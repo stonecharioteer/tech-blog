@@ -7,10 +7,18 @@ outputs:
     - HTML
     - RSS
     - JSON # necessary for search
+enableGitInfo: true
+
+frontmatter:
+  lastmod:
+    - lastmod
 menus:
   main:
   - name: Home
     pageRef: /
+    weight: 10
+  - name: Resume
+    url: https://github.com/stonecharioteer/resume/releases/latest
     weight: 10
   - name: Values
     pageRef: /values
