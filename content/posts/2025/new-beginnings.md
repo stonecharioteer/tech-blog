@@ -4,6 +4,7 @@ draft: false
 title: 'New Beginnings'
 tags:
   - "reflection"
+  - "housekeeping"
 ---
 
 I'm splitting my website into different subdomains. This one,
