@@ -1,6 +1,6 @@
 ---
 date: '2025-04-05T13:31:38+05:30'
-draft: true
+draft: false
 title: 'New Beginnings'
 tags:
   - "reflection"
