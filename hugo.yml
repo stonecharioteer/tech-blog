@@ -20,6 +20,9 @@ menus:
   - name: Resume
     url: https://github.com/stonecharioteer/resume/releases/latest
     weight: 10
+  - name: My Gear
+    pageRef: /gear
+    weight: 10
   - name: Values
     pageRef: /values
     weight: 20
