@@ -41,7 +41,7 @@ trial_3 = timeit.timeit("my_list[::-1]", number=10**4, globals=dict(my_list=my_l
 print(trial_3)
 ```
 
-This attempts to reverse a list of a thousand numbers ranging from 0 to a million ten thousand times. On my [X13 Flow laptop](/gear) and with python 3.12.3 this gets me the following output:
+This attempts to reverse a list of a thousand numbers ranging from 0 to a million ten thousand times. On my [X13 Flow laptop](/gear/#laptop---asus-x13-flow-2022) and with python 3.12.3 this gets me the following output:
 
 ```
 0.0005502169997271267
