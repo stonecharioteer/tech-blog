@@ -1,7 +1,7 @@
 ---
 date: '2025-04-13T10:54:37+05:30'
 draft: false
-title: 'My Gear'
+title: '🖥️ My Gear'
 ---
 
 I get asked what devices I use (since I have a LOT of them). I wanted to document these at one place so that I answer this question a little deliberately.

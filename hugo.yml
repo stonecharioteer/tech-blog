@@ -17,13 +17,16 @@ menus:
   - name: Home
     pageRef: /
     weight: 10
-  - name: Resume
+  - name: 🗎 Resume
     url: https://github.com/stonecharioteer/resume/releases/latest
     weight: 10
-  - name: My Gear
+  - name: 🖥️ My Gear
     pageRef: /gear
-    weight: 10
-  - name: Values
+    weight: 20
+  - name: 🧡 Faves
+    pageRef: /favourites
+    weight: 20
+  - name: 🫀 Values
     pageRef: /values
     weight: 20
   - name: Search
@@ -55,9 +58,9 @@ params:
 
       ![The Stone Chariot of Hampi](/logo/stonecharioteer.png)
       
-      I'm a developer who's worked with Python and Rust,
-      and here I'm collecting my thoughts on software development, technology
-      and having a career I am passionate about.
+      I'm a developer who's worked with Python and Rust, and here I'm collecting
+      my thoughts on software development, technology and having a career I am
+      passionate about.
 
   socialIcons: # optional
     - name: "github"

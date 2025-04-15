@@ -1,5 +1,5 @@
 ---
-title: "A Code of Values"
+title: "🫀 A Code of Values"
 description: "My personal code of values that I let guide my decisions."
 date: "2021-01-01"
 lastmod: "2025-04-05"
