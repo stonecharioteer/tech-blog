@@ -35,6 +35,12 @@ menus:
   - name: Archive
     pageRef: /archive
     weight: 40
+markup:
+  highlight:
+    lineNos: true
+    lineNumbersInTable: true
+    noClasses: false
+    style: monokai
 params:
   fuseOpts:
     isCaseSensitive: false
