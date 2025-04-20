@@ -5,7 +5,8 @@ title: 'Py-x-Protobuf - Or How I Learned to Stop Worrying and Love Protocol Buff
 cover:
   image: "/images/py-x-protobuf.jpeg"
   alt: "Use Protobufs not JSON"
-
+images:
+  - "/images/py-x-protobuf.jpeg"
 tags:
   - "python"
   - "microservices"
