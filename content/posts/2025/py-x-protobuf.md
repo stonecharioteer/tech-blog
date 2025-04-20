@@ -1,7 +1,7 @@
 ---
 date: '2025-04-20T09:44:21+05:30'
 draft: false
-title: 'Py-x-Protobuf - Or How I Learned to Stop Worry and Love Protocol Buffers'
+title: 'Py-x-Protobuf - Or How I Learned to Stop Worrying and Love Protocol Buffers'
 tags:
   - "python"
   - "microservices"
