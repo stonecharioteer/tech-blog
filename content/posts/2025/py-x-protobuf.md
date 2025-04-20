@@ -2,12 +2,17 @@
 date: '2025-04-20T09:44:21+05:30'
 draft: false
 title: 'Py-x-Protobuf - Or How I Learned to Stop Worrying and Love Protocol Buffers'
+cover:
+  image: "/images/py-x-protobuf.jpeg"
+  alt: "Use Protobufs not JSON"
+
 tags:
   - "python"
   - "microservices"
   - "grpc"
 ---
 
+<!-- ![Use Protobufs, not JSON](static/images/py-x-protobuf.jpeg) -->
 ## TLDR
 
 - Protobufs are a mainstay of microservice development.
