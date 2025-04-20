@@ -13,7 +13,6 @@ tags:
   - "grpc"
 ---
 
-<!-- ![Use Protobufs, not JSON](static/images/py-x-protobuf.jpeg) -->
 ## TLDR
 
 - Protobufs are a mainstay of microservice development.
