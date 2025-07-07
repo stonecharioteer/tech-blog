@@ -173,8 +173,8 @@ This is a warning with a custom title
 This is a tip with a custom title
 {{< /tip >}}
 
-{{< quote title="Einstein said" >}}
-This is a quote with a custom title
+{{< quote title="Einstein said" footer="Albert Einstein" >}}
+This is a quote with a custom title and attribution
 {{< /quote >}}
 
 {{< example title="Code Sample" >}}
@@ -198,6 +198,23 @@ def hello():
 {{< /note >}}
 ```
 
+#### Quote with attribution (special case):
+```
+{{< quote title="Poetry" footer="Robert Frost, The Road Not Taken" blockquote="true" >}}
+Two roads diverged in a wood, and I—
+I took the one less traveled by,
+And that has made all the difference.
+{{< /quote >}}
+
+{{< quote footer="Maya Angelou" >}}
+There is no greater agony than bearing an untold story inside you.
+{{< /quote >}}
+
+{{< quote title="Prose Quote" footer="Marcus Aurelius, Meditations" blockquote="false" >}}
+You have power over your mind—not outside events. Realize this, and you will find strength.
+{{< /quote >}}
+```
+
 ### Styling
 The admonitions include:
 - Responsive design
@@ -205,6 +222,19 @@ The admonitions include:
 - Color-coded borders and backgrounds
 - Icons for visual distinction
 - Proper spacing and typography
+
+**Quote Special Features:**
+- Serif font (Georgia, Times New Roman) for elegant typography
+- Italic styling for the quote content
+- Optional footer parameter for attribution
+- Right-aligned attribution with em dash prefix
+- Optional `blockquote="true"` parameter for line-preserving quotes (default: false)
+- Maintains readability in both light and dark modes
+
+**Quote Parameters:**
+- `title` - Custom title (default: "Quote")
+- `footer` - Attribution text (optional)
+- `blockquote` - Wrap content in blockquote for line preservation (default: "false")
 
 ### Files Created
 - `layouts/shortcodes/note.html`
