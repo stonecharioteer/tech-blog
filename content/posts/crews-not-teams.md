@@ -2,6 +2,7 @@
 date: '2025-06-17T13:58:20+05:30'
 draft: true
 title: 'Crews Not Teams'
+description: "Building effective teams by leveraging individual strengths instead of competing. Inspired by tactical video games where each member has specialized skills."
 tags:
   - "Career"
   - "Culture"
