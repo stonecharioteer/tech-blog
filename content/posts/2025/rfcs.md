@@ -1,9 +1,12 @@
 ---
 date: "2025-07-22T13:13:10+05:30"
 title: "RFC Tutorials"
+description: "I built an interactive tutorial platform for learning internet fundamentals through RFCs, built with AI. Features popup glossary, diagrams, and Python code examples."
 cover:
   image: "/images/rfc-tutorial-site-thumbnail.png"
   alt: "RFC Tutorials"
+images:
+  - "/images/rfc-tutorial-site-thumbnail.png"
 tags:
   - "AI"
   - "learning"
