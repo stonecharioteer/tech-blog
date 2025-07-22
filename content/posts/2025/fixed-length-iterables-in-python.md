@@ -2,6 +2,7 @@
 date: '2025-04-14T16:00:21+05:30'
 draft: false
 title: 'Fixed Length Iterables in Python'
+description: "Using collections.deque with maxlen parameter to create fixed-length iterables in Python. A simple solution many junior developers try to implement themselves."
 tags:
   - "python"
 ---

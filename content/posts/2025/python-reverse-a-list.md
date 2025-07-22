@@ -2,6 +2,7 @@
 date: '2025-04-13T10:54:37+05:30'
 draft: false
 title: 'Python Reverse a List'
+description: "Comparing three methods to reverse lists in Python: slice notation, reversed(), and .reverse(). Includes performance benchmarks and readability considerations."
 tags:
   - "python"
   - "data-structures-and-algorithms"

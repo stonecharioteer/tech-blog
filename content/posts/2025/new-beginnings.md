@@ -2,6 +2,7 @@
 date: '2025-04-05T13:31:38+05:30'
 draft: false
 title: 'New Beginnings'
+description: "Restructuring my website into subdomains with separate themes. Moving to Hugo and PaperMod theme for better content creation workflow."
 tags:
   - "reflection"
   - "housekeeping"

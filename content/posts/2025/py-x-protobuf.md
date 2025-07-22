@@ -2,6 +2,7 @@
 date: '2025-04-20T09:44:21+05:30'
 draft: false
 title: 'Py-x-Protobuf - Or How I Learned to Stop Worrying and Love Protocol Buffers'
+description: "Why Protocol Buffers are superior to JSON for microservice communication. Much faster serialization/deserialization with practical Python examples."
 cover:
   image: "/images/py-x-protobuf.jpeg"
   alt: "Use Protobufs not JSON"
