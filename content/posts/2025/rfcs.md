@@ -16,9 +16,9 @@ tags:
 I made a thing using AI. I wanted to learn how the internet works using RFCs, and I thought it would
 be a cool exercise to use Claude to build an interactive tutorial platform for it.
 
-![RFC Tutorial](/images/rfc-tutorial-site.png)
+[![RFC Tutorial](/images/rfc-tutorial-site.png)](https://rfc.stonecharioteer.com)
 
-Head over to [rfc.stonecharioteer.com](https://rfc.stonecharioteer.com) to try it out. I'm planning on
+Head over to [https://rfc.stonecharioteer.com](https://rfc.stonecharioteer.com) to try it out. I'm planning on
 updating it with plenty of RFCs in the upcoming days.
 
 This tutorial site includes:
@@ -28,6 +28,6 @@ This tutorial site includes:
 - Python code snippets to "explain like I'm a pythonista"
 - Docker examples to demonstrate the practical aspect of RFCs.
 
-![Latest Sections](/images/rfc-tutorial-site-latest.png)
+[![Latest Sections](/images/rfc-tutorial-site-latest.png)](https://rfc.stonecharioteer.com)
 
 This is something I made for myself, and I hope it helps others too!
