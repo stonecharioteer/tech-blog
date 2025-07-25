@@ -45,13 +45,26 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
+          fetch-depth: 0
       - name: Update submodules to latest remote
         run: git submodule update --init --recursive --remote
+      - name: Show PaperMod commit hash
+        run: |
+          cd themes/PaperMod
+          git rev-parse HEAD
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
+      - name: DEBUG – Check PaperMod submodule contents
+        run: |
+          echo "Submodule hash:"
+          git submodule status
+          echo "Listing PaperMod template dir:"
+          ls -la themes/PaperMod/layouts/partials/templates || echo "Missing templates dir!"
+          echo "Full tree:"
+          find themes/PaperMod | head -n 50 themes/PaperMod/layouts/partials/templates || echo "Missing templates dir!"
       - name: Build with Hugo
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
