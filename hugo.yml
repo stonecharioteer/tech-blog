@@ -1,7 +1,7 @@
-baseURL: 'https://tech.stonecharioteer.com/'
-languageCode: 'en-us'
+baseURL: "https://tech.stonecharioteer.com/"
+languageCode: "en-us"
 title: "Stonecharioteer on Tech"
-theme: 'PaperMod'
+theme: "PaperMod"
 outputs:
   home:
     - HTML
@@ -14,27 +14,27 @@ frontmatter:
     - lastmod
 menus:
   main:
-  - name: Home
-    pageRef: /
-    weight: 10
-  - name: 🗎 Resume
-    url: https://github.com/stonecharioteer/resume/releases/latest
-    weight: 10
-  - name: 🖥️ My Gear
-    pageRef: /gear
-    weight: 20
-  - name: 🧡 Faves
-    pageRef: /favourites
-    weight: 20
-  - name: 🫀 Values
-    pageRef: /values
-    weight: 20
-  - name: Search
-    pageRef: /search
-    weight: 30
-  - name: Archive
-    pageRef: /archive
-    weight: 40
+    - name: Home
+      pageRef: /
+      weight: 10
+    - name: 🗎 Resume
+      url: https://github.com/stonecharioteer/resume/releases/latest
+      weight: 10
+    - name: 🖥️ My Gear
+      pageRef: /gear
+      weight: 20
+    - name: 🧡 Faves
+      pageRef: /favourites
+      weight: 20
+    - name: 🫀 Values
+      pageRef: /values
+      weight: 20
+    - name: Search
+      pageRef: /search
+      weight: 30
+    - name: Archive
+      pageRef: /archive
+      weight: 40
 markup:
   highlight:
     lineNos: true
@@ -42,6 +42,8 @@ markup:
     noClasses: false
     style: monokai
 params:
+  env: production
+  ShowRssButtonInSectionTermList: true
   fuseOpts:
     isCaseSensitive: false
     shouldSort: true
@@ -59,11 +61,10 @@ params:
   # logo: "/logo/stonecharioteer-banner.png"
   homeInfoParams:
     Title: Hello world!
-    Content:
-      I'm *Vinay Keerthi*, `stonecharioteer` around the webs.
+    Content: I'm *Vinay Keerthi*, `stonecharioteer` around the webs.
 
       ![The Stone Chariot of Hampi](/logo/stonecharioteer.png)
-      
+
       I'm a developer who's worked with Python and Rust, and here I'm collecting
       my thoughts on software development, technology and having a career I am
       passionate about.

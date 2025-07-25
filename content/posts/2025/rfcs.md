@@ -1,6 +1,6 @@
 ---
 date: "2025-07-22T13:13:10+05:30"
-title: "RFC Tutorials"
+title: "Read the RFCs that Built the Internet"
 description: "I built an interactive tutorial platform for learning internet fundamentals through RFCs, built with AI. Features popup glossary, diagrams, and Python code examples."
 cover:
   image: "/images/rfc-tutorial-site-thumbnail.png"
@@ -26,5 +26,8 @@ This tutorial site includes:
 - Popup glossary for terms
 - Diagrams to explain concepts
 - Python code snippets to "explain like I'm a pythonista"
+- Docker examples to demonstrate the practical aspect of RFCs.
+
+![Latest Sections](/images/rfc-tutorial-site-latest.png)
 
 This is something I made for myself, and I hope it helps others too!
