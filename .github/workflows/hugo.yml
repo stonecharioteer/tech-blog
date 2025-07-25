@@ -57,21 +57,26 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
-      - name: DEBUG – Check PaperMod submodule contents
+      - name: Debug PaperMod contents
         run: |
-          echo "Submodule hash:"
-          git submodule status
-          echo "Listing PaperMod template dir:"
-          ls -la themes/PaperMod/layouts/partials/templates || echo "Missing templates dir!"
-          echo "Full tree:"
-          find themes/PaperMod | head -n 50 themes/PaperMod/layouts/partials/templates || echo "Missing templates dir!"
+          echo "PaperMod commit hash:"
+          git -C themes/PaperMod rev-parse HEAD
+
+          echo -e "\nTop-level files:"
+          ls -l themes/PaperMod | head -20
+
+          echo -e "\nChecking for schema_json template:"
+          if [ -f themes/PaperMod/layouts/partials/templates/schema_json.html ]; then
+            echo "✅ Found schema_json.html"
+          else
+            echo "❌ Missing schema_json.html"
+          fi
       - name: Build with Hugo
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
           HUGO_ENVIRONMENT: production
         run: |
           hugo \
-            --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
