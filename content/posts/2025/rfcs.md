@@ -36,4 +36,4 @@ I wanted to frame each RFC with its own sections on understanding it with:
 
 I plan to evolve this project out further, and I hope it helps others as well.
 This is the first of many projects I have been planning out to improve how I learn.
-[If you spot any bugs, please report them on github.](https://github.com/stonecharioteer/interactive-rfc-tutorial/).](https://github.com/stonecharioteer/interactive-rfc-tutorial/).](https://github.com/stonecharioteer/interactive-rfc-tutorial/).](https://github.com/stonecharioteer/interactive-rfc-tutorials/)
+[If you spot any bugs, please report them on github.](https://github.com/stonecharioteer/interactive-rfc-tutorial/)
