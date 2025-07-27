@@ -94,7 +94,7 @@ hugo new content content/posts/YYYY/title.md
 ### Configuration Highlights
 - **Git Integration**: `enableGitInfo: true` for auto last-modified dates
 - **Search**: JSON output format with Fuse.js integration
-- **Syntax Highlighting**: Monokai theme with line numbers
+- **Syntax Highlighting**: Theme-aware highlighting with custom light/dark mode support
 - **Social Integration**: GitHub and LinkedIn profiles
 - **Custom Menu**: Emoji navigation with external resume link
 
@@ -104,16 +104,66 @@ hugo new content content/posts/YYYY/title.md
 This blog extends the base PaperMod theme with several sophisticated customizations:
 
 1. **Admonition System** - Complete documentation-style callouts
-2. **External Code Integration** - Shortcode for including code files
-3. **Private Post Filtering** - Content privacy without separate sections
-4. **Enhanced Metadata** - Last-modified dates with Git integration
-5. **SEO Enhancements** - Proper handling of private content
+2. **Theme-Aware Syntax Highlighting** - Custom light/dark mode code block styling
+3. **External Code Integration** - Shortcode for including code files
+4. **Private Post Filtering** - Content privacy without separate sections
+5. **Enhanced Metadata** - Last-modified dates with Git integration
+6. **SEO Enhancements** - Proper handling of private content
 
 ### Custom Features
 - **Performance Focus**: Maintains PaperMod's speed while adding functionality
 - **Dark Mode Support**: All customizations work in both light and dark themes
 - **Responsive Design**: Mobile-first approach with proper spacing
 - **Accessibility**: Proper contrast ratios and semantic HTML
+
+## Theme-Aware Syntax Highlighting
+
+The blog features a comprehensive custom syntax highlighting system that automatically adapts to light and dark themes. This replaces Hugo's default fixed-theme approach with intelligent theme switching.
+
+### Implementation Details
+
+**Hugo Configuration** (`hugo.yml`):
+```yaml
+markup:
+  highlight:
+    lineNos: true
+    lineNumbersInTable: true
+    noClasses: false
+    # NO fixed style - allows for theme-aware CSS
+```
+
+**Custom CSS** (in `layouts/partials/head.html`):
+- **Light Mode**: Clean GitHub-style syntax highlighting with high contrast colors
+- **Dark Mode**: Rich Monokai-style colors optimized for dark backgrounds  
+- **Universal Coverage**: Works across all programming languages (Python, JavaScript, Rust, Go, etc.)
+
+### Light Mode Colors:
+- **Keywords** (`fn`, `let`, `if`): Bold red (`#d01040`)
+- **Strings**: Dark blue (`#003d99`)
+- **Functions**: Bold purple (`#6610f2`)
+- **Comments**: Green italic (`#198754`)
+- **Numbers**: Orange (`#fd7e14`)
+- **Types**: Magenta (`#d63384`)
+- **Background**: Light gray (`#f8f9fa`) with rounded corners
+
+### Dark Mode Colors:
+- **Keywords**: Light purple (`#c6a0f6`)
+- **Strings**: Light green (`#a6da95`)
+- **Functions**: Light blue (`#8aadf4`)
+- **Comments**: Muted gray (`#6e738d`) italic
+- **Numbers**: Orange (`#f5a97f`)
+- **Background**: Dark (`#24273a`)
+
+### Technical Approach:
+1. **Removed fixed Hugo style** to enable CSS-based theming
+2. **Comprehensive CSS selectors** target all Chroma highlighting elements
+3. **Attribute selectors** (`[class*="chroma"]`) ensure universal coverage
+4. **Multiple specificity layers** guarantee proper override of theme defaults
+5. **Media query fallback** for systems using `prefers-color-scheme`
+
+### Files Modified:
+- `hugo.yml` - Removed fixed monokai style
+- `layouts/partials/head.html` - Added comprehensive CSS overrides
 
 ## Admonition Shortcodes
 The most significant customization is a complete admonition system that brings documentation-quality content formatting to the blog:

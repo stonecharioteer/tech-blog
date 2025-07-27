@@ -40,7 +40,6 @@ markup:
     lineNos: true
     lineNumbersInTable: true
     noClasses: false
-    style: monokai
 params:
   env: production
   ShowRssButtonInSectionTermList: true

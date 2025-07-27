@@ -334,6 +334,204 @@
     .dark .admonition.example .admonition-content {
         color: #e9d5ff;
     }
+    
+    /* CHROMA SYNTAX HIGHLIGHTING FIX - HIGHEST PRIORITY */
+    /* Light mode code blocks - target ALL possible containers */
+    .chroma,
+    .highlight,
+    .highlight .chroma,
+    div.highlight,
+    div.highlight .chroma,
+    pre.chroma,
+    .highlight pre.chroma,
+    .highlight pre,
+    pre,
+    .lntable,
+    .lntd,
+    .lntd pre,
+    .lntd pre.chroma,
+    .highlight .lntable,
+    .highlight .lntd,
+    .highlight .lntd pre,
+    .highlight .lntd pre.chroma,
+    div.highlight .lntable,
+    div.highlight .lntd,
+    div.highlight .lntd pre,
+    div.highlight .lntd pre.chroma {
+        background-color: #f6f8fa !important;
+        color: #24292e !important;
+    }
+    
+    /* Dark mode code blocks - target ALL possible containers */
+    .dark .chroma,
+    .dark .highlight,
+    .dark .highlight .chroma,
+    .dark div.highlight,
+    .dark div.highlight .chroma,
+    .dark pre.chroma,
+    .dark .highlight pre.chroma,
+    .dark .highlight pre,
+    .dark pre,
+    .dark .lntable,
+    .dark .lntd,
+    .dark .lntd pre,
+    .dark .lntd pre.chroma,
+    .dark .highlight .lntable,
+    .dark .highlight .lntd,
+    .dark .highlight .lntd pre,
+    .dark .highlight .lntd pre.chroma,
+    .dark div.highlight .lntable,
+    .dark div.highlight .lntd,
+    .dark div.highlight .lntd pre,
+    .dark div.highlight .lntd pre.chroma {
+        background-color: #24273a !important;
+        color: #cad3f5 !important;
+    }
+    
+    /* Media query fallback - target ALL possible containers */
+    @media (prefers-color-scheme: dark) {
+        body:not(.light) .chroma,
+        body:not(.light) .highlight,
+        body:not(.light) .highlight .chroma,
+        body:not(.light) div.highlight,
+        body:not(.light) div.highlight .chroma,
+        body:not(.light) pre.chroma,
+        body:not(.light) .highlight pre.chroma,
+        body:not(.light) .highlight pre,
+        body:not(.light) pre,
+        body:not(.light) .lntable,
+        body:not(.light) .lntd,
+        body:not(.light) .lntd pre,
+        body:not(.light) .lntd pre.chroma,
+        body:not(.light) .highlight .lntable,
+        body:not(.light) .highlight .lntd,
+        body:not(.light) .highlight .lntd pre,
+        body:not(.light) .highlight .lntd pre.chroma,
+        body:not(.light) div.highlight .lntable,
+        body:not(.light) div.highlight .lntd,
+        body:not(.light) div.highlight .lntd pre,
+        body:not(.light) div.highlight .lntd pre.chroma {
+            background-color: #24273a !important;
+            color: #cad3f5 !important;
+        }
+    }
+    
+    /* WORKING SOLUTION - Use attribute selectors for maximum coverage */
+    /* Extra specific for light mode */
+    body:not(.dark) [class*="chroma"],
+    body:not(.dark) [class*="highlight"],
+    body:not(.dark) [class*="lnt"],
+    body:not(.dark) pre,
+    body:not(.dark) code,
+    [class*="chroma"],
+    [class*="highlight"],
+    [class*="lnt"],
+    pre,
+    code {
+        background-color: #f6f8fa !important;
+        color: #24292e !important;
+    }
+    
+    .dark [class*="chroma"],
+    .dark [class*="highlight"], 
+    .dark [class*="lnt"],
+    .dark pre,
+    .dark code {
+        background-color: #24273a !important;
+        color: #cad3f5 !important;
+    }
+    
+    /* Media query fallback */
+    @media (prefers-color-scheme: dark) {
+        body:not(.light) [class*="chroma"],
+        body:not(.light) [class*="highlight"],
+        body:not(.light) [class*="lnt"],
+        body:not(.light) pre,
+        body:not(.light) code {
+            background-color: #24273a !important;
+            color: #cad3f5 !important;
+        }
+    }
+    
+    /* FINAL OVERRIDE - Ensure light mode works with better contrast */
+    body:not(.dark) [class*="chroma"],
+    body:not(.dark) [class*="highlight"],
+    body:not(.dark) [class*="lnt"],
+    body:not(.dark) pre,
+    body:not(.dark) code {
+        background-color: #f8f9fa !important;
+        color: #1a1a1a !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        border-radius: 8px !important;
+    }
+    
+    /* Remove ALL borders and outlines from light mode code elements */
+    body:not(.dark) .highlight,
+    body:not(.dark) .highlight > div,
+    body:not(.dark) .lntable,
+    body:not(.dark) .lntd {
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    
+    /* Enhanced syntax colors for light mode - maximum contrast */
+    body:not(.dark) .chroma .k,
+    body:not(.dark) .chroma .kd,
+    body:not(.dark) .chroma .kn,
+    body:not(.dark) .chroma .kp,
+    body:not(.dark) .chroma .kr,
+    body:not(.dark) .chroma .kt { color: #d01040 !important; font-weight: 600 !important; } /* Keywords - bold red */
+    
+    body:not(.dark) .chroma .s,
+    body:not(.dark) .chroma .s1,
+    body:not(.dark) .chroma .s2,
+    body:not(.dark) .chroma .sb,
+    body:not(.dark) .chroma .sc { color: #003d99 !important; } /* Strings - much darker blue */
+    
+    body:not(.dark) .chroma .nf,
+    body:not(.dark) .chroma .fm { color: #6610f2 !important; font-weight: 500 !important; } /* Functions - bold purple */
+    
+    body:not(.dark) .chroma .c,
+    body:not(.dark) .chroma .c1,
+    body:not(.dark) .chroma .cm { color: #198754 !important; font-style: italic !important; } /* Comments - green italic */
+    
+    body:not(.dark) .chroma .m,
+    body:not(.dark) .chroma .mi,
+    body:not(.dark) .chroma .mf { color: #fd7e14 !important; } /* Numbers - orange */
+    
+    body:not(.dark) .chroma .ln,
+    body:not(.dark) .chroma .lnt { color: #adb5bd !important; } /* Line numbers - gray */
+    
+    body:not(.dark) .chroma .p { color: #495057 !important; } /* Punctuation - dark gray */
+    
+    /* Fix specific problematic elements */
+    body:not(.dark) .chroma .nc,
+    body:not(.dark) .chroma .no { color: #d63384 !important; font-weight: 600 !important; } /* Types like "Package" - magenta */
+    
+    body:not(.dark) .chroma .nt { color: #003d99 !important; font-weight: 600 !important; } /* Type hints like "String" - much darker blue */
+    
+    body:not(.dark) .chroma .na,
+    body:not(.dark) .chroma .nx { color: #1a1a1a !important; } /* Attributes and names - black */
+    
+    /* Target self/&self parameters and other variable references */
+    body:not(.dark) .chroma .nv,
+    body:not(.dark) .chroma .vc,
+    body:not(.dark) .chroma .vg,
+    body:not(.dark) .chroma .vi,
+    body:not(.dark) .chroma .vm { color: #003d99 !important; font-weight: 500 !important; } /* Variables like self/&self - dark blue */
+    
+    /* AGGRESSIVE OVERRIDE - catch any remaining light blue elements */
+    body:not(.dark) .chroma .nb,
+    body:not(.dark) .chroma .bp,
+    body:not(.dark) .chroma .nd,
+    body:not(.dark) .chroma .nn { color: #003d99 !important; font-weight: 500 !important; } /* Built-ins, decorators, namespaces - dark blue */
+    
+    /* Final catchall for any elements that might still be light blue */
+    body:not(.dark) .chroma [style*="color:#8aadf4"],
+    body:not(.dark) .chroma [style*="color:#91d7e3"] { color: #003d99 !important; }
 </style>
 
 {{- partial "extend_head.html" . -}}
