@@ -17,7 +17,7 @@ menus:
     - name: Home
       pageRef: /
       weight: 10
-    - name: 🗎 Resume
+    - name: 📄 Resume
       url: https://github.com/stonecharioteer/resume/releases/latest
       weight: 10
     - name: 🖥️ My Gear
@@ -40,7 +40,6 @@ markup:
     lineNos: true
     lineNumbersInTable: true
     noClasses: false
-    style: monokai
 params:
   env: production
   ShowRssButtonInSectionTermList: true
