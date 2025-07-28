@@ -20,15 +20,9 @@ menus:
     - name: 📄 Resume
       url: https://github.com/stonecharioteer/resume/releases/latest
       weight: 10
-    - name: 🖥️ My Gear
-      pageRef: /gear
-      weight: 20
-    - name: 🧡 Faves
-      pageRef: /favourites
-      weight: 20
-    - name: 🫀 Values
-      pageRef: /values
-      weight: 20
+    - name: TIL
+      pageRef: /tags/til
+      weight: 15
     - name: Search
       pageRef: /search
       weight: 30
@@ -64,6 +58,9 @@ params:
     Title: Hello world!
     Content: I'm *Vinay Keerthi*, `stonecharioteer` around the webs.
 
+
+      **Quick Links:** [🖥️ My Gear](/gear) • [🧡 Favourites](/favourites) • [🫀 Values](/values)
+
       ![The Stone Chariot of Hampi](/logo/stonecharioteer.png)
       {{< example title="Open to Hire" >}}
       I'm currently open to new opportunities! If you're looking for an experienced Python/Rust developer passionate about clean code, performance, and building great software, feel free to reach out via [LinkedIn](https://linkedin.com/in/vinaykeerthi/) or check out my [resume](https://github.com/stonecharioteer/resume/releases/latest).
@@ -78,3 +75,5 @@ params:
       url: "https://github.com/stonecharioteer"
     - name: "linkedin"
       url: "https://linkedin.com/in/vinaykeerthi/"
+    - name: "rss"
+      url: "/index.xml"
