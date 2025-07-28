@@ -532,6 +532,17 @@
     /* Final catchall for any elements that might still be light blue */
     body:not(.dark) .chroma [style*="color:#8aadf4"],
     body:not(.dark) .chroma [style*="color:#91d7e3"] { color: #003d99 !important; }
+
+    /* Simple dotted underline for all links */
+    a {
+        text-decoration: underline;
+        text-decoration-style: dotted;
+        text-underline-offset: 3px;
+    }
+
+    a:hover {
+        text-decoration-style: solid;
+    }
 </style>
 
 {{- partial "extend_head.html" . -}}
