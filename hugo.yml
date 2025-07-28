@@ -57,6 +57,8 @@ params:
   ShowBreadCrumbs: true
   ShowPostNavLinks: true
   ShowCodeCopyButtons: true
+  ShowToc: true
+  TocOpen: false
   # logo: "/logo/stonecharioteer-banner.png"
   homeInfoParams:
     Title: Hello world!

@@ -1,6 +1,6 @@
 ---
-date: '2025-06-17T13:58:20+05:30'
-draft: true
+date: '2022-08-18T10:00:00+05:30'
+draft: false
 title: 'Crews Not Teams'
 description: "Building effective teams by leveraging individual strengths instead of competing. Inspired by tactical video games where each member has specialized skills."
 tags:
