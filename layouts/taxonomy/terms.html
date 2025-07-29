@@ -1,0 +1,64 @@
+{{- define "main" }}
+
+<header class="page-header">
+  {{- partial "breadcrumbs.html" . }}
+  <h1>
+    {{ .Title }}
+    {{- with .OutputFormats.Get "rss" }}
+    <a href="{{ .RelPermalink }}" title="RSS" aria-label="RSS">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" height="23">
+        <path d="M4 11a9 9 0 0 1 9 9" />
+        <path d="M4 4a16 16 0 0 1 16 16" />
+        <circle cx="5" cy="19" r="1" />
+      </svg>
+    </a>
+    {{- end }}
+  </h1>
+  {{- if .Description }}
+  <div class="post-description">
+    {{ .Description | markdownify }}
+  </div>
+  {{- end }}
+</header>
+
+{{- if .Content }}
+<div class="post-content">
+  {{- if not (.Param "disableAnchoredHeadings") }}
+  {{- partial "anchored_headings.html" .Content -}}
+  {{- else }}{{ .Content }}{{ end }}
+</div>
+{{- end }}
+
+<div class="tags-overview">
+  <div class="tags-stats">
+    <p>Browse posts by tag. Tags are sorted by post count (most popular first). Click any tag to see related posts.</p>
+    <p><strong>{{ len .Data.Terms }}</strong> tags • <strong>{{ len site.RegularPages }}</strong> total posts</p>
+  </div>
+  
+  <div class="tags-grid">
+    {{- range .Data.Terms.ByCount }}
+    {{- $tagName := .Name }}
+    {{- $tagCount := .Count }}
+    <div class="tag-card">
+      <a href="{{ .Page.Permalink }}" class="tag-link">
+        <div class="tag-info">
+          <h3 class="tag-name">{{ $tagName }}</h3>
+          <span class="tag-count">{{ $tagCount }} {{ if eq $tagCount 1 }}post{{ else }}posts{{ end }}</span>
+        </div>
+        <div class="tag-preview">
+          {{- $tagPosts := .Pages | first 3 }}
+          {{- range $tagPosts }}
+          <span class="preview-post">{{ .Title }}</span>
+          {{- end }}
+          {{- if gt .Count 3 }}
+          <span class="more-posts">+{{ sub .Count 3 }} more</span>
+          {{- end }}
+        </div>
+      </a>
+    </div>
+    {{- end }}
+  </div>
+</div>
+
+{{- end }}{{- /* end main */ -}}

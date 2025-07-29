@@ -543,6 +543,269 @@
     a:hover {
         text-decoration-style: solid;
     }
+
+    /* Numbered pagination styling */
+    .pagination {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin: 2rem 0;
+    }
+
+    .page-numbers {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .page-numbers a,
+    .page-numbers span.current {
+        display: inline-block;
+        padding: 0.5rem 0.75rem;
+        text-decoration: none;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        min-width: 2.5rem;
+        text-align: center;
+        transition: all 0.2s ease;
+    }
+
+    .page-numbers a:hover {
+        background-color: var(--theme);
+        color: var(--main);
+        border-color: var(--theme);
+    }
+
+    .page-numbers span.current {
+        background-color: var(--theme);
+        color: var(--main);
+        border-color: var(--theme);
+        font-weight: bold;
+    }
+
+    .page-numbers span.dots {
+        padding: 0.5rem 0.25rem;
+        color: var(--secondary);
+    }
+
+    .pagination-info {
+        font-size: 0.9rem;
+        color: var(--secondary);
+        text-align: center;
+        margin-top: 1rem;
+        padding: 0.5rem;
+        background-color: var(--code-bg);
+        border-radius: 4px;
+    }
+
+    /* Tag filtering dropdown */
+    .tag-filter-dropdown {
+        margin: 1.5rem 0;
+        padding: 0.75rem 1rem;
+        background-color: var(--code-bg);
+        border-radius: 6px;
+        border: 1px solid var(--border);
+    }
+
+    .filter-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.75rem;
+    }
+
+    .filter-label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--primary);
+    }
+
+    .filter-stats {
+        font-size: 0.8rem;
+        color: var(--secondary);
+    }
+
+    .tag-dropdown {
+        width: 100%;
+        max-width: 300px;
+        padding: 0.5rem;
+        font-size: 0.9rem;
+        background-color: var(--theme);
+        color: var(--primary);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .tag-dropdown:hover {
+        border-color: var(--primary);
+    }
+
+    .tag-dropdown:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
+    }
+
+    /* Dark mode dropdown support */
+    .dark .tag-dropdown {
+        background-color: var(--entry);
+        color: var(--primary);
+    }
+
+    /* Tags overview page */
+    .tags-overview {
+        margin: 2rem 0;
+    }
+
+    .tags-stats {
+        margin-bottom: 2rem;
+        padding: 1rem;
+        background-color: var(--code-bg);
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        text-align: center;
+    }
+
+    .tags-stats p {
+        margin: 0.5rem 0;
+        color: var(--secondary);
+    }
+
+    .tags-stats strong {
+        color: var(--primary);
+    }
+
+    .tags-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .tag-card {
+        background-color: var(--code-bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        overflow: hidden;
+        transition: all 0.2s ease;
+    }
+
+    .tag-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-color: var(--primary);
+    }
+
+    .tag-link {
+        display: block;
+        padding: 1rem;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .tag-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.75rem;
+    }
+
+    .tag-name {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--primary);
+    }
+
+    .tag-count {
+        font-size: 0.85rem;
+        color: var(--secondary);
+        background-color: var(--theme);
+        padding: 0.2rem 0.5rem;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+    }
+
+    .tag-preview {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .preview-post {
+        font-size: 0.8rem;
+        color: var(--secondary);
+        line-height: 1.3;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .more-posts {
+        font-size: 0.75rem;
+        color: var(--secondary);
+        font-style: italic;
+        opacity: 0.7;
+    }
+
+    /* Dark mode for tags page */
+    .dark .tag-card:hover {
+        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .pagination {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .page-numbers {
+            justify-content: center;
+        }
+        
+        .tag-filter-dropdown {
+            margin: 1rem 0;
+            padding: 0.5rem 0.75rem;
+        }
+        
+        .filter-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.25rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tag-dropdown {
+            max-width: 100%;
+            font-size: 0.85rem;
+        }
+        
+        .tags-grid {
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+        
+        .tag-card {
+            margin-bottom: 0.5rem;
+        }
+        
+        .tag-info {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        
+        .pagination-info {
+            font-size: 0.8rem;
+        }
+    }
 </style>
 
 {{- partial "extend_head.html" . -}}
