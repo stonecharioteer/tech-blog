@@ -94,6 +94,20 @@
 {{- $class = "post-entry tag-entry" }}
 {{- end }}
 
+{{/* Check if this is a TIL post by looking at tags */}}
+{{- $isTILPost := false }}
+{{- if .Params.tags }}
+  {{- range .Params.tags }}
+    {{- if eq (lower .) "til" }}
+      {{- $isTILPost = true }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+
+{{- if $isTILPost }}
+  {{- $class = printf "%s til-post" $class }}
+{{- end }}
+
 <article class="{{ $class }}">
   {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
   {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
@@ -128,7 +142,7 @@
 <footer class="page-footer">
   <nav class="pagination">
     {{- if $paginator.HasPrev }}
-    <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">
+    <a class="prev" href="{{ $paginator.Prev.URL | relURL }}">
       «&nbsp;{{ i18n "prev_page" }}
     </a>
     {{- end }}
@@ -138,10 +152,24 @@
       {{- $currentPage := $paginator.PageNumber }}
       {{- $totalPages := $paginator.TotalPages }}
       {{- $showRange := 2 }}
+      {{- $baseURL := "" }}
+      {{- if .IsHome }}
+        {{- $baseURL = "" }}
+      {{- else if eq .Section "posts" }}
+        {{- $baseURL = "/posts" }}
+      {{- else if .Data.Term }}
+        {{- $baseURL = printf "/tags/%s" (.Data.Term | urlize) }}
+      {{- else }}
+        {{- $baseURL = .RelPermalink }}
+      {{- end }}
       
       {{/* Always show first page */}}
       {{- if gt $currentPage (add $showRange 2) }}
-      <a href="{{ $paginator.First.URL | absURL }}" {{- if eq $currentPage 1 }} class="current"{{- end }}>1</a>
+      {{- if eq 1 $currentPage }}
+      <span class="current">1</span>
+      {{- else }}
+      <a href="{{ $baseURL | relURL }}">1</a>
+      {{- end }}
       {{- if gt $currentPage (add $showRange 3) }}
       <span class="dots">…</span>
       {{- end }}
@@ -156,9 +184,9 @@
       <span class="current">{{ $pageNum }}</span>
       {{- else }}
       {{- if eq $pageNum 1 }}
-      <a href="{{ $paginator.First.URL | absURL }}">{{ $pageNum }}</a>
+      <a href="{{ $baseURL | relURL }}">{{ $pageNum }}</a>
       {{- else }}
-      <a href="{{ printf "%s/page/%d/" $paginator.First.URL $pageNum | absURL }}">{{ $pageNum }}</a>
+      <a href="{{ printf "%s/page/%d/" $baseURL $pageNum | relURL }}">{{ $pageNum }}</a>
       {{- end }}
       {{- end }}
       {{- end }}
@@ -170,12 +198,16 @@
       {{- if lt $currentPage (sub $totalPages (add $showRange 2)) }}
       <span class="dots">…</span>
       {{- end }}
-      <a href="{{ printf "%s/page/%d/" $paginator.First.URL $totalPages | absURL }}" {{- if eq $currentPage $totalPages }} class="current"{{- end }}>{{ $totalPages }}</a>
+      {{- if eq $totalPages $currentPage }}
+      <span class="current">{{ $totalPages }}</span>
+      {{- else }}
+      <a href="{{ printf "%s/page/%d/" $baseURL $totalPages | relURL }}">{{ $totalPages }}</a>
+      {{- end }}
       {{- end }}
     </div>
     
     {{- if $paginator.HasNext }}
-    <a class="next" href="{{ $paginator.Next.URL | absURL }}">
+    <a class="next" href="{{ $paginator.Next.URL | relURL }}">
       {{ i18n "next_page" }}&nbsp;»
     </a>
     {{- end }}
