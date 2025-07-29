@@ -1,15 +1,9 @@
 {{- define "main" }}
 
-{{- if (and site.Params.profileMode.enabled .IsHome) }}
-{{- partial "index_profile.html" . }}
-{{- else }} {{/* if not profileMode */}}
-
-{{- if not .IsHome | and .Title }}
 <header class="page-header">
   {{- partial "breadcrumbs.html" . }}
   <h1>
     {{ .Title }}
-    {{- if and (or (eq .Kind `term`) (eq .Kind `section`)) (.Param "ShowRssButtonInSectionTermList") }}
     {{- with .OutputFormats.Get "rss" }}
     <a href="{{ .RelPermalink }}" title="RSS" aria-label="RSS">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -20,7 +14,6 @@
       </svg>
     </a>
     {{- end }}
-    {{- end }}
   </h1>
   {{- if .Description }}
   <div class="post-description">
@@ -28,7 +21,6 @@
   </div>
   {{- end }}
 </header>
-{{- end }}
 
 {{- if .Content }}
 <div class="post-content">
@@ -38,48 +30,8 @@
 </div>
 {{- end }}
 
-{{- $pages := union .RegularPages .Sections }}
-
-{{- if .IsHome }}
-{{- $pages = where site.RegularPages "Type" "in" site.Params.mainSections }}
-{{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true"  }}
-{{- end }}
-
-{{- $pages = where $pages "Params.private" "ne" true }}
-
+{{- $pages := .Pages }}
 {{- $paginator := .Paginate $pages }}
-
-{{- if and .IsHome site.Params.homeInfoParams (eq $paginator.PageNumber 1) }}
-{{- partial "home_info.html" . }}
-{{- end }}
-
-{{/* Tag filtering section - only show on home page or posts listing, after welcome */}}
-{{- if or .IsHome (eq .Section "posts") }}
-{{- $allTags := slice }}
-{{- range $pages }}
-  {{- range .Params.tags }}
-    {{- $allTags = $allTags | append . }}
-  {{- end }}
-{{- end }}
-{{- $uniqueTags := $allTags | uniq | sort }}
-{{- $term := .Data.Term }}
-
-{{- if gt (len $uniqueTags) 0 }}
-<div class="tag-filter-dropdown">
-  <div class="filter-header">
-    <label for="tag-select" class="filter-label">Filter by Tag:</label>
-    <span class="filter-stats">{{ len $pages }} posts{{- if $term }} • filtered by "{{ $term }}"{{- end }}</span>
-  </div>
-  <select id="tag-select" class="tag-dropdown" onchange="window.location.href=this.value">
-    <option value="{{ if .IsHome }}/{{ else }}/posts/{{ end }}">All Posts</option>
-    {{- range $uniqueTags }}
-    {{- $taggedPosts := where $pages ".Params.tags" "intersect" (slice .) }}
-    <option value="/tags/{{ . | urlize }}/"{{- if eq . $term }} selected{{- end }}>{{ . }} ({{ len $taggedPosts }} posts)</option>
-    {{- end }}
-  </select>
-</div>
-{{- end }}
-{{- end }}
 
 {{- $term := .Data.Term }}
 
@@ -194,7 +146,5 @@
   </div>
 </footer>
 {{- end }}
-
-{{- end }}{{/* end profileMode */}}
 
 {{- end }}{{- /* end main */ -}}
