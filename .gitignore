@@ -187,3 +187,6 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# TIL migration database (local development only)
+til.db
