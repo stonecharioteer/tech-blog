@@ -44,6 +44,7 @@ tech-blog/
 2. **Career & Culture** - Team dynamics, professional development
 3. **Meta/Housekeeping** - Blog maintenance, platform updates
 4. **Personal Reflection** - Values, career transitions
+5. **TIL (Today I Learned)** - Daily learning entries and technical discoveries
 
 ### Content Patterns
 - **TLDR sections** for longer posts
@@ -349,6 +350,14 @@ The admonitions include:
 - Maintain year-based organization for posts
 - Review tag consistency regularly
 - Update gear/favorites pages periodically
+
+### TIL Migration (COMPLETED ✅)
+- **Migration Status**: 100% complete - all 990 TIL entries migrated
+- **Source**: Archive Sphinx blog TIL page with 197 unique dates (2019-2021)
+- **Target Format**: Hugo markdown posts with comprehensive frontmatter
+- **Database Tracking**: SQLite database (`til.db`) for migration validation
+- **Content Enhancement**: Each TIL expanded with context, explanations, and structured sections
+- **Organization**: Year-based folders with descriptive filenames
 
 ### Code Examples
 - Keep `/code/` directory examples runnable
