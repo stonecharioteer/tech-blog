@@ -1,6 +1,6 @@
 ---
 date: '2025-08-07T11:41:44+05:30'
-draft: true
+draft: false
 title: 'A Less Busy Mind'
 description: 'Using Coding Assistants frees me up to do other things'
 tags:
