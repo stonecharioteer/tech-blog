@@ -18,6 +18,8 @@ that is inspired by [Rustlings](https://github.com/rust-lang/rustlings) for Go.
 I see some potential repos in Github, but I thought I'd try my hand at making my own
 version using Claude.
 
+So I built [GoForGo](https://github.com/stonecharioteer/goforgo)
+
 [![GoForGo](/images/posts/goforgo.png)](https://github.com/stonecharioteer/goforgo)
 
 I'm happy with the results thus far.
@@ -28,4 +30,4 @@ and then install `goforgo`, using `goforgo init` to get started.
 
 I've recorded a gif to try and showcase what the tool is like, but go ahead and try it out for yourselves.
 
-![GoForGo in action](/images/posts/goforgo.gif)
+[![asciicast](https://asciinema.org/a/clUw4uK605Lcbj6RVB9LpbDye.svg)](https://asciinema.org/a/clUw4uK605Lcbj6RVB9LpbDye)
