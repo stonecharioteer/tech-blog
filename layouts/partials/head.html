@@ -246,6 +246,16 @@
         color: #5b21b6;
     }
     
+    .admonition.ai {
+        border-left-color: #f97316;
+        background-color: #fff7ed;
+    }
+    
+    .admonition.ai .admonition-title {
+        background-color: #fed7aa;
+        color: #c2410c;
+    }
+    
     /* Dark mode styles */
     .dark .admonition.note {
         background-color: #1e3a8a;
@@ -334,6 +344,22 @@
     .dark .admonition.example .admonition-content {
         color: #e9d5ff;
     }
+    
+    .dark .admonition.ai {
+        background-color: #7c2d12;
+        border-left-color: #fb923c;
+    }
+    
+    .dark .admonition.ai .admonition-title {
+        background-color: #9a3412;
+        color: #fed7aa;
+    }
+    
+    .dark .admonition.ai .admonition-content {
+        color: #ffedd5;
+    }
+    
+    /* REMOVED DUPLICATE LINE NUMBER RULES */
     
     /* CHROMA SYNTAX HIGHLIGHTING FIX - HIGHEST PRIORITY */
     /* Light mode code blocks - target ALL possible containers */
@@ -456,7 +482,6 @@
     /* FINAL OVERRIDE - Ensure light mode works with better contrast */
     body:not(.dark) [class*="chroma"],
     body:not(.dark) [class*="highlight"],
-    body:not(.dark) [class*="lnt"],
     body:not(.dark) pre,
     body:not(.dark) code {
         background-color: #f8f9fa !important;
@@ -464,7 +489,15 @@
         border: none !important;
         outline: none !important;
         box-shadow: none !important;
-        border-radius: 8px !important;
+        border-radius: 0 !important; /* Remove rounded corners to eliminate black corner issue */
+    }
+    
+    /* Light mode line numbers - match dark mode behavior exactly */
+    body:not(.dark) [class*="lnt"],
+    body:not(.dark) [class*="ln"] {
+        background-color: #f8f9fa !important;
+        color: #6c757d !important;
+        border-radius: 0 !important;
     }
     
     /* Remove ALL borders and outlines from light mode code elements */
@@ -868,6 +901,55 @@
         .til-post .entry-header {
             margin-right: 0;
         }
+    }
+    
+    /* FINAL LINE NUMBER FIX - REVERT TO WORKING VERSION */
+    .lntd:first-child,
+    .lntd:first-child *,
+    .lntable .lntd:first-child,
+    .lntable .lntd:first-child *,
+    .lnt,
+    .ln,
+    span.lnt,
+    span.ln,
+    td.lnt,
+    td.ln,
+    .chroma .lnt,
+    .chroma .ln,
+    .highlight .lnt,
+    .highlight .ln,
+    body:not(.dark) .lnt,
+    body:not(.dark) .ln,
+    body:not(.dark) [class*="lnt"],
+    body:not(.dark) [class*="ln"] {
+        border-radius: 0 !important;
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+        border: none !important;
+        outline: none !important;
+    }
+    
+    /* FIX BLACK CORNERS ON CODE BLOCK CONTAINER - COMPREHENSIVE */
+    .highlight,
+    .chroma,
+    div.highlight,
+    .lntable,
+    .highlight .lntable,
+    .chroma .lntable,
+    .highlight > div,
+    .chroma > div,
+    body:not(.dark) .highlight,
+    body:not(.dark) .chroma,
+    body:not(.dark) div.highlight,
+    body:not(.dark) .lntable,
+    body:not(.dark) .highlight .lntable,
+    body:not(.dark) .chroma .lntable,
+    body:not(.dark) .highlight > div,
+    body:not(.dark) .chroma > div {
+        background-color: #f8f9fa !important;
+        background: #f8f9fa !important;
     }
 </style>
 
