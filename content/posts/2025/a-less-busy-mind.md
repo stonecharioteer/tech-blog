@@ -17,7 +17,7 @@ following:
 ![A better mind](/images/posts/a-less-busy-mind/a-better-mind.png)
 
 Bruce is surprised at Lucius's obvious lie, an attempt at modesty. After all,
-Lucius was the one who build all of the Batman's gadgets and the face of Wayne
+Lucius was the one who built all of the Batman's gadgets and the face of Wayne
 Enterprises.
 
 ![A less busy mind](/images/posts/a-less-busy-mind/a-less-busy-mind.png)
@@ -66,7 +66,7 @@ able to use all the multimedia keys on my keyboards with ease.
 Did I mention that I'm running Linux?
 
 *And*, my laptop now supports native screen rotation. The Asus X13 Flow has an
-accelerator that never worked well on Linux, at least not in a tiling window
+accelerometer that never worked well on Linux, at least not in a tiling window
 manager and now, it works with ease! I am also able to extend my `Rofi` config
 to have scripts for things I didn't ever think I'd get around to, like being
 able to copy my `dunst` notifications to memory.
