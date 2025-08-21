@@ -1,22 +1,28 @@
 ---
-date: '2025-08-21T12:23:51+05:30'
-title: 'Watchexec: My New File Watching Swiss Army Knife'
-description: 'How watchexec replaced entr in my development workflow for Hugo, Rust, and Go projects'
+date: '2025-08-19T12:23:51+05:30'
+title: 'TIL: Watchexec - Modern File Watching for Development Workflows'
+description: 'Today I learned about watchexec, a cross-platform file watcher that replaced entr in my development workflow with better defaults and intuitive usage patterns for Hugo, Rust, and Go projects.'
 tags:
-  - "tools"
-  - "productivity"
-  - "hugo"
-  - "rust"
-  - "go"
+  - til
+  - tools
+  - productivity
+  - development-workflow
+  - file-watching
+  - hugo
+  - rust
+  - go
+  - command-line-tools
 ---
 
-{{< info title="AI-Generated Content" >}}
-This post was written with assistance from Claude (Anthropic's AI assistant) based on my experiences and requirements. While the technical content and examples reflect real usage patterns, the writing was collaboratively generated.
-{{< /info >}}
+Today I discovered `watchexec`, a modern cross-platform file watcher that has completely replaced `entr` in my development workflow. It executes commands when files change with much better defaults and a more intuitive interface than traditional file watching tools.
 
-**TLDR**: `watchexec` is a cross-platform file watcher that executes commands when files change. It's more intuitive than `entr` and has better defaults for development workflows. Perfect for auto-rebuilding Hugo sites, Rust projects, and running Go tests.
+{{< ai title="AI-Generated Content" >}}
+This post was written with assistance from Claude (Anthropic's AI assistant) based on my experiences and requirements. While the technical content and examples reflect real usage patterns, the writing was collaboratively generated. The discovery of watchexec's advantages over entr - particularly the reduction from verbose `find . -name "*.go" | entr -r go test` to clean `watchexec -e go 'go test ./...'` - represents genuine workflow improvements in my development process.
+{{< /ai >}}
 
-I've been using `entr` for years to watch files and trigger builds during development. Recently I discovered `watchexec` and it's become my go-to tool for file watching. Here's why and how I use it.
+## The Core Discovery
+
+Watchexec is a Rust-based tool that watches file system changes and triggers commands. Unlike `entr`, which requires explicit file listing and complex `find` commands, watchexec works intelligently out of the box.
 
 ## What is watchexec?
 
