@@ -7,9 +7,13 @@ A Hugo-powered technical blog focused on software development, Python, and caree
 ## Setup
 
 ### Prerequisites
-Install Hugo using the `.deb` file from https://github.com/gohugoio/hugo/releases/latest:
+Install Hugo 0.146.7 extended using the `.deb` file:
 ```bash
-sudo dpkg -i hugo_extended_*_linux-amd64.deb
+# Download Hugo 0.146.7 extended
+wget https://github.com/gohugoio/hugo/releases/download/v0.146.7/hugo_extended_0.146.7_linux-amd64.deb
+
+# Install the package
+sudo dpkg -i hugo_extended_0.146.7_linux-amd64.deb
 ```
 
 ### Development
@@ -22,6 +26,16 @@ hugo serve --buildDrafts
 
 # Production build
 hugo
+```
+
+### Testing GitHub Actions Locally
+Test the build workflow locally using [act](https://github.com/nektos/act):
+```bash
+# Test the build job only (skips deployment)
+gh act -j build
+
+# Test with specific event (e.g., pull request)
+gh act pull_request -j build
 ```
 
 ## Content Management
