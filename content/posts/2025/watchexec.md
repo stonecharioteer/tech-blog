@@ -1,5 +1,5 @@
 ---
-date: '2025-08-21T12:23:51+05:30'
+date: '2025-08-19T12:23:51+05:30'
 title: 'Watchexec: My New File Watching Swiss Army Knife'
 description: 'How watchexec replaced entr in my development workflow for Hugo, Rust, and Go projects'
 tags:
