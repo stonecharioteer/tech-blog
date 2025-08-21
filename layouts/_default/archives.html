@@ -1,0 +1,88 @@
+{{- define "main" }}
+<div class="archive">
+    <h1>{{ .Title }}</h1>
+    
+    {{- $pages := where .Site.RegularPages "Type" "posts" }}
+    {{- $pages = where $pages "Params.private" "ne" true }}
+    {{- $pages = $pages.GroupByDate "2006" }}
+    
+    {{- range $pages }}
+    <div class="archive-year">
+        <h2>{{ .Key }}</h2>
+        <ul class="archive-list">
+            {{- range .Pages }}
+            <li class="archive-item">
+                <time datetime="{{ .Date.Format "2006-01-02" }}" class="archive-date">
+                    {{ .Date.Format "Jan 02" }}
+                </time>
+                <a href="{{ .RelPermalink }}" class="archive-title">{{ .Title }}</a>
+                {{- if .Params.tags }}
+                <div class="archive-tags">
+                    {{- range .Params.tags }}
+                    <span class="archive-tag">{{ . }}</span>
+                    {{- end }}
+                </div>
+                {{- end }}
+            </li>
+            {{- end }}
+        </ul>
+    </div>
+    {{- end }}
+</div>
+
+<style>
+.archive-year {
+    margin-bottom: 2rem;
+}
+
+.archive-year h2 {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.archive-list {
+    list-style: none;
+    padding: 0;
+}
+
+.archive-item {
+    display: flex;
+    align-items: baseline;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.archive-date {
+    font-family: var(--code-font-family);
+    font-size: 0.875rem;
+    color: var(--secondary);
+    min-width: 3.5rem;
+    margin-right: 1rem;
+}
+
+.archive-title {
+    flex: 1;
+    text-decoration: none;
+    color: var(--primary);
+}
+
+.archive-title:hover {
+    color: var(--theme);
+}
+
+.archive-tags {
+    display: flex;
+    gap: 0.25rem;
+    margin-left: 1rem;
+}
+
+.archive-tag {
+    background: var(--code-bg);
+    color: var(--secondary);
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+}
+</style>
+{{- end }}
