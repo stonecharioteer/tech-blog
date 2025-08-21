@@ -127,7 +127,7 @@ A few years ago, when I was at Visa, I was mulling the idea of building a deskto
 
 I realized an assistant that could do anything on your computer was exactly what I needed. I said YOLO and gave Claude access to my Laptop, Desktop and my MiniPc, and asked it to read my [qtile config](https://github.com/stonecharioteer/dotfiles-qtile) and my [fish config](https://github.com/stonecharioteer/dotfiles-qtile) and the [distributed dotfiles repo](https://github.com/stonecharioteer/distributed-dotfiles) to update all the playbooks so that all I'd need to do would be to run the playbooks to setup my machines. The following sections talk about what Claude did to fix each of the problems therein.
 
-## Problems We Tackled (The Human Story)
+## Problems We Tackled
 
 ### "My Battery Dies Without Warning"
 
@@ -224,6 +224,42 @@ battery supplementation.
 - Wondering if you're pushing the system too hard
 - The investigation into power monitoring
 - The satisfaction of having real-time feedback -->
+
+### "My Ansible Playbooks Were Machine-Specific Nightmares"
+
+You know how it is. You start with one machine, create an ansible playbook. Then you get another machine with different specs, so you duplicate the playbook and modify it. Before long, you have three different playbooks that are 80% identical but you're too scared to consolidate them because "what if something breaks?"
+
+My distributed-dotfiles repo was exactly this mess. Desktop playbook, laptop playbook, server playbook - all basically doing the same thing with slight variations.
+
+{{< ai title="Hardware-Aware Ansible Role Architecture" >}}
+Completely restructured your ansible architecture around hardware detection rather than machine types. The key insight: instead of separate playbooks per machine, use a single playbook with intelligent roles that detect their own applicability.
+
+**Core Architecture Changes:**
+- `failsafe-checks` role now validates system capabilities before any configuration
+- `laptop` role checks for `/sys/class/power_supply/BAT*` before installing power management
+- `qtile-wm` role detects X11/Wayland environment before GUI setup
+- `docker` role validates CPU architecture and kernel version compatibility
+- `nerd-fonts` role checks available disk space before downloading font packages
+
+**Hardware Detection Logic:**
+```yaml
+# Example from laptop role
+- name: Check if battery hardware exists
+  stat:
+    path: /sys/class/power_supply/BAT0
+  register: battery_check
+
+- name: Install battery monitoring tools
+  package:
+    name: ["acpi", "powertop", "tlp"]
+  when: battery_check.stat.exists
+```
+
+**Conditional Package Management:**
+The `system-deps` role now adapts package lists based on detected hardware: installs `nvidia-driver` only when NVIDIA GPU detected, `bluetooth` packages only when bluetooth hardware present, and `laptop-mode-tools` only on battery-powered systems.
+
+**Result:** Single `base-environment.yml` + `gui-environment.yml` playbook pair handles Desktop (Ryzen 9 + RTX 4070), Laptop (ASUS ROG hybrid graphics), and MiniPC (Intel NUC) through role-based hardware awareness. No more maintaining three separate playbook copies.
+{{< /ai >}}
 
 ## What Made This Different from Normal Linux Troubleshooting
 
