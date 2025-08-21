@@ -131,6 +131,13 @@ I realized an assistant that could do anything on your computer was exactly what
 
 ### "My Battery Dies Without Warning"
 
+{{< ai title="Battery Monitoring Implementation" >}}
+Created `/home/stonecharioteer/.config/qtile/install/battery-monitor.sh` that
+iterates through `/sys/class/power_supply/BAT*` directories, reads capacity and
+status files, and triggers dunst notifications at 30% and 15% thresholds.
+Scheduled via cron every 10 minutes. The script includes battery detection
+logic and graceful exit when no battery hardware is present.
+{{< /ai >}}
 
 <!-- Focus on the frustration and solution discovery:
 - The problem: sudden shutdowns, no warnings, panic about losing work
@@ -140,12 +147,29 @@ I realized an assistant that could do anything on your computer was exactly what
 
 ### "My Laptop Sleeps When I'm Using External Monitors"
 
+{{< ai title="Monitor-Aware Suspend Logic" >}}
+Implemented `monitor-aware-suspend.sh` that uses `xrandr --query | grep -c "
+connected"` to count active displays. Systemd-logind integration prevents
+suspend when monitor count > 1. The script returns exit code 0 (allow suspend)
+for single monitor, exit code 1 (prevent suspend) for multiple monitors. Added
+notification system for user feedback when suspend is prevented.
+{{< /ai >}}
+
 <!-- The daily annoyance story:
 - Working on external monitors, close laptop lid, everything stops
 - The detective work with Claude to figure out the logic
 - The satisfaction of laptop staying awake when you want it to -->
 
 ### "None of My Hardware Buttons Work"
+
+{{< ai title="X11 Keysym to Command Mapping" >}}
+Mapped hardware keys in qtile config: `XF86AudioMute` → `pactl set-sink-mute`,
+`XF86MonBrightnessUp/Down` → `brightnessctl -d nvidia_0`,
+`XF86KbdBrightnessUp/Down` → `brightnessctl -d asus::kbd_backlight`. Created
+udev rules in `/etc/udev/rules.d/99-backlight.rules` for group-based write
+permissions to `/sys/class/backlight/*/brightness` and
+`/sys/class/leds/*/brightness`. Added user to `video` and `input` groups.
+{{< /ai >}}
 
 <!-- The accumulated frustration:
 - Years of volume keys, brightness keys, special function keys doing nothing
@@ -154,6 +178,15 @@ I realized an assistant that could do anything on your computer was exactly what
 
 ### "My Multi-Monitor Setup is a Daily Lottery"
 
+{{< ai title="Multi-Monitor EDID and GPU Switching Issues" >}}
+Diagnosed EDID detection failures (`/sys/class/drm/*/edid` files were 0 bytes),
+causing VGA fallback modes. Fixed hybrid graphics stuttering by forcing
+dedicated GPU mode with `prime-select nvidia`. Created custom modelines using
+`cvt 2560 1440 60` and implemented display enumeration logic that handles GPU
+mode changes (DisplayPort-1-X in NVIDIA mode, DisplayPort-2-X in hybrid mode).
+USB-C connection provided better EDID than HDMI through dock.
+{{< /ai >}}
+
 <!-- The workflow disruption:
 - Monitors not detected, wrong resolutions, system stuttering
 - The complex investigation process with Claude
@@ -161,12 +194,31 @@ I realized an assistant that could do anything on your computer was exactly what
 
 ### "My Touchpad is Just a Basic Clicking Rectangle"
 
+{{< ai title="Touchegg and libinput Configuration" >}}
+Configured `/etc/X11/xorg.conf.d/40-libinput-touchpad.conf` with libinput
+driver options: `Tapping on`, `NaturalScrolling true`, `ScrollMethod
+twofinger`. Deployed touchegg XML configuration mapping PINCH gestures to
+`Control+plus/minus` and SWIPE gestures to navigation keys. Enabled touchegg
+systemd user service for automatic startup. Required input group membership for
+proper device access.
+{{< /ai >}}
+
 <!-- The productivity loss:
 - Missing gestures you expect from modern hardware
 - The discovery that Linux could do this stuff, it just wasn't configured
 - The difference in daily workflow after fixing gestures -->
 
 ### "I Never Know How Much Power I'm Using"
+
+{{< ai title="Real-Time Power Consumption Monitoring" >}}
+Built multi-method power detection: UPower energy-rate parsing from
+`/sys/class/power_supply/BAT*/` with battery state analysis, component-based
+estimation using CPU load from `/proc/stat`, NVIDIA GPU power via `nvidia-smi
+--query-gpu=power.draw`, and fixed estimates for displays/dock. Integrated into
+qtile status bar with 5-second polling. Handles AC connection detection and
+differentiates between charging, discharging, and high-load scenarios requiring
+battery supplementation.
+{{< /ai >}}
 
 <!-- The curiosity and control aspect:
 - Wondering if you're pushing the system too hard
