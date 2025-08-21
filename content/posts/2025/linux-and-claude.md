@@ -1,5 +1,5 @@
 ---
-date: '2025-01-20T00:05:00+05:30'
+date: '2025-08-21T00:00:00+05:30'
 title: 'My Linux Laptop Finally Works: How Claude Helped Me Fix Years of Annoyances'
 description: 'After years of living with Linux laptop quirks - battery surprises, broken suspend, useless gestures, and monitor chaos - I partnered with Claude to actually fix these problems instead of just accepting them as "the Linux experience."'
 tags:
