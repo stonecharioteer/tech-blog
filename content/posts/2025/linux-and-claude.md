@@ -116,24 +116,21 @@ This counts active monitors, excluding the built-in laptop screen (eDP-1). If th
 The whole thing was maybe 50 lines of bash script and some systemd service configuration. Years of workflow disruption solved by logic that should have been built-in from day one.
 {{< /ai >}}
 
-<!-- Brief hardware overview focused on the problems, not specs:
-- ASUS ROG X13 Flow running Linux Mint 22.1
-- The specific pain points this hardware combo created
-- What worked out of the box vs what was broken
-- Your daily workflow and where these issues hit hardest -->
+That was arguably less condescending. Yeesh.
 
 ## The Claude Partnership: How We Worked Together
 
-<!-- This is the core section - focus on the collaboration:
-- How you approached Claude with problems
-- The back-and-forth debugging process
-- Claude's role as a patient debugging partner who never gets frustrated
-- How it felt different from traditional troubleshooting (forums, documentation, trial-and-error)
-- The iterative approach: fix one thing, discover the next issue, repeat -->
+I decided to start using this approach for other problems. I realized that my mental paradigms about AI assistants had to change. You had assistants like Cursor that presented themselves as
+wholly tied down as "coding assitants", but then you also had Claude Code, which presented an interesting problem.
+
+A few years ago, when I was at Visa, I was mulling the idea of building a desktop assistant, something that new joinees could install on their macbooks and then have it setup the development environment for them, the Visa way. It was a project that didn't take off, but not for my lack of trying. I didn't get to work on it, but I tried it out for my own laptop later. I had a mix of Vagrantfiles and ansible playbooks in my [distributed dotfiles](https://github.com/stonecharioteer/distributed-dotfiles) that I painstakingly updated myself, everytime I updated my devtools. This got unwieldy and I never got around to updating it.
+
+I realized an assistant that could do anything on your computer was exactly what I needed. I said YOLO and gave Claude access to my Laptop, Desktop and my MiniPc, and asked it to read my [qtile config](https://github.com/stonecharioteer/dotfiles-qtile) and my [fish config](https://github.com/stonecharioteer/dotfiles-qtile) and the [distributed dotfiles repo](https://github.com/stonecharioteer/distributed-dotfiles) to update all the playbooks so that all I'd need to do would be to run the playbooks to setup my machines. The following sections talk about what Claude did to fix each of the problems therein.
 
 ## Problems We Tackled (The Human Story)
 
 ### "My Battery Dies Without Warning"
+
 
 <!-- Focus on the frustration and solution discovery:
 - The problem: sudden shutdowns, no warnings, panic about losing work
