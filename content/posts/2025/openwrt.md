@@ -1,16 +1,17 @@
 ---
 date: '2025-08-22T21:05:02+05:30'
-draft: true
 title: 'Openwrt'
 description: 'How I spent my week setting up multi-wan failover on OpenWRT on my Beelink EQI12'
 tags:
   - "homelab"
-  - "chatGPT"
+  - "ai"
+  - "openwrt"
+  - "proxmox"
 ---
 
-I got a Beelink EQI12 two weeks ago, thanks to a friend flying in from Dubai. This MiniPC has been my plan to replace the weak Linkstar H68K OpenWRT router I had for about 2 years now. While the Linkstar has worked just fine, I wanted to upgrade to something more powerful so I could install other services on it as well. I didn't want to install PiHole on a Raspberry Pi anymore. I'm a little tired of Pis and their problems.
+I got a [Beelink EQI12](https://www.bee-link.com/catalog/product/view/id/1077) two weeks ago, thanks to a friend flying in from Dubai. This MiniPC has been my plan to replace the weak [Linkstar H68K](https://www.linkstar.com/h68k/) [OpenWrt](https://openwrt.org/) router I had for about 2 years now. While the Linkstar has worked just fine, I wanted to upgrade to something more powerful so I could install other services on it as well. I didn't want to install PiHole on a Raspberry Pi anymore. I'm a little tired of Pis and their problems.
 
-So I setup Proxmox on this server, and then installed OpenWRT on a VM on it. At first I assumed it would be easy. I was *very* wrong.
+So I setup [Proxmox](https://www.proxmox.com/) on this server, and then installed [OpenWrt](https://openwrt.org/) on a VM on it. At first I assumed it would be easy. I was *very* wrong.
 
 I used ChatGPT to constantly debug this. What made my life easier at first was:
 
@@ -22,7 +23,7 @@ I'm enjoying having AI summarize what I did, just so that I can wave away the de
 
 {{<ai title="🔧 Debugging OpenWRT For Dual WAN Failover with ChatGPT">}}
 
-I set up a **reliable failover system** using OpenWRT and `mwan3` on a mini PC router.
+I set up a **reliable failover system** using [OpenWrt](https://openwrt.org/) and [`mwan3`](https://openwrt.org/docs/guide-user/network/wan/multiwan/mwan3) on a mini PC router.
 
 ### ✅ Goals:
 
@@ -35,9 +36,9 @@ I set up a **reliable failover system** using OpenWRT and `mwan3` on a mini PC r
 
 ### ⚙️ Key Components:
 
-* **OpenWRT** running in a Proxmox VM on an EQI12 mini PC
-* **mwan3** for multi-WAN tracking and routing policies
-* **`httping`** to test actual HTTP response from:
+* **[OpenWrt](https://openwrt.org/)** running in a [Proxmox](https://www.proxmox.com/) VM on an EQI12 mini PC
+* **[mwan3](https://openwrt.org/docs/guide-user/network/wan/multiwan/mwan3)** for multi-WAN tracking and routing policies
+* **[`httping`](https://openwrt.org/packages/pkgdata_owrt18_6/httping)** to test actual HTTP response from:
 
   * `https://github.com`
   * `https://amazon.com`
@@ -93,6 +94,10 @@ I set up a **reliable failover system** using OpenWRT and `mwan3` on a mini PC r
 
 * ChatGPT really likes to convince me that `mwan3` has a `script` feature. No. It does not. Thanks Claude.
 * GPT5 SUCKS. It is so damned slow. I've gotten used to being productive with Claude. Using GPT5 and the Web App for ChatGPT is so damned horrible. I'm happier with Claude thank you very much.
+* ACT is better with [PPPoE](https://openwrt.org/docs/guide-user/network/wan/wan_interface_protocols#protocol_pppoe_ppp_over_ethernet) connections, not DHCP. I am glad I have my account password saved for such an occasion. I wish people didn't pivot to the OTP login, that's such a travesty.
+* Airtel is surprisingly easier, albeit because it comes with its own router. I'm not a big fan of that. I had to use Airtel over WiFi and ACT over Ethernet, since the EQI12 only has 2 NICs.
+* The silliest error I faced was that I'd put in `1.1.1.1 8.8.8.8` as the entry in DNS config. These had to be *one per line*. This happened because ChatGPT kept telling me to add both nameservers in one command using `uci`.
+* [`dnsmasq`](https://openwrt.org/docs/guide-user/base-system/dhcp_configuration) errors! So many `dnsmasq` errors. I wish I had the time to read the docs, but honestly I don't.
 
 All in all, it works now, and that was 2 days of my life spent. I am not sure if I'd say it was "well-spent" though. If you're choosing to be your family's sysadmin, YMMV.
 
