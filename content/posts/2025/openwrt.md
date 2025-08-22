@@ -9,7 +9,7 @@ tags:
   - "proxmox"
 ---
 
-I got a [Beelink EQI12](https://www.bee-link.com/catalog/product/view/id/1077) two weeks ago, thanks to a friend flying in from Dubai. This MiniPC has been my plan to replace the weak [Linkstar H68K](https://www.linkstar.com/h68k/) [OpenWrt](https://openwrt.org/) router I had for about 2 years now. While the Linkstar has worked just fine, I wanted to upgrade to something more powerful so I could install other services on it as well. I didn't want to install PiHole on a Raspberry Pi anymore. I'm a little tired of Pis and their problems.
+I got a [Beelink EQI12](https://www.bee-link.com/products/beelink-eqi12-intel%C2%AE-core-1220p-12450h-12650h) two weeks ago, thanks to a friend flying in from Dubai. This MiniPC has been my plan to replace the weak [Linkstar H68K](https://www.seeedstudio.com/LinkStar-H68K-1432-p-5501.html) [OpenWrt](https://openwrt.org/) router I had for about 2 years now. While the Linkstar has worked just fine, I wanted to upgrade to something more powerful so I could install other services on it as well. I didn't want to install PiHole on a Raspberry Pi anymore. I'm a little tired of Pis and their problems.
 
 So I setup [Proxmox](https://www.proxmox.com/) on this server, and then installed [OpenWrt](https://openwrt.org/) on a VM on it. At first I assumed it would be easy. I was *very* wrong.
 
