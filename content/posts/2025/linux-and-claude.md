@@ -19,10 +19,6 @@ cover:
 ## The "Linux Experience" I Was Used To
 
 
-```bash
-echo "Hello, world"
-```
-
 I'm sure you know the story.
 
 I bought the Asus ROG X13 Flow in 2022, eager to use a powerful Ryzen 9 laptop
