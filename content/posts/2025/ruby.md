@@ -200,6 +200,7 @@ mise install ruby@3.1.1
 mise use ruby@3.1.1
 gem install bundler -v 2.3.4
 bundle init
+bundle config set --local path 'vendor/bundle'
 bundle add logger
 ```
 
@@ -226,4 +227,372 @@ I had *so* **many** ***thoughts***!
 
 First of all, *what* is that syntax? It's so strange. I had never seen versioning like that in a CLI.
 But after I had gotten over the initial shock, my developer brain immediately wanted to know *how* Ruby
-managed that.
+managed that. Let's focus on that.
+
+I first ran into something related when I installed a different version of Rails and wanted to downgrade
+to match the version in the tutorial.
+
+![Multiple rails versions](/images/posts/ruby/multiple-versions.png)
+
+Now that made my neurons fire at full power. *What?* **WHAT?** _***WHAT?!**_
+
+Those are multiple versions of Rails, all installed on my computer, but not on the same environment.
+
+Notice that I did `bundle config set --local path 'vendor/bundle'` earlier, and I did that because
+my Python brain told me to look for a way to isolate my local installs.
+
+I didn't know that I *did not **need** to.*
+
+Ruby can manage multiple versions of packages -- called Gems (eat poop Gemini!) -- globally.
+That leads us down a very interesting rabbithole.
+
+![Choosing versions](/images/posts/ruby/choosing_versions.png)
+
+How is this happening? This specific version of Ruby I'm using says I can choose the library version!
+
+I decided to inspect what `gem list` would output.
+
+```
+$ gem list
+
+abbrev (0.1.2)
+actioncable (7.2.2.2, 7.1.5.2, 7.1.3, 7.0.4, 7.0.0)
+actionmailbox (7.2.2.2, 7.1.5.2, 7.1.3, 7.0.4, 7.0.0)
+actionmailer (7.2.2.2, 7.1.5.2, 7.1.3, 7.0.4, 7.0.0)
+actionpack (7.2.2.2, 7.1.5.2, 7.1.3, 7.0.4, 7.0.0)
+actiontext (7.2.2.2, 7.1.5.2, 7.1.3, 7.0.4, 7.0.0)
+actionview (7.2.2.2, 7.1.5.2, 7.1.3, 7.0.4, 7.0.0)
+activejob (7.2.2.2, 7.1.5.2, 7.1.3, 7.0.4, 7.0.0)
+activemodel (7.2.2.2, 7.1.5.2, 7.1.3, 7.0.4, 7.0.0)
+activerecord (7.2.2.2, 7.1.5.2, 7.1.3, 7.0.4, 7.0.0)
+activestorage (7.2.2.2, 7.1.5.2, 7.1.3, 7.0.4, 7.0.0)
+activesupport (7.2.2.2, 7.1.5.2, 7.1.3, 7.0.4, 7.0.0)
+addressable (2.8.7)
+ansi (1.5.0)
+ast (2.4.3)
+base64 (0.3.0, 0.2.0)
+benchmark (0.4.1, default: 0.4.0)
+bigdecimal (3.2.3, 3.1.8)
+bindex (0.8.1)
+bootsnap (1.18.6)
+brakeman (7.1.0)
+builder (3.3.0)
+bundler (default: 2.6.9, 2.4.19, 2.3.14, 2.3.10)
+capybara (3.40.0)
+cgi (default: 0.4.2)
+childprocess (4.1.0)
+coderay (1.1.3)
+concurrent-ruby (1.3.5)
+connection_pool (2.5.4)
+crass (1.0.6)
+csv (3.3.2)
+date (3.4.1)
+debug (1.11.0)
+delegate (default: 0.4.0)
+did_you_mean (default: 2.0.0)
+digest (default: 3.2.0)
+drb (2.2.3, 2.2.1)
+english (default: 0.8.0)
+erb (5.0.2, default: 4.0.4)
+error_highlight (default: 0.7.0)
+erubi (1.13.1)
+etc (default: 1.4.6)
+fcntl (default: 1.2.0)
+ffi (1.17.2 x86_64-linux-gnu)
+fiddle (default: 1.1.6)
+fileutils (default: 1.7.3)
+find (default: 0.2.0)
+formatador (1.2.1)
+forwardable (default: 1.3.3)
+getoptlong (0.2.1)
+globalid (1.3.0)
+guard (2.19.1)
+guard-compat (1.2.1)
+guard-minitest (2.4.6)
+i18n (1.14.7)
+importmap-rails (2.2.2)
+io-console (0.8.1)
+io-nonblock (default: 0.3.2)
+io-wait (default: 0.3.2)
+ipaddr (default: 1.2.7)
+irb (1.15.2, default: 1.14.3)
+jbuilder (2.14.1)
+json (2.15.0, default: 2.9.1)
+language_server-protocol (3.17.0.5)
+lint_roller (1.1.0)
+listen (3.9.0)
+logger (1.7.0, default: 1.6.4)
+loofah (2.24.1)
+lumberjack (1.4.2)
+mail (2.8.1)
+marcel (1.1.0)
+matrix (0.4.3, 0.4.2)
+method_source (1.1.0)
+mini_mime (1.1.5)
+mini_portile2 (2.8.9)
+minitest (5.25.5, 5.25.4)
+minitest-reporters (1.7.1, 1.2.0)
+msgpack (1.8.0)
+mustermann (2.0.2)
+mutex_m (0.3.0)
+nenv (0.3.0)
+net-ftp (0.3.8)
+net-http (default: 0.6.0)
+net-imap (0.5.10, 0.5.8)
+net-pop (0.1.2)
+net-protocol (0.2.2)
+net-smtp (0.5.1)
+nio4r (2.7.4)
+nkf (0.2.0)
+nokogiri (1.18.10 x86_64-linux-gnu)
+notiffany (0.1.3)
+observer (0.1.2)
+open-uri (default: 0.5.0)
+open3 (default: 0.2.1)
+openssl (default: 3.3.0)
+optparse (default: 0.6.0)
+ostruct (0.6.3, default: 0.6.1)
+parallel (1.27.0)
+parser (3.3.9.0)
+pathname (default: 0.4.0)
+power_assert (2.0.5)
+pp (0.6.2)
+prettyprint (0.2.0)
+prime (0.1.3)
+prism (1.5.1)
+pry (0.15.2)
+pstore (default: 0.1.4)
+psych (5.2.6, default: 5.2.2)
+public_suffix (6.0.2)
+puma (7.0.4, 5.6.5)
+racc (1.8.1)
+rack (3.2.1, 3.1.16, 2.2.17)
+rack-protection (2.2.2)
+rack-session (2.1.1)
+rack-test (2.2.0)
+rackup (2.2.1)
+rails (7.2.2.2, 7.1.5.2, 7.1.3, 7.0.4, 7.0.0)
+rails-controller-testing (1.0.5)
+rails-dom-testing (2.3.0)
+rails-html-sanitizer (1.6.2)
+railties (7.2.2.2, 7.1.5.2, 7.1.3, 7.0.4, 7.0.0)
+rainbow (3.1.1)
+rake (13.3.0, 13.2.1)
+rb-fsevent (0.11.2)
+rb-inotify (0.11.1)
+rbs (3.8.0)
+rdoc (6.14.2, default: 6.14.0)
+readline (default: 0.0.4)
+regexp_parser (2.11.3)
+reline (0.6.2, default: 0.6.0)
+repl_type_completor (0.1.9)
+resolv (default: 0.6.2)
+resolv-replace (0.1.1)
+rexml (3.4.4, 3.4.0)
+rinda (0.2.0)
+rss (0.3.1)
+rubocop (1.81.0, 1.80.2)
+rubocop-ast (1.47.1)
+rubocop-performance (1.26.0)
+rubocop-rails (2.33.3)
+rubocop-rails-omakase (1.1.0)
+ruby-progressbar (1.13.0)
+ruby2_keywords (default: 0.0.5)
+rubyzip (3.1.0)
+securerandom (0.4.1)
+selenium-webdriver (4.35.0, 4.1.0)
+set (default: 1.1.1)
+shellany (0.0.1)
+shellwords (default: 0.2.2)
+sinatra (2.2.2)
+singleton (default: 0.3.0)
+sprockets (4.2.2)
+sprockets-rails (3.5.2)
+sqlite3 (2.7.4 x86_64-linux-gnu, 1.7.3)
+stimulus-rails (1.3.4)
+stringio (3.1.7, default: 3.1.2)
+strscan (default: 3.1.2)
+syntax_suggest (default: 2.0.2)
+syslog (0.2.0)
+tempfile (default: 0.3.1)
+test-unit (3.6.7)
+thor (1.4.0)
+tilt (2.6.1)
+time (default: 0.4.1)
+timeout (0.4.3)
+tmpdir (default: 0.3.1)
+tsort (default: 0.2.0)
+turbo-rails (2.0.16)
+typeprof (0.30.1)
+tzinfo (2.0.6)
+un (default: 0.3.0)
+unicode-display_width (3.2.0)
+unicode-emoji (4.1.0)
+uri (default: 1.0.3)
+useragent (0.16.11)
+weakref (default: 0.1.3)
+web-console (4.2.1)
+webdrivers (5.3.1)
+websocket (1.2.11)
+websocket-driver (0.8.0)
+websocket-extensions (0.1.5)
+xpath (3.2.0)
+yaml (default: 0.4.0)
+zeitwerk (2.7.3)
+zlib (default: 3.2.1)
+```
+
+Oh boy. My eyes are still spinning.
+
+```
+$ gem list  | grep ','
+
+actioncable (7.2.2.2, 7.1.5.2, 7.1.3, 7.0.4, 7.0.0)
+actionmailbox (7.2.2.2, 7.1.5.2, 7.1.3, 7.0.4, 7.0.0)
+actionmailer (7.2.2.2, 7.1.5.2, 7.1.3, 7.0.4, 7.0.0)
+actionpack (7.2.2.2, 7.1.5.2, 7.1.3, 7.0.4, 7.0.0)
+actiontext (7.2.2.2, 7.1.5.2, 7.1.3, 7.0.4, 7.0.0)
+actionview (7.2.2.2, 7.1.5.2, 7.1.3, 7.0.4, 7.0.0)
+activejob (7.2.2.2, 7.1.5.2, 7.1.3, 7.0.4, 7.0.0)
+activemodel (7.2.2.2, 7.1.5.2, 7.1.3, 7.0.4, 7.0.0)
+activerecord (7.2.2.2, 7.1.5.2, 7.1.3, 7.0.4, 7.0.0)
+activestorage (7.2.2.2, 7.1.5.2, 7.1.3, 7.0.4, 7.0.0)
+activesupport (7.2.2.2, 7.1.5.2, 7.1.3, 7.0.4, 7.0.0)
+base64 (0.3.0, 0.2.0)
+benchmark (0.4.1, default: 0.4.0)
+bigdecimal (3.2.3, 3.1.8)
+bundler (default: 2.6.9, 2.4.19, 2.3.14, 2.3.10)
+drb (2.2.3, 2.2.1)
+erb (5.0.2, default: 4.0.4)
+irb (1.15.2, default: 1.14.3)
+json (2.15.0, default: 2.9.1)
+logger (1.7.0, default: 1.6.4)
+matrix (0.4.3, 0.4.2)
+minitest (5.25.5, 5.25.4)
+minitest-reporters (1.7.1, 1.2.0)
+net-imap (0.5.10, 0.5.8)
+ostruct (0.6.3, default: 0.6.1)
+psych (5.2.6, default: 5.2.2)
+puma (7.0.4, 5.6.5)
+rack (3.2.1, 3.1.16, 2.2.17)
+rails (7.2.2.2, 7.1.5.2, 7.1.3, 7.0.4, 7.0.0)
+railties (7.2.2.2, 7.1.5.2, 7.1.3, 7.0.4, 7.0.0)
+rake (13.3.0, 13.2.1)
+rdoc (6.14.2, default: 6.14.0)
+reline (0.6.2, default: 0.6.0)
+rexml (3.4.4, 3.4.0)
+rubocop (1.81.0, 1.80.2)
+selenium-webdriver (4.35.0, 4.1.0)
+sqlite3 (2.7.4 x86_64-linux-gnu, 1.7.3)
+stringio (3.1.7, default: 3.1.2)
+```
+
+These libraries all have multiple versions and no-doubt they know how to choose their dependencies
+according to what they need. Because what sane language would allow multiple versions without
+being able to resolve the version as needed?
+
+I can't imagine doing this in Python.
+
+How does Ruby do this?
+
+I went looking -- and in 2025, that means I asked an LLM -- and I found the files here.
+
+```
+$ ls ~/.local/share/mise/installs/ruby/3.4.6/lib/ruby/gems/3.4.0/gems/
+
+abbrev-0.1.2/           activemodel-7.1.3/      coderay-1.1.3/                jbuilder-2.14.1/                    openssl-3.3.0/                   railties-7.1.3/               singleton-0.3.0/
+actioncable-7.0.0/      activemodel-7.1.5.2/    concurrent-ruby-1.3.5/        json-2.15.0/                        open-uri-0.5.0/                  railties-7.1.5.2/             sprockets-4.2.2/
+actioncable-7.0.4/      activemodel-7.2.2.2/    connection_pool-2.5.4/        json-2.9.1/                         optparse-0.6.0/                  railties-7.2.2.2/             sprockets-rails-3.5.2/
+actioncable-7.1.3/      activerecord-7.0.0/     crass-1.0.6/                  language_server-protocol-3.17.0.5/  ostruct-0.6.1/                   rainbow-3.1.1/                sqlite3-1.7.3/
+actioncable-7.1.5.2/    activerecord-7.0.4/     csv-3.3.2/                    lint_roller-1.1.0/                  ostruct-0.6.3/                   rake-13.2.1/                  sqlite3-2.7.4-x86_64-linux-gnu/
+actioncable-7.2.2.2/    activerecord-7.1.3/     date-3.4.1/                   listen-3.9.0/                       parallel-1.27.0/                 rake-13.3.0/                  stimulus-rails-1.3.4/
+actionmailbox-7.0.0/    activerecord-7.1.5.2/   debug-1.11.0/                 logger-1.6.4/                       parser-3.3.9.0/                  rb-fsevent-0.11.2/            stringio-3.1.2/
+actionmailbox-7.0.4/    activerecord-7.2.2.2/   delegate-0.4.0/               logger-1.7.0/                       pathname-0.4.0/                  rb-inotify-0.11.1/            stringio-3.1.7/
+actionmailbox-7.1.3/    activestorage-7.0.0/    did_you_mean-2.0.0/           loofah-2.24.1/                      power_assert-2.0.5/              rbs-3.8.0/                    strscan-3.1.2/
+actionmailbox-7.1.5.2/  activestorage-7.0.4/    digest-3.2.0/                 lumberjack-1.4.2/                   pp-0.6.2/                        rdoc-6.14.0/                  syntax_suggest-2.0.2/
+actionmailbox-7.2.2.2/  activestorage-7.1.3/    drb-2.2.1/                    mail-2.8.1/                         prettyprint-0.2.0/               rdoc-6.14.2/                  syslog-0.2.0/
+actionmailer-7.0.0/     activestorage-7.1.5.2/  drb-2.2.3/                    marcel-1.1.0/                       prime-0.1.3/                     readline-0.0.4/               tempfile-0.3.1/
+actionmailer-7.0.4/     activestorage-7.2.2.2/  english-0.8.0/                matrix-0.4.2/                       prism-1.5.1/                     regexp_parser-2.11.3/         test-unit-3.6.7/
+actionmailer-7.1.3/     activesupport-7.0.0/    erb-4.0.4/                    matrix-0.4.3/                       pry-0.15.2/                      reline-0.6.0/                 thor-1.4.0/
+actionmailer-7.1.5.2/   activesupport-7.0.4/    erb-5.0.2/                    method_source-1.1.0/                pstore-0.1.4/                    reline-0.6.2/                 tilt-2.6.1/
+actionmailer-7.2.2.2/   activesupport-7.1.3/    error_highlight-0.7.0/        mini_mime-1.1.5/                    psych-5.2.2/                     repl_type_completor-0.1.9/    time-0.4.1/
+actionpack-7.0.0/       activesupport-7.1.5.2/  erubi-1.13.1/                 mini_portile2-2.8.9/                psych-5.2.6/                     resolv-0.6.2/                 timeout-0.4.3/
+actionpack-7.0.4/       activesupport-7.2.2.2/  etc-1.4.6/                    minitest-5.25.4/                    public_suffix-6.0.2/             resolv-replace-0.1.1/         tmpdir-0.3.1/
+actionpack-7.1.3/       addressable-2.8.7/      fcntl-1.2.0/                  minitest-5.25.5/                    puma-5.6.5/                      rexml-3.4.0/                  tsort-0.2.0/
+actionpack-7.1.5.2/     ansi-1.5.0/             ffi-1.17.2-x86_64-linux-gnu/  minitest-reporters-1.2.0/           puma-7.0.4/                      rexml-3.4.4/                  turbo-rails-2.0.16/
+actionpack-7.2.2.2/     ast-2.4.3/              fiddle-1.1.6/                 minitest-reporters-1.7.1/           racc-1.8.1/                      rinda-0.2.0/                  typeprof-0.30.1/
+actiontext-7.0.0/       base64-0.2.0/           fileutils-1.7.3/              msgpack-1.8.0/                      rack-2.2.17/                     rss-0.3.1/                    tzinfo-2.0.6/
+actiontext-7.0.4/       base64-0.3.0/           find-0.2.0/                   mustermann-2.0.2/                   rack-3.1.16/                     rubocop-1.80.2/               un-0.3.0/
+actiontext-7.1.3/       benchmark-0.4.0/        formatador-1.2.1/             mutex_m-0.3.0/                      rack-3.2.1/                      rubocop-1.81.0/               unicode-display_width-3.2.0/
+actiontext-7.1.5.2/     benchmark-0.4.1/        forwardable-1.3.3/            nenv-0.3.0/                         rack-protection-2.2.2/           rubocop-ast-1.47.1/           unicode-emoji-4.1.0/
+actiontext-7.2.2.2/     bigdecimal-3.1.8/       getoptlong-0.2.1/             net-ftp-0.3.8/                      rack-session-2.1.1/              rubocop-performance-1.26.0/   uri-1.0.3/
+actionview-7.0.0/       bigdecimal-3.2.3/       globalid-1.3.0/               net-http-0.6.0/                     rack-test-2.2.0/                 rubocop-rails-2.33.3/         useragent-0.16.11/
+actionview-7.0.4/       bindex-0.8.1/           guard-2.19.1/                 net-imap-0.5.10/                    rackup-2.2.1/                    rubocop-rails-omakase-1.1.0/  weakref-0.1.3/
+actionview-7.1.3/       bootsnap-1.18.6/        guard-compat-1.2.1/           net-imap-0.5.8/                     rails-7.0.0/                     ruby2_keywords-0.0.5/         web-console-4.2.1/
+actionview-7.1.5.2/     brakeman-7.1.0/         guard-minitest-2.4.6/         net-pop-0.1.2/                      rails-7.0.4/                     ruby-progressbar-1.13.0/      webdrivers-5.3.1/
+actionview-7.2.2.2/     builder-3.3.0/          i18n-1.14.7/                  net-protocol-0.2.2/                 rails-7.1.3/                     rubyzip-3.1.0/                websocket-1.2.11/
+activejob-7.0.0/        bundler-2.3.10/         importmap-rails-2.2.2/        net-smtp-0.5.1/                     rails-7.1.5.2/                   securerandom-0.4.1/           websocket-driver-0.8.0/
+activejob-7.0.4/        bundler-2.3.14/         io-console-0.8.1/             nio4r-2.7.4/                        rails-7.2.2.2/                   selenium-webdriver-4.1.0/     websocket-extensions-0.1.5/
+activejob-7.1.3/        bundler-2.4.19/         io-nonblock-0.3.2/            nkf-0.2.0/                          rails-controller-testing-1.0.5/  selenium-webdriver-4.35.0/    xpath-3.2.0/
+activejob-7.1.5.2/      bundler-2.6.9/          io-wait-0.3.2/                nokogiri-1.18.10-x86_64-linux-gnu/  rails-dom-testing-2.3.0/         set-1.1.1/                    yaml-0.4.0/
+activejob-7.2.2.2/      capybara-3.40.0/        ipaddr-1.2.7/                 notiffany-0.1.3/                    rails-html-sanitizer-1.6.2/      shellany-0.0.1/               zeitwerk-2.7.3/
+activemodel-7.0.0/      cgi-0.4.2/              irb-1.14.3/                   observer-0.1.2/                     railties-7.0.0/                  shellwords-0.2.2/             zlib-3.2.1/
+activemodel-7.0.4/      childprocess-4.1.0/     irb-1.15.2/                   open3-0.2.1/                        railties-7.0.4/                  sinatra-2.2.2/
+```
+
+Every gem, irrespective of whether it has multiple versions, has its version
+number suffixed to the folder. This helps me understand a lot more.
+
+At install time, Ruby would have no *need* to overwrite the older installs.
+Python would just overwrite stuff since it doesn't have a concept of versions
+*at import time*. Everything in Python is "installed" in the `site-packages`
+folder, after all. I'm doing some hand-wavey stuff with the actual
+implementation logic, but at the very least `import pandas` doesn't take any
+identifier for the version of the package
+[its looking for.](https://docs.python.org/3/reference/import.html#searching)
+
+Ruby's version means that you can have multiple versions of a Gem installed globally, and
+you do not need to worry about your new project changing something for another project
+just because you ran `bundle install`. You do not need isolated environments.
+
+Now, I don't think virtual environments are bad, they're fine if you're the kind of developer
+who only has one project going on at any given point of time. But if you're like me, you
+probably have a couple dozen `venv`s in your computer at any given point of time, some of
+which have the same versions of a particular dependency.
+
+The solution, by the way, is not Docker either.
+
+I've also run into issues when two branches of the same project use different
+versions of dependencies. It happens when you're trying to upgrade a dependency
+and trying some functionality out, but you need to switch back to the other
+branch that uses the older version. It's an ugly world out there, folks.
+
+"The Ruby Way" ensures that you don't have to nuke your local environment to see if you
+can upgrade Rails. That line I spent a bit figuring out because I was concerned the tutorial
+didn't introduce me to early on?
+
+```
+$ bundle config set --local path 'vendor/bundle'
+```
+
+Turns out, it was never necessary!
+
+Multiple versions of your dependencies *can* co-exist. There's no reason for
+them no to, and you don't need environments taking space all over your
+computer. And you certainly don't need a tool that you need to run to find all the
+different environments you have created to free up space on your home directory.
+[`cargo-sweep`](https://crates.io/crates/cargo-sweep), I'm looking at you.
+
+### `irb` doesn't have a `vim` mode
+
+There isn't much to say about this. I don't expect to use `irb` much. I barely
+use the Python interpreter these days. It's not a big loss, but even Python's
+interpreter doesn't have vim mode out of the box either. I'd need to play with
+`readline`'s settings or use the IPython shell, which is what I use when I
+really want to spend time on the interpreter anyway.
+
+### A tiny web server
+
+![Sinatra](/images/posts/ruby/sinatra.png)
+
+Okay, this makes the Flask lover in me giggle.
