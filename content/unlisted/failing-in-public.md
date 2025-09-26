@@ -8,6 +8,10 @@ hiddenInHomeList: true
 url: "failure"
 ---
 
+## Note 1
+
+**June 17, 2025**
+
 I was 17 when I failed school for the very first time.
 
 I was in the 11th grade and if I'd continued at that school, I'd have failed in
@@ -126,3 +130,65 @@ I feel *disappointed* if nothing else, that I couldn't sniff that out. I left
 after seeing that the company didn't offer me at least two of three things. I
 only got money, no semblance of good people or work. I didn't belong, and
 neither did they.
+
+## Note 2
+
+**September 5, 2025**
+
+I've been thinking a lot about my career and how I feel right now. It's September,
+and I left Company C after a little over a month there in the first week of June.
+
+I have struggled with burnout for a while now, a little over 2 years. I started at my previous
+company, ChainSafe, in November 2022, and I can tell you for certain that I did nothing
+of note there.
+
+It isn't me being insecure, or me having Imposter's Syndrome, but it's the raw truth.
+I didn't have anything to do at ChainSafe, and I also grew complacent. I didn't spend
+time learning, I didn't spend time studying, and I certainly lost my creativity as a result.
+
+I wondered what the point of it all was, when I wasn't using any of the things I'd learnt by
+myself in a silo when I was at GKN Aerospace. I worked there for 3.5 years and built *wonders*.
+I ran an Elasticsearch-powered search engine for the company by myself. I built tiny applications
+that made other engineers ask me to build more each week, and every week I had an "app of the week"
+request from my German manager.
+
+I was making things that made me happy, and eventually, that joy left me by the time I was at ChainSafe.
+I also surrounded myself with people who would tell me "why do you bother", because they couldn't
+fathom why I did these things. My natural creativity tanked, and so did my cognitive acumen.
+
+I felt slower than I was. I felt like I was unable to think coherently. Self-reflection led me to
+believe I had cognitive disabilities and I let the thoughts of others shoehorn themselves into my
+own.
+
+It is an odd thing, failure. I have written about it before, but this time, it feels oddly intimate.
+I have failed in many things before, but I've also always been the person to think my way out of things.
+I think from 2021 till 2025, I began a decline that I am only now trying to fight back.
+
+Someone once asked me how I managed to think my way out of things, and I think there was a certain level
+of privilege to my success as well. I was lucky, and at times I think I was luckier than I deserved to be.
+I didn't use said luck good enough, and my career has signs of survivor bias.
+
+A part of me also tells me that my career has ended because I didn't keep up with AI over the last two 
+years. I had a chance to, but I was... unable to focus.
+
+## Note 3
+
+**September 26, 2025**
+
+It's been 25 days since I wrote the previous note, but I wanted to expand on what's been going on since then.
+
+I attended PyCon India 2025 and IndiaFOSS 2025. Both of these helped me a bit, but I think it was mostly unrelated to
+the conferences themselves. I thrive in tech conferences. I'm a loud extrovert there. So much so that sometimes I
+wonder if I should have been a DevRel. I know I cannot keep that energy up, but it helps me know that there's a crowd out
+there who I love to interact with.
+
+I'm learning Ruby these days. I have put my distributed systems learning on pause to do so, because I'm trying out
+a temporary role at a company. I like what they do, and they asked me to learn Ruby because that's what they use.
+
+Learning Ruby is teaching me a lot about myself, and I think that it'll add to the list of things that heal me. That list
+is rather personal and I don't expect it to help anyone else, but if you're close enough to me for you to have seen this
+article, ask and I'll talk about it in person.
+
+I'm doing a lot better than I was when I started this year, my anxiety is under control and my interest in technology is 
+alive again. I think I will continue to do better, and in time, I might look back at this and be able to articulate what went
+on.
