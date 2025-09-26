@@ -19,6 +19,13 @@ That brings me to Ruby. I have a lot of thoughts about learning Ruby in 2025,
 and while some of them are great, a few of them are related to the language and
 how I *almost* ended up choosing Ruby over Python in 2014.
 
+Before I begin though, I'd like to preface that I'm not pedantic about language.
+I like to compare language philosophies in my head so I understand how they work
+internally, not just superficially. I could skim through everything, navigate code
+using Claude Code or Gemini CLI, and then make the changes I need, claiming that isn't
+Vibe Coding, but I instead want to commit. Contrasting Ruby with Python is my way
+of saying, I'm giving this a real go, and not just trying superficially.
+
 ## How I learnt Python
 
 I was in Flipkart, and my team had a few millions of rows of data to deal with
@@ -596,3 +603,67 @@ really want to spend time on the interpreter anyway.
 ![Sinatra](/images/posts/ruby/sinatra.png)
 
 Okay, this makes the Flask lover in me giggle.
+
+When I was trying this exercise out, I didn't understand a LOT.
+
+1. The `()` after a function call are optional.
+2. Ruby's `blocks` are *like* Python's `contextmanager` blocks, but also no.
+3. My head hurts.
+
+{{< note >}}
+Your brain hurting in this context is a good thing. It takes a LOT of effort for your
+grey cells to unlearn things and be uncomfortable. That *is* a good thing.
+I've felt this way learning Rust too, and that was about 4 years ago. I don't think
+there's a shortcut to this, and if you want to grow, you learn.
+{{< /note >}}
+
+### Rubyisms
+
+```ruby
+"hello".include? "lo"
+```
+
+That gave me pause. In many ways, it reminded me of my trip to Cambodia. The
+Khmer language is very similar to Tamil, Sinhalese and Malayalam to an eye that
+cannot differentiate between them. In a sad example of the
+[Dunning-Kruger effect](https://en.wikipedia.org/wiki/Dunning%E2%80%93Kruger_effect)
+I felt confident enough to surmise that the `?` is some sort of function
+operator, when the true solution was far, far more simpler.
+
+{{< info title="From the Ruby Docs" >}}
+[Method Names (Ruby Docs)](https://docs.ruby-lang.org/en/master/syntax/methods_rdoc.html#label-Method+Names)
+
+Method names may end with a `!` (bang or exclamation mark), a `?` (question
+mark), or `=` (equals sign).
+
+{{< /info >}}
+
+Everyone fixates on this when I ask them about Ruby and tells me that `user.admin?` is *sublime*.
+I agree, but I wanted to understand whether this was convention or actual grammar that enforced the rules.
+
+{{<info title="From the Ruby docs">}}
+[Method Names (Ruby Docs)](https://docs.ruby-lang.org/en/master/syntax/methods_rdoc.html#label-Method+Names)
+
+The bang methods (`!` at the end of the method name) are called and executed just
+like any other method. However, by convention, a method with an exclamation
+point or bang is considered dangerous. In Ruby’s core library the dangerous
+method implies that when a method ends with a bang (`!`), it indicates that
+unlike its non-bang equivalent, permanently modifies its receiver. Almost
+always, the Ruby core library will have a non-bang counterpart (method name
+which does NOT end with `!`) of every bang method (method name which does end
+with `!`) that does not modify the receiver. This convention is typically true
+for the Ruby core library but may or may not hold true for other Ruby
+libraries.
+
+Methods that end with a question mark by convention return boolean, but they
+may not always return just true or false. Often, they will return an object to
+indicate a true value (or “truthy” value).
+
+Methods that end with an equals sign indicate an assignment method.
+{{</info>}}
+
+That cleared it. Those could annotate what a function is *supposed* to do, but doesn't
+enforce it in any way. But you could say that the lines are drawn so strongly in
+convention that it would seem almost like a rule. The Python alternative, `is_admin`
+while it follows the same spirit, doesn't have something tacked on at the end that almost
+alienates the idea of not following convention.
