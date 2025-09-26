@@ -1,6 +1,6 @@
 ---
 date: '2025-08-22T21:05:02+05:30'
-title: 'Openwrt'
+title: 'OpenWRT'
 description: 'How I spent my week setting up multi-wan failover on OpenWRT on my Beelink EQI12'
 tags:
   - "homelab"
@@ -9,9 +9,16 @@ tags:
   - "proxmox"
 ---
 
-I got a [Beelink EQI12](https://www.bee-link.com/products/beelink-eqi12-intel%C2%AE-core-1220p-12450h-12650h) two weeks ago, thanks to a friend flying in from Dubai. This MiniPC has been my plan to replace the weak [Linkstar H68K](https://www.seeedstudio.com/LinkStar-H68K-1432-p-5501.html) [OpenWrt](https://openwrt.org/) router I had for about 2 years now. While the Linkstar has worked just fine, I wanted to upgrade to something more powerful so I could install other services on it as well. I didn't want to install PiHole on a Raspberry Pi anymore. I'm a little tired of Pis and their problems.
+I got a [Beelink EQI12](https://www.bee-link.com/products/beelink-eqi12-intel%C2%AE-core-1220p-12450h-12650h) two weeks ago,
+thanks to a friend flying in from Dubai. This MiniPC has been my plan to replace the weak
+[Linkstar H68K](https://www.seeedstudio.com/LinkStar-H68K-1432-p-5501.html) [OpenWrt](https://openwrt.org/) router I
+had for about 2 years now. While the Linkstar has worked just fine, I wanted to upgrade to something more powerful so I
+could install other services on it as well. I didn't want to install PiHole on
+a Raspberry Pi anymore. I'm a little tired of Pis and their problems.
 
-So I setup [Proxmox](https://www.proxmox.com/) on this server, and then installed [OpenWrt](https://openwrt.org/) on a VM on it. At first I assumed it would be easy. I was *very* wrong.
+So I setup [Proxmox](https://www.proxmox.com/) on this server, and then installed
+[OpenWrt](https://openwrt.org/) on a VM on it. At first I assumed it would be easy.
+I was *very* wrong.
 
 I used ChatGPT to constantly debug this. What made my life easier at first was:
 
@@ -100,5 +107,3 @@ I set up a **reliable failover system** using [OpenWrt](https://openwrt.org/) an
 * [`dnsmasq`](https://openwrt.org/docs/guide-user/base-system/dhcp_configuration) errors! So many `dnsmasq` errors. I wish I had the time to read the docs, but honestly I don't.
 
 All in all, it works now, and that was 2 days of my life spent. I am not sure if I'd say it was "well-spent" though. If you're choosing to be your family's sysadmin, YMMV.
-
-
