@@ -1,11 +1,13 @@
 ---
 date: '2025-09-26T15:20:33+05:30'
-draft: true
+draft: false
 title: 'Ruby'
 description: 'How I started learning Ruby and Ruby on Rails in 2025 and what my experience has been like so far.'
 tags:
   - "ruby"
   - "programming-languages"
+cover:
+  image: "/images/posts/ruby/ruby-and-python.png"
 ---
 
 I think everyone needs to learn more programming languages. It's a very fun
@@ -19,12 +21,17 @@ That brings me to Ruby. I have a lot of thoughts about learning Ruby in 2025,
 and while some of them are great, a few of them are related to the language and
 how I *almost* ended up choosing Ruby over Python in 2014.
 
-Before I begin though, I'd like to preface that I'm not pedantic about language.
-I like to compare language philosophies in my head so I understand how they work
-internally, not just superficially. I could skim through everything, navigate code
-using Claude Code or Gemini CLI, and then make the changes I need, claiming that isn't
-Vibe Coding, but I instead want to commit. Contrasting Ruby with Python is my way
-of saying, I'm giving this a real go, and not just trying superficially.
+Before I begin though, I'd like to preface that I'm not pedantic about
+language. I like to compare language philosophies in my head so I understand
+how they work internally, not just superficially. I could skim through
+everything, navigate code using Claude Code or Gemini CLI, and then make the
+changes I need, claiming that isn't Vibe Coding, but I instead want to commit.
+Contrasting Ruby with Python is my way of saying, I'm giving this a real go,
+and not just trying superficially.
+
+That being said, I'll try to sound like myself, and add in a few memes.
+
+![*whistles*](/images/posts/ruby/ruby-meme-1.jpeg)
 
 ## How I learnt Python
 
@@ -78,6 +85,8 @@ the coming of the year of the Linux Desktop. Just before I started learning
 Ruby, I learnt that he was also the creator of Rails.
 
 ## I didn't need Ruby
+
+![Ruby vs Python](/images/posts/ruby/ruby-meme-4.jpeg)
 
 I strongly believe every programmer should learn multiple programming
 languages. I do include shell scripting languages in that group. But I believe
@@ -147,6 +156,16 @@ No. I do not.
 
 I didn't need Ruby, but I discovered that opinionated products tend to have strong
 reasons for existing.
+
+That being said, I can write a lot of Ruby already. *Et voila!*
+
+![Hello World!](/images/posts/ruby/hello-world-0.png)
+
+And inside `hello_world.erb`.
+
+![Hello World!](/images/posts/ruby/hello-world-1.png)
+
+What surprised me is that this was easier than I thought it'd be. That's scary.
 
 ## Learning Ruby
 
@@ -619,6 +638,8 @@ there's a shortcut to this, and if you want to grow, you learn.
 
 ### Rubyisms
 
+#### Method Names?
+
 ```ruby
 "hello".include? "lo"
 ```
@@ -667,3 +688,309 @@ enforce it in any way. But you could say that the lines are drawn so strongly in
 convention that it would seem almost like a rule. The Python alternative, `is_admin`
 while it follows the same spirit, doesn't have something tacked on at the end that almost
 alienates the idea of not following convention.
+
+But this makes me think. The one thing that everyone told me I'd love going
+into Ruby was this syntax. This makes the code readable. I don't have enough
+experience writing Ruby to agree or disagree, but it also takes something away
+from the developer writing the code. Not Ruby I mean, but this idea that a
+language is what pushes you to write good code. I certainly can imagine a
+developer not caring for Ruby's conventions and writing absolutely ludicrous
+code using these conventions. The SOLID principles have existed for decades and
+developers still refuse to follow them.
+
+That doesn't take away from Ruby's goal of coaxing developers to thinking that
+it *requires* (Hey, I made a Ruby pun!) them to write code this way, but since
+developers do not RTFM anyway, I'm certain that false belief that the Ruby
+interpreter will yell at them for doing anything otherwise, (Or maybe DHH will,
+who knows?) is a good thing.
+
+#### Blocks
+
+I admit I'm not sure I get blocks quite yet. I'm hoping by the time I write
+this part of this post, I'd have understood them somewhat.
+
+```ruby
+def twice
+  yield
+  yield
+end
+
+
+twice {puts "hello"}
+```
+
+This outputs:
+
+```
+hello
+hello
+```
+
+Okay, I could do this in Python like so:
+
+```python
+
+def twice(callback):
+  callback()
+  callback()
+
+twice(lambda: print("hello"))
+```
+
+But here's something Ruby can do that just blows my mind.
+
+```ruby
+def twice(param_1, param_2)
+  puts param_1, param_2
+  yield
+  yield
+end
+
+twice(1,2) {puts "hello there"}
+
+# This prints out
+# 1,2
+# hello there
+# hello there
+```
+
+Look at that line really, really, hard. Now let's do that in Python.
+
+```python
+def twice(param_1, param_2, callback):
+  print(param_1, param_2)
+  callback()
+  callback()
+
+twice(1,2, lambda: print("hello there"))
+```
+
+Now, I'm not expecting Python to do exactly what Ruby does. I don't even think Python *should* do something like this.
+But it's a feature that is a very interesting choice. Notice that the Ruby equivalent didn't have a named parameter.
+
+In face, I could even do this:
+
+```ruby
+def twice(param_1, param_2, &block)
+  puts param_1, param_2
+  block.call
+  block.call
+end
+
+twice(1,2) {puts "hello there"}
+```
+
+This is functionally the same, but now we have a named parameter that you `call` explicitly. This named parameter is unnecessary if you just want
+to call the function, `yield` works just as well, but you can have a named parameter and use that however you want, perhaps even passing in arguments
+when it is called.
+
+This feature is something you don't need until someone shows it to you, like cooled car seating in your car when stuck in Bengaluru traffic in summer.
+
+But what's even cooler is what `&` is doing. Without `&`, blocks are used
+through `yield` using a *Rubyism* (my term). It's not an object there. When you
+pass a block in with `&`, you're telling the function definition that you can
+convert the given block into a *procedure*, a [`Proc` object.](https://docs.ruby-lang.org/en/master/Proc.html)
+You'd call this a *callable* perhaps? But what's cool is now this is a Ruby object,
+and can be passed around as we see fit.
+
+I'll write more about Procs once I understand them.
+
+
+#### Loop-de-loop
+
+I think I'm going strongly out of order here, but I started writing this
+article after completing the Ruby tutorial and at the starting of the Rails
+tutorial. Or how else would you explain me getting to loops now?
+
+When I first saw the `for` loop syntax, I was stumped with this.
+
+![Ruby loops](/images/posts/ruby/loops.png)
+
+I understand that no one writes Ruby like this, but that's besides the point.
+The first loop, when consumed, *evaluates* to the loop itself. It evaluates to `0..1000`.
+And so does the second one. And so will every run through this loop!
+
+I could do this:
+
+```ruby
+x = for y in 0..5
+  puts y
+end
+puts x == 0..5
+```
+
+And this would be true? That's magic!
+
+I've seen this before though, and it's a good segui into how Rust has a lot of
+Rubyisms, but I'll talk about that when I talk about module resolution.
+
+#### Module Resolution
+Now I'm stepping into things I *really* like.
+
+You have the `require` method, which loads a gem from the
+[`$LOAD_PATH`](https://docs.ruby-lang.org/en/3.4/globals_rdoc.html#label-24LOAD_PATH+-28Load+Path-29),
+or you can use `relative_require`, which loads the module from the current path. 
+
+I *love* `relative_require`. I've always hated the `from .. import module` in
+python syntax a lot. I ensure my modules don't have that level of entanglement,
+but it's easy to see why developers would use. There's nothing wrong in it,
+as long as you've invested time into the language.
+
+That being said, there's one bit that really tripped me up in Rust that I later
+realized came from Ruby and that made me feel violated as someone who "thought Python".
+
+```rust
+use log::{debug, error, log_enabled, info, Level};
+
+env_logger::init(); // watch this line
+
+debug!("this is a debug {}", "message");
+error!("this is printed by default");
+
+if log_enabled!(Level::Info) {
+    let x = 3 * 4; // expensive computation
+    info!("the answer was: {}", x);
+}
+```
+
+This above snippet is in Rust, and it's from the docs from [`env_logger`](https://docs.rs/env_logger/latest/env_logger/).
+This tripped me up when I first read it, because in all the tutorials I'd read so far, everyone used `use $module`
+and that seemed to mimic `import $module` in Python.
+
+This one line `env_logger::init()` felt *wrong*.
+
+Where did this come from? I didn't *import* (*sic* `use`) `env_logger` anywhere.
+
+```rust
+use env_logger
+
+env_logger::init()
+```
+
+I thought this is how Rust was written. I asked about this on Reddit and the first response was, "Ah, you haven't used Ruby have you?"
+
+That was back in 2021 I think.
+
+To my shock, this was considered *natural* in Ruby? I had **strong** feelings against it. I thought `import $module` made it clear
+where it came from. Why would you not want to state that at the top of the file?
+
+But after using Rust for a while, I've mellowed on this. In fact, I even like
+this method, since it makes it clear where something has come from as well.
+
+```ruby
+require 'logger'
+
+logger = Logger.new(STDOUT)
+logger.info("hello")
+```
+
+Having `require 'logger'` bring the `Logger` class into the namespace feels
+like it's going to be hard to say where a particular object comes from. 
+
+```ruby
+require 'logger'
+require 'lumberjack'
+
+logger = Logger.new() # which Logger is this? It's from `lumberjack`, because that was the last one in.
+```
+
+I'm still not sure how I'd address this.
+
+I haven't used modules enough to have stronger opinions, but I'm certain to
+write about this later.
+
+#### `return` is Optional
+
+Another Rubyism I noticed in Rust was the fact that `return` is optional. This
+took me a bit of time to learn in Rust as well, but since I'd seen it there, I
+was less shocked by it here. In fact, given how loops resolve into values, I
+can agree that it's quite elegant.
+
+#### `include`
+
+Now for something I *love*. I'm going to use an example from the Learn Enough Ruby to be Dangerous tutorial.
+
+```ruby
+
+module Palindrome
+  # Returns true if the string is a boolean, else false
+  def palindrome?
+    processed_content == processed_content.reverse
+  end
+
+  private
+
+  # cleans the string for testing if it's a palindrome
+  def processed_content
+    to_s.downcase.gsub(/[^a-z0-9]/, "")
+  end
+end
+
+class String
+  include Palindrome
+end
+
+class Integer
+  include Palindrome
+end
+```
+
+Now *this* is elegant. Using `is_a` (a method I absolutely love) for `String`, I get
+`[String, Palindrome, Comparable, Object, Kernel, BasicObject]`.
+
+For `Integer`, I get `[Integer, Palindrome, Numeric, Comparable, Object, Kernel, BasicObject]`.
+
+This makes me so happy, since Ruby injected `Palindrome` into the ancestor chain, so that integers are _still_
+integers, instead of needing a new constructor like `Palindrome.new(10)`, every Integer we use has become
+a Palindrome.
+
+But that also brings us to the monke.
+
+#### Monkey Patching
+
+Ah yes. If Ruby is on Rails, Rails is on the monke.
+
+There's so damned much I think I'll want to say about this, and whether it's good or bad, but for now, I'll accept this as
+a Rubyism. I know that's not a climactic response to this, but I think it's something I might learn to love but be wary of.
+Like I said above, I really like the `include` method of injecting behaviour into an object.
+
+Thankfully though, I've loved Rust's `impl` syntax.
+
+```ruby
+class Integer
+  def squared
+    self * self
+  end
+end
+```
+
+```rust
+impl i32 {
+    fn squared(self) -> i32 {
+        self * self
+    }
+}
+```
+
+But what I'm worried about is that Rust does this at compile time, and that
+prevents one library (Rust's crates) from overwriting another crate's behaviour
+at runtime. But with Ruby, we can truly let the monke loose.
+
+## Where to next?
+
+I'm still learning Rails, so I will have a lot to say about that when I
+complete it and start using it in a while. I hope to write another post a month
+later, showcasing how I feel so far about Ruby.
+
+For what it's worth, I'm going to try to grok the Rails way. I would like to
+understand where the bones are, and I am sure that there are a lot of parallels
+to Django. I haven't used enough Django though, just a smidge, but I think
+understanding where things come from and where they go will be a challenge.
+I want to understand these things because that'll drive home first-principles about
+Ruby and Ruby on Rails.
+
+To paraphrase what a friend and I said together, coming from Python to Ruby
+felt like moving to another city, I feel a huge culture shock in a lot of ways.
+But at the same time, it feels like I'm in a new city where if you have a
+problem with the potholes on the roads, you're welcome to patching them
+yourselves.
