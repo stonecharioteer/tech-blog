@@ -945,7 +945,8 @@ class Integer
 end
 ```
 
-Now *this* is elegant. Using `is_a` (a method I absolutely love) for `String`, I get
+Now *this* is elegant. Using `obj.class.ancestors` (a method I absolutely love after `is_a?`)
+for `String`, I get
 `[String, Palindrome, Comparable, Object, Kernel, BasicObject]`.
 
 For `Integer`, I get `[Integer, Palindrome, Numeric, Comparable, Object, Kernel, BasicObject]`.
