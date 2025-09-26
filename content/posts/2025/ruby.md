@@ -208,6 +208,16 @@ as well.
 
 ## Implicit not Explicit, Ruby from a Pythonista
 
+### Editor and LSP
+
+I experimented with LSPs for neovim, having tried
+[`sorbet`](https://sorbet.org/docs/overview) and
+[`solargraph`](https://github.com/castwide/solargraph), I settled on
+[`ruby-lsp`](https://github.com/Shopify/ruby-lsp). I think Solargraph had some
+problem with resolving tests in a rails project, I'm not sure what it was, but
+I installed Ruby-LSP and it worked without any tweaks. I prefer that for now,
+but my preference might change eventually.
+
 ### Environments
 
 My first question starting off was how do I manage Ruby installations on my computer.
