@@ -29,7 +29,7 @@ notice something.
 This is also a method call with a block as an input.
 
 ```ruby
-it "can do something" { puts "The cake is a lie" }
+it("can do something") { puts "The cake is a lie" }
 ```
 
 But here's something else that's a method call with a block as an input.
