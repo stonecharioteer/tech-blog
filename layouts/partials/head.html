@@ -951,6 +951,30 @@
         background-color: #f8f9fa !important;
         background: #f8f9fa !important;
     }
+
+    /* LINE HIGHLIGHTING - Light mode */
+    body:not(.dark) .chroma .hl,
+    body:not(.dark) .highlight .hl {
+        background-color: #fff3cd !important;
+        display: block;
+        width: 100%;
+    }
+
+    /* LINE HIGHLIGHTING - Dark mode */
+    .dark .chroma .hl,
+    .dark .highlight .hl {
+        background-color: #3d3d00 !important;
+        display: block;
+        width: 100%;
+    }
+
+    /* Media query fallback for line highlighting */
+    @media (prefers-color-scheme: dark) {
+        body:not(.light) .chroma .hl,
+        body:not(.light) .highlight .hl {
+            background-color: #3d3d00 !important;
+        }
+    }
 </style>
 
 {{- partial "extend_head.html" . -}}
