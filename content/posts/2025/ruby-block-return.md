@@ -1,7 +1,7 @@
 ---
 date: '2025-09-29T11:55:18+05:30'
 draft: false
-title: 'Returning from a Ruby Blocks, Procs and Lambdas'
+title: 'Returning from Ruby Blocks, Procs and Lambdas'
 description: 'How does `return` work within blocks, procs and lambda?'
 tags:
   - "ruby"
