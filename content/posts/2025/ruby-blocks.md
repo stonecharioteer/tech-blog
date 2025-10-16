@@ -165,8 +165,8 @@ class TodoList
 
   def task(description, &block)
     task_obj = Task.new(description)
-    task_object.instance_eval(&block) if block
-    &tasks << task_obj
+    task_obj.instance_eval(&block) if block
+    @tasks << task_obj
   end
 
   def show
@@ -178,11 +178,11 @@ class Task
   attr_accessor :priority, :due_date, :description
 
   def initialize(description)
-    &description = description
+    @description = description
   end
 
   def priority(level)
-    &priority = level
+    @priority = level
   end
 
   def due(date)
@@ -190,7 +190,7 @@ class Task
   end
 
   def to_s
-    "#{@description} (Priority: #{@priority}, Due: #{&due_date})"
+    "#{@description} (Priority: #{@priority}, Due: #{@due_date})"
   end
 end
 
@@ -254,7 +254,7 @@ Okay let's make our own `unless` or `if` syntax. Just because I'm feeling like i
 
 ```ruby
 def only_on_weekdays
-  yield unless [0, 6].include?(Time.now.day)
+  yield unless [0, 6].include?(Time.now.wday)
 end
 
 only_on_weekdays do
