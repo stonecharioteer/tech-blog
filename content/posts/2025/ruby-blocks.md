@@ -165,8 +165,8 @@ class TodoList
 
   def task(description, &block)
     task_obj = Task.new(description)
-    task_object.instance_eval(&block) if block
-    &tasks << task_obj
+    task_obj.instance_eval(&block) if block
+    @tasks << task_obj
   end
 
   def show
@@ -178,11 +178,11 @@ class Task
   attr_accessor :priority, :due_date, :description
 
   def initialize(description)
-    &description = description
+    @description = description
   end
 
   def priority(level)
-    &priority = level
+    @priority = level
   end
 
   def due(date)
@@ -190,7 +190,7 @@ class Task
   end
 
   def to_s
-    "#{@description} (Priority: #{@priority}, Due: #{&due_date})"
+    "#{@description} (Priority: #{@priority}, Due: #{@due_date})"
   end
 end
 
