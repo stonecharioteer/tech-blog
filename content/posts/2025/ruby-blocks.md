@@ -254,7 +254,7 @@ Okay let's make our own `unless` or `if` syntax. Just because I'm feeling like i
 
 ```ruby
 def only_on_weekdays
-  yield unless [0, 6].include?(Time.now.day)
+  yield unless [0, 6].include?(Time.now.wday)
 end
 
 only_on_weekdays do
