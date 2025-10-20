@@ -1,5 +1,6 @@
 ---
 date: '2025-10-14T18:17:51+05:30'
+lastmod: '2025-10-20T22:33:22+05:30'
 title: 'Ruby Blocks'
 description: 'How to start really getting Ruby, especially blocks.'
 tags:
@@ -315,4 +316,10 @@ That's the genius of Ruby. The language gets out of your way and lets you think
 about the problem, not the syntax.
 {{< /tip >}}
 
+---
 
+## Other Posts in This Series
+
+- [Ruby]({{< ref "ruby.md" >}})
+- [Returning from Ruby Blocks, Procs and Lambdas]({{< ref "ruby-block-return.md" >}})
+- [Some Smalltalk about Ruby Loops]({{< ref "ruby-loops.md" >}})

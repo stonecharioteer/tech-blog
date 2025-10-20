@@ -1,5 +1,6 @@
 ---
 date: '2025-09-26T15:20:33+05:30'
+lastmod: '2025-10-20T22:33:22+05:30'
 draft: false
 title: 'Ruby'
 description: 'How I started learning Ruby and Ruby on Rails in 2025 and what my experience has been like so far.'
@@ -1005,3 +1006,11 @@ felt like moving to another city, I feel a huge culture shock in a lot of ways.
 But at the same time, it feels like I'm in a new city where if you have a
 problem with the potholes on the roads, you're welcome to patching them
 yourselves.
+
+---
+
+## Other Posts in This Series
+
+- [Returning from Ruby Blocks, Procs and Lambdas]({{< ref "ruby-block-return.md" >}})
+- [Ruby Blocks]({{< ref "ruby-blocks.md" >}})
+- [Some Smalltalk about Ruby Loops]({{< ref "ruby-loops.md" >}})
