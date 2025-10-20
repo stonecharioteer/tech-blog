@@ -1,5 +1,6 @@
 ---
 date: "2025-10-20T10:10:10+05:30"
+lastmod: "2025-10-20T22:33:22+05:30"
 draft: false
 title: "Some Smalltalk about Ruby Loops"
 description: "Sending a message about why you shouldn't write `for` loops in Ruby."
@@ -24,7 +25,7 @@ I was wrong, wasn't I?
 10.times { |i| puts "i = #{i}" }
 ```
 
-If you haven't read my post on Ruby blocks, you should. And then come back to this.
+If you haven't read [my post on Ruby blocks,]({{< ref "ruby-blocks.md" >}}) you should. And then come back to this.
 
 Damn, Ruby. Why do you need to be scratching my brain in ways I didn't think were possible all the time?
 
@@ -526,3 +527,11 @@ And now, when I see:
 
 I do not see a loop anymore. I see an object responding to a message. I see
 Smalltalk's legacy. I see protocol over syntax.
+
+---
+
+## Other Posts in This Series
+
+- [Ruby]({{< ref "ruby.md" >}})
+- [Returning from Ruby Blocks, Procs and Lambdas]({{< ref "ruby-block-return.md" >}})
+- [Ruby Blocks]({{< ref "ruby-blocks.md" >}})

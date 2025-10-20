@@ -1,5 +1,6 @@
 ---
 date: '2025-09-29T11:55:18+05:30'
+lastmod: '2025-10-20T22:33:22+05:30'
 draft: false
 title: 'Returning from Ruby Blocks, Procs and Lambdas'
 description: 'How does `return` work within blocks, procs and lambda?'
@@ -122,3 +123,11 @@ not the entire scope that you're calling this from.
 
 I don't really have many more observations, but if I do, I'll write another
 post.
+
+---
+
+## Other Posts in This Series
+
+- [Ruby]({{< ref "ruby.md" >}})
+- [Ruby Blocks]({{< ref "ruby-blocks.md" >}})
+- [Some Smalltalk about Ruby Loops]({{< ref "ruby-loops.md" >}})
