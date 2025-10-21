@@ -1,6 +1,6 @@
 ---
 date: "2025-10-20T10:10:10+05:30"
-lastmod: "2025-10-20T22:33:22+05:30"
+lastmod: "2025-10-21T10:56:22+05:30"
 draft: false
 title: "Some Smalltalk about Ruby Loops"
 description: "Sending a message about why you shouldn't write `for` loops in Ruby."
@@ -31,7 +31,7 @@ Damn, Ruby. Why do you need to be scratching my brain in ways I didn't think wer
 
 Where's that meme?
 
-![Khaby Lazy Meme](/images/posts/ruby/loops-khaby.png)
+![Khaby Lazy Meme](/images/posts/ruby/loops-khaby.jpg)
 
 What's so great about this? Either you've never written Ruby before or you have your eyes closed.
 
