@@ -31,7 +31,7 @@ Damn, Ruby. Why do you need to be scratching my brain in ways I didn't think wer
 
 Where's that meme?
 
-![Khaby Lazy Meme](/images/posts/ruby/loops-khaby.png)
+![Khaby Lazy Meme](/images/posts/ruby/loops-khaby.jpg)
 
 What's so great about this? Either you've never written Ruby before or you have your eyes closed.
 
