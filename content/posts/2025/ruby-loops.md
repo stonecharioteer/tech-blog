@@ -1,6 +1,6 @@
 ---
 date: "2025-10-20T10:10:10+05:30"
-lastmod: "2025-10-20T22:33:22+05:30"
+lastmod: "2025-10-21T10:56:22+05:30"
 draft: false
 title: "Some Smalltalk about Ruby Loops"
 description: "Sending a message about why you shouldn't write `for` loops in Ruby."
