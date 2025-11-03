@@ -323,3 +323,4 @@ about the problem, not the syntax.
 - [Ruby]({{< ref "ruby.md" >}})
 - [Returning from Ruby Blocks, Procs and Lambdas]({{< ref "ruby-block-return.md" >}})
 - [Some Smalltalk about Ruby Loops]({{< ref "ruby-loops.md" >}})
+- [Symbolic Ruby]({{< ref "ruby-symbols.md" >}})

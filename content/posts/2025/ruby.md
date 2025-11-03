@@ -1014,3 +1014,4 @@ yourselves.
 - [Returning from Ruby Blocks, Procs and Lambdas]({{< ref "ruby-block-return.md" >}})
 - [Ruby Blocks]({{< ref "ruby-blocks.md" >}})
 - [Some Smalltalk about Ruby Loops]({{< ref "ruby-loops.md" >}})
+- [Symbolic Ruby]({{< ref "ruby-symbols.md" >}})
