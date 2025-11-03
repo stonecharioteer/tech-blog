@@ -1,8 +1,8 @@
 ---
 date: "2025-11-03T15:36:29+05:30"
 draft: false
-title: "A soiree into symbols in Ruby"
-description: "A Pythonista walks into a bar and looks at all the symbols in Ruby. Or so the joke begins."
+title: "A Soiree into Symbols in Ruby"
+description: "A Pythonista opens `irb` and looks at all the symbols in Ruby. Or so the joke begins."
 tags:
   - "ruby"
 ---
