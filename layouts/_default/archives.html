@@ -48,9 +48,11 @@
 
 .archive-item {
     display: flex;
+    flex-wrap: wrap;
     align-items: baseline;
     padding: 0.5rem 0;
     border-bottom: 1px solid var(--border);
+    gap: 0.5rem;
 }
 
 .archive-date {
@@ -58,11 +60,11 @@
     font-size: 0.875rem;
     color: var(--secondary);
     min-width: 3.5rem;
-    margin-right: 1rem;
 }
 
 .archive-title {
     flex: 1;
+    min-width: 200px;
     text-decoration: none;
     color: var(--primary);
 }
@@ -73,8 +75,9 @@
 
 .archive-tags {
     display: flex;
+    flex-wrap: wrap;
     gap: 0.25rem;
-    margin-left: 1rem;
+    align-items: center;
 }
 
 .archive-tag {
@@ -83,6 +86,40 @@
     padding: 0.125rem 0.375rem;
     border-radius: 0.25rem;
     font-size: 0.75rem;
+    white-space: nowrap;
+}
+
+/* Mobile responsive design */
+@media (max-width: 768px) {
+    .archive-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+        padding: 0.75rem 0;
+    }
+
+    .archive-date {
+        min-width: auto;
+        font-size: 0.75rem;
+        order: -1;
+    }
+
+    .archive-title {
+        min-width: auto;
+        width: 100%;
+        font-size: 0.95rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .archive-tags {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .archive-tag {
+        font-size: 0.7rem;
+        padding: 0.1rem 0.3rem;
+    }
 }
 </style>
 {{- end }}

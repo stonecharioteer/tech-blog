@@ -1,0 +1,23 @@
+{{- /* Newsletter signup form */ -}}
+<div class="newsletter-container">
+    <h3 class="newsletter-heading">Subscribe to Newsletter</h3>
+    <p class="newsletter-description">Get the latest posts and insights delivered to your inbox.</p>
+    <form
+      action="https://picoletter.com/stonecharioteer-on-tech/embed/subscribe"
+      method="post"
+      target="popupwindow"
+      onsubmit="window.open('https://picoletter.com/stonecharioteer-on-tech', 'popupwindow', 'scrollbars=yes,width=800,height=600'); return true;"
+      class="picoletter-form-embed"
+    >
+      <label for="pico-name">Enter your name</label>
+      <input type="text" name="name" id="pico-name" required />
+
+      <label for="pico-email">Enter your email</label>
+      <input type="email" name="email" id="pico-email" required />
+
+      <input type="submit" value="Subscribe" />
+      <p class="picoletter-attribution">
+        <a href="https://picoletter.com?from=stonecharioteer-on-tech" target="_blank" rel="noopener noreferrer">Built using Picoletter.</a>
+      </p>
+    </form>
+</div>
