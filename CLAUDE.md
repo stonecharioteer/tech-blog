@@ -1,13 +1,19 @@
 # Claude Instructions for Tech Blog
 
 ## Project Overview
-This is **Stonecharioteer's Tech Blog** - a sophisticated Hugo static site focused on software development, technology, and career insights. The site is deployed at `https://tech.stonecharioteer.com/` and represents a high-quality technical blog with advanced content authoring capabilities.
+
+This is **Stonecharioteer's Tech Blog** - a sophisticated Hugo static site
+focused on software development, technology, and career insights. The site is
+deployed at `https://tech.stonecharioteer.com/` and represents a high-quality
+technical blog with advanced content authoring capabilities.
 
 **Author**: Vinay Keerthi (`stonecharioteer`)  
-**Focus**: Python development, microservices, career development, and technical tutorials  
+**Focus**: Python development, microservices, career development, and technical
+tutorials  
 **Theme**: PaperMod with extensive customizations
 
 ## Repository Structure
+
 ```
 tech-blog/
 ├── content/
@@ -40,6 +46,7 @@ tech-blog/
 ## Content Strategy & Organization
 
 ### Post Categories
+
 1. **Technical Tutorials** - Python, microservices, performance analysis
 2. **Career & Culture** - Team dynamics, professional development
 3. **Meta/Housekeeping** - Blog maintenance, platform updates
@@ -47,6 +54,7 @@ tech-blog/
 5. **TIL (Today I Learned)** - Daily learning entries and technical discoveries
 
 ### Content Patterns
+
 - **TLDR sections** for longer posts
 - **Performance benchmarks** with timing analysis
 - **Practical code examples** with working implementations
@@ -54,28 +62,32 @@ tech-blog/
 - **Cross-references** to gear and favorites pages
 
 ### Frontmatter Standards
+
 ```yaml
 ---
-date: 'YYYY-MM-DDTHH:MM:SS+05:30'  # IST timezone
+date: "YYYY-MM-DDTHH:MM:SS+05:30" # IST timezone
 draft: false
-title: 'Post Title'
+title: "Post Title"
 tags: ["tag1", "tag2"]
-cover:                              # Optional
+cover: # Optional
   image: "/images/filename.jpeg"
   alt: "Alt text"
-private: true                       # Optional - hides from listings
-url: "custom-path"                  # Optional - custom URL
+private: true # Optional - hides from listings
+url: "custom-path" # Optional - custom URL
 ---
 ```
 
 ### Tag Strategy
-- **Technical**: `python`, `microservices`, `grpc`, `data-structures-and-algorithms`
+
+- **Technical**: `python`, `microservices`, `grpc`,
+  `data-structures-and-algorithms`
 - **Content**: `reflection`, `housekeeping`, `career`, `culture`
 - **Consistency**: Mixed case (needs standardization)
 
 ## Build Process & Deployment
 
 ### Development Workflow
+
 ```bash
 # Theme setup (one-time)
 git submodule update --init --recursive
@@ -88,30 +100,37 @@ hugo new content content/posts/YYYY/title.md
 ```
 
 ### Dependencies
+
 - **Hugo**: Install from GitHub releases (`.deb` package)
 - **PaperMod Theme**: Git submodule at `themes/PaperMod/`
 - **Python Code Examples**: `code/py-x-protobuf/` uses Python 3.13+ with uv/pip
 
 ### Configuration Highlights
+
 - **Git Integration**: `enableGitInfo: true` for auto last-modified dates
 - **Search**: JSON output format with Fuse.js integration
-- **Syntax Highlighting**: Theme-aware highlighting with custom light/dark mode support
+- **Syntax Highlighting**: Theme-aware highlighting with custom light/dark mode
+  support
 - **Social Integration**: GitHub and LinkedIn profiles
 - **Custom Menu**: Emoji navigation with external resume link
 
 ## Theme Customizations
 
 ### PaperMod Extensions
-This blog extends the base PaperMod theme with several sophisticated customizations:
+
+This blog extends the base PaperMod theme with several sophisticated
+customizations:
 
 1. **Admonition System** - Complete documentation-style callouts
-2. **Theme-Aware Syntax Highlighting** - Custom light/dark mode code block styling
+2. **Theme-Aware Syntax Highlighting** - Custom light/dark mode code block
+   styling
 3. **External Code Integration** - Shortcode for including code files
 4. **Private Post Filtering** - Content privacy without separate sections
 5. **Enhanced Metadata** - Last-modified dates with Git integration
 6. **SEO Enhancements** - Proper handling of private content
 
 ### Custom Features
+
 - **Performance Focus**: Maintains PaperMod's speed while adding functionality
 - **Dark Mode Support**: All customizations work in both light and dark themes
 - **Responsive Design**: Mobile-first approach with proper spacing
@@ -119,11 +138,14 @@ This blog extends the base PaperMod theme with several sophisticated customizati
 
 ## Theme-Aware Syntax Highlighting
 
-The blog features a comprehensive custom syntax highlighting system that automatically adapts to light and dark themes. This replaces Hugo's default fixed-theme approach with intelligent theme switching.
+The blog features a comprehensive custom syntax highlighting system that
+automatically adapts to light and dark themes. This replaces Hugo's default
+fixed-theme approach with intelligent theme switching.
 
 ### Implementation Details
 
 **Hugo Configuration** (`hugo.yml`):
+
 ```yaml
 markup:
   highlight:
@@ -134,11 +156,15 @@ markup:
 ```
 
 **Custom CSS** (in `layouts/partials/head.html`):
-- **Light Mode**: Clean GitHub-style syntax highlighting with high contrast colors
-- **Dark Mode**: Rich Monokai-style colors optimized for dark backgrounds  
-- **Universal Coverage**: Works across all programming languages (Python, JavaScript, Rust, Go, etc.)
+
+- **Light Mode**: Clean GitHub-style syntax highlighting with high contrast
+  colors
+- **Dark Mode**: Rich Monokai-style colors optimized for dark backgrounds
+- **Universal Coverage**: Works across all programming languages (Python,
+  JavaScript, Rust, Go, etc.)
 
 ### Light Mode Colors:
+
 - **Keywords** (`fn`, `let`, `if`): Bold red (`#d01040`)
 - **Strings**: Dark blue (`#003d99`)
 - **Functions**: Bold purple (`#6610f2`)
@@ -148,6 +174,7 @@ markup:
 - **Background**: Light gray (`#f8f9fa`) with rounded corners
 
 ### Dark Mode Colors:
+
 - **Keywords**: Light purple (`#c6a0f6`)
 - **Strings**: Light green (`#a6da95`)
 - **Functions**: Light blue (`#8aadf4`)
@@ -156,6 +183,7 @@ markup:
 - **Background**: Dark (`#24273a`)
 
 ### Technical Approach:
+
 1. **Removed fixed Hugo style** to enable CSS-based theming
 2. **Comprehensive CSS selectors** target all Chroma highlighting elements
 3. **Attribute selectors** (`[class*="chroma"]`) ensure universal coverage
@@ -163,15 +191,19 @@ markup:
 5. **Media query fallback** for systems using `prefers-color-scheme`
 
 ### Files Modified:
+
 - `hugo.yml` - Removed fixed monokai style
 - `layouts/partials/head.html` - Added comprehensive CSS overrides
 
 ## Admonition Shortcodes
-The most significant customization is a complete admonition system that brings documentation-quality content formatting to the blog:
+
+The most significant customization is a complete admonition system that brings
+documentation-quality content formatting to the blog:
 
 ### Available Types
+
 - `note` - Blue themed with 📝 icon
-- `info` - Cyan themed with ℹ️ icon  
+- `info` - Cyan themed with ℹ️ icon
 - `warning` - Yellow themed with ⚠️ icon
 - `tip` - Green themed with 💡 icon
 - `quote` - Gray themed with 💬 icon
@@ -180,6 +212,7 @@ The most significant customization is a complete admonition system that brings d
 ### Usage Examples
 
 #### Basic usage with default titles:
+
 ```
 {{< note >}}
 This is a note with default title "Note"
@@ -207,6 +240,7 @@ This is an example with default title "Example"
 ```
 
 #### Custom titles:
+
 ```
 {{< note title="Important Point" >}}
 This is a note with a custom title
@@ -234,7 +268,8 @@ This is an example with a custom title
 ```
 
 #### With Markdown content:
-```
+
+````
 {{< note title="Code Example" >}}
 You can use **markdown** inside admonitions:
 
@@ -245,25 +280,26 @@ You can use **markdown** inside admonitions:
 ```python
 def hello():
     print("Hello from inside an admonition!")
-```
+````
+
 {{< /note >}}
+
 ```
 
 #### Quote with attribution (special case):
 ```
-{{< quote title="Poetry" footer="Robert Frost, The Road Not Taken" blockquote="true" >}}
-Two roads diverged in a wood, and I—
-I took the one less traveled by,
-And that has made all the difference.
-{{< /quote >}}
 
-{{< quote footer="Maya Angelou" >}}
-There is no greater agony than bearing an untold story inside you.
-{{< /quote >}}
+{{< quote title="Poetry" footer="Robert Frost, The Road Not Taken" blockquote="true" >}}
+Two roads diverged in a wood, and I— I took the one less traveled by, And that
+has made all the difference. {{< /quote >}}
+
+{{< quote footer="Maya Angelou" >}} There is no greater agony than bearing an
+untold story inside you. {{< /quote >}}
 
 {{< quote title="Prose Quote" footer="Marcus Aurelius, Meditations" blockquote="false" >}}
-You have power over your mind—not outside events. Realize this, and you will find strength.
-{{< /quote >}}
+You have power over your mind—not outside events. Realize this, and you will
+find strength. {{< /quote >}}
+
 ```
 
 ### Styling
@@ -300,7 +336,9 @@ The admonitions include:
 
 ### External Code Integration
 ```
+
 {{< code language="python" source="code/py-x-protobuf/example.py" >}}
+
 ```
 - Reads external code files at build time
 - Supports syntax highlighting with configurable options
@@ -375,3 +413,4 @@ The admonitions include:
 - **Runtime**: Static site with client-side search
 - **SEO**: Optimized for search engines and social sharing
 - **Accessibility**: WCAG compliant with proper contrast ratios
+```
