@@ -1,8 +1,14 @@
 ---
 date: 2021-02-18T10:00:00+05:30
 draft: false
-title: "TIL: Terminal File Managers, ELF Format, Responsible Web Apps, Cat Computer Debugging, and Ink Narrative Language"
-description: "Today I learned about modern terminal file managers, ELF executable format internals, principles of responsible web applications, hilarious computer debugging involving cats, and Ink narrative scripting language for interactive storytelling."
+title:
+  "TIL: Terminal File Managers, ELF Format, Responsible Web Apps, Cat Computer
+  Debugging, and Ink Narrative Language"
+description:
+  "Today I learned about modern terminal file managers, ELF executable format
+  internals, principles of responsible web applications, hilarious computer
+  debugging involving cats, and Ink narrative scripting language for interactive
+  storytelling."
 tags:
   - TIL
   - Terminal
@@ -24,6 +30,7 @@ tags:
 Fast, minimalist terminal file manager inspired by ranger:
 
 #### **Key Features:**
+
 - **Vi-like Bindings**: Familiar navigation for vi/vim users
 - **Configurable**: Extensive customization through config files
 - **Cross-platform**: Works on Linux, macOS, Windows, BSD
@@ -31,6 +38,7 @@ Fast, minimalist terminal file manager inspired by ranger:
 - **Extensible**: Custom commands and integrations
 
 #### **Configuration Example:**
+
 ```bash
 # ~/.config/lf/lfrc
 set preview true
@@ -58,6 +66,7 @@ map o &mimeopen $f
 Feature-rich, lightning-fast terminal file manager:
 
 #### **Unique Features:**
+
 - **Disk Usage Analyzer**: Built-in du functionality
 - **Plugin System**: Extensible with shell scripts
 - **Contexts**: Multiple independent sessions
@@ -65,6 +74,7 @@ Feature-rich, lightning-fast terminal file manager:
 - **Type-to-nav**: Instant search as you type
 
 #### **Advanced Capabilities:**
+
 ```bash
 # Selection and batch operations
 nnn -P p    # Show preview pane
@@ -79,6 +89,7 @@ export NNN_FIFO='/tmp/nnn.fifo'
 ```
 
 #### **Plugin Examples:**
+
 - **preview-tui**: Live file preview
 - **finder**: fzf integration for fuzzy finding
 - **diffs**: Compare files and directories
@@ -93,6 +104,7 @@ Comprehensive exploration of Linux executable format:
 ### ELF Structure:
 
 #### **File Layout:**
+
 ```
 ELF Header
 Program Headers (optional)
@@ -103,6 +115,7 @@ Section Headers (optional)
 ```
 
 #### **ELF Header Fields:**
+
 ```c
 typedef struct {
     unsigned char e_ident[16];  // Magic number and info
@@ -119,11 +132,13 @@ typedef struct {
 ### Key Concepts:
 
 #### **Sections vs Segments:**
+
 - **Sections**: Linking view (source code perspective)
 - **Segments**: Execution view (loader perspective)
 - **Mapping**: Multiple sections can map to one segment
 
 #### **Common Sections:**
+
 - **.text**: Executable code
 - **.data**: Initialized global variables
 - **.bss**: Uninitialized global variables
@@ -132,6 +147,7 @@ typedef struct {
 - **.strtab**: String table
 
 ### Analysis Tools:
+
 ```bash
 # Basic information
 file executable
@@ -159,24 +175,28 @@ Principles for building ethical, sustainable web applications:
 ### Core Principles:
 
 #### **Performance Responsibility:**
+
 - **Minimize Payload**: Only send necessary code and data
 - **Optimize Loading**: Critical path optimization
 - **Efficient Code**: Avoid unnecessary processing
 - **Caching Strategies**: Reduce repeat requests
 
 #### **Accessibility First:**
+
 - **Semantic HTML**: Use proper HTML structures
 - **Keyboard Navigation**: Full keyboard accessibility
 - **Screen Readers**: Compatible with assistive technologies
 - **Color Contrast**: Sufficient contrast ratios
 
 #### **Privacy Protection:**
+
 - **Data Minimization**: Collect only necessary data
 - **Consent Management**: Clear, informed consent
 - **Local Processing**: Process data locally when possible
 - **Transparent Policies**: Clear privacy policies
 
 #### **Environmental Impact:**
+
 - **Green Hosting**: Renewable energy providers
 - **Efficient Algorithms**: Reduce computational load
 - **Optimal Formats**: Use efficient image/video formats
@@ -185,6 +205,7 @@ Principles for building ethical, sustainable web applications:
 ### Implementation Guidelines:
 
 #### **Performance Budget:**
+
 ```javascript
 // Example performance budget
 {
@@ -197,7 +218,7 @@ Principles for building ethical, sustainable web applications:
           "budget": 2000
         },
         {
-          "metric": "largest-contentful-paint", 
+          "metric": "largest-contentful-paint",
           "budget": 2500
         }
       ],
@@ -219,20 +240,25 @@ Principles for building ethical, sustainable web applications:
 Hilarious and educational debugging story about intermittent computer crashes:
 
 ### The Mystery:
+
 - **Correlation**: Computer crashes only when cat is present
 - **Timing**: Crashes occur during specific activities
 - **Pattern**: Consistent enough to notice correlation
 
 ### The Investigation:
+
 - **Environmental Factors**: Temperature, humidity, electromagnetic interference
 - **Static Electricity**: Cat fur generating static discharge
 - **Physical Interference**: Cat walking on keyboard, touching cables
 - **Vibration**: Cat jumping causing mechanical issues
 
 ### The Solution:
-**Static Electricity Culprit**: Cat's fur building up static charge, discharging through computer components, causing voltage spikes that crash the system.
+
+**Static Electricity Culprit**: Cat's fur building up static charge, discharging
+through computer components, causing voltage spikes that crash the system.
 
 ### Lessons Learned:
+
 - **Correlation ≠ Causation**: But sometimes correlation leads to causation
 - **Environmental Debugging**: Consider all environmental factors
 - **Physical Issues**: Don't overlook mechanical/electrical causes
@@ -247,10 +273,11 @@ Powerful scripting language for interactive fiction and narrative games:
 ### Core Features:
 
 #### **Branching Narratives:**
+
 ```ink
 You stand at a crossroads.
 
-* [Go left] 
+* [Go left]
   You head down the left path.
   ** [Continue walking]
      The path leads to a dark forest.
@@ -264,6 +291,7 @@ You stand at a crossroads.
 ```
 
 #### **Variables and Logic:**
+
 ```ink
 VAR health = 100
 VAR has_sword = false
@@ -286,6 +314,7 @@ VAR has_sword = false
 ### Advanced Features:
 
 #### **Functions and Tunnels:**
+
 ```ink
 === fight_monster ===
 You encounter a fearsome beast!
@@ -306,6 +335,7 @@ You flee from danger...
 ```
 
 #### **Dynamic Text:**
+
 ```ink
 VAR player_name = "Hero"
 VAR times_visited = 0
@@ -320,21 +350,26 @@ VAR times_visited = 0
 ### Integration:
 
 #### **Game Engines:**
+
 - **Unity**: Official Unity plugin
 - **Unreal Engine**: Community plugins available
 - **Web**: JavaScript runtime for web games
 - **Mobile**: iOS and Android support
 
 #### **Output Formats:**
+
 - **JSON**: For custom integrations
 - **C#**: Runtime compilation
 - **JavaScript**: Web-based stories
 - **Standalone**: Command-line player
 
 ### Use Cases:
+
 - **Interactive Fiction**: Text-based adventure games
-- **Dialogue Systems**: RPG conversation trees  
+- **Dialogue Systems**: RPG conversation trees
 - **Branching Stories**: Choose-your-own-adventure books
 - **Educational Content**: Interactive learning materials
 
-Each tool represents innovation in its domain - from efficient terminal navigation to executable format understanding, ethical web development, systematic debugging, and narrative design.
+Each tool represents innovation in its domain - from efficient terminal
+navigation to executable format understanding, ethical web development,
+systematic debugging, and narrative design.

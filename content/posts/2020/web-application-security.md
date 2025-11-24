@@ -2,7 +2,11 @@
 date: 2020-11-11T10:00:00+05:30
 draft: false
 title: Web Application Security with secure.py
-description: A comprehensive guide to implementing secure HTTP headers in Flask applications using secure.py. Covers OWASP guidelines, security best practices, and practical examples of protecting web applications from common vulnerabilities.
+description:
+  A comprehensive guide to implementing secure HTTP headers in Flask
+  applications using secure.py. Covers OWASP guidelines, security best
+  practices, and practical examples of protecting web applications from common
+  vulnerabilities.
 tags:
   - Python
   - Flask
@@ -11,25 +15,40 @@ tags:
   - OWASP
 ---
 
-A common pitfall when developing web applications is not knowing how to design a safe application. `secure.py` is a great Python module that helps deal with the basic foundations of web application security.
+A common pitfall when developing web applications is not knowing how to design a
+safe application. `secure.py` is a great Python module that helps deal with the
+basic foundations of web application security.
 
 ## Goal
 
-In this post, I go through web application security, and how to use `secure.py` to address common pitfalls. Note that by web application security, I am not addressing authentication or database security. I mean secure web headers, predominantly, as defined by the [OWASP Secure Headers Project.](https://owasp.org/www-project-secure-headers/)
+In this post, I go through web application security, and how to use `secure.py`
+to address common pitfalls. Note that by web application security, I am not
+addressing authentication or database security. I mean secure web headers,
+predominantly, as defined by the
+[OWASP Secure Headers Project.](https://owasp.org/www-project-secure-headers/)
 
 ## OWASP
 
-The [Open Web Application Security Project®](https://owasp.org/) (OWASP) is a nonprofit foundation that works to improve the security of software. It provides resources and guidelines about web application security, and holds educational and training conferences.
+The [Open Web Application Security Project®](https://owasp.org/) (OWASP) is a
+nonprofit foundation that works to improve the security of software. It provides
+resources and guidelines about web application security, and holds educational
+and training conferences.
 
-If you're concerning yourself with writing a web application, I highly recommend going through the OWASP guidelines on various topics related to web application security.
+If you're concerning yourself with writing a web application, I highly recommend
+going through the OWASP guidelines on various topics related to web application
+security.
 
-This particular post will be centered around the OWASP guidelines on HTTP Headers. Reference links are at the bottom of the post.
+This particular post will be centered around the OWASP guidelines on HTTP
+Headers. Reference links are at the bottom of the post.
 
 ## A Little Bit About HTTP Headers
 
-[HTTP Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers) are the sort of things that don't *often* concern developers. We don't think about them, until we encounter some issue with Cross-Site Requests or something similar. However, knowledge of headers gives you a lot to think about.
+[HTTP Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers) are
+the sort of things that don't _often_ concern developers. We don't think about
+them, until we encounter some issue with Cross-Site Requests or something
+similar. However, knowledge of headers gives you a lot to think about.
 
-How do you even *see* the headers, anyway?
+How do you even _see_ the headers, anyway?
 
 Let's try `curl`.
 
@@ -43,7 +62,10 @@ The document has moved
 </BODY></HTML>
 ```
 
-Besides the HTML content, this tells us *nothing*. From the `title` tag, you can guess that the request returned a [301 Moved HTTP status code](https://devhints.io/http-status). However, remember, developers are *human*.
+Besides the HTML content, this tells us _nothing_. From the `title` tag, you can
+guess that the request returned a
+[301 Moved HTTP status code](https://devhints.io/http-status). However,
+remember, developers are _human_.
 
 It is only too easy to do this:
 
@@ -66,11 +88,16 @@ def index():
     return html, 200
 ```
 
-If you save that snippet to a file named `app.py`, and run it with the Flask command line using `FLASK_APP=app.py flask run`, you can access this with `curl` again.
+If you save that snippet to a file named `app.py`, and run it with the Flask
+command line using `FLASK_APP=app.py flask run`, you can access this with `curl`
+again.
 
-Note that you need to have a Python environment with `flask` installed for this to work.
+Note that you need to have a Python environment with `flask` installed for this
+to work.
 
-PS: If you've noticed the `textwrap.dedent` trick, it's a neat way of telling python to ignore the indentation within a triple-quoted string. I can get a bit pedantic about being exact.
+PS: If you've noticed the `textwrap.dedent` trick, it's a neat way of telling
+python to ignore the indentation within a triple-quoted string. I can get a bit
+pedantic about being exact.
 
 ```bash
 $ curl localhost:5000/
@@ -85,11 +112,12 @@ The document has moved
 
 There's no difference here. Does that mean both are the same?
 
-*No*.
+_No_.
 
 Instead, let's try to see if `curl` can help.
 
-`curl -s -D - <url>` Will give us the entire response, including the HTTP headers.
+`curl -s -D - <url>` Will give us the entire response, including the HTTP
+headers.
 
 Let's try it on `google.com`
 
@@ -115,7 +143,9 @@ The document has moved
 </BODY></HTML>
 ```
 
-The first line is the most important one. It tells us that the website we are trying to access has *moved permanently*. In fact, the code there is the standard code for the 301 response.
+The first line is the most important one. It tells us that the website we are
+trying to access has _moved permanently_. In fact, the code there is the
+standard code for the 301 response.
 
 Let's look at what we have.
 
@@ -137,44 +167,63 @@ The document has moved
 </BODY></HTML>
 ```
 
-Not only does this say `HTTP/1.0 200 OK` when the *body* of the response says `301 Moved`, but it also has fewer items in the header.
+Not only does this say `HTTP/1.0 200 OK` when the _body_ of the response says
+`301 Moved`, but it also has fewer items in the header.
 
 This exercise served three purposes:
 
-1. The actual response code of a HTTP request *does not have to match the response body*.
+1. The actual response code of a HTTP request _does not have to match the
+   response body_.
 2. `curl -s -D - <url>` can be used to expose all the headers.
-3. Despite the body being the same, the default headers of our flask app are not the same as those returned by `google.com`.
+3. Despite the body being the same, the default headers of our flask app are not
+   the same as those returned by `google.com`.
 
-Look at point 3 again. **Despite the body being the same, the default headers of our flask app are not the same as those returned by `google.com`.**
+Look at point 3 again. **Despite the body being the same, the default headers of
+our flask app are not the same as those returned by `google.com`.**
 
-In the response you get from flask, the first *red flag* should be `Server: Werkzeug/1.0.1 Python/3.8.5`. Why?
+In the response you get from flask, the first _red flag_ should be
+`Server: Werkzeug/1.0.1 Python/3.8.5`. Why?
 
-This is telling any potential users of your API that your server is running on Werkzeug 1.0.1, using Python 3.8.5. Any malevolent user will just need to search for "vulnerabilities to exploit in Python 3.8.5" to get a list of ideas on how to bring down your app.
+This is telling any potential users of your API that your server is running on
+Werkzeug 1.0.1, using Python 3.8.5. Any malevolent user will just need to search
+for "vulnerabilities to exploit in Python 3.8.5" to get a list of ideas on how
+to bring down your app.
 
 This is where we segui into the OWASP guidelines.
 
 ## OWASP Guidelines on Secure Headers
 
-Open the [OWASP Secure Headers Project](https://owasp.org/www-project-secure-headers/#) and click on the `Response Headers` Tab. This displays the following list:
+Open the
+[OWASP Secure Headers Project](https://owasp.org/www-project-secure-headers/#)
+and click on the `Response Headers` Tab. This displays the following list:
 
-* HTTP Strict Transport Security (HSTS)
-* X-Frame-Options
-* X-Content-Type-Options
-* Content-Security-Policy
-* X-Permitted-Cross-Domain-Policies
-* Referrer-Policy
-* Feature-Policy
-* Public Key Pinning Extension for HTTP (HPKP)
-* Expect-CT
-* X-XSS-Protection
+- HTTP Strict Transport Security (HSTS)
+- X-Frame-Options
+- X-Content-Type-Options
+- Content-Security-Policy
+- X-Permitted-Cross-Domain-Policies
+- Referrer-Policy
+- Feature-Policy
+- Public Key Pinning Extension for HTTP (HPKP)
+- Expect-CT
+- X-XSS-Protection
 
-This a list of the top ten best ways to ensure secure headers in an application. The link above provides detailed explanations of what these are and why you should be aware of them. Explaining that is out of the scope of this post.
+This a list of the top ten best ways to ensure secure headers in an application.
+The link above provides detailed explanations of what these are and why you
+should be aware of them. Explaining that is out of the scope of this post.
 
-However, it is important that you add these headers into your own application. While you could theoretically learn how to do that with the flask `app.after_request` hook and manually baking in the rules into that, there's an easier way: use `secure.py`.
+However, it is important that you add these headers into your own application.
+While you could theoretically learn how to do that with the flask
+`app.after_request` hook and manually baking in the rules into that, there's an
+easier way: use `secure.py`.
 
 ## `secure.py`
 
-`secure.py` is a minimal Python library that offers a way to add secure headers by default. It is designed with the OWASP guidelines in tow, and it is constantly updated with the best practices baked in. The best part of it is that it is a uniform library that is agnostic of your framework, so Django devs, rejoice!
+`secure.py` is a minimal Python library that offers a way to add secure headers
+by default. It is designed with the OWASP guidelines in tow, and it is
+constantly updated with the best practices baked in. The best part of it is that
+it is a uniform library that is agnostic of your framework, so Django devs,
+rejoice!
 
 First, install `secure.py`:
 
@@ -210,7 +259,9 @@ def set_secure_headers(response):
     return response
 ```
 
-`@app,after_request` allows you to add additional information to the response, or remove information from it. These lines of code ensure that your application follows the OWASP Secure Headers guidelines to a T.
+`@app,after_request` allows you to add additional information to the response,
+or remove information from it. These lines of code ensure that your application
+follows the OWASP Secure Headers guidelines to a T.
 
 Let's try this out.
 
@@ -239,11 +290,17 @@ Date: Wed, 11 Nov 2020 18:18:38 GMT
 </BODY></HTML>
 ```
 
-Now, you can see that a lot of additional headers have been added. These are the headers defined by the OWASP guidelines. However, `Server` is still present in the response. This is because while it is *unsafe* to expose this information, it should be altered explicitly instead of through a library since it may be necessary in some cases.
+Now, you can see that a lot of additional headers have been added. These are the
+headers defined by the OWASP guidelines. However, `Server` is still present in
+the response. This is because while it is _unsafe_ to expose this information,
+it should be altered explicitly instead of through a library since it may be
+necessary in some cases.
 
-To address this, we can just add `response.headers.set("Server", "Secure")` in the `@app.after_request` function.
+To address this, we can just add `response.headers.set("Server", "Secure")` in
+the `@app.after_request` function.
 
-If you are interested, you may also use `SecureCookie` to add a cookie to the response.
+If you are interested, you may also use `SecureCookie` to add a cookie to the
+response.
 
 ```python
 import flask
@@ -304,23 +361,34 @@ Date: Wed, 11 Nov 2020 18:23:57 GMT
 </BODY></HTML>
 ```
 
-As you can see, the `Server` has been set to `Secure`, and there is now a `Set-Cookie` header.
+As you can see, the `Server` has been set to `Secure`, and there is now a
+`Set-Cookie` header.
 
-Each header added by `secure` can be customized. I recommend [reading the documentation](https://secure.readthedocs.io/en/latest/index.html) and deciding which to omit, if you feel that's absolutely necessary.
+Each header added by `secure` can be customized. I recommend
+[reading the documentation](https://secure.readthedocs.io/en/latest/index.html)
+and deciding which to omit, if you feel that's absolutely necessary.
 
 ## X-Powered-By
 
-There are some flask plugins that enable this particular header. While I am glad Flask (unlike electron) does not do this out of the box, I will say this.
+There are some flask plugins that enable this particular header. While I am glad
+Flask (unlike electron) does not do this out of the box, I will say this.
 
-*Do not, under any circumstances, advertise to your users what your API runs on.*
+_Do not, under any circumstances, advertise to your users what your API runs
+on._
 
-**Do not, under any circumstances, give potential hackers ideas on where to look for application vulnerabilities in your API**.
+**Do not, under any circumstances, give potential hackers ideas on where to look
+for application vulnerabilities in your API**.
 
-Both of these are *stupid ideas*. The only reason why you would like to advertise the stack of your API within the header would be if your API is only accessed internally, by people you absolutely trust. Even then, developer documentation and access to the code base are better ideas. Using `X-Powered-By` should never be a good idea.
+Both of these are _stupid ideas_. The only reason why you would like to
+advertise the stack of your API within the header would be if your API is only
+accessed internally, by people you absolutely trust. Even then, developer
+documentation and access to the code base are better ideas. Using `X-Powered-By`
+should never be a good idea.
 
 ## `httpie`
 
-While `curl -s -D - <url>` solves the header visibility problem, I also recommend using `httpie` if you're looking for a more beginner-friendly tool.
+While `curl -s -D - <url>` solves the header visibility problem, I also
+recommend using `httpie` if you're looking for a more beginner-friendly tool.
 
 `httpie` is installed by `pip`.
 
@@ -351,7 +419,8 @@ X-XSS-Protection: 1; mode=block
 </BODY></HTML>
 ```
 
-While this offers the same output, it also does this by default, and adds some nice colors to the output. Refer the documentation for more.
+While this offers the same output, it also does this by default, and adds some
+nice colors to the output. Refer the documentation for more.
 
 ## References and Additional Tools
 

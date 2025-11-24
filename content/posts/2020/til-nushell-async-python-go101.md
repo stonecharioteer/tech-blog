@@ -1,8 +1,13 @@
 ---
 date: 2020-08-25T10:00:00+05:30
 draft: false
-title: "TIL: NuShell Structured Data Shell, Async Python Performance Reality, and Go Programming Fundamentals"
-description: "Today I learned about NuShell's structured approach to shell computing, why async Python isn't always faster, comprehensive Go language resources, and effective techniques for asking technical questions."
+title:
+  "TIL: NuShell Structured Data Shell, Async Python Performance Reality, and Go
+  Programming Fundamentals"
+description:
+  "Today I learned about NuShell's structured approach to shell computing, why
+  async Python isn't always faster, comprehensive Go language resources, and
+  effective techniques for asking technical questions."
 tags:
   - til
   - shell
@@ -14,15 +19,18 @@ tags:
   - performance
 ---
 
-Today's discoveries challenged conventional wisdom about async programming while exploring innovative shell design and comprehensive language learning resources.
+Today's discoveries challenged conventional wisdom about async programming while
+exploring innovative shell design and comprehensive language learning resources.
 
 ## NuShell - Structured Data Shell in Rust
 
-[NuShell](https://www.nushell.sh/) reimagines the command-line interface with structured data as a first-class concept:
+[NuShell](https://www.nushell.sh/) reimagines the command-line interface with
+structured data as a first-class concept:
 
 ### Core Philosophy:
 
 #### **Structured Data Pipeline:**
+
 ```bash
 # Traditional shell - text-based
 ps aux | grep python | awk '{print $2}' | head -5
@@ -32,6 +40,7 @@ ps | where name =~ python | select pid | first 5
 ```
 
 #### **Built-in Data Types:**
+
 ```bash
 # Working with JSON directly
 http get https://api.github.com/repos/nushell/nushell | get stargazers_count
@@ -49,6 +58,7 @@ sys | get host.name
 ### Advanced Features:
 
 #### **Custom Commands:**
+
 ```bash
 # Define custom command
 def weather [city: string] {
@@ -69,16 +79,17 @@ def git-summary [--author(-a): string] {
 ```
 
 #### **Data Transformation:**
+
 ```bash
 # Convert between formats
 open data.json | to csv | save data.csv
 open config.toml | to json | save config.json
 
 # Advanced filtering and grouping
-open sales.csv 
-| where date >= 2023-01-01 
-| group-by region 
-| each { |group| 
+open sales.csv
+| where date >= 2023-01-01
+| group-by region
+| each { |group|
     {
         region: ($group.0),
         total_sales: ($group.1 | get amount | math sum),
@@ -88,6 +99,7 @@ open sales.csv
 ```
 
 #### **Cross-Platform Compatibility:**
+
 ```bash
 # File operations work consistently across platforms
 ls **/*.rs | where size > 10kb | get name
@@ -115,11 +127,13 @@ ls | where name =~ ".log" | get name | lines | xargs tail -f
 
 ## Async Python Performance Reality
 
-[Async Python is Not Faster](http://calpaterson.com/async-python-is-not-faster.html) challenges common misconceptions about async programming:
+[Async Python is Not Faster](http://calpaterson.com/async-python-is-not-faster.html)
+challenges common misconceptions about async programming:
 
 ### Performance Myths vs Reality:
 
 #### **CPU-Bound Tasks:**
+
 ```python
 import asyncio
 import time
@@ -152,14 +166,14 @@ async def async_cpu_test_wrong():
 async def async_cpu_test_correct():
     start = time.time()
     loop = asyncio.get_event_loop()
-    
+
     with ThreadPoolExecutor() as executor:
         tasks = [
             loop.run_in_executor(executor, cpu_bound_task, 100000)
             for _ in range(4)
         ]
         results = await asyncio.gather(*tasks)
-    
+
     end = time.time()
     return end - start, results
 
@@ -170,6 +184,7 @@ async def async_cpu_test_correct():
 ```
 
 #### **I/O-Bound Tasks - Where Async Shines:**
+
 ```python
 import aiohttp
 import requests
@@ -188,13 +203,13 @@ def sync_http_test(urls):
 async def async_http_test(urls):
     start = time.time()
     results = []
-    
+
     async with aiohttp.ClientSession() as session:
         tasks = []
         for url in urls:
             tasks.append(fetch_url(session, url))
         results = await asyncio.gather(*tasks)
-    
+
     end = time.time()
     return end - start, results
 
@@ -208,6 +223,7 @@ async def fetch_url(session, url):
 ```
 
 #### **Memory and Overhead Considerations:**
+
 ```python
 import sys
 import asyncio
@@ -215,21 +231,21 @@ import threading
 
 def measure_memory_usage():
     """Compare memory usage of different approaches"""
-    
+
     # Thread-based approach
     def thread_worker():
         time.sleep(1)
-    
+
     threads = [threading.Thread(target=thread_worker) for _ in range(1000)]
     thread_memory = sys.getsizeof(threads) + sum(sys.getsizeof(t) for t in threads)
-    
+
     # Async approach
     async def async_worker():
         await asyncio.sleep(1)
-    
+
     tasks = [async_worker() for _ in range(1000)]
     task_memory = sys.getsizeof(tasks) + sum(sys.getsizeof(t) for t in tasks)
-    
+
     print(f"1000 threads: ~{thread_memory} bytes")
     print(f"1000 async tasks: ~{task_memory} bytes")
     # Async tasks typically use much less memory
@@ -240,12 +256,14 @@ measure_memory_usage()
 ### When to Use Async:
 
 #### **Good Use Cases:**
+
 - High-concurrency I/O operations (web scraping, API calls)
 - Network servers handling many connections
 - Database operations with connection pooling
 - File I/O with many small files
 
 #### **Poor Use Cases:**
+
 - CPU-intensive computations
 - Simple sequential programs
 - Legacy code integration
@@ -258,6 +276,7 @@ measure_memory_usage()
 ### Core Go Concepts:
 
 #### **Goroutines and Channels:**
+
 ```go
 package main
 
@@ -288,16 +307,17 @@ func consumer(ch <-chan int, done chan<- bool) {
 func main() {
     ch := make(chan int, 2) // Buffered channel
     done := make(chan bool)
-    
+
     go producer(ch)
     go consumer(ch, done)
-    
+
     <-done // Wait for consumer to finish
     fmt.Println("All done!")
 }
 ```
 
 #### **Interface-Based Design:**
+
 ```go
 // Define behavior through interfaces
 type Writer interface {
@@ -334,13 +354,14 @@ func doWork(logger Logger) {
 func main() {
     fileLogger := &FileLogger{filename: "app.log"}
     consoleLogger := &ConsoleLogger{}
-    
+
     doWork(fileLogger)
     doWork(consoleLogger)
 }
 ```
 
 #### **Error Handling Patterns:**
+
 ```go
 import (
     "errors"
@@ -355,7 +376,7 @@ type ValidationError struct {
 }
 
 func (v *ValidationError) Error() string {
-    return fmt.Sprintf("validation failed for field '%s' with value '%v': %s", 
+    return fmt.Sprintf("validation failed for field '%s' with value '%v': %s",
                        v.Field, v.Value, v.Reason)
 }
 
@@ -368,15 +389,15 @@ func validateUser(name string, age int) (*User, error) {
             Reason: "name cannot be empty",
         }
     }
-    
+
     if age < 0 || age > 150 {
         return nil, &ValidationError{
-            Field: "age", 
+            Field: "age",
             Value: age,
             Reason: "age must be between 0 and 150",
         }
     }
-    
+
     return &User{Name: name, Age: age}, nil
 }
 
@@ -392,28 +413,31 @@ func main() {
         }
         return
     }
-    
+
     fmt.Printf("Valid user: %+v\n", user)
 }
 ```
 
 ## Effective Technical Questions
 
-[How to ask questions of experts and gain more than just an answer](https://josh.works/better-questions) provides guidance for productive technical discussions:
+[How to ask questions of experts and gain more than just an answer](https://josh.works/better-questions)
+provides guidance for productive technical discussions:
 
 ### Question Framework:
 
 #### **Context-Rich Questions:**
+
 ```
 Poor: "My code doesn't work. Help!"
 
-Better: "I'm trying to implement a REST API in Go using Gin framework. 
+Better: "I'm trying to implement a REST API in Go using Gin framework.
 When I send a POST request to /api/users, I get a 500 error. Here's my code:
-[code snippet]. The error message is [specific error]. I've tried 
+[code snippet]. The error message is [specific error]. I've tried
 [what you've attempted]. What might be causing this issue?"
 ```
 
 #### **Show Your Work:**
+
 ```
 Include:
 - What you're trying to accomplish
@@ -426,6 +450,7 @@ Include:
 ```
 
 #### **Follow-Up Strategy:**
+
 ```
 1. Ask clarifying questions about the solution
 2. Explain what you learned in your own words
@@ -434,4 +459,7 @@ Include:
 5. Ask about related concepts or edge cases
 ```
 
-These discoveries highlight the importance of understanding the true characteristics of tools and techniques rather than accepting conventional wisdom, while also providing practical frameworks for effective learning and communication.
+These discoveries highlight the importance of understanding the true
+characteristics of tools and techniques rather than accepting conventional
+wisdom, while also providing practical frameworks for effective learning and
+communication.

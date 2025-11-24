@@ -1,8 +1,13 @@
 ---
 date: 2021-01-08T10:00:00+05:30
 draft: false
-title: "TIL: Visual NumPy Guide, Advent of Code Solutions, and Johnny Decimal Organization System"
-description: "Today I learned about Jay Alammar's visual guide to NumPy, exploring Peter Norvig's Advent of Code solutions for learning algorithms, and the Johnny Decimal system for organizing digital information."
+title:
+  "TIL: Visual NumPy Guide, Advent of Code Solutions, and Johnny Decimal
+  Organization System"
+description:
+  "Today I learned about Jay Alammar's visual guide to NumPy, exploring Peter
+  Norvig's Advent of Code solutions for learning algorithms, and the Johnny
+  Decimal system for organizing digital information."
 tags:
   - TIL
   - NumPy
@@ -21,14 +26,18 @@ tags:
 Brilliant visual guide to understanding NumPy through interactive diagrams:
 
 ### Why Visual Learning Works:
+
 - **Complex Concepts**: NumPy operations involve multi-dimensional thinking
-- **Abstract Operations**: Broadcasting and reshaping are hard to visualize mentally  
-- **Mathematical Foundation**: Linear algebra concepts become clearer with visuals
+- **Abstract Operations**: Broadcasting and reshaping are hard to visualize
+  mentally
+- **Mathematical Foundation**: Linear algebra concepts become clearer with
+  visuals
 - **Debugging Aid**: Understanding data shapes prevents common errors
 
 ### Core NumPy Concepts Visualized:
 
 #### **Array Creation and Structure:**
+
 ```python
 import numpy as np
 
@@ -36,27 +45,28 @@ import numpy as np
 arr_1d = np.array([1, 2, 3, 4])
 # [1] [2] [3] [4]
 
-# 2D array (matrix) visualization  
-arr_2d = np.array([[1, 2, 3], 
+# 2D array (matrix) visualization
+arr_2d = np.array([[1, 2, 3],
                    [4, 5, 6]])
 # [[1] [2] [3]]
 # [[4] [5] [6]]
 
 # 3D array visualization
-arr_3d = np.array([[[1, 2], [3, 4]], 
+arr_3d = np.array([[[1, 2], [3, 4]],
                    [[5, 6], [7, 8]]])
 # Layer 0: [[1] [2]]  Layer 1: [[5] [6]]
 #          [[3] [4]]           [[7] [8]]
 ```
 
 #### **Array Operations:**
+
 ```python
 # Element-wise operations visualized
 a = np.array([1, 2, 3])
 b = np.array([4, 5, 6])
 
 # Addition: [1] + [4] = [5]
-#          [2] + [5] = [7]  
+#          [2] + [5] = [7]
 #          [3] + [6] = [9]
 result = a + b  # [5, 7, 9]
 
@@ -71,11 +81,12 @@ result = a + scalar  # [11, 12, 13]
 ### Advanced Visualizations:
 
 #### **Matrix Multiplication:**
+
 ```python
 # Dot product visualization
-A = np.array([[1, 2], 
+A = np.array([[1, 2],
               [3, 4]])
-B = np.array([[5, 6], 
+B = np.array([[5, 6],
               [7, 8]])
 
 # Visual representation of A @ B:
@@ -87,18 +98,19 @@ result = A @ B  # [[19, 22], [43, 50]]
 ```
 
 #### **Reshaping and Indexing:**
+
 ```python
 # Original shape: (6,)
 arr = np.array([1, 2, 3, 4, 5, 6])
 
-# Reshape to (2, 3): 
+# Reshape to (2, 3):
 # [[1] [2] [3]]
 # [[4] [5] [6]]
 reshaped = arr.reshape(2, 3)
 
 # Reshape to (3, 2):
 # [[1] [2]]
-# [[3] [4]]  
+# [[3] [4]]
 # [[5] [6]]
 reshaped = arr.reshape(3, 2)
 ```
@@ -106,6 +118,7 @@ reshaped = arr.reshape(3, 2)
 ### Practical Applications:
 
 #### **Data Science Workflows:**
+
 ```python
 # Image processing example
 image = np.random.rand(256, 256, 3)  # Height, Width, RGB channels
@@ -118,6 +131,7 @@ resized = image[::2, ::2, :]         # Every other pixel
 ```
 
 #### **Machine Learning Data:**
+
 ```python
 # Dataset visualization
 X = np.random.rand(1000, 10)  # 1000 samples, 10 features
@@ -132,6 +146,7 @@ X_train, X_test = X[:split_idx], X[split_idx:]
 ```
 
 ### Learning Benefits:
+
 - **Intuitive Understanding**: See what operations actually do to data
 - **Debugging Skills**: Quickly spot shape mismatches and dimensionality issues
 - **Performance Awareness**: Understand which operations are efficient
@@ -145,6 +160,7 @@ X_train, X_test = X[:split_idx], X[split_idx:]
 Exploring algorithmic problem-solving through Advent of Code challenges:
 
 ### What is Advent of Code:
+
 - **Daily Programming Puzzles**: 25 problems released from Dec 1-25
 - **Increasing Difficulty**: Problems get progressively harder
 - **Algorithmic Focus**: Emphasis on data structures and algorithms
@@ -153,6 +169,7 @@ Exploring algorithmic problem-solving through Advent of Code challenges:
 ### Learning from Peter Norvig's Solutions:
 
 #### **Elegant Python Patterns:**
+
 ```python
 # Pattern: Generator expressions for parsing
 def parse_input(text):
@@ -170,12 +187,13 @@ from functools import lru_cache
 def count_arrangements(adapters, index=0):
     if index == len(adapters) - 1:
         return 1
-    return sum(count_arrangements(adapters, i) 
+    return sum(count_arrangements(adapters, i)
                for i in range(index + 1, len(adapters))
                if adapters[i] - adapters[index] <= 3)
 ```
 
 #### **Data Structure Selection:**
+
 ```python
 # Using sets for fast membership testing
 visited = set()
@@ -197,18 +215,21 @@ new_position = position + directions[0]  # Move right
 ### Algorithm Categories in AoC:
 
 #### **Graph Algorithms:**
+
 - **BFS/DFS**: Pathfinding and reachability
 - **Dijkstra**: Shortest path with weights
 - **Topological Sort**: Dependency resolution
 - **Connected Components**: Network analysis
 
 #### **Dynamic Programming:**
+
 - **Memoization**: Avoid recomputing subproblems
 - **Bottom-up**: Build solutions incrementally
 - **State Space**: Define problem states clearly
 - **Optimization**: Find optimal solutions
 
 #### **Pattern Recognition:**
+
 - **Cycle Detection**: Find repeating patterns
 - **State Machines**: Model system behavior
 - **Regular Expressions**: Text parsing and matching
@@ -217,6 +238,7 @@ new_position = position + directions[0]  # Move right
 ### Best Practices from Expert Solutions:
 
 #### **Code Organization:**
+
 ```python
 def solve_part1(input_text):
     data = parse_input(input_text)
@@ -235,6 +257,7 @@ def parse_input(text):
 ```
 
 #### **Testing and Validation:**
+
 ```python
 def test_with_examples():
     example_input = """..."""
@@ -252,6 +275,7 @@ def test_with_examples():
 Revolutionary system for organizing digital information and files:
 
 ### The Core Concept:
+
 - **Hierarchical Structure**: 10 areas, 10 categories each, unlimited items
 - **Numeric Identification**: Every item gets a unique number
 - **Search Friendly**: Find anything by its number
@@ -260,6 +284,7 @@ Revolutionary system for organizing digital information and files:
 ### System Structure:
 
 #### **Three Levels:**
+
 ```
 Areas (10-19, 20-29, 30-39, etc.)
 ├── Categories (11, 12, 13, etc.)
@@ -267,6 +292,7 @@ Areas (10-19, 20-29, 30-39, etc.)
 ```
 
 #### **Example Implementation:**
+
 ```
 10-19 Personal Development
 ├── 11 Learning & Education
@@ -291,6 +317,7 @@ Areas (10-19, 20-29, 30-39, etc.)
 ### Digital Implementation:
 
 #### **File System Organization:**
+
 ```
 /Documents/
 ├── 11.01 Online Courses/
@@ -308,15 +335,18 @@ Areas (10-19, 20-29, 30-39, etc.)
 ```
 
 #### **Note-Taking Integration:**
+
 ```markdown
 # 11.03 Daily Learning Notes
 
 ## 2021-01-08 - NumPy Visualization Study
+
 - Reviewed Jay Alammar's visual NumPy guide
 - Key insight: Broadcasting is like stretching arrays
 - Next: Practice with real dataset
 
 ## Cross-references:
+
 - See 13.02 for portfolio project using NumPy
 - See 21.03 for data analysis of expenses
 ```
@@ -324,12 +354,14 @@ Areas (10-19, 20-29, 30-39, etc.)
 ### Benefits of the System:
 
 #### **Cognitive Load Reduction:**
+
 - **No More "Where Did I Put That?"**: Everything has a number
 - **Consistent Structure**: Same hierarchy everywhere
 - **Muscle Memory**: Numbers become automatic
 - **Reduced Decisions**: Clear place for everything
 
 #### **Scalability:**
+
 - **Personal Use**: Organize your entire digital life
 - **Team Projects**: Shared understanding of structure
 - **Business Applications**: Department and project organization
@@ -338,6 +370,7 @@ Areas (10-19, 20-29, 30-39, etc.)
 ### Implementation Tips:
 
 #### **Getting Started:**
+
 1. **Audit Current Organization**: What areas of life/work do you manage?
 2. **Define Areas**: 10 broad categories (can use fewer initially)
 3. **Break Down Categories**: What subcategories exist in each area?
@@ -345,13 +378,14 @@ Areas (10-19, 20-29, 30-39, etc.)
 5. **Iterate**: Refine structure as you use it
 
 #### **Digital Tools Integration:**
+
 ```python
 # Python script to create Johnny Decimal folder structure
 import os
 
 areas = {
     10: "Personal Development",
-    20: "Home & Life Management", 
+    20: "Home & Life Management",
     30: "Work Projects"
 }
 
@@ -366,11 +400,13 @@ def create_structure(base_path):
     for area_num, area_name in areas.items():
         area_path = f"{base_path}/{area_num}-{area_num+9} {area_name}"
         os.makedirs(area_path, exist_ok=True)
-        
+
         for cat_num, cat_name in categories.items():
             if area_num <= cat_num < area_num + 10:
                 cat_path = f"{area_path}/{cat_num} {cat_name}"
                 os.makedirs(cat_path, exist_ok=True)
 ```
 
-These three resources represent different approaches to managing complexity - visual learning for technical concepts, structured problem-solving for algorithm development, and systematic organization for information management.
+These three resources represent different approaches to managing complexity -
+visual learning for technical concepts, structured problem-solving for algorithm
+development, and systematic organization for information management.

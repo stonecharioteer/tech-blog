@@ -1,8 +1,12 @@
 ---
 date: 2021-05-21T10:00:00+05:30
 draft: false
-title: "TIL: AutoInvent, ASGI, Python Packaging, RAPIDS GPU Computing, and FlaskCon"
-description: "Today I learned about AutoInvent's development tools, ASGI specification for async Python web apps, dh-virtualenv for Python packaging, RAPIDS for GPU data science, and FlaskCon 2020 talks."
+title:
+  "TIL: AutoInvent, ASGI, Python Packaging, RAPIDS GPU Computing, and FlaskCon"
+description:
+  "Today I learned about AutoInvent's development tools, ASGI specification for
+  async Python web apps, dh-virtualenv for Python packaging, RAPIDS for GPU data
+  science, and FlaskCon 2020 talks."
 tags:
   - TIL
   - Python
@@ -17,6 +21,7 @@ tags:
 [AutoInvent · GitHub](https://github.com/autoinvent/)
 
 AutoInvent provides development tools and frameworks, particularly focused on:
+
 - Rapid application development
 - Code generation and scaffolding
 - Developer productivity tools
@@ -24,20 +29,27 @@ AutoInvent provides development tools and frameworks, particularly focused on:
 
 ## ASGI - Async Python Web Standard
 
-[GitHub - django/asgiref](https://github.com/django/asgiref) - ASGI specification and utilities.
+[GitHub - django/asgiref](https://github.com/django/asgiref) - ASGI
+specification and utilities.
 
-ASGI (Asynchronous Server Gateway Interface) is the spiritual successor to WSGI, providing:
+ASGI (Asynchronous Server Gateway Interface) is the spiritual successor to WSGI,
+providing:
+
 - Asynchronous request handling
 - WebSocket support
 - HTTP/2 compatibility
 - Background task processing
-- Integration with modern async Python frameworks like FastAPI and Django Channels
+- Integration with modern async Python frameworks like FastAPI and Django
+  Channels
 
 ## dh-virtualenv - Python Debian Packaging
 
-[GitHub - spotify/dh-virtualenv](https://github.com/spotify/dh-virtualenv) - Python virtualenvs in Debian packages.
+[GitHub - spotify/dh-virtualenv](https://github.com/spotify/dh-virtualenv) -
+Python virtualenvs in Debian packages.
 
-Spotify's tool for packaging Python applications as Debian packages while maintaining virtualenv isolation:
+Spotify's tool for packaging Python applications as Debian packages while
+maintaining virtualenv isolation:
+
 - Combines Python virtualenvs with Debian packaging
 - Solves dependency conflicts in production
 - Maintains isolation between Python applications
@@ -48,6 +60,7 @@ Spotify's tool for packaging Python applications as Debian packages while mainta
 [Open GPU Data Science | RAPIDS](https://rapids.ai/)
 
 RAPIDS provides GPU-accelerated libraries for data science and analytics:
+
 - GPU-accelerated DataFrames (cuDF)
 - Machine learning (cuML)
 - Graph analytics (cuGraph)
@@ -59,6 +72,7 @@ RAPIDS provides GPU-accelerated libraries for data science and analytics:
 [PyVideo.org · FlaskCon 2020](https://pyvideo.org/events/flaskcon-2020.html)
 
 Collection of talks from FlaskCon 2020 covering:
+
 - Flask best practices and patterns
 - Modern web development with Flask
 - Performance optimization

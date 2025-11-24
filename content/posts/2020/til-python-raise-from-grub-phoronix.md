@@ -1,8 +1,13 @@
 ---
 date: 2020-08-05T10:00:00+05:30
 draft: false
-title: "TIL: Python's raise from Statement, Grub Customization, Liquorix Kernel, and Hardware Benchmarking"
-description: "Today I learned about Python's raise from clause for exception chaining, customizing the Grub bootloader, the Liquorix kernel for desktop performance, and comprehensive hardware benchmarking with Phoronix Test Suite."
+title:
+  "TIL: Python's raise from Statement, Grub Customization, Liquorix Kernel, and
+  Hardware Benchmarking"
+description:
+  "Today I learned about Python's raise from clause for exception chaining,
+  customizing the Grub bootloader, the Liquorix kernel for desktop performance,
+  and comprehensive hardware benchmarking with Phoronix Test Suite."
 tags:
   - til
   - python
@@ -14,15 +19,18 @@ tags:
   - system-administration
 ---
 
-Today's discoveries spanned from Python exception handling best practices to Linux system customization and performance optimization.
+Today's discoveries spanned from Python exception handling best practices to
+Linux system customization and performance optimization.
 
 ## Python's raise from Statement
 
-[Python's raise statement with from clause](https://docs.python.org/3/reference/simple_stmts.html#the-raise-statement) enables proper exception chaining to preserve full tracebacks:
+[Python's raise statement with from clause](https://docs.python.org/3/reference/simple_stmts.html#the-raise-statement)
+enables proper exception chaining to preserve full tracebacks:
 
 ### Exception Chaining Fundamentals:
 
 #### **Basic raise from Usage:**
+
 ```python
 def process_file(filename):
     try:
@@ -46,6 +54,7 @@ except ValueError as e:
 ```
 
 #### **Suppressing Exception Context:**
+
 ```python
 def clean_error_without_context():
     try:
@@ -63,6 +72,7 @@ def clean_error_with_context():
 ```
 
 #### **Advanced Exception Chaining Patterns:**
+
 ```python
 import logging
 from contextlib import contextmanager
@@ -107,11 +117,11 @@ def update_user_profile(user_id, profile_data):
             user = db.get_user(user_id)
             if not user:
                 raise UserNotFoundError(f"User {user_id} not found")
-            
+
             validate_profile_data(profile_data)
             db.update_user_profile(user_id, profile_data)
             db.log_user_activity(user_id, "profile_updated")
-            
+
     except UserNotFoundError:
         # Re-raise without chaining - this is the root cause
         raise
@@ -123,17 +133,18 @@ def update_user_profile(user_id, profile_data):
 ```
 
 #### **Exception Chaining Best Practices:**
+
 ```python
 def api_request_with_retries(url, max_retries=3):
     """Example showing when to chain vs when not to chain"""
     last_exception = None
-    
+
     for attempt in range(max_retries):
         try:
             response = requests.get(url, timeout=10)
             response.raise_for_status()
             return response.json()
-            
+
         except requests.ConnectionError as e:
             last_exception = e
             if attempt == max_retries - 1:
@@ -142,13 +153,13 @@ def api_request_with_retries(url, max_retries=3):
                     f"Failed to connect to {url} after {max_retries} attempts"
                 ) from e
             time.sleep(2 ** attempt)  # Exponential backoff
-            
+
         except requests.HTTPError as e:
             # Don't retry on HTTP errors - raise immediately with context
             raise APIHttpError(
                 f"HTTP {e.response.status_code}: {e.response.reason}"
             ) from e
-            
+
         except requests.Timeout as e:
             last_exception = e
             if attempt == max_retries - 1:
@@ -160,11 +171,13 @@ def api_request_with_retries(url, max_retries=3):
 
 ## Grub Bootloader Customization
 
-[Grub Customizer](https://itsfoss.com/grub-customizer-ubuntu/) provides a GUI tool for customizing the GRUB bootloader:
+[Grub Customizer](https://itsfoss.com/grub-customizer-ubuntu/) provides a GUI
+tool for customizing the GRUB bootloader:
 
 ### Grub Configuration Methods:
 
 #### **Manual Configuration:**
+
 ```bash
 # Edit GRUB configuration
 sudo nano /etc/default/grub
@@ -182,6 +195,7 @@ sudo update-grub
 ```
 
 #### **Advanced Grub Customization:**
+
 ```bash
 # Custom menu entries
 sudo nano /etc/grub.d/40_custom
@@ -207,6 +221,7 @@ GRUB_THEME="/boot/grub/themes/mytheme/theme.txt"
 ```
 
 #### **Grub Rescue Operations:**
+
 ```bash
 # Boot repair from live USB
 sudo add-apt-repository ppa:yannubuntu/boot-repair
@@ -223,17 +238,20 @@ sudo update-grub
 
 ## Liquorix Kernel for Desktop Performance
 
-[Liquorix Kernel](https://liquorix.net/) provides optimized kernel builds for desktop and multimedia workloads:
+[Liquorix Kernel](https://liquorix.net/) provides optimized kernel builds for
+desktop and multimedia workloads:
 
 ### Liquorix Features:
 
 #### **Performance Optimizations:**
+
 - **MuQSS Scheduler**: Better interactive performance than CFS
 - **Low latency**: Optimized for real-time audio/video work
 - **Desktop responsiveness**: Reduced input lag and smoother UI
 - **Gaming optimizations**: Better frame time consistency
 
 #### **Installation:**
+
 ```bash
 # Add Liquorix repository
 curl -s 'https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x9ae4078033f8024d' | sudo apt-key add -
@@ -247,6 +265,7 @@ sudo apt install linux-image-liquorix-amd64 linux-headers-liquorix-amd64
 ```
 
 #### **Kernel Comparison:**
+
 ```bash
 # Check current kernel
 uname -r
@@ -267,11 +286,13 @@ time (dd if=/dev/zero of=/tmp/test bs=1M count=1000; sync)
 
 ## Phoronix Test Suite - Hardware Benchmarking
 
-[Phoronix Test Suite](https://www.phoronix-test-suite.com/) provides comprehensive open-source benchmarking tools:
+[Phoronix Test Suite](https://www.phoronix-test-suite.com/) provides
+comprehensive open-source benchmarking tools:
 
 ### Benchmarking Capabilities:
 
 #### **Installation and Basic Usage:**
+
 ```bash
 # Install Phoronix Test Suite
 sudo apt install phoronix-test-suite
@@ -287,6 +308,7 @@ phoronix-test-suite detailed-system-info
 ```
 
 #### **CPU Benchmarking:**
+
 ```bash
 # CPU-intensive benchmarks
 phoronix-test-suite install pts/compress-7zip
@@ -302,6 +324,7 @@ phoronix-test-suite run pts/openssl
 ```
 
 #### **GPU and Graphics Benchmarking:**
+
 ```bash
 # OpenGL performance
 phoronix-test-suite install pts/unigine-valley
@@ -317,6 +340,7 @@ phoronix-test-suite run pts/luxcorerender
 ```
 
 #### **Automated Test Suites:**
+
 ```bash
 # Comprehensive system test
 phoronix-test-suite install pts/desktop
@@ -336,6 +360,7 @@ phoronix-test-suite upload-result
 ```
 
 #### **Results Analysis:**
+
 ```bash
 # View test results
 phoronix-test-suite list-saved-results
@@ -372,4 +397,6 @@ done
 phoronix-test-suite merge-results results-*
 ```
 
-These tools and techniques provide comprehensive approaches to Python error handling, Linux system customization, and performance analysis - essential skills for effective software development and system administration.
+These tools and techniques provide comprehensive approaches to Python error
+handling, Linux system customization, and performance analysis - essential
+skills for effective software development and system administration.

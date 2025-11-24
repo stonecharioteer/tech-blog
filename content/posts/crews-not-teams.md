@@ -1,8 +1,11 @@
 ---
-date: '2022-08-18T10:00:00+05:30'
+date: "2022-08-18T10:00:00+05:30"
 draft: false
-title: 'Crews Not Teams'
-description: "Building effective teams by leveraging individual strengths instead of competing. Inspired by tactical video games where each member has specialized skills."
+title: "Crews Not Teams"
+description:
+  "Building effective teams by leveraging individual strengths instead of
+  competing. Inspired by tactical video games where each member has specialized
+  skills."
 tags:
   - "Career"
   - "Culture"
@@ -24,9 +27,9 @@ Whenever I see someone thinking like this, I like to think about a game I used
 to play as a child. It's an old computer game called Commando. It had a small
 unit of commandos who'd go do covert missions. You couldn't Age-of-Empires your
 way through the battlefield. You'd get 2 or 3 soldiers who each had a
-*particular* set of skills. You as the player knew each of their strengths and
+_particular_ set of skills. You as the player knew each of their strengths and
 knew when to use them. They were a team, but not the sort that you see at your
-workplace. They were a *unit*, a *crew*.
+workplace. They were a _unit_, a _crew_.
 
 Not a lot of people open up to their team members that way. Have you ever
 thought about what your strengths are that a team could leverage? What about
@@ -34,7 +37,7 @@ your weaknesses? Do you ever try to find a team to fit into that could use your
 strengths and aid your weaknesses? Would talking like this hinder your chances
 at a job interview?
 
-Somehow, a lot of people consider this a vulnerability. Build a crew, a *band*,
+Somehow, a lot of people consider this a vulnerability. Build a crew, a _band_,
 not a team that only comes together at a standup and only builds what is needed
 to get an Exceeds Expectations on an arbitrary review scale.
 

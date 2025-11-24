@@ -2,7 +2,10 @@
 date: 2020-07-15T20:00:00+05:30
 draft: false
 title: "TIL: Flask Advanced Patterns and Development Tools"
-description: "Today I learned about advanced Flask patterns including Method Views, Signals, profiling techniques, and security extensions that enhance Flask application development."
+description:
+  "Today I learned about advanced Flask patterns including Method Views,
+  Signals, profiling techniques, and security extensions that enhance Flask
+  application development."
 tags:
   - til
   - flask
@@ -14,11 +17,15 @@ tags:
   - method-views
 ---
 
-Today I delved deep into advanced Flask patterns and discovered several powerful features and tools that can significantly improve Flask application development and maintainability.
+Today I delved deep into advanced Flask patterns and discovered several powerful
+features and tools that can significantly improve Flask application development
+and maintainability.
 
 ## Flask Method Views - Better Organization
 
-[Flask's Method Views](https://flask.palletsprojects.com/en/1.1.x/views/) provide a cleaner way to organize complex endpoints by grouping related functionality into classes:
+[Flask's Method Views](https://flask.palletsprojects.com/en/1.1.x/views/)
+provide a cleaner way to organize complex endpoints by grouping related
+functionality into classes:
 
 ```python
 from flask import Flask, request, render_template
@@ -34,23 +41,23 @@ class UserAPI(MethodView):
         else:
             # Return specific user
             return self.get_user(user_id)
-    
+
     def post(self):
         # Create new user
         return self.create_user()
-    
+
     def put(self, user_id):
         # Update existing user
         return self.update_user(user_id)
-    
+
     def delete(self, user_id):
         # Delete user
         return self.delete_user(user_id)
-    
+
     def list_users(self):
         # Implementation for listing users
         return {"users": []}
-    
+
     def get_user(self, user_id):
         # Implementation for getting specific user
         return {"user": {"id": user_id}}
@@ -64,17 +71,19 @@ app.add_url_rule('/users/<int:user_id>', view_func=user_view,
                  methods=['GET', 'PUT', 'DELETE'])
 ```
 
-{{< tip title="When to Use Method Views" >}}
-Method Views are particularly beneficial when:
+{{< tip title="When to Use Method Views" >}} Method Views are particularly
+beneficial when:
+
 - You have complex endpoints with multiple HTTP methods
 - Related functionality is scattered across multiple functions
 - You want to share state or helper methods between endpoints
-- You're building RESTful APIs with consistent patterns
-{{< /tip >}}
+- You're building RESTful APIs with consistent patterns {{< /tip >}}
 
 ## Flask Signals - Decoupled Communication
 
-[Flask Signals](https://flask.palletsprojects.com/en/1.1.x/signals/) use the [Blinker library](https://pythonhosted.org/blinker/) to enable decoupled communication between different parts of your application:
+[Flask Signals](https://flask.palletsprojects.com/en/1.1.x/signals/) use the
+[Blinker library](https://pythonhosted.org/blinker/) to enable decoupled
+communication between different parts of your application:
 
 ```python
 from flask import Flask
@@ -124,13 +133,13 @@ def login():
 ### Available Flask Signals
 
 {{< note title="Built-in Flask Signals" >}}
+
 - **request_started** - Before request processing begins
 - **request_finished** - After response is sent
 - **request_tearing_down** - During request teardown
 - **got_request_exception** - When an unhandled exception occurs
 - **template_rendered** - After template is rendered
-- **before_render_template** - Before template rendering
-{{< /note >}}
+- **before_render_template** - Before template rendering {{< /note >}}
 
 ## Advanced Flask Profiling
 
@@ -150,15 +159,15 @@ class ConditionalProfilerMiddleware:
         self.app = app
         self.restrictions = restrictions or [30]
         self.profile_dir = profile_dir or './profiles'
-        
+
         # Create profile directory if it doesn't exist
         os.makedirs(self.profile_dir, exist_ok=True)
-    
+
     def __call__(self, environ, start_response):
         # Only profile if requested
         if environ.get('HTTP_X_PROFILE'):
             profiler = ProfilerMiddleware(
-                self.app, 
+                self.app,
                 restrictions=self.restrictions,
                 profile_dir=self.profile_dir
             )
@@ -167,7 +176,7 @@ class ConditionalProfilerMiddleware:
 
 # Apply conditional profiling
 app.wsgi_app = ConditionalProfilerMiddleware(
-    app.wsgi_app, 
+    app.wsgi_app,
     restrictions=[30]  # Show top 30 function calls
 )
 
@@ -194,18 +203,18 @@ def profile_endpoint(func):
         start_time = time.time()
         result = func(*args, **kwargs)
         end_time = time.time()
-        
+
         duration = end_time - start_time
         current_app.logger.info(
             f"Endpoint {func.__name__} took {duration:.4f} seconds"
         )
-        
+
         # Log slow requests
         if duration > 1.0:
             current_app.logger.warning(
                 f"Slow endpoint detected: {func.__name__} ({duration:.4f}s)"
             )
-        
+
         return result
     return wrapper
 
@@ -220,7 +229,8 @@ def get_data():
 
 ### Flask-Security-Too
 
-[Flask-Security-Too](https://github.com/Flask-Middleware/flask-security/) provides comprehensive security patterns for Flask applications:
+[Flask-Security-Too](https://github.com/Flask-Middleware/flask-security/)
+provides comprehensive security patterns for Flask applications:
 
 ```python
 from flask import Flask
@@ -251,20 +261,22 @@ def protected_view():
 ```
 
 {{< example title="Flask-Security-Too Features" >}}
+
 - **Authentication**: Login, logout, registration
 - **Authorization**: Role and permission-based access
 - **Password Security**: Secure hashing and validation
 - **Session Management**: Secure session handling
 - **Two-Factor Auth**: Optional 2FA support
 - **Email Integration**: Confirmation and recovery emails
-- **Customizable**: Extensive configuration options
-{{< /example >}}
+- **Customizable**: Extensive configuration options {{< /example >}}
 
 ## Flask Testing and Mocking Best Practices
 
 ### Proper Mocking in Flask Tests
 
-A crucial testing insight I learned: When mocking Python functions in Flask tests, reference the module where the function is **called**, not where it **originates**:
+A crucial testing insight I learned: When mocking Python functions in Flask
+tests, reference the module where the function is **called**, not where it
+**originates**:
 
 ```python
 # api/users.py
@@ -274,7 +286,7 @@ def create_user(username, email):
     user = User(username=username, email=email)
     db.session.add(user)
     db.session.commit()
-    
+
     # Function is called here
     send_welcome_email(user.email)
     return user
@@ -288,19 +300,20 @@ class TestUserCreation:
     def test_create_user_sends_email(self, mock_send_email):
         # NOT: @patch('services.email.send_welcome_email')
         # That would be where it's DEFINED, not where it's CALLED
-        
+
         user = create_user('testuser', 'test@example.com')
-        
+
         assert user.username == 'testuser'
         mock_send_email.assert_called_once_with('test@example.com')
 ```
 
-{{< warning title="Common Mocking Mistake" >}}
-Many developers patch the module where a function is **defined** rather than where it's **imported and called**. This leads to mocks that don't work because the test patches the wrong reference.
+{{< warning title="Common Mocking Mistake" >}} Many developers patch the module
+where a function is **defined** rather than where it's **imported and called**.
+This leads to mocks that don't work because the test patches the wrong
+reference.
 
 **Wrong**: `@patch('services.email.send_welcome_email')`  
-**Right**: `@patch('api.users.send_welcome_email')`
-{{< /warning >}}
+**Right**: `@patch('api.users.send_welcome_email')` {{< /warning >}}
 
 ## Advanced Flask Patterns
 
@@ -424,12 +437,17 @@ def create_admin(username, email):
 3. **Error Handling**: Provide consistent, informative error responses
 4. **Context Processors**: Share common data across templates
 
-{{< quote title="Flask Philosophy" footer="From Experience" >}}
-Flask's power lies not just in its simplicity, but in its extensibility. These advanced patterns show how Flask scales from simple apps to complex, enterprise-grade applications while maintaining clarity and control.
-{{< /quote >}}
+{{< quote title="Flask Philosophy" footer="From Experience" >}} Flask's power
+lies not just in its simplicity, but in its extensibility. These advanced
+patterns show how Flask scales from simple apps to complex, enterprise-grade
+applications while maintaining clarity and control. {{< /quote >}}
 
-This exploration of advanced Flask patterns demonstrates that while Flask starts simple, it provides sophisticated tools for building robust, maintainable web applications when you need them.
+This exploration of advanced Flask patterns demonstrates that while Flask starts
+simple, it provides sophisticated tools for building robust, maintainable web
+applications when you need them.
 
 ---
 
-*These insights from my learning archive showcase Flask's evolution from a micro-framework to a comprehensive platform for building scalable web applications with proper architecture and security patterns.*
+_These insights from my learning archive showcase Flask's evolution from a
+micro-framework to a comprehensive platform for building scalable web
+applications with proper architecture and security patterns._

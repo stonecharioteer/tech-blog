@@ -2,7 +2,9 @@
 date: 2020-06-15T10:00:00+05:30
 draft: false
 title: "Python Closures: Understanding Scope and Variable Lifetime"
-description: "An in-depth exploration of closures in Python, examining how variables persist across scopes through practical examples and bytecode analysis."
+description:
+  "An in-depth exploration of closures in Python, examining how variables
+  persist across scopes through practical examples and bytecode analysis."
 tags:
   - python
   - tutorial
@@ -11,28 +13,41 @@ tags:
   - intermediate
 ---
 
-## Preamble 
+## Preamble
 
-About a year ago, a friend and I were discussing closures in programming languages, and how they were treated so specially in many technical circles. To us, the concept seemed weird. Python's closures were... *intuitive*, weren't they? Both of us were not exactly from a standard programming background, we'd both studied Mechanical Engineering, not Computer Science, but we were (and still are) super passionate about tech.
+About a year ago, a friend and I were discussing closures in programming
+languages, and how they were treated so specially in many technical circles. To
+us, the concept seemed weird. Python's closures were... _intuitive_, weren't
+they? Both of us were not exactly from a standard programming background, we'd
+both studied Mechanical Engineering, not Computer Science, but we were (and
+still are) super passionate about tech.
 
-Which is why we were confused. Whatever it is that the world calls **closures** seems pretty obvious. At least to us they were.
+Which is why we were confused. Whatever it is that the world calls **closures**
+seems pretty obvious. At least to us they were.
 
-And well, we weren't wrong. But we were mildly surprised at how Python deals with it.
+And well, we weren't wrong. But we were mildly surprised at how Python deals
+with it.
 
 ## Intended Audience
 
-This is an intermediate level article, and you might be confused reading it if you don't understand the following:
+This is an intermediate level article, and you might be confused reading it if
+you don't understand the following:
 
 1. [Writing Python scripts.](https://docs.python.org/3/tutorial/index.html)
 2. [Using the REPL Interpreter](https://docs.python.org/3/tutorial/interpreter.html)
 3. [Writing functions](https://docs.python.org/3/tutorial/controlflow.html#defining-functions)
 4. [Writing classes (knowledge of inheritance is not required)](https://docs.python.org/3/tutorial/classes.html)
-5. Using the [`id`](https://docs.python.org/3/library/functions.html#id), [`help`](https://docs.python.org/3/library/functions.html#help) and [`dir`](https://docs.python.org/3/library/functions.html#dir) functions.
+5. Using the [`id`](https://docs.python.org/3/library/functions.html#id),
+   [`help`](https://docs.python.org/3/library/functions.html#help) and
+   [`dir`](https://docs.python.org/3/library/functions.html#dir) functions.
 6. [Using the `dis` module to disassemble Python code.](https://docs.python.org/3/library/dis.html)
 
-I have linked to the best articles (IMO) on these topics above, so if you like, you can go ahead and read those first.
+I have linked to the best articles (IMO) on these topics above, so if you like,
+you can go ahead and read those first.
 
-Also, most articles deal with an article with respect to nested functions. While I *do* deal with nested functions, I do not start there. I start earlier, with a simple variable, and build up to nested... let's say objects.
+Also, most articles deal with an article with respect to nested functions. While
+I _do_ deal with nested functions, I do not start there. I start earlier, with a
+simple variable, and build up to nested... let's say objects.
 
 ## Introduction
 
@@ -45,7 +60,11 @@ def some_func():
     return something_to_return
 ```
 
-The `id` function in Python is a built-in that [returns the *identity*](https://docs.python.org/3/library/functions.html#id) of the object that represents the variable. I use this function to sniff around my code to see if I am passing around copies of a variable or if I am actually passing the variable (*sic* object) itself.
+The `id` function in Python is a built-in that
+[returns the _identity_](https://docs.python.org/3/library/functions.html#id) of
+the object that represents the variable. I use this function to sniff around my
+code to see if I am passing around copies of a variable or if I am actually
+passing the variable (_sic_ object) itself.
 
 In this case, it is easy to test this theory.
 
@@ -56,11 +75,16 @@ id(something_to_return) = 10917664
 10917664
 ```
 
-This snippet prints out the `id` value of these variables, and while of course this number will vary, and it could be the same, but for objects with non-overlapping lifetime. In other words, during one specific *scope*, these numbers are guaranteed to be representative of a specific object.
+This snippet prints out the `id` value of these variables, and while of course
+this number will vary, and it could be the same, but for objects with
+non-overlapping lifetime. In other words, during one specific _scope_, these
+numbers are guaranteed to be representative of a specific object.
 
 ## Scopes
 
-The *scope* that I just brought up is, in very simple terms, like a space for your code to run in. In python, variables are shared from an outer scope to an inner scope.
+The _scope_ that I just brought up is, in very simple terms, like a space for
+your code to run in. In python, variables are shared from an outer scope to an
+inner scope.
 
 ```python
 def test():
@@ -74,7 +98,8 @@ print(x)
 # the "higher" scope"
 ```
 
-A higher scope is indicative of a scope that contains another scope. If that is too wordy for your taste:
+A higher scope is indicative of a scope that contains another scope. If that is
+too wordy for your taste:
 
 ```python
 # this is scope 0
@@ -83,18 +108,23 @@ def func():
     def func2():
         # this is scope 2
         pass
-    pass 
+    pass
 ```
 
-In this example, scope 0 *contains* scope 1. Scope 1 *contains* scope 2. However, everything in scopes 0 and 1 are accessible in scope 2, and everything in scope 0 is accessible to scope 1.
+In this example, scope 0 _contains_ scope 1. Scope 1 _contains_ scope 2.
+However, everything in scopes 0 and 1 are accessible in scope 2, and everything
+in scope 0 is accessible to scope 1.
 
-Scope 0 is the outermost scope. Scope 1 is inside scope 0. Scope 1 is outside of scope 2. Scope 2 is inside scope 1.
+Scope 0 is the outermost scope. Scope 1 is inside scope 0. Scope 1 is outside of
+scope 2. Scope 2 is inside scope 1.
 
 This will become clearer in time.
 
 ## Sniffing around returned values
 
-Now, let's look back at our closures. We saw that the `id` value of the integer that was returned is the same. which means, technically, that the same object was returned into the outer scope from the inner scope.
+Now, let's look back at our closures. We saw that the `id` value of the integer
+that was returned is the same. which means, technically, that the same object
+was returned into the outer scope from the inner scope.
 
 Let's expand this example.
 
@@ -125,7 +155,11 @@ When I run the above snippet, here's what I get:
 94093123237024
 ```
 
-If you are following along, this means that the application passed around a variable `x`, created *inside* `func`, outside of its scope, and then *into* the scope of another function that returned it unmodified, and the `id` was never changed. This means that all through your process, you passed around a single object. You did not change it.
+If you are following along, this means that the application passed around a
+variable `x`, created _inside_ `func`, outside of its scope, and then _into_ the
+scope of another function that returned it unmodified, and the `id` was never
+changed. This means that all through your process, you passed around a single
+object. You did not change it.
 
 Now, you might wonder if this would work.
 
@@ -163,11 +197,13 @@ AssertionError                            Traceback (most recent call last)
 AssertionError: the objects are not the same
 ```
 
-This doesn't work. Why? Let's take it apart using another tool in the python standard library, the `dis` module.
+This doesn't work. Why? Let's take it apart using another tool in the python
+standard library, the `dis` module.
 
 ## Disassembling our snippets
 
-The `dis` module allows us to see the bytecode that Python generates from our source code. This can help us understand what's happening under the hood:
+The `dis` module allows us to see the bytecode that Python generates from our
+source code. This can help us understand what's happening under the hood:
 
 ```python
 import dis
@@ -179,11 +215,15 @@ def func2(inp):
 dis.dis(func2)
 ```
 
-When you examine the bytecode, you'll see that the assignment `inp = inp**2` creates a new object (the result of the power operation) and assigns it to the local variable `inp`. The original object is not modified - instead, a new integer object is created.
+When you examine the bytecode, you'll see that the assignment `inp = inp**2`
+creates a new object (the result of the power operation) and assigns it to the
+local variable `inp`. The original object is not modified - instead, a new
+integer object is created.
 
-{{< note title="Integer Immutability" >}}
-In Python, integers are immutable objects. When you perform operations like `inp**2`, Python creates a new integer object rather than modifying the existing one. This is why the `id` values are different.
-{{< /note >}}
+{{< note title="Integer Immutability" >}} In Python, integers are immutable
+objects. When you perform operations like `inp**2`, Python creates a new integer
+object rather than modifying the existing one. This is why the `id` values are
+different. {{< /note >}}
 
 ## Let's return a dictionary instead!
 
@@ -209,7 +249,8 @@ print(f"Original dict: {my_dict}")
 print(f"Are they the same object? {my_dict is modified_dict}")
 ```
 
-With mutable objects like dictionaries, the same object reference is passed around, and modifications affect the original object.
+With mutable objects like dictionaries, the same object reference is passed
+around, and modifications affect the original object.
 
 ## Nested Functions - Finally
 
@@ -218,12 +259,12 @@ Now let's get to the heart of closures with nested functions:
 ```python
 def outer_function(x):
     outer_variable = x
-    
+
     def inner_function():
         # This inner function has access to outer_variable
         print(f"From inner function: outer_variable = {outer_variable}")
         return outer_variable * 2
-    
+
     return inner_function
 
 # Create a closure
@@ -232,7 +273,10 @@ result = multiplier()
 print(f"Result: {result}")
 ```
 
-Here's where it gets interesting. Even after `outer_function` has finished executing, the `inner_function` still remembers the value of `outer_variable`. This is a closure - the inner function "closes over" the variables from its enclosing scope.
+Here's where it gets interesting. Even after `outer_function` has finished
+executing, the `inner_function` still remembers the value of `outer_variable`.
+This is a closure - the inner function "closes over" the variables from its
+enclosing scope.
 
 Let's examine what makes this possible:
 
@@ -255,7 +299,8 @@ print(f"Values in closure: {[cell.cell_contents for cell in double.__closure__]}
 
 ## `__closure__` and what it means
 
-The `__closure__` attribute reveals the secret behind closures. It contains a tuple of cell objects that hold the values from the enclosing scope:
+The `__closure__` attribute reveals the secret behind closures. It contains a
+tuple of cell objects that hold the values from the enclosing scope:
 
 ```python
 def outer(x, y):
@@ -271,9 +316,9 @@ print(f"Cell contents: {[cell.cell_contents for cell in closure_func.__closure__
 print(f"Code object variables: {closure_func.__code__.co_freevars}")
 ```
 
-{{< info title="Free Variables" >}}
-Variables that are referenced in a function but not defined locally are called "free variables." These are the variables that get captured in closures.
-{{< /info >}}
+{{< info title="Free Variables" >}} Variables that are referenced in a function
+but not defined locally are called "free variables." These are the variables
+that get captured in closures. {{< /info >}}
 
 ## Practical Example: Building a Counter
 
@@ -282,20 +327,20 @@ Here's a practical example that demonstrates the power of closures:
 ```python
 def create_counter(initial=0):
     count = initial
-    
+
     def increment(step=1):
         nonlocal count
         count += step
         return count
-    
+
     def decrement(step=1):
         nonlocal count
         count -= step
         return count
-    
+
     def get_count():
         return count
-    
+
     # Return a dictionary of functions
     return {
         'increment': increment,
@@ -310,7 +355,8 @@ print(counter['increment'](3))  # 9
 print(counter['decrement'](2))  # 7
 ```
 
-Each counter maintains its own state through closures, providing a clean way to create stateful functions without classes.
+Each counter maintains its own state through closures, providing a clean way to
+create stateful functions without classes.
 
 ## Decorators and Closures
 
@@ -319,14 +365,14 @@ Decorators are perhaps the most common use of closures in Python:
 ```python
 def timer_decorator(func):
     import time
-    
+
     def wrapper(*args, **kwargs):
         start_time = time.time()
         result = func(*args, **kwargs)
         end_time = time.time()
         print(f"{func.__name__} took {end_time - start_time:.4f} seconds")
         return result
-    
+
     return wrapper
 
 @timer_decorator
@@ -338,7 +384,8 @@ def slow_function():
 slow_function()
 ```
 
-The decorator function returns a closure that wraps the original function, maintaining access to the original function reference.
+The decorator function returns a closure that wraps the original function,
+maintaining access to the original function reference.
 
 ## Common Pitfalls: Late Binding
 
@@ -366,19 +413,29 @@ for f in functions:
 
 ## A Personal Story
 
-The conversation at the beginning of this article came about because I had just come out of an interview where the interviewer asked me to explain Python closures. I had faltered, not because I didn't know, but because, oddly enough, I thought there was nothing special about how you can essentially play ping pong with objects in Python. Most languages do this. Python does this only because C does it. You can return pointers, can't you?
+The conversation at the beginning of this article came about because I had just
+come out of an interview where the interviewer asked me to explain Python
+closures. I had faltered, not because I didn't know, but because, oddly enough,
+I thought there was nothing special about how you can essentially play ping pong
+with objects in Python. Most languages do this. Python does this only because C
+does it. You can return pointers, can't you?
 
-All in all, a confusing interview led me to understand something in depth, and helped me learn.
+All in all, a confusing interview led me to understand something in depth, and
+helped me learn.
 
 ## Conclusion
 
-Closures in Python are indeed intuitive once you understand the underlying concepts of scope and variable lifetime. They provide a powerful mechanism for:
+Closures in Python are indeed intuitive once you understand the underlying
+concepts of scope and variable lifetime. They provide a powerful mechanism for:
 
 - Creating stateful functions without classes
 - Implementing decorators
 - Building factory functions
 - Maintaining encapsulation
 
-The key insight is that inner functions can capture and remember variables from their enclosing scope, even after the outer function has finished executing. This creates a "closed over" environment - hence the term "closure."
+The key insight is that inner functions can capture and remember variables from
+their enclosing scope, even after the outer function has finished executing.
+This creates a "closed over" environment - hence the term "closure."
 
-Understanding closures deeply will make you a better Python programmer and help you write more elegant, functional code.
+Understanding closures deeply will make you a better Python programmer and help
+you write more elegant, functional code.

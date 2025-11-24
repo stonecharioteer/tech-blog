@@ -1,8 +1,14 @@
 ---
 date: 2020-12-05T10:00:00+05:30
 draft: false
-title: "TIL: How to Design Programs, Raft Consensus Algorithm, DWIM Philosophy, and The Jargon File"
-description: "Today I learned about the systematic program design methodology from HtDP, the elegant Raft consensus algorithm visualization, the DWIM (Do What I Mean) principle in computing, and the legendary Jargon File documenting hacker culture."
+title:
+  "TIL: How to Design Programs, Raft Consensus Algorithm, DWIM Philosophy, and
+  The Jargon File"
+description:
+  "Today I learned about the systematic program design methodology from HtDP,
+  the elegant Raft consensus algorithm visualization, the DWIM (Do What I Mean)
+  principle in computing, and the legendary Jargon File documenting hacker
+  culture."
 tags:
   - TIL
   - Program Design
@@ -17,11 +23,13 @@ tags:
 
 [How to Design Programs: An Introduction to Computing and Programming](http://htdp.org/2003-09-26/Book/curriculum.html)
 
-Systematic methodology for program design that emphasizes thinking before coding:
+Systematic methodology for program design that emphasizes thinking before
+coding:
 
 ### Core Design Philosophy:
 
 #### **The Design Recipe:**
+
 1. **Data Analysis**: Understand the data your program processes
 2. **Contract**: Specify input/output types and purpose
 3. **Examples**: Create concrete examples of function behavior
@@ -30,6 +38,7 @@ Systematic methodology for program design that emphasizes thinking before coding
 6. **Testing**: Verify function works with examples
 
 #### **Example: Processing Lists**
+
 ```scheme
 ;; Data Definition
 ;; A List-of-Numbers is one of:
@@ -37,7 +46,7 @@ Systematic methodology for program design that emphasizes thinking before coding
 ;; - (cons Number List-of-Numbers)
 
 ;; Contract and Purpose
-;; sum : List-of-Numbers -> Number  
+;; sum : List-of-Numbers -> Number
 ;; Computes the sum of all numbers in the list
 
 ;; Examples
@@ -64,6 +73,7 @@ Systematic methodology for program design that emphasizes thinking before coding
 ### Key Principles:
 
 #### **Structure Follows Data:**
+
 ```scheme
 ;; Binary Tree data definition
 ;; A BT is one of:
@@ -84,12 +94,13 @@ Systematic methodology for program design that emphasizes thinking before coding
 (define (count-nodes bt)
   (cond
     [(symbol? bt) 0]
-    [(node? bt) (+ 1 
+    [(node? bt) (+ 1
                    (count-nodes (node-left bt))
                    (count-nodes (node-right bt)))]))
 ```
 
 #### **Generative Recursion:**
+
 ```scheme
 ;; When structure doesn't follow data: generative recursion
 ;; Example: Collatz conjecture
@@ -108,12 +119,14 @@ Systematic methodology for program design that emphasizes thinking before coding
 ### Educational Benefits:
 
 #### **Systematic Thinking:**
+
 - **Problem Decomposition**: Break complex problems into manageable pieces
 - **Type-Driven Development**: Let data definitions guide program structure
 - **Test-First Mentality**: Examples before implementation
 - **Refinement Process**: Iterative improvement through design recipe
 
 #### **Transferable Skills:**
+
 ```python
 # HtDP principles in Python
 
@@ -125,7 +138,7 @@ from dataclasses import dataclass
 class Empty:
     pass
 
-@dataclass  
+@dataclass
 class Node:
     value: int
     rest: Union['Node', Empty]
@@ -135,7 +148,7 @@ ListOfInts = Union[Node, Empty]
 # Contract and Purpose
 def sum_list(lst: ListOfInts) -> int:
     """Computes the sum of all integers in the list."""
-    
+
     # Examples (as doctests)
     """
     >>> sum_list(Empty())
@@ -143,7 +156,7 @@ def sum_list(lst: ListOfInts) -> int:
     >>> sum_list(Node(3, Node(7, Empty())))
     10
     """
-    
+
     # Template follows data structure
     if isinstance(lst, Empty):
         return 0
@@ -160,11 +173,13 @@ Elegant distributed consensus algorithm designed for understandability:
 ### Core Concepts:
 
 #### **Server States:**
+
 - **Follower**: Passive servers that respond to leaders and candidates
 - **Candidate**: Server trying to become leader during election
 - **Leader**: Handles all client requests and log replication
 
 #### **Key Components:**
+
 ```
 Term: Logical clock that increases monotonically
 Log: Sequence of committed entries
@@ -175,6 +190,7 @@ Election Timeout: Follower becomes candidate if no heartbeat
 ### Leader Election Process:
 
 #### **Election Flow:**
+
 ```
 1. Follower timeout → Become Candidate
 2. Increment term, vote for self
@@ -185,6 +201,7 @@ Election Timeout: Follower becomes candidate if no heartbeat
 ```
 
 #### **Election Safety Properties:**
+
 ```python
 # Pseudo-code for election logic
 class RaftServer:
@@ -194,13 +211,13 @@ class RaftServer:
         self.voted_for = None
         self.log = []
         self.election_timeout = random_timeout()
-    
+
     def start_election(self):
         self.state = "candidate"
         self.current_term += 1
         self.voted_for = self.server_id
         votes_received = 1  # Vote for self
-        
+
         for server in other_servers:
             vote_granted = server.request_vote(
                 term=self.current_term,
@@ -210,17 +227,17 @@ class RaftServer:
             )
             if vote_granted:
                 votes_received += 1
-        
+
         if votes_received > len(all_servers) // 2:
             self.become_leader()
         else:
             self.become_follower()
-    
+
     def request_vote(self, term, candidate_id, last_log_index, last_log_term):
         # Only vote if:
         # 1. Haven't voted in this term, or voted for this candidate
         # 2. Candidate's log is at least as up-to-date as ours
-        if (term > self.current_term and 
+        if (term > self.current_term and
             (self.voted_for is None or self.voted_for == candidate_id) and
             self.log_is_up_to_date(last_log_index, last_log_term)):
             self.voted_for = candidate_id
@@ -232,6 +249,7 @@ class RaftServer:
 ### Log Replication:
 
 #### **Replication Process:**
+
 ```
 1. Client sends command to leader
 2. Leader appends to local log
@@ -242,6 +260,7 @@ class RaftServer:
 ```
 
 #### **Log Consistency:**
+
 ```python
 class LogEntry:
     def __init__(self, term, command):
@@ -253,7 +272,7 @@ class RaftLeader:
         # Append to local log
         entry = LogEntry(self.current_term, command)
         self.log.append(entry)
-        
+
         # Send to followers
         responses = []
         for follower in self.followers:
@@ -266,7 +285,7 @@ class RaftLeader:
                 leader_commit=self.commit_index
             )
             responses.append(response)
-        
+
         # Check for majority
         success_count = sum(1 for r in responses if r.success) + 1  # +1 for leader
         if success_count > len(self.all_servers) // 2:
@@ -278,19 +297,24 @@ class RaftLeader:
 ### Safety Properties:
 
 #### **Key Guarantees:**
+
 - **Election Safety**: At most one leader per term
 - **Leader Append-Only**: Leader never overwrites/deletes log entries
-- **Log Matching**: If two logs contain entry with same index/term, logs identical up to that point
-- **Leader Completeness**: If entry committed in term, present in logs of leaders for higher terms
-- **State Machine Safety**: If server applies entry at index, no other server applies different entry at same index
+- **Log Matching**: If two logs contain entry with same index/term, logs
+  identical up to that point
+- **Leader Completeness**: If entry committed in term, present in logs of
+  leaders for higher terms
+- **State Machine Safety**: If server applies entry at index, no other server
+  applies different entry at same index
 
 #### **Network Partition Handling:**
+
 ```
 Scenario: 5-server cluster splits into groups of 3 and 2
 
 Group with 3 servers:
 - Can elect leader (3 > 5/2)
-- Can commit entries (3 > 5/2)  
+- Can commit entries (3 > 5/2)
 - Continues operating normally
 
 Group with 2 servers:
@@ -312,11 +336,13 @@ Computing philosophy emphasizing intelligent interpretation of user intent:
 ### Core Philosophy:
 
 #### **Historical Context:**
+
 - **Origin**: Warren Teitelman's BBN-LISP system (1960s-70s)
 - **Goal**: Systems that understand user intent even with imperfect input
 - **Trade-off**: Convenience vs. predictability
 
 #### **Implementation Challenges:**
+
 ```lisp
 ;; Original DWIM in LISP
 ;; If user types (CAR X Y) instead of (CAR (X Y))
@@ -325,13 +351,14 @@ Computing philosophy emphasizing intelligent interpretation of user intent:
 ;; But ambiguity arises:
 (SETQ FOO (CAR X Y))  ; What did user mean?
 ;; Option 1: (SETQ FOO (CAR (X Y)))
-;; Option 2: (SETQ FOO (CAR X) Y)  
+;; Option 2: (SETQ FOO (CAR X) Y)
 ;; Option 3: Syntax error
 ```
 
 ### Modern DWIM Examples:
 
 #### **Successful DWIM:**
+
 ```python
 # Python's flexible type system
 def add_items(items):
@@ -350,10 +377,11 @@ $ ls /us/lo<TAB>  # Expands to '/usr/local'
 ```
 
 #### **Problematic DWIM:**
+
 ```javascript
 // JavaScript's type coercion (too much DWIM)
 "5" + 3    // "53" (string concatenation)
-"5" - 3    // 2 (numeric subtraction)  
+"5" - 3    // 2 (numeric subtraction)
 [] + []    // "" (empty string)
 [] + {}    // "[object Object]"
 {} + []    // 0 (in some contexts)
@@ -367,6 +395,7 @@ echo json_encode($array);  // "[1,2,3]" (more useful)
 ### Design Principles:
 
 #### **Good DWIM Characteristics:**
+
 1. **Predictable**: Users can learn and predict behavior
 2. **Consistent**: Similar contexts produce similar interpretations
 3. **Reversible**: Easy to undo or override automatic behavior
@@ -374,6 +403,7 @@ echo json_encode($array);  // "[1,2,3]" (more useful)
 5. **Conservative**: Err on side of asking rather than guessing
 
 #### **Modern Examples:**
+
 ```python
 # pandas DataFrame - good DWIM
 import pandas as pd
@@ -402,6 +432,7 @@ Comprehensive glossary of hacker slang and computing culture:
 ### Historical Significance:
 
 #### **Cultural Documentation:**
+
 - **Origins**: MIT AI Lab, Stanford, CMU hacker communities
 - **Evolution**: From 1975 to present, maintained by Eric S. Raymond
 - **Purpose**: Preserve and explain hacker culture terminology
@@ -410,6 +441,7 @@ Comprehensive glossary of hacker slang and computing culture:
 ### Notable Entries:
 
 #### **Technical Terms:**
+
 ```
 Hack: (n.) 1. An elegant, clever, or inspired solution to a programming problem
       2. A quick-and-dirty fix or modification
@@ -426,6 +458,7 @@ Cruft: Accumulated junk, bugs, or poorly-designed code
 ```
 
 #### **Cultural Concepts:**
+
 ```
 Real Programmer: Mythical figure who codes in assembly language,
                  drinks coffee, and works through the night
@@ -441,6 +474,7 @@ Mundane: Non-hacker; someone outside the computing community
 ### Programming Philosophy:
 
 #### **Hacker Ethics (from the Jargon File):**
+
 1. **Information wants to be free**: Open access to information and code
 2. **Mistrust authority**: Decentralized decision-making
 3. **Judge by hacking ability**: Meritocracy based on technical skill
@@ -448,6 +482,7 @@ Mundane: Non-hacker; someone outside the computing community
 5. **Create beautiful, elegant solutions**: Aesthetic appreciation of code
 
 #### **Design Values:**
+
 ```python
 # Examples of hacker aesthetic values:
 
@@ -470,7 +505,7 @@ def factorial_verbose(n):
 def reverse_bits(n):
     return int(bin(n)[2:].zfill(32)[::-1], 2)
 
-# Orthogonality - tools that compose well  
+# Orthogonality - tools that compose well
 # Unix philosophy: do one thing well
 cat file.txt | grep "pattern" | sort | uniq -c | head -10
 ```
@@ -478,6 +513,7 @@ cat file.txt | grep "pattern" | sort | uniq -c | head -10
 ### Modern Relevance:
 
 #### **Continuing Traditions:**
+
 - **Open Source Movement**: Direct descendant of hacker ethics
 - **Stack Overflow Culture**: Modern Q&A inherits hacker help traditions
 - **Code Golf**: Competitive programming for shortest solutions
@@ -485,11 +521,12 @@ cat file.txt | grep "pattern" | sort | uniq -c | head -10
 - **RFC Humor**: April Fools' RFCs (like RFC 1149 - IP over Avian Carriers)
 
 #### **Evolution of Terms:**
+
 ```
 Historical: "Hacker" meant skilled programmer
 Modern: Often conflated with "cracker" (malicious attacker)
 
-Historical: "Guru" was revered expert  
+Historical: "Guru" was revered expert
 Modern: "Tech lead" or "Staff engineer"
 
 Historical: "Wizard" had magical programming abilities
@@ -498,4 +535,8 @@ Modern: "10x engineer" (controversial term)
 New terms: "Code smell", "Technical debt", "Yak shaving"
 ```
 
-These resources represent different aspects of computing culture and methodology - systematic program design, elegant distributed algorithms, user-centered design philosophy, and the rich cultural history of computing communities. Together they illustrate how technical and cultural evolution intertwine in the computing field.
+These resources represent different aspects of computing culture and
+methodology - systematic program design, elegant distributed algorithms,
+user-centered design philosophy, and the rich cultural history of computing
+communities. Together they illustrate how technical and cultural evolution
+intertwine in the computing field.

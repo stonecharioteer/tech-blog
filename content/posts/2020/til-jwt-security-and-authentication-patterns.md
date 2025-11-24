@@ -2,7 +2,10 @@
 date: 2020-07-13T22:00:00+05:30
 draft: false
 title: "TIL: JWT Security Patterns and Token Management"
-description: "Today I learned about advanced JWT security patterns, token blacklisting strategies, and secure authentication implementations using Flask-JWT-Extended."
+description:
+  "Today I learned about advanced JWT security patterns, token blacklisting
+  strategies, and secure authentication implementations using
+  Flask-JWT-Extended."
 tags:
   - til
   - jwt
@@ -13,13 +16,16 @@ tags:
   - web-security
 ---
 
-Today I explored advanced JWT (JSON Web Token) security patterns and discovered comprehensive strategies for handling token expiration, blacklisting, and secure authentication flows in web applications.
+Today I explored advanced JWT (JSON Web Token) security patterns and discovered
+comprehensive strategies for handling token expiration, blacklisting, and secure
+authentication flows in web applications.
 
 ## Flask-JWT-Extended Security Patterns
 
 ### Advanced Token Blacklisting
 
-[Flask-JWT-Extended](https://flask-jwt-extended.readthedocs.io/en/stable/blacklist_and_token_revoking/) provides sophisticated patterns for JWT blacklisting and token revocation:
+[Flask-JWT-Extended](https://flask-jwt-extended.readthedocs.io/en/stable/blacklist_and_token_revoking/)
+provides sophisticated patterns for JWT blacklisting and token revocation:
 
 ```python
 from flask import Flask, request, jsonify
@@ -47,12 +53,12 @@ class TokenBlacklist:
         # Calculate TTL for automatic cleanup
         ttl = int((expires_at - datetime.utcnow()).total_seconds())
         redis_client.setex(f"blacklist_{jti}", ttl, "true")
-    
+
     @staticmethod
     def is_token_blacklisted(jti):
         """Check if token is blacklisted"""
         return redis_client.exists(f"blacklist_{jti}")
-    
+
     @staticmethod
     def blacklist_user_tokens(user_id):
         """Blacklist all tokens for a specific user"""
@@ -85,19 +91,19 @@ def add_claims_to_access_token(identity):
 def login():
     username = request.json.get('username')
     password = request.json.get('password')
-    
+
     # Validate credentials (implement your auth logic)
     user = authenticate_user(username, password)
     if not user:
         return jsonify({'error': 'Invalid credentials'}), 401
-    
+
     # Create tokens with additional claims
     user_identity = {
         'user_id': user.id,
         'username': username,
         'roles': user.roles
     }
-    
+
     access_token = create_access_token(
         identity=user_identity,
         additional_claims={'token_type': 'access'}
@@ -106,12 +112,12 @@ def login():
         identity=user_identity,
         additional_claims={'token_type': 'refresh'}
     )
-    
+
     # Track token for user (for mass revocation)
     access_jti = get_jwt()['jti']
     refresh_jti = get_jwt()['jti']  # Get from refresh token
     redis_client.sadd(f"user_tokens_{user.id}", access_jti, refresh_jti)
-    
+
     return jsonify({
         'access_token': access_token,
         'refresh_token': refresh_token,
@@ -123,23 +129,23 @@ def login():
 def logout():
     current_user = get_jwt_identity()
     token = get_jwt()
-    
+
     # Add current token to blacklist
     TokenBlacklist.add_token_to_blacklist(
-        token['jti'], 
+        token['jti'],
         datetime.fromtimestamp(token['exp'])
     )
-    
+
     return jsonify({'message': 'Successfully logged out'})
 
 @app.route('/logout-all', methods=['POST'])
 @jwt_required()
 def logout_all_devices():
     current_user = get_jwt_identity()
-    
+
     # Blacklist all tokens for this user
     TokenBlacklist.blacklist_user_tokens(current_user['user_id'])
-    
+
     return jsonify({'message': 'Logged out from all devices'})
 ```
 
@@ -153,19 +159,19 @@ def logout_all_devices():
 def refresh():
     current_user = get_jwt_identity()
     old_token = get_jwt()
-    
+
     # Blacklist the old refresh token
     TokenBlacklist.add_token_to_blacklist(
         old_token['jti'],
         datetime.fromtimestamp(old_token['exp'])
     )
-    
+
     # Create new access token
     new_access_token = create_access_token(identity=current_user)
-    
+
     # Optionally create new refresh token for rotation
     new_refresh_token = create_refresh_token(identity=current_user)
-    
+
     return jsonify({
         'access_token': new_access_token,
         'refresh_token': new_refresh_token
@@ -176,16 +182,16 @@ def refresh():
 def protected():
     current_user = get_jwt_identity()
     token_claims = get_jwt()
-    
+
     # Additional security checks
     if token_claims.get('token_type') != 'access':
         return jsonify({'error': 'Invalid token type'}), 401
-    
+
     # Check user still exists and is active
     user = get_user_by_id(current_user['user_id'])
     if not user or not user.is_active:
         return jsonify({'error': 'User account disabled'}), 401
-    
+
     return jsonify({
         'user': current_user,
         'data': 'This is protected data'
@@ -205,14 +211,14 @@ def require_roles(*required_roles):
             current_user = get_jwt_identity()
             user_roles = set(current_user.get('roles', []))
             required_roles_set = set(required_roles)
-            
+
             if not required_roles_set.intersection(user_roles):
                 return jsonify({
                     'error': 'Insufficient permissions',
                     'required_roles': list(required_roles),
                     'user_roles': list(user_roles)
                 }), 403
-            
+
             return f(*args, **kwargs)
         return decorated_function
     return decorator
@@ -232,14 +238,15 @@ def moderate_posts():
 
 ### Secure Token Storage and Transport
 
-{{< warning title="JWT Security Considerations" >}}
-**Critical Security Practices:**
+{{< warning title="JWT Security Considerations" >}} **Critical Security
+Practices:**
+
 - **HTTPS Only**: Never transmit JWTs over unencrypted connections
 - **Short Expiration**: Keep access tokens short-lived (15-60 minutes)
 - **Secure Storage**: Store tokens in HttpOnly cookies or secure storage
 - **Token Validation**: Always validate token signature and claims
 - **Blacklist Support**: Implement token revocation for security incidents
-{{< /warning >}}
+  {{< /warning >}}
 
 ```python
 # Secure cookie configuration
@@ -271,30 +278,30 @@ def validate_jwt_structure(token):
     try:
         # Decode without verification first to check structure
         unverified = jwt.decode(token, options={"verify_signature": False})
-        
+
         # Required claims validation
         required_claims = ['exp', 'iat', 'jti', 'sub']
         for claim in required_claims:
             if claim not in unverified:
                 raise ValueError(f"Missing required claim: {claim}")
-        
+
         # Expiration check
         exp = datetime.fromtimestamp(unverified['exp'], tz=timezone.utc)
         if exp < datetime.now(timezone.utc):
             raise ValueError("Token has expired")
-        
+
         # Not before check (if present)
         if 'nbf' in unverified:
             nbf = datetime.fromtimestamp(unverified['nbf'], tz=timezone.utc)
             if nbf > datetime.now(timezone.utc):
                 raise ValueError("Token not yet valid")
-        
+
         # Custom business logic validation
         if 'user_id' not in unverified:
             raise ValueError("Token missing user identification")
-        
+
         return True
-        
+
     except jwt.InvalidTokenError as e:
         raise ValueError(f"Invalid token structure: {str(e)}")
 
@@ -307,7 +314,7 @@ def verify_token_callback(jwt_header, jwt_payload):
         user_id = jwt_payload.get('user_id')
         if not user_exists(user_id):
             return False
-        
+
         # Check for suspicious activity
         if detect_suspicious_activity(jwt_payload):
             TokenBlacklist.add_token_to_blacklist(
@@ -315,7 +322,7 @@ def verify_token_callback(jwt_header, jwt_payload):
                 datetime.fromtimestamp(jwt_payload['exp'])
             )
             return False
-        
+
         return True
     except Exception:
         return False
@@ -333,24 +340,24 @@ def extend_session():
     """Extend session for active users"""
     if request.endpoint in ['static', 'health']:
         return
-    
+
     try:
         # Check if we have a valid JWT
         if request.headers.get('Authorization'):
             token = get_jwt()
             current_time = datetime.utcnow()
             exp_time = datetime.fromtimestamp(token['exp'])
-            
+
             # If token expires within 15 minutes, issue a new one
             if (exp_time - current_time) < timedelta(minutes=15):
                 current_user = get_jwt_identity()
                 new_token = create_access_token(identity=current_user)
-                
+
                 # Add new token to response headers
                 response = make_response()
                 response.headers['X-New-Token'] = new_token
                 return response
-                
+
     except Exception:
         pass  # Continue with normal request processing
 ```
@@ -382,17 +389,17 @@ def log_token_event(event_type, user_id, token_jti, additional_data=None):
         'user_agent': request.headers.get('User-Agent'),
         'additional_data': additional_data or {}
     }
-    
+
     audit_logger.info(f"JWT_EVENT: {log_data}")
 
 # Integration with token operations
 @app.route('/login', methods=['POST'])
 def login_with_audit():
     # ... authentication logic ...
-    
+
     access_token = create_access_token(identity=user_identity)
     token_data = get_jwt()
-    
+
     # Log successful login
     log_token_event(
         'TOKEN_ISSUED',
@@ -400,7 +407,7 @@ def login_with_audit():
         token_data['jti'],
         {'token_type': 'access', 'expires_at': token_data['exp']}
     )
-    
+
     return jsonify({'access_token': access_token})
 
 @app.route('/logout', methods=['POST'])
@@ -408,7 +415,7 @@ def login_with_audit():
 def logout_with_audit():
     current_user = get_jwt_identity()
     token = get_jwt()
-    
+
     # Log logout event
     log_token_event(
         'TOKEN_REVOKED',
@@ -416,12 +423,12 @@ def logout_with_audit():
         token['jti'],
         {'reason': 'user_logout'}
     )
-    
+
     TokenBlacklist.add_token_to_blacklist(
         token['jti'],
         datetime.fromtimestamp(token['exp'])
     )
-    
+
     return jsonify({'message': 'Successfully logged out'})
 ```
 
@@ -430,6 +437,7 @@ def logout_with_audit():
 ### JWT Best Practices Summary
 
 {{< tip title="Essential JWT Security Checklist" >}}
+
 1. **Short-lived Access Tokens**: 15-60 minutes maximum
 2. **Secure Refresh Tokens**: Long-lived but revocable
 3. **Token Blacklisting**: Support for immediate revocation
@@ -437,19 +445,19 @@ def logout_with_audit():
 5. **Secure Storage**: HttpOnly cookies or secure local storage
 6. **Claims Validation**: Verify all token claims server-side
 7. **Audit Logging**: Track all token operations
-8. **Rate Limiting**: Prevent token-related abuse
-{{< /tip >}}
+8. **Rate Limiting**: Prevent token-related abuse {{< /tip >}}
 
 ### Common JWT Security Mistakes
 
 {{< warning title="Avoid These Pitfalls" >}}
+
 - **Long-lived Access Tokens**: Increases security risk window
 - **Client-side Secret Storage**: Never store secrets in frontend code
 - **Missing Token Validation**: Always verify signature and claims
 - **No Revocation Strategy**: Implement blacklisting for security incidents
 - **Insufficient Logging**: Monitor token usage for suspicious activity
 - **Weak Secret Keys**: Use cryptographically strong random keys
-{{< /warning >}}
+  {{< /warning >}}
 
 ## Production Deployment Considerations
 
@@ -459,16 +467,16 @@ class ProductionJWTConfig:
     JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=15)  # Short-lived
     JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=7)     # Reasonable refresh window
-    
+
     # Security headers
     JWT_COOKIE_SECURE = True
     JWT_COOKIE_HTTPONLY = True
     JWT_COOKIE_SAMESITE = 'Strict'
     JWT_COOKIE_CSRF_PROTECT = True
-    
+
     # Algorithm specification (avoid 'none')
     JWT_ALGORITHM = 'HS256'
-    
+
     # Token location preferences
     JWT_TOKEN_LOCATION = ['cookies', 'headers']
     JWT_HEADER_NAME = 'Authorization'
@@ -491,8 +499,12 @@ def login():
     pass
 ```
 
-This comprehensive exploration of JWT security patterns demonstrates that while JWTs are powerful, they require careful implementation to maintain security in production applications.
+This comprehensive exploration of JWT security patterns demonstrates that while
+JWTs are powerful, they require careful implementation to maintain security in
+production applications.
 
 ---
 
-*These JWT security insights from my archive highlight the evolution from simple token-based auth to sophisticated security patterns that address real-world attack vectors and compliance requirements.*
+_These JWT security insights from my archive highlight the evolution from simple
+token-based auth to sophisticated security patterns that address real-world
+attack vectors and compliance requirements._

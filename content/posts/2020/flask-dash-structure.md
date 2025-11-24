@@ -2,7 +2,9 @@
 date: 2020-07-17T15:20:26+05:30
 draft: true
 title: "Building a Multipage Application with Flask and Dash"
-description: "A way to use flask and dash together, with patterns and best practises for production applications."
+description:
+  "A way to use flask and dash together, with patterns and best practises for
+  production applications."
 tags:
   - flask
   - python
@@ -11,25 +13,40 @@ tags:
   - application-structure
 ---
 
-I have been following a bunch of practises to use Flask and Dash together to build web applications, and I wanted to document them for others to understand and improve upon.
+I have been following a bunch of practises to use Flask and Dash together to
+build web applications, and I wanted to document them for others to understand
+and improve upon.
 
 ## Prerequisites
 
-This is an *intermediate* to *advanced* article on `flask` and `dash`, and before you begin reading this, I would recommend understanding both those libraries to some extent. Here are my favourite resources on these:
+This is an _intermediate_ to _advanced_ article on `flask` and `dash`, and
+before you begin reading this, I would recommend understanding both those
+libraries to some extent. Here are my favourite resources on these:
 
 1. Miguel Grinberg's Flask Mega-Tutorial
 2. Explore Flask
 3. Plotly Dash Documentation
 
-If you are familiar with `flask` and not `dash`, read the documention, and know that `dash` offers you a way to build web pages in Python. It is largely sold as dashboarding framework, but underneath, it converts your Python code into `react` code. You *do not* need to know any `reactjs` or javascript to understand this post.
+If you are familiar with `flask` and not `dash`, read the documention, and know
+that `dash` offers you a way to build web pages in Python. It is largely sold as
+dashboarding framework, but underneath, it converts your Python code into
+`react` code. You _do not_ need to know any `reactjs` or javascript to
+understand this post.
 
 ## Introduction
 
-I have been using `flask` for quite some time. It is my framework of choice, and I can be very opinionated about this. However, I like `django`'s way of configuring an application, and through reading resources that have shown me how to setup a `flask` app for production purposes, I make it a point to follow this application structure.
+I have been using `flask` for quite some time. It is my framework of choice, and
+I can be very opinionated about this. However, I like `django`'s way of
+configuring an application, and through reading resources that have shown me how
+to setup a `flask` app for production purposes, I make it a point to follow this
+application structure.
 
 All the work in this article will be documented in this repository.
 
-If you are interested in a video tutorial for flask, I have previously taken a workshop with the Bangalore Python Meetup Group on Flask. That is a very beginner-level workshop, and this seeks to address productionizing flask, as well as integrating multipage views with `dash`.
+If you are interested in a video tutorial for flask, I have previously taken a
+workshop with the Bangalore Python Meetup Group on Flask. That is a very
+beginner-level workshop, and this seeks to address productionizing flask, as
+well as integrating multipage views with `dash`.
 
 ## Setup
 
@@ -45,15 +62,18 @@ pip install -r requirements.txt
 
 ## Structure
 
-This application is structured completely around having something that can be packaged, if needed, and used elsewhere.
+This application is structured completely around having something that can be
+packaged, if needed, and used elsewhere.
 
 The folder structure is as follows:
 
-*[Structure details to be documented]*
+_[Structure details to be documented]_
 
 ## Cookiecutter Template
 
-Finally, since I do this setup each time I have a multipage application that I build using this approach, I made myself a cookiecutter template that you can use (and contribute to!)
+Finally, since I do this setup each time I have a multipage application that I
+build using this approach, I made myself a cookiecutter template that you can
+use (and contribute to!)
 
 ```bash
 cookiecutter gh:stonecharioteer/cookiecutter-dash-multipage.git
@@ -63,4 +83,5 @@ This also adds `jwt`-based authentication optionally, should you wish it.
 
 ---
 
-**Note:** This article appears to be incomplete and was meant to complement the Dash SPA tutorial with more detailed Flask application structure patterns.
+**Note:** This article appears to be incomplete and was meant to complement the
+Dash SPA tutorial with more detailed Flask application structure patterns.

@@ -2,7 +2,10 @@
 date: 2020-11-01T10:00:00+05:30
 draft: false
 title: "TIL: tr Command for Stream Translation and Character Manipulation"
-description: "Today I learned how the tr command can translate stdin from one format to another, providing powerful text transformation capabilities in Unix pipelines."
+description:
+  "Today I learned how the tr command can translate stdin from one format to
+  another, providing powerful text transformation capabilities in Unix
+  pipelines."
 tags:
   - til
   - unix
@@ -11,19 +14,22 @@ tags:
   - command-line
 ---
 
-Today I discovered the versatile `tr` command for translating and manipulating character streams in Unix pipelines.
+Today I discovered the versatile `tr` command for translating and manipulating
+character streams in Unix pipelines.
 
 ## Basic tr Command Usage
 
-The `tr` (translate) command transforms characters from stdin according to specified rules:
+The `tr` (translate) command transforms characters from stdin according to
+specified rules:
 
 ### Character Translation:
+
 ```bash
 # Convert lowercase to uppercase
 echo "hello world" | tr 'a-z' 'A-Z'
 # Output: HELLO WORLD
 
-# Convert uppercase to lowercase  
+# Convert uppercase to lowercase
 echo "HELLO WORLD" | tr 'A-Z' 'a-z'
 # Output: hello world
 
@@ -37,6 +43,7 @@ echo "hello world" | tr 'hw' 'HW'
 ```
 
 ### Character Deletion:
+
 ```bash
 # Delete specific characters
 echo "hello123world456" | tr -d '0-9'
@@ -51,6 +58,7 @@ cat multiline.txt | tr -d '\n'
 ```
 
 ### Character Sets and Ranges:
+
 ```bash
 # Using predefined character classes
 echo "Hello World 123!" | tr '[:upper:]' '[:lower:]'
@@ -64,7 +72,7 @@ echo "Hello World 123!" | tr -d '[:digit:]'
 
 # Available character classes:
 # [:alnum:]  - alphanumeric characters
-# [:alpha:]  - alphabetic characters  
+# [:alpha:]  - alphabetic characters
 # [:digit:]  - numeric characters
 # [:lower:]  - lowercase letters
 # [:upper:]  - uppercase letters
@@ -75,6 +83,7 @@ echo "Hello World 123!" | tr -d '[:digit:]'
 ## Advanced tr Operations
 
 ### Squeeze Repeated Characters:
+
 ```bash
 # Squeeze multiple spaces into single space
 echo "hello    world" | tr -s ' '
@@ -90,6 +99,7 @@ echo "hellooo wooorld" | tr -s 'o'
 ```
 
 ### Complement Operations:
+
 ```bash
 # Keep only specified characters (delete complement)
 echo "abc123def456" | tr -cd '[:digit:]'
@@ -103,6 +113,7 @@ echo "Hello, World! 123" | tr -cd '[:alpha:][:space:]'
 ## Practical Use Cases
 
 ### Data Cleaning:
+
 ```bash
 # Clean CSV data - replace commas with tabs
 cat data.csv | tr ',' '\t'
@@ -119,6 +130,7 @@ echo "(555) 123-4567" | tr -cd '[:digit:]'
 ```
 
 ### Text Processing:
+
 ```bash
 # ROT13 cipher
 echo "hello" | tr 'a-zA-Z' 'n-za-mN-ZA-M'
@@ -132,11 +144,12 @@ echo "Hello World!" | tr '[:upper:][:space:][:punct:]' '[:lower:]--'
 echo "hello,world;testing" | tr -cs '[:alpha:]' '\n'
 # Output:
 # hello
-# world  
+# world
 # testing
 ```
 
 ### Log Analysis:
+
 ```bash
 # Count unique IP addresses in log
 cat access.log | tr -s ' ' | cut -d' ' -f1 | sort | uniq -c
@@ -149,6 +162,7 @@ cat log.txt | tr ':' '-'  # Replace colons with dashes
 ```
 
 ### System Administration:
+
 ```bash
 # Generate random passwords (simple method)
 tr -cd '[:alnum:]' < /dev/urandom | head -c 16
@@ -165,6 +179,7 @@ echo "$PATH" | tr ':' '\n'  # Show PATH entries one per line
 ## Advanced Patterns
 
 ### Character Mapping Tables:
+
 ```bash
 # Create substitution cipher
 plaintext="abcdefghijklmnopqrstuvwxyz"
@@ -178,6 +193,7 @@ echo "elite hacker" | tr 'eElLoOaAsS' '33110044$$'
 ```
 
 ### Combining with Other Commands:
+
 ```bash
 # Word frequency analysis
 cat text.txt | tr -cs '[:alpha:]' '\n' | tr '[:upper:]' '[:lower:]' | sort | uniq -c | sort -nr
@@ -190,6 +206,7 @@ echo "camelCaseVariable" | tr '[:upper:]' '[:lower:]' | sed 's/\([a-z]\)\([A-Z]\
 ```
 
 ### Performance Considerations:
+
 ```bash
 # tr is very fast for simple transformations
 time cat large_file.txt | tr '[:lower:]' '[:upper:]' > /dev/null
@@ -198,4 +215,7 @@ time cat large_file.txt | tr '[:lower:]' '[:upper:]' > /dev/null
 time cat large_file.txt | tr -d '[:punct:]' | tr -s '[:space:]' > /dev/null
 ```
 
-The `tr` command is particularly valuable because it's designed for character-level transformations and is extremely fast, making it ideal for preprocessing data in complex pipelines before more sophisticated tools like `sed`, `awk`, or `grep` operate on it.
+The `tr` command is particularly valuable because it's designed for
+character-level transformations and is extremely fast, making it ideal for
+preprocessing data in complex pipelines before more sophisticated tools like
+`sed`, `awk`, or `grep` operate on it.
