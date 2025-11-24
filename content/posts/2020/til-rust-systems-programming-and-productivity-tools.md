@@ -2,7 +2,10 @@
 date: 2020-07-21T18:00:00+05:30
 draft: false
 title: "TIL: Rust Systems Programming and Terminal Productivity Tools"
-description: "Today I learned about Rust systems programming through terminal applications, backend development patterns, Pi-hole networking setup, and various development productivity tools and resources."
+description:
+  "Today I learned about Rust systems programming through terminal applications,
+  backend development patterns, Pi-hole networking setup, and various
+  development productivity tools and resources."
 tags:
   - til
   - rust
@@ -14,13 +17,16 @@ tags:
   - development-tools
 ---
 
-Today I explored the intersection of systems programming and productivity tools, discovering how Rust enables building efficient terminal applications and learning about modern development workflows and educational resources.
+Today I explored the intersection of systems programming and productivity tools,
+discovering how Rust enables building efficient terminal applications and
+learning about modern development workflows and educational resources.
 
 ## Rust Terminal Applications
 
 ### Terminal Habit Tracker in Rust
 
-[Dijo - Terminal Habit Tracker written in Rust](https://github.com/NerdyPepper/dijo) demonstrates elegant terminal UI development:
+[Dijo - Terminal Habit Tracker written in Rust](https://github.com/NerdyPepper/dijo)
+demonstrates elegant terminal UI development:
 
 ```rust
 // Example: Building a terminal habit tracker similar to dijo
@@ -58,38 +64,38 @@ impl Habit {
             created_date: Local::now().date_naive(),
         }
     }
-    
+
     fn mark_completed(&mut self, date: NaiveDate) {
         if !self.completed_dates.contains(&date) {
             self.completed_dates.push(date);
             self.completed_dates.sort();
         }
     }
-    
+
     fn is_completed_on(&self, date: NaiveDate) -> bool {
         self.completed_dates.contains(&date)
     }
-    
+
     fn weekly_completion_rate(&self, week_start: NaiveDate) -> f32 {
         let week_end = week_start + Duration::days(6);
         let completed_this_week = self.completed_dates
             .iter()
             .filter(|&&date| date >= week_start && date <= week_end)
             .count() as f32;
-        
+
         (completed_this_week / self.target_frequency as f32).min(1.0)
     }
-    
+
     fn streak(&self) -> u32 {
         let today = Local::now().date_naive();
         let mut streak = 0;
         let mut current_date = today;
-        
+
         while self.is_completed_on(current_date) {
             streak += 1;
             current_date = current_date - Duration::days(1);
         }
-        
+
         streak
     }
 }
@@ -116,30 +122,30 @@ impl HabitTracker {
             mode: AppMode::Normal,
             input_buffer: String::new(),
         };
-        
+
         // Add some sample habits
         tracker.add_habit("Exercise".to_string(), 5);
         tracker.add_habit("Read".to_string(), 7);
         tracker.add_habit("Meditate".to_string(), 7);
         tracker.add_habit("Code".to_string(), 5);
-        
+
         tracker
     }
-    
+
     fn add_habit(&mut self, name: String, frequency: u32) {
         let habit = Habit::new(name.clone(), frequency);
         self.habits.insert(name.clone(), habit);
-        
+
         if self.selected_habit.is_none() {
             self.selected_habit = Some(name);
         }
     }
-    
+
     fn toggle_habit_today(&mut self) {
         if let Some(habit_name) = &self.selected_habit {
             if let Some(habit) = self.habits.get_mut(habit_name) {
                 let today = Local::now().date_naive();
-                
+
                 if habit.is_completed_on(today) {
                     habit.completed_dates.retain(|&date| date != today);
                 } else {
@@ -148,7 +154,7 @@ impl HabitTracker {
             }
         }
     }
-    
+
     fn next_habit(&mut self) {
         if let Some(current) = &self.selected_habit {
             let habit_names: Vec<_> = self.habits.keys().collect();
@@ -158,7 +164,7 @@ impl HabitTracker {
             }
         }
     }
-    
+
     fn previous_habit(&mut self) {
         if let Some(current) = &self.selected_habit {
             let habit_names: Vec<_> = self.habits.keys().collect();
@@ -185,35 +191,35 @@ fn ui<B: Backend>(f: &mut Frame<B>, app: &HabitTracker) {
             Constraint::Length(3),
         ].as_ref())
         .split(f.size());
-    
+
     // Title
     let title = Paragraph::new("🎯 Habit Tracker")
         .style(Style::default().fg(Color::Yellow).add_modifier(Modifier::BOLD))
         .alignment(Alignment::Center)
         .block(Block::default().borders(Borders::ALL));
     f.render_widget(title, chunks[0]);
-    
+
     // Main content
     let main_chunks = Layout::default()
         .direction(Direction::Horizontal)
         .constraints([Constraint::Percentage(60), Constraint::Percentage(40)].as_ref())
         .split(chunks[1]);
-    
+
     // Habit list
     let habits_list = render_habits_list(app);
     f.render_widget(habits_list, main_chunks[0]);
-    
+
     // Statistics panel
     let stats_panel = render_statistics(app);
     f.render_widget(stats_panel, main_chunks[1]);
-    
+
     // Status bar
     let status = match app.mode {
         AppMode::Normal => "Press 'a' to add habit, 'space' to toggle, 'q' to quit",
         AppMode::AddingHabit => "Enter habit name, then press Enter",
         AppMode::ViewingCalendar => "Press 'Esc' to return",
     };
-    
+
     let status_bar = Paragraph::new(status)
         .style(Style::default().fg(Color::Gray))
         .alignment(Alignment::Center)
@@ -229,13 +235,13 @@ fn render_habits_list(app: &HabitTracker) -> List {
             let is_selected = app.selected_habit.as_ref() == Some(name);
             let is_completed_today = habit.is_completed_on(today);
             let streak = habit.streak();
-            
+
             let completion_indicator = if is_completed_today { "✅" } else { "⭕" };
             let streak_text = if streak > 0 { format!(" 🔥{}", streak) } else { String::new() };
-            
-            let content = format!("{} {} ({}x/week){}", 
+
+            let content = format!("{} {} ({}x/week){}",
                 completion_indicator, name, habit.target_frequency, streak_text);
-            
+
             let style = if is_selected {
                 Style::default().fg(Color::Yellow).add_modifier(Modifier::BOLD)
             } else if is_completed_today {
@@ -243,11 +249,11 @@ fn render_habits_list(app: &HabitTracker) -> List {
             } else {
                 Style::default().fg(Color::White)
             };
-            
+
             ListItem::new(content).style(style)
         })
         .collect();
-    
+
     List::new(items)
         .block(Block::default().borders(Borders::ALL).title("Habits"))
         .highlight_style(Style::default().add_modifier(Modifier::REVERSED))
@@ -256,22 +262,22 @@ fn render_habits_list(app: &HabitTracker) -> List {
 fn render_statistics(app: &HabitTracker) -> Paragraph {
     let today = Local::now().date_naive();
     let week_start = today - Duration::days(today.weekday().num_days_from_monday() as i64);
-    
+
     let total_habits = app.habits.len();
     let completed_today = app.habits.values()
         .filter(|habit| habit.is_completed_on(today))
         .count();
-    
+
     let weekly_rates: Vec<_> = app.habits.values()
         .map(|habit| habit.weekly_completion_rate(week_start))
         .collect();
-    
+
     let avg_weekly_rate = if !weekly_rates.is_empty() {
         weekly_rates.iter().sum::<f32>() / weekly_rates.len() as f32
     } else {
         0.0
     };
-    
+
     let stats_text = format!(
         "📊 Statistics\n\n\
         Today: {}/{} habits completed\n\
@@ -284,7 +290,7 @@ fn render_statistics(app: &HabitTracker) -> Paragraph {
         total_habits,
         render_week_view(&app.habits, week_start)
     );
-    
+
     Paragraph::new(stats_text)
         .block(Block::default().borders(Borders::ALL).title("Statistics"))
         .style(Style::default().fg(Color::Cyan))
@@ -293,16 +299,16 @@ fn render_statistics(app: &HabitTracker) -> Paragraph {
 fn render_week_view(habits: &HashMap<String, Habit>, week_start: NaiveDate) -> String {
     let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     let mut week_view = String::new();
-    
+
     for (i, day) in days.iter().enumerate() {
         let date = week_start + Duration::days(i as i64);
         let completed_count = habits.values()
             .filter(|habit| habit.is_completed_on(date))
             .count();
-        
+
         week_view.push_str(&format!("{}: {} ", day, completed_count));
     }
-    
+
     week_view
 }
 
@@ -313,12 +319,12 @@ fn run_app() -> Result<(), Box<dyn std::error::Error>> {
     execute!(stdout, EnterAlternateScreen)?;
     let backend = CrosstermBackend::new(stdout);
     let mut terminal = Terminal::new(backend)?;
-    
+
     let mut app = HabitTracker::new();
-    
+
     loop {
         terminal.draw(|f| ui(f, &app))?;
-        
+
         if let event::Event::Key(key) = event::read()? {
             match app.mode {
                 AppMode::Normal => {
@@ -360,7 +366,7 @@ fn run_app() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
     }
-    
+
     disable_raw_mode()?;
     execute!(terminal.backend_mut(), LeaveAlternateScreen)?;
     Ok(())
@@ -406,7 +412,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 .about("Launch terminal UI")
         )
         .get_matches();
-    
+
     match matches.subcommand() {
         ("tui", _) => {
             run_app()?;
@@ -436,24 +442,25 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             run_app()?;
         }
     }
-    
+
     Ok(())
 }
 ```
 
-{{< example title="Terminal UI Best Practices" >}}
-**Key Principles for Terminal Applications:**
+{{< example title="Terminal UI Best Practices" >}} **Key Principles for Terminal
+Applications:**
+
 - **Keyboard-driven navigation** - Vim-like keybindings for efficiency
 - **Visual feedback** - Clear indicators for state and completion status
 - **Persistent data** - Save state between sessions
 - **Multiple interfaces** - Both CLI commands and interactive TUI
 - **Performance** - Efficient rendering and minimal resource usage
-- **Cross-platform** - Works on Linux, macOS, and Windows
-{{< /example >}}
+- **Cross-platform** - Works on Linux, macOS, and Windows {{< /example >}}
 
 ### Spotify Terminal Interface in Rust
 
-[Spotify TUI written in Rust](https://www.reddit.com/r/unixporn/comments/dekj2i/oc_a_spotify_terminal_user_interface_written_in/) showcases advanced terminal UI patterns:
+[Spotify TUI written in Rust](https://www.reddit.com/r/unixporn/comments/dekj2i/oc_a_spotify_terminal_user_interface_written_in/)
+showcases advanced terminal UI patterns:
 
 ```rust
 // Simplified Spotify TUI architecture
@@ -518,7 +525,7 @@ impl SpotifyController {
     fn new() -> Self {
         let (cmd_tx, cmd_rx) = mpsc::channel();
         let (event_tx, event_rx) = mpsc::channel();
-        
+
         // Spawn background thread to handle Spotify API calls
         let event_sender = event_tx.clone();
         thread::spawn(move || {
@@ -529,7 +536,7 @@ impl SpotifyController {
                 shuffle: false,
                 repeat: RepeatMode::Off,
             };
-            
+
             loop {
                 // Handle commands from UI
                 if let Ok(command) = cmd_rx.try_recv() {
@@ -556,7 +563,7 @@ impl SpotifyController {
                         }
                     }
                 }
-                
+
                 // Simulate periodic updates
                 if let Some(ref track) = current_state.current_track {
                     if track.is_playing {
@@ -566,21 +573,21 @@ impl SpotifyController {
                         }
                     }
                 }
-                
+
                 thread::sleep(Duration::from_millis(100));
             }
         });
-        
+
         Self {
             command_sender: cmd_tx,
             event_receiver: event_rx,
         }
     }
-    
+
     fn send_command(&self, command: SpotifyCommand) {
         self.command_sender.send(command).ok();
     }
-    
+
     fn poll_events(&self) -> Vec<UIEvent> {
         let mut events = Vec::new();
         while let Ok(event) = self.event_receiver.try_recv() {
@@ -595,15 +602,15 @@ fn render_progress_bar(current: u64, total: u64, width: usize) -> String {
     if total == 0 {
         return "─".repeat(width);
     }
-    
+
     let progress = (current as f64 / total as f64).min(1.0);
     let filled = ((width as f64 * progress) as usize).min(width);
     let empty = width - filled;
-    
+
     let mut bar = String::new();
     bar.push_str(&"█".repeat(filled));
     bar.push_str(&"─".repeat(empty));
-    
+
     bar
 }
 
@@ -619,7 +626,7 @@ fn format_duration(ms: u64) -> String {
 fn render_volume_bar(volume: u8) -> String {
     let bars = volume / 10;
     let mut result = String::new();
-    
+
     for i in 0..10 {
         if i < bars {
             result.push('█');
@@ -627,7 +634,7 @@ fn render_volume_bar(volume: u8) -> String {
             result.push('─');
         }
     }
-    
+
     format!("🔊 {} ({}%)", result, volume)
 }
 ```
@@ -636,7 +643,8 @@ fn render_volume_bar(volume: u8) -> String {
 
 ### Modern Backend Architecture
 
-[How I write Backends](https://github.com/fpereiro/backendlore) provides comprehensive backend development philosophy:
+[How I write Backends](https://github.com/fpereiro/backendlore) provides
+comprehensive backend development philosophy:
 
 ```rust
 // Modern Rust backend architecture example
@@ -700,11 +708,11 @@ impl UserRepository {
     fn new(db: PgPool) -> Self {
         Self { db }
     }
-    
+
     async fn create_user(&self, req: CreateUserRequest) -> Result<User, sqlx::Error> {
         let user_id = Uuid::new_v4();
         let now = chrono::Utc::now();
-        
+
         let user = sqlx::query_as!(
             User,
             r#"
@@ -719,10 +727,10 @@ impl UserRepository {
         )
         .fetch_one(&self.db)
         .await?;
-        
+
         Ok(user)
     }
-    
+
     async fn get_user_by_id(&self, id: Uuid) -> Result<Option<User>, sqlx::Error> {
         let user = sqlx::query_as!(
             User,
@@ -731,37 +739,37 @@ impl UserRepository {
         )
         .fetch_optional(&self.db)
         .await?;
-        
+
         Ok(user)
     }
-    
+
     async fn list_users(&self, query: UserQuery) -> Result<Vec<User>, sqlx::Error> {
         let page = query.page.unwrap_or(1);
         let limit = query.limit.unwrap_or(10).min(100); // Cap at 100
         let offset = (page - 1) * limit;
-        
+
         let mut sql = "SELECT id, username, email, created_at FROM users".to_string();
         let mut params = Vec::new();
-        
+
         if let Some(search) = query.search {
             sql.push_str(" WHERE username ILIKE $1 OR email ILIKE $1");
             params.push(format!("%{}%", search));
         }
-        
+
         sql.push_str(" ORDER BY created_at DESC LIMIT $2 OFFSET $3");
-        
+
         let mut query_builder = sqlx::query_as::<_, User>(&sql);
-        
+
         if !params.is_empty() {
             query_builder = query_builder.bind(params[0].clone());
         }
-        
+
         let users = query_builder
             .bind(limit as i64)
             .bind(offset as i64)
             .fetch_all(&self.db)
             .await?;
-        
+
         Ok(users)
     }
 }
@@ -775,17 +783,17 @@ impl UserService {
     fn new(repository: UserRepository) -> Self {
         Self { repository }
     }
-    
+
     async fn create_user(&self, req: CreateUserRequest) -> Result<User, ServiceError> {
         // Validation
         if req.username.trim().is_empty() {
             return Err(ServiceError::InvalidInput("Username cannot be empty".into()));
         }
-        
+
         if !req.email.contains('@') {
             return Err(ServiceError::InvalidInput("Invalid email format".into()));
         }
-        
+
         // Business logic
         let user = self.repository
             .create_user(req)
@@ -796,11 +804,11 @@ impl UserService {
                 },
                 _ => ServiceError::Internal(e.to_string()),
             })?;
-        
+
         info!("Created user: {}", user.id);
         Ok(user)
     }
-    
+
     async fn get_user(&self, id: Uuid) -> Result<User, ServiceError> {
         self.repository
             .get_user_by_id(id)
@@ -808,7 +816,7 @@ impl UserService {
             .map_err(|e| ServiceError::Internal(e.to_string()))?
             .ok_or(ServiceError::NotFound)
     }
-    
+
     async fn list_users(&self, query: UserQuery) -> Result<Vec<User>, ServiceError> {
         self.repository
             .list_users(query)
@@ -834,11 +842,11 @@ impl From<ServiceError> for (StatusCode, Json<serde_json::Value>) {
             ServiceError::Conflict(msg) => (StatusCode::CONFLICT, &msg),
             ServiceError::Internal(_) => (StatusCode::INTERNAL_SERVER_ERROR, "Internal server error"),
         };
-        
+
         if matches!(err, ServiceError::Internal(_)) {
             error!("Internal error: {:?}", err);
         }
-        
+
         (status, Json(serde_json::json!({
             "error": message
         })))
@@ -901,7 +909,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     tracing_subscriber::fmt()
         .with_env_filter("info,sqlx=warn")
         .init();
-    
+
     // Load configuration
     let config = Arc::new(Config {
         database_url: std::env::var("DATABASE_URL")?,
@@ -910,25 +918,25 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             .parse()?,
         log_level: std::env::var("LOG_LEVEL").unwrap_or_else(|_| "info".to_string()),
     });
-    
+
     // Setup database connection
     let db = PgPool::connect(&config.database_url).await?;
-    
+
     // Run migrations
     sqlx::migrate!("./migrations").run(&db).await?;
-    
+
     // Create application state
     let state = AppState { db, config: config.clone() };
-    
+
     // Build application
     let app = create_app(state).await;
-    
+
     // Start server
     let listener = TcpListener::bind(format!("0.0.0.0:{}", config.port)).await?;
     info!("Server starting on port {}", config.port);
-    
+
     axum::serve(listener, app).await?;
-    
+
     Ok(())
 }
 
@@ -940,48 +948,48 @@ mod tests {
     use serde_json::json;
     use sqlx::PgPool;
     use tokio;
-    
+
     async fn setup_test_db() -> PgPool {
         let database_url = std::env::var("TEST_DATABASE_URL")
             .expect("TEST_DATABASE_URL must be set for tests");
-        
+
         let pool = PgPool::connect(&database_url).await.unwrap();
         sqlx::migrate!("./migrations").run(&pool).await.unwrap();
-        
+
         pool
     }
-    
+
     #[tokio::test]
     async fn test_create_user() {
         let db = setup_test_db().await;
         let service = UserService::new(UserRepository::new(db));
-        
+
         let req = CreateUserRequest {
             username: "testuser".to_string(),
             email: "test@example.com".to_string(),
         };
-        
+
         let result = service.create_user(req).await;
         assert!(result.is_ok());
-        
+
         let user = result.unwrap();
         assert_eq!(user.username, "testuser");
         assert_eq!(user.email, "test@example.com");
     }
-    
+
     #[tokio::test]
     async fn test_invalid_email() {
         let db = setup_test_db().await;
         let service = UserService::new(UserRepository::new(db));
-        
+
         let req = CreateUserRequest {
             username: "testuser".to_string(),
             email: "invalid-email".to_string(),
         };
-        
+
         let result = service.create_user(req).await;
         assert!(result.is_err());
-        
+
         if let Err(ServiceError::InvalidInput(_)) = result {
             // Expected
         } else {
@@ -991,21 +999,23 @@ mod tests {
 }
 ```
 
-{{< tip title="Backend Architecture Principles" >}}
-**Key Design Patterns:**
-- **Layered architecture** - Clear separation between handlers, services, and repositories
+{{< tip title="Backend Architecture Principles" >}} **Key Design Patterns:**
+
+- **Layered architecture** - Clear separation between handlers, services, and
+  repositories
 - **Dependency injection** - Use of state and configuration injection
 - **Error handling** - Comprehensive error types with proper HTTP mapping
 - **Testing** - Unit tests for business logic, integration tests for full stack
 - **Configuration** - Environment-based configuration management
-- **Observability** - Structured logging and health checks
-{{< /tip >}}
+- **Observability** - Structured logging and health checks {{< /tip >}}
 
 ## Pi-hole Network Setup
 
 ### Pi-hole with Unbound DNS
 
-[Pi-hole Unbound](https://docs.pi-hole.net/guides/unbound/) and [Pi-Hole Tips](https://www.reddit.com/r/pihole/comments/dezyvy/into_the_pihole_you_should_go_8_months_later/) provide advanced DNS configuration:
+[Pi-hole Unbound](https://docs.pi-hole.net/guides/unbound/) and
+[Pi-Hole Tips](https://www.reddit.com/r/pihole/comments/dezyvy/into_the_pihole_you_should_go_8_months_later/)
+provide advanced DNS configuration:
 
 ```bash
 #!/bin/bash
@@ -1024,19 +1034,19 @@ server:
     rrset-cache-slabs: 8
     infra-cache-slabs: 8
     key-cache-slabs: 8
-    
+
     # Memory optimization
     rrset-cache-size: 256m
     msg-cache-size: 128m
     so-rcvbuf: 1m
-    
+
     # Network settings
     port: 5335
     do-ip4: yes
     do-ip6: yes
     do-udp: yes
     do-tcp: yes
-    
+
     # Privacy and security
     hide-identity: yes
     hide-version: yes
@@ -1045,31 +1055,31 @@ server:
     harden-below-nxdomain: yes
     harden-referral-path: yes
     unwanted-reply-threshold: 10000000
-    
+
     # Prefetching
     prefetch: yes
     prefetch-key: yes
-    
+
     # Access control
     access-control: 127.0.0.1/32 allow
     access-control: 192.168.0.0/16 allow
     access-control: 172.16.0.0/12 allow
     access-control: 10.0.0.0/8 allow
-    
+
     # Root hints
     root-hints: "/var/lib/unbound/root.hints"
-    
+
     # Logging (for debugging)
     verbosity: 0
     log-queries: no
-    
+
     # Local zone for Pi-hole
     private-address: 192.168.0.0/16
     private-address: 172.16.0.0/12
     private-address: 10.0.0.0/8
     private-domain: "local"
     domain-insecure: "local"
-    
+
 forward-zone:
     name: "."
     forward-tls-upstream: yes
@@ -1152,10 +1162,10 @@ pihole -g > /var/log/pihole-update.log 2>&1
 # Check if update was successful
 if [ $? -eq 0 ]; then
     echo "$(date): Pi-hole blocklists updated successfully" >> /var/log/pihole-update.log
-    
+
     # Restart FTL to reload lists
     sudo systemctl restart pihole-FTL
-    
+
     # Update Unbound root hints monthly
     if [ $(date +%d) -eq 01 ]; then
         wget -O /tmp/root.hints https://www.internic.net/domain/named.cache
@@ -1231,12 +1241,12 @@ class NetworkMonitor:
         self.pihole_token = pihole_token
         self.db_path = "/var/log/network_monitor.db"
         self.init_database()
-    
+
     def init_database(self):
         """Initialize SQLite database for storing metrics"""
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
-        
+
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS dns_metrics (
                 timestamp DATETIME,
@@ -1249,7 +1259,7 @@ class NetworkMonitor:
                 queries_forwarded INTEGER
             )
         ''')
-        
+
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS performance_metrics (
                 timestamp DATETIME,
@@ -1260,10 +1270,10 @@ class NetworkMonitor:
                 disk_usage_percent REAL
             )
         ''')
-        
+
         conn.commit()
         conn.close()
-    
+
     def get_pihole_stats(self):
         """Fetch Pi-hole statistics"""
         try:
@@ -1271,26 +1281,26 @@ class NetworkMonitor:
             params = {}
             if self.pihole_token:
                 params['auth'] = self.pihole_token
-            
+
             response = requests.get(url, params=params, timeout=5)
             response.raise_for_status()
             return response.json()
         except Exception as e:
             print(f"Error fetching Pi-hole stats: {e}")
             return None
-    
+
     def measure_dns_performance(self):
         """Measure DNS resolution performance"""
         test_domains = [
             "google.com",
-            "github.com", 
+            "github.com",
             "stackoverflow.com",
             "wikipedia.org"
         ]
-        
+
         total_time = 0
         successful_queries = 0
-        
+
         for domain in test_domains:
             try:
                 start_time = time.time()
@@ -1300,20 +1310,20 @@ class NetworkMonitor:
                     timeout=5
                 )
                 end_time = time.time()
-                
+
                 if result.returncode == 0:
                     total_time += (end_time - start_time) * 1000  # Convert to ms
                     successful_queries += 1
-                    
+
             except subprocess.TimeoutExpired:
                 print(f"DNS query timeout for {domain}")
             except Exception as e:
                 print(f"DNS query error for {domain}: {e}")
-        
+
         if successful_queries > 0:
             return total_time / successful_queries
         return None
-    
+
     def measure_internet_latency(self):
         """Measure internet connectivity latency"""
         try:
@@ -1323,7 +1333,7 @@ class NetworkMonitor:
                 text=True,
                 timeout=10
             )
-            
+
             if result.returncode == 0:
                 # Parse ping output for average time
                 lines = result.stdout.split('\n')
@@ -1333,16 +1343,16 @@ class NetworkMonitor:
                         parts = line.split('=')[1].strip().split('/')
                         if len(parts) >= 2:
                             return float(parts[1])
-            
+
         except Exception as e:
             print(f"Error measuring internet latency: {e}")
-        
+
         return None
-    
+
     def get_system_metrics(self):
         """Get system resource usage"""
         metrics = {}
-        
+
         try:
             # Memory usage
             result = subprocess.run(["free", "-m"], capture_output=True, text=True)
@@ -1354,11 +1364,11 @@ class NetworkMonitor:
                     used = int(parts[2])
                     metrics['memory_usage_percent'] = (used / total) * 100
                     break
-            
+
             # CPU usage (simplified)
             result = subprocess.run(
-                ["top", "-bn1"], 
-                capture_output=True, 
+                ["top", "-bn1"],
+                capture_output=True,
                 text=True
             )
             lines = result.stdout.split('\n')
@@ -1369,7 +1379,7 @@ class NetworkMonitor:
                     cpu_usage = float(parts[1].replace('%us', ''))
                     metrics['cpu_usage_percent'] = cpu_usage
                     break
-            
+
             # Disk usage
             result = subprocess.run(["df", "/"], capture_output=True, text=True)
             lines = result.stdout.split('\n')
@@ -1378,18 +1388,18 @@ class NetworkMonitor:
                 if len(parts) >= 5:
                     usage_percent = int(parts[4].replace('%', ''))
                     metrics['disk_usage_percent'] = usage_percent
-            
+
         except Exception as e:
             print(f"Error getting system metrics: {e}")
-        
+
         return metrics
-    
+
     def store_metrics(self, dns_stats, performance_metrics):
         """Store metrics in database"""
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
         timestamp = datetime.now()
-        
+
         # Store DNS metrics
         if dns_stats:
             cursor.execute('''
@@ -1404,7 +1414,7 @@ class NetworkMonitor:
                 dns_stats.get('queries_cached', 0),
                 dns_stats.get('queries_forwarded', 0)
             ))
-        
+
         # Store performance metrics
         cursor.execute('''
             INSERT INTO performance_metrics VALUES (?, ?, ?, ?, ?, ?)
@@ -1416,79 +1426,79 @@ class NetworkMonitor:
             performance_metrics.get('cpu_usage_percent', 0.0),
             performance_metrics.get('disk_usage_percent', 0.0)
         ))
-        
+
         conn.commit()
         conn.close()
-    
+
     def run_monitoring_cycle(self):
         """Run one complete monitoring cycle"""
         print(f"[{datetime.now()}] Running monitoring cycle...")
-        
+
         # Collect Pi-hole statistics
         dns_stats = self.get_pihole_stats()
-        
+
         # Measure performance
         performance_metrics = {}
         performance_metrics['dns_response_time'] = self.measure_dns_performance()
         performance_metrics['internet_latency'] = self.measure_internet_latency()
         performance_metrics.update(self.get_system_metrics())
-        
+
         # Store metrics
         self.store_metrics(dns_stats, performance_metrics)
-        
+
         # Print summary
         if dns_stats:
             print(f"  DNS Queries: {dns_stats.get('dns_queries_today', 'N/A')}")
             print(f"  Blocked: {dns_stats.get('ads_blocked_today', 'N/A')} ({dns_stats.get('ads_percentage_today', 0):.1f}%)")
-        
+
         if performance_metrics.get('dns_response_time'):
             print(f"  DNS Response Time: {performance_metrics['dns_response_time']:.1f}ms")
-        
+
         if performance_metrics.get('internet_latency'):
             print(f"  Internet Latency: {performance_metrics['internet_latency']:.1f}ms")
-        
+
         print(f"  Memory Usage: {performance_metrics.get('memory_usage_percent', 0):.1f}%")
         print(f"  CPU Usage: {performance_metrics.get('cpu_usage_percent', 0):.1f}%")
         print(f"  Disk Usage: {performance_metrics.get('disk_usage_percent', 0):.1f}%")
-    
+
     def generate_report(self, hours=24):
         """Generate performance report for the last N hours"""
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
-        
+
         since = datetime.now() - timedelta(hours=hours)
-        
+
         # DNS statistics
         cursor.execute('''
             SELECT AVG(block_percentage), MAX(queries_today), MAX(blocked_today)
-            FROM dns_metrics 
+            FROM dns_metrics
             WHERE timestamp > ?
         ''', (since,))
-        
+
         dns_result = cursor.fetchone()
-        
+
         # Performance statistics
         cursor.execute('''
-            SELECT AVG(dns_response_time_ms), AVG(internet_latency_ms), 
+            SELECT AVG(dns_response_time_ms), AVG(internet_latency_ms),
                    AVG(memory_usage_percent), AVG(cpu_usage_percent)
-            FROM performance_metrics 
+            FROM performance_metrics
             WHERE timestamp > ?
         ''', (since,))
-        
+
         perf_result = cursor.fetchone()
-        
+
         print(f"\n=== Network Performance Report (Last {hours} hours) ===")
         if dns_result[0] is not None:
             print(f"Average Block Rate: {dns_result[0]:.1f}%")
             print(f"Peak Queries: {dns_result[1]}")
             print(f"Peak Blocked: {dns_result[2]}")
-        
+
         if perf_result[0] is not None:
             print(f"Average DNS Response Time: {perf_result[0]:.1f}ms")
             print(f"Average Internet Latency: {perf_result[1]:.1f}ms")
             print(f"Average Memory Usage: {perf_result[2]:.1f}%")
             print(f"Average CPU Usage: {perf_result[3]:.1f}%")
-        
+
         conn.close()
 
 def main():
@@ -1498,11 +1508,11 @@ def main():
     parser.add_argument("--interval", type=int, default=300, help="Monitoring interval in seconds")
     parser.add_argument("--report", type=int, help="Generate report for last N hours")
     parser.add_argument("--daemon", action="store_true", help="Run as daemon")
-    
+
     args = parser.parse_args()
-    
+
     monitor = NetworkMonitor(args.host, args.token)
-    
+
     if args.report:
         monitor.generate_report(args.report)
     elif args.daemon:
@@ -1524,21 +1534,24 @@ if __name__ == "__main__":
 
 ### System Design Learning
 
-[System Design for Advanced Beginners](https://robertheaton.com/2020/04/06/systems-design-for-advanced-beginners/) provides practical system design education:
+[System Design for Advanced Beginners](https://robertheaton.com/2020/04/06/systems-design-for-advanced-beginners/)
+provides practical system design education:
 
-{{< note title="System Design Principles" >}}
-**Key Concepts for Backend Systems:**
+{{< note title="System Design Principles" >}} **Key Concepts for Backend
+Systems:**
+
 - **Scalability patterns** - Horizontal vs vertical scaling strategies
 - **Data storage** - Choosing between SQL, NoSQL, and caching layers
 - **Load balancing** - Distributing traffic across multiple servers
 - **Microservices** - Service decomposition and communication patterns
 - **Monitoring** - Observability, logging, and alerting strategies
 - **Security** - Authentication, authorization, and data protection
-{{< /note >}}
+  {{< /note >}}
 
 ### Testing and Quality Assurance
 
-[Testing Dash Applications using Pytest and Selenium](https://dash.plotly.com/testing) demonstrates comprehensive testing approaches:
+[Testing Dash Applications using Pytest and Selenium](https://dash.plotly.com/testing)
+demonstrates comprehensive testing approaches:
 
 ```rust
 // Rust testing patterns for system applications
@@ -1547,7 +1560,7 @@ mod tests {
     use super::*;
     use std::time::Duration;
     use tokio::time::timeout;
-    
+
     // Unit tests for individual components
     #[test]
     fn test_habit_creation() {
@@ -1556,85 +1569,85 @@ mod tests {
         assert_eq!(habit.target_frequency, 5);
         assert!(habit.completed_dates.is_empty());
     }
-    
-    #[test] 
+
+    #[test]
     fn test_habit_completion_tracking() {
         let mut habit = Habit::new("Test".to_string(), 7);
         let date = NaiveDate::from_ymd_opt(2020, 7, 21).unwrap();
-        
+
         assert!(!habit.is_completed_on(date));
-        
+
         habit.mark_completed(date);
         assert!(habit.is_completed_on(date));
-        
+
         // Test idempotency
         habit.mark_completed(date);
         assert_eq!(habit.completed_dates.len(), 1);
     }
-    
+
     #[test]
     fn test_streak_calculation() {
         let mut habit = Habit::new("Test".to_string(), 7);
         let today = Local::now().date_naive();
-        
+
         // No streak initially
         assert_eq!(habit.streak(), 0);
-        
+
         // Mark today and yesterday
         habit.mark_completed(today);
         habit.mark_completed(today - Duration::days(1));
-        
+
         assert_eq!(habit.streak(), 2);
     }
-    
+
     // Integration tests for the full system
     #[tokio::test]
     async fn test_habit_tracker_integration() {
         let mut tracker = HabitTracker::new();
-        
+
         // Test adding habit
         tracker.add_habit("Integration Test".to_string(), 3);
         assert!(tracker.habits.contains_key("Integration Test"));
-        
+
         // Test selection
         tracker.selected_habit = Some("Integration Test".to_string());
-        
+
         // Test completion toggle
         let initial_completed = tracker.habits["Integration Test"]
             .is_completed_on(Local::now().date_naive());
-        
+
         tracker.toggle_habit_today();
-        
+
         let after_toggle = tracker.habits["Integration Test"]
             .is_completed_on(Local::now().date_naive());
-        
+
         assert_ne!(initial_completed, after_toggle);
     }
-    
+
     // Performance tests
     #[test]
     fn test_large_habit_list_performance() {
         use std::time::Instant;
-        
+
         let mut tracker = HabitTracker::new();
-        
+
         // Add many habits
         let start = Instant::now();
         for i in 0..1000 {
             tracker.add_habit(format!("Habit {}", i), 5);
         }
         let add_duration = start.elapsed();
-        
+
         assert!(add_duration < Duration::from_millis(100));
         assert_eq!(tracker.habits.len(), 1003); // 1000 + 3 default habits
     }
-    
+
     // Property-based testing with proptest (if available)
     #[cfg(feature = "proptest")]
     mod property_tests {
         use super::*;
         use proptest::prelude::*;
-        
+
         proptest! {
             #[test]
             fn test_habit_frequency_invariants(
@@ -1642,7 +1655,7 @@ mod tests {
                 frequency in 1u32..8u32
             ) {
                 let habit = Habit::new(name.clone(), frequency);
-                
+
                 // Properties that should always hold
                 prop_assert_eq!(habit.name, name);
                 prop_assert_eq!(habit.target_frequency, frequency);
@@ -1658,29 +1671,29 @@ mod tests {
 mod benches {
     use super::*;
     use criterion::{black_box, criterion_group, criterion_main, Criterion};
-    
+
     fn benchmark_habit_operations(c: &mut Criterion) {
         let mut tracker = HabitTracker::new();
-        
+
         // Add test data
         for i in 0..100 {
             tracker.add_habit(format!("Habit {}", i), 5);
         }
-        
+
         c.bench_function("habit navigation", |b| {
             b.iter(|| {
                 tracker.next_habit();
                 black_box(&tracker.selected_habit);
             })
         });
-        
+
         c.bench_function("habit toggle", |b| {
             b.iter(|| {
                 tracker.toggle_habit_today();
             })
         });
     }
-    
+
     criterion_group!(benches, benchmark_habit_operations);
     criterion_main!(benches);
 }
@@ -1690,9 +1703,11 @@ mod benches {
 
 ### Systems Programming in Rust
 
-Today's exploration of terminal applications in Rust demonstrated several key advantages:
+Today's exploration of terminal applications in Rust demonstrated several key
+advantages:
 
-- **Memory safety** without garbage collection enables efficient system utilities
+- **Memory safety** without garbage collection enables efficient system
+  utilities
 - **Cross-platform support** through crates like `crossterm` and `tui`
 - **Rich ecosystem** for terminal UI, networking, and system interaction
 - **Performance** characteristics suitable for real-time applications
@@ -1726,4 +1741,6 @@ The combination of tools and practices explored today emphasizes:
 
 ---
 
-*Today's exploration reinforced that modern systems programming combines performance, safety, and developer productivity through careful tool selection and architectural decisions.*
+_Today's exploration reinforced that modern systems programming combines
+performance, safety, and developer productivity through careful tool selection
+and architectural decisions._

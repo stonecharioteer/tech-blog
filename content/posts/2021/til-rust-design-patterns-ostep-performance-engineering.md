@@ -1,8 +1,13 @@
 ---
 date: 2021-01-06T10:00:00+05:30
 draft: false
-title: "TIL: Rust Design Patterns, Operating Systems Three Easy Pieces, and MIT Performance Engineering"
-description: "Today I learned about the comprehensive Rust Design Patterns book, the excellent OSTEP operating systems textbook, MIT's performance engineering course, and other valuable computer science learning resources."
+title:
+  "TIL: Rust Design Patterns, Operating Systems Three Easy Pieces, and MIT
+  Performance Engineering"
+description:
+  "Today I learned about the comprehensive Rust Design Patterns book, the
+  excellent OSTEP operating systems textbook, MIT's performance engineering
+  course, and other valuable computer science learning resources."
 tags:
   - TIL
   - Rust
@@ -20,7 +25,9 @@ tags:
 Comprehensive guide to idiomatic Rust programming patterns:
 
 ### Why Rust Design Patterns Matter:
-- **Ownership-Aware Patterns**: Traditional patterns adapted for Rust's ownership system
+
+- **Ownership-Aware Patterns**: Traditional patterns adapted for Rust's
+  ownership system
 - **Memory Safety**: Patterns that leverage Rust's guarantees
 - **Performance**: Zero-cost abstractions and efficient implementations
 - **Ergonomics**: Patterns that make Rust code more readable and maintainable
@@ -30,6 +37,7 @@ Comprehensive guide to idiomatic Rust programming patterns:
 #### **Creational Patterns:**
 
 **Builder Pattern in Rust:**
+
 ```rust
 struct Config {
     debug: bool,
@@ -51,22 +59,22 @@ impl ConfigBuilder {
             max_connections: None,
         }
     }
-    
+
     fn debug(mut self, debug: bool) -> Self {
         self.debug = Some(debug);
         self
     }
-    
+
     fn log_level(mut self, level: impl Into<String>) -> Self {
         self.log_level = Some(level.into());
         self
     }
-    
+
     fn max_connections(mut self, max: u32) -> Self {
         self.max_connections = Some(max);
         self
     }
-    
+
     fn build(self) -> Result<Config, &'static str> {
         Ok(Config {
             debug: self.debug.unwrap_or(false),
@@ -87,6 +95,7 @@ let config = ConfigBuilder::new()
 #### **Behavioral Patterns:**
 
 **Strategy Pattern with Traits:**
+
 ```rust
 trait CompressionStrategy {
     fn compress(&self, data: &[u8]) -> Vec<u8>;
@@ -101,7 +110,7 @@ impl CompressionStrategy for GzipCompression {
         // Gzip compression implementation
         todo!()
     }
-    
+
     fn decompress(&self, data: &[u8]) -> Vec<u8> {
         // Gzip decompression implementation
         todo!()
@@ -113,7 +122,7 @@ impl CompressionStrategy for BrotliCompression {
         // Brotli compression implementation
         todo!()
     }
-    
+
     fn decompress(&self, data: &[u8]) -> Vec<u8> {
         // Brotli decompression implementation
         todo!()
@@ -128,7 +137,7 @@ impl FileProcessor {
     fn new(compression: Box<dyn CompressionStrategy>) -> Self {
         FileProcessor { compression }
     }
-    
+
     fn process_file(&self, data: &[u8]) -> Vec<u8> {
         self.compression.compress(data)
     }
@@ -138,6 +147,7 @@ impl FileProcessor {
 ### Rust-Specific Patterns:
 
 #### **RAII (Resource Acquisition Is Initialization):**
+
 ```rust
 use std::fs::File;
 use std::io::prelude::*;
@@ -151,7 +161,7 @@ impl FileHandler {
         let file = File::create(path)?;
         Ok(FileHandler { file })
     }
-    
+
     fn write_data(&mut self, data: &str) -> std::io::Result<()> {
         self.file.write_all(data.as_bytes())
     }
@@ -174,6 +184,7 @@ fn write_config() -> std::io::Result<()> {
 ```
 
 #### **Newtype Pattern:**
+
 ```rust
 struct UserId(u64);
 struct PostId(u64);
@@ -182,7 +193,7 @@ impl UserId {
     fn new(id: u64) -> Self {
         UserId(id)
     }
-    
+
     fn as_u64(&self) -> u64 {
         self.0
     }
@@ -196,6 +207,7 @@ fn get_user_posts(user_id: UserId, post_id: PostId) -> Vec<String> {
 ```
 
 #### **Error Handling Patterns:**
+
 ```rust
 use std::error::Error;
 use std::fmt;
@@ -236,11 +248,13 @@ Outstanding free textbook covering operating system fundamentals:
 ### The "Three Easy Pieces":
 
 #### **1. Virtualization:**
+
 - **CPU Virtualization**: How OS creates illusion of many CPUs
 - **Memory Virtualization**: Virtual memory and address spaces
 - **Process Management**: Process creation, scheduling, and switching
 
 **Key Concepts:**
+
 ```c
 // Process creation example
 #include <unistd.h>
@@ -248,7 +262,7 @@ Outstanding free textbook covering operating system fundamentals:
 
 int main() {
     pid_t pid = fork();
-    
+
     if (pid == 0) {
         // Child process
         printf("Hello from child process\n");
@@ -261,17 +275,19 @@ int main() {
         // Fork failed
         perror("fork failed");
     }
-    
+
     return 0;
 }
 ```
 
 #### **2. Concurrency:**
+
 - **Threads**: Lightweight processes sharing address space
 - **Synchronization**: Locks, condition variables, semaphores
 - **Common Problems**: Race conditions, deadlocks, starvation
 
 **Thread Synchronization:**
+
 ```c
 #include <pthread.h>
 #include <stdio.h>
@@ -290,24 +306,26 @@ void *worker(void *arg) {
 
 int main() {
     pthread_t t1, t2;
-    
+
     pthread_create(&t1, NULL, worker, NULL);
     pthread_create(&t2, NULL, worker, NULL);
-    
+
     pthread_join(t1, NULL);
     pthread_join(t2, NULL);
-    
+
     printf("Final counter value: %d\n", counter);
     return 0;
 }
 ```
 
 #### **3. Persistence:**
+
 - **File Systems**: Storage organization and management
 - **I/O Devices**: Hard drives, SSDs, and device interfaces
 - **Crash Consistency**: Ensuring data integrity across failures
 
 ### Learning Approach:
+
 - **Practical Examples**: Real code demonstrations
 - **Simulation**: Provided simulators for key concepts
 - **Homework**: Hands-on programming assignments
@@ -320,6 +338,7 @@ int main() {
 Comprehensive course on making software fast:
 
 ### Course Philosophy:
+
 - **Performance Matters**: Speed affects user experience and costs
 - **Systematic Approach**: Methodical performance optimization
 - **Measurement-Driven**: Profile before optimizing
@@ -328,6 +347,7 @@ Comprehensive course on making software fast:
 ### Key Topics Covered:
 
 #### **Performance Analysis:**
+
 ```bash
 # Profiling with perf
 perf record ./my_program
@@ -342,6 +362,7 @@ perf stat -e cycles,instructions,cache-misses ./my_program
 ```
 
 #### **Algorithmic Optimization:**
+
 ```c
 // Cache-friendly matrix multiplication
 void matrix_multiply_optimized(double **A, double **B, double **C, int n) {
@@ -374,12 +395,14 @@ void matrix_multiply_tiled(double **A, double **B, double **C, int n, int tile_s
 ```
 
 #### **Memory Optimization:**
+
 - **Cache Awareness**: Understanding cache hierarchies
 - **Data Structure Layout**: Structure of arrays vs array of structures
 - **Memory Alignment**: Avoiding false sharing
 - **NUMA Awareness**: Non-uniform memory access considerations
 
 #### **Parallel Programming:**
+
 ```c
 #include <cilk/cilk.h>
 
@@ -393,12 +416,12 @@ int parallel_sum(int *arr, int n) {
         }
         return sum;
     }
-    
+
     int mid = n / 2;
     int left_sum = cilk_spawn parallel_sum(arr, mid);
     int right_sum = parallel_sum(arr + mid, n - mid);
     cilk_sync;
-    
+
     return left_sum + right_sum;
 }
 ```
@@ -406,12 +429,14 @@ int parallel_sum(int *arr, int n) {
 ### Performance Engineering Principles:
 
 #### **Measurement and Profiling:**
+
 1. **Profile First**: Don't guess where bottlenecks are
 2. **Microbenchmarks**: Isolate specific operations
 3. **System-Level Metrics**: CPU, memory, I/O, network
 4. **Statistical Significance**: Multiple runs, confidence intervals
 
 #### **Optimization Strategies:**
+
 1. **Algorithmic**: Better algorithms beat micro-optimizations
 2. **Data Structure**: Choose appropriate data structures
 3. **Compiler**: Help compiler optimize (const, restrict, inline)
@@ -420,6 +445,7 @@ int parallel_sum(int *arr, int n) {
 ## Additional Learning Resources:
 
 ### Tech Interview Handbook
+
 [Tech Interview Handbook](https://yangshun.github.io/tech-interview-handbook/)
 
 - **Algorithm Practice**: Systematic approach to coding interviews
@@ -428,6 +454,7 @@ int parallel_sum(int *arr, int n) {
 - **Company-Specific**: Preparation for major tech companies
 
 ### Understanding Connections & Pools
+
 [Understanding Connections & Pools](https://sudhir.io/understanding-connections-pools/)
 
 - **Database Connections**: Connection lifecycle and management
@@ -435,4 +462,6 @@ int parallel_sum(int *arr, int n) {
 - **Monitoring**: Connection pool health metrics
 - **Best Practices**: Avoiding connection leaks and timeouts
 
-These resources represent different aspects of becoming a proficient systems programmer - from language-specific best practices to fundamental computer science concepts and performance optimization techniques.
+These resources represent different aspects of becoming a proficient systems
+programmer - from language-specific best practices to fundamental computer
+science concepts and performance optimization techniques.

@@ -1,8 +1,13 @@
 ---
 date: 2020-12-04T10:00:00+05:30
 draft: false
-title: "TIL: CLI Design Guidelines, Parinfer for Lisp Editing, Mosh Mobile Shell, and ripgrep-all for Document Search"
-description: "Today I learned about comprehensive CLI design guidelines, Parinfer's revolutionary approach to Lisp code editing, Mosh as a robust replacement for SSH, and ripgrep-all for searching inside various document formats."
+title:
+  "TIL: CLI Design Guidelines, Parinfer for Lisp Editing, Mosh Mobile Shell, and
+  ripgrep-all for Document Search"
+description:
+  "Today I learned about comprehensive CLI design guidelines, Parinfer's
+  revolutionary approach to Lisp code editing, Mosh as a robust replacement for
+  SSH, and ripgrep-all for searching inside various document formats."
 tags:
   - TIL
   - CLI Design
@@ -24,17 +29,19 @@ Comprehensive guide for creating user-friendly command-line tools:
 ### Core Design Principles:
 
 #### **Human-First Design:**
+
 - **Helpful by Default**: Show useful information without being asked
 - **Fail Gracefully**: Clear error messages with actionable suggestions
 - **Consistent Behavior**: Follow established conventions
 - **Progressive Disclosure**: Start simple, allow complexity when needed
 
 #### **Error Handling Best Practices:**
+
 ```bash
 # Bad error message
 error: invalid input
 
-# Good error message  
+# Good error message
 error: expected a number, got "hello"
 Try: mycommand --count 5
 
@@ -52,6 +59,7 @@ error: cannot connect to database
 ### Guidelines by Category:
 
 #### **Arguments and Flags:**
+
 ```bash
 # Prefer flags over positional arguments for clarity
 # Good
@@ -72,6 +80,7 @@ grep -R --recursive      # Consistent
 ```
 
 #### **Output and Feedback:**
+
 ```bash
 # Show progress for long operations
 Downloading... [████████████████████████████] 100% (15.2 MB/s)
@@ -83,7 +92,7 @@ mycommand --format table  # Human-readable default
 
 # Color coding (but respect NO_COLOR)
 ✓ Success: Database backup completed
-⚠ Warning: Low disk space  
+⚠ Warning: Low disk space
 ✗ Error: Connection failed
 
 # Quiet modes for scripts
@@ -92,10 +101,11 @@ mycommand --silent        # Minimal output
 ```
 
 #### **Configuration and Environment:**
+
 ```bash
 # Configuration hierarchy (most to least specific)
 1. Command-line flags
-2. Environment variables  
+2. Environment variables
 3. Configuration files
 4. Defaults
 
@@ -113,6 +123,7 @@ MYAPP_CONFIG_PATH
 ### Advanced Features:
 
 #### **Interactive Elements:**
+
 ```python
 # Example: Interactive confirmation
 import click
@@ -122,11 +133,11 @@ import click
 def delete_database(force):
     if not force:
         click.confirm('This will delete all data. Continue?', abort=True)
-    
+
     with click.progressbar(tables, label='Dropping tables') as bar:
         for table in bar:
             drop_table(table)
-    
+
     click.secho('✓ Database deleted', fg='green')
 
 # Tab completion support
@@ -138,6 +149,7 @@ def deploy(environment):
 ```
 
 #### **Documentation Integration:**
+
 ```bash
 # Multi-level help
 mycommand --help              # Overview
@@ -165,11 +177,13 @@ Options:
 
 [Parinfer - simpler Lisp editing](https://shaunlebron.github.io/parinfer/)
 
-Innovative approach to editing Lisp code that infers parentheses from indentation:
+Innovative approach to editing Lisp code that infers parentheses from
+indentation:
 
 ### The Parentheses Problem:
 
 #### **Traditional Lisp Editing Challenges:**
+
 ```lisp
 ;; Traditional Lisp - parentheses can be overwhelming
 (defn factorial [n]
@@ -187,6 +201,7 @@ Innovative approach to editing Lisp code that infers parentheses from indentatio
 ### Parinfer Modes:
 
 #### **Indent Mode:**
+
 - **Indentation drives structure**: Parentheses inferred from indentation
 - **Writing-focused**: Natural for entering new code
 - **Familiar**: Works like Python or other indentation-based languages
@@ -206,6 +221,7 @@ defn factorial [n]
 ```
 
 #### **Paren Mode:**
+
 - **Parentheses drive structure**: Indentation adjusted to match parens
 - **Editing-focused**: Good for modifying existing code
 - **Traditional**: Familiar to experienced Lisp programmers
@@ -227,6 +243,7 @@ defn factorial [n]
 ### Smart Features:
 
 #### **Cursor-Based Inference:**
+
 ```lisp
 ;; Cursor position affects paren inference
 ;; Cursor at end of line:
@@ -234,18 +251,19 @@ defn factorial [n]
 ;; Result: (map inc [1 2 3])
 
 ;; Cursor in middle:
-(map inc [1 2| 3])  
+(map inc [1 2| 3])
 ;; Different grouping possible based on context
 ```
 
 #### **Tab Stops:**
+
 ```lisp
 ;; Smart tab stops for alignment
 (let [x    1
       y    2    ; Aligned automatically
       long 3])
 
-;; Function arguments align naturally  
+;; Function arguments align naturally
 (function arg1
           arg2     ; Aligned with first arg
           arg3)
@@ -254,6 +272,7 @@ defn factorial [n]
 ### Editor Integration:
 
 #### **Available Implementations:**
+
 - **Atom**: Lisp editing with Parinfer integration
 - **VS Code**: Parinfer extension for modern editor
 - **Vim/Neovim**: Multiple Parinfer plugins available
@@ -261,6 +280,7 @@ defn factorial [n]
 - **Sublime Text**: Community-maintained Parinfer support
 
 #### **Configuration Example (VS Code):**
+
 ```json
 {
   "parinfer.defaultMode": "indent",
@@ -273,12 +293,14 @@ defn factorial [n]
 ### Benefits for Lisp Learning:
 
 #### **Reduced Cognitive Load:**
+
 - **Focus on Logic**: Less mental energy spent on parentheses
 - **Visual Structure**: Indentation makes nesting obvious
 - **Error Prevention**: Automatic balancing prevents common mistakes
 - **Gentle Learning Curve**: Familiar indentation-based editing
 
 #### **Before/After Comparison:**
+
 ```lisp
 ;; Without Parinfer - manual paren management
 (defn process-items [items]
@@ -304,6 +326,7 @@ Robust, responsive terminal application that handles intermittent connectivity:
 ### Problems with Traditional SSH:
 
 #### **Common SSH Issues:**
+
 - **Connection Drops**: WiFi disconnections kill sessions
 - **Lag**: Every keystroke waits for round-trip
 - **IP Changes**: Moving between networks breaks connections
@@ -312,6 +335,7 @@ Robust, responsive terminal application that handles intermittent connectivity:
 ### Mosh Solutions:
 
 #### **Key Technologies:**
+
 ```
 State Synchronization Protocol (SSP):
 - Client and server maintain synchronized terminal state
@@ -325,19 +349,21 @@ Predictive Echo:
 ```
 
 #### **Roaming Support:**
+
 ```bash
 # Traditional SSH breaks when IP changes
 ssh user@server
 # WiFi → 4G transition = broken connection
 
 # Mosh maintains connection across IP changes
-mosh user@server  
+mosh user@server
 # WiFi → 4G → different WiFi = seamless transition
 ```
 
 ### Technical Architecture:
 
 #### **Connection Process:**
+
 ```bash
 # 1. Mosh client connects via SSH
 mosh user@server
@@ -350,6 +376,7 @@ mosh user@server
 ```
 
 #### **State Synchronization:**
+
 ```
 Client State:  "hello world"
 Server State:  "hello world"
@@ -365,6 +392,7 @@ Server State:  "hello world!" (synchronized)
 ### Advanced Features:
 
 #### **Predictive Text Display:**
+
 ```
 # User types quickly:
 $ git commit -m "fix bug"
@@ -380,6 +408,7 @@ $ git commit -m "fix bug"
 ```
 
 #### **Firewall and NAT Traversal:**
+
 ```bash
 # Mosh uses UDP port range (default 60000-61000)
 # Configure firewall to allow:
@@ -394,6 +423,7 @@ mosh --server="mosh-server new -p 2222" user@server
 ### Installation and Usage:
 
 #### **Installation:**
+
 ```bash
 # Ubuntu/Debian (both client and server needed)
 sudo apt install mosh
@@ -409,13 +439,14 @@ mosh user@hostname
 ```
 
 #### **Advanced Options:**
+
 ```bash
 # Specify SSH port
 mosh --ssh="ssh -p 2222" user@server
 
 # Set prediction mode
 mosh --predict=always user@server    # Always predict
-mosh --predict=never user@server     # Never predict  
+mosh --predict=never user@server     # Never predict
 mosh --predict=adaptive user@server  # Default
 
 # Specify colors (for 256-color support)
@@ -431,6 +462,7 @@ Extended version of ripgrep that searches inside various file formats:
 ### Supported File Types:
 
 #### **Archive Formats:**
+
 ```bash
 # Search inside compressed archives
 rga "search term" archive.zip
@@ -442,13 +474,14 @@ rga "password" archive.zip/nested.tar.gz/document.pdf
 ```
 
 #### **Document Formats:**
+
 ```bash
 # Office documents
 rga "quarterly report" presentation.pptx
-rga "budget analysis" spreadsheet.xlsx  
+rga "budget analysis" spreadsheet.xlsx
 rga "project timeline" document.docx
 
-# PDF documents  
+# PDF documents
 rga "machine learning" research_paper.pdf
 rga "installation guide" manual.pdf
 
@@ -458,6 +491,7 @@ rga "design patterns" programming_book.mobi
 ```
 
 #### **Media and Other Formats:**
+
 ```bash
 # Image text extraction (OCR)
 rga "street sign" photo.jpg
@@ -474,12 +508,13 @@ rga "user_table" database.sqlite
 ### Advanced Usage:
 
 #### **Adapter Configuration:**
+
 ```bash
 # List available adapters
 rga --rga-list-adapters
 
 # Use specific adapter
-rga --rga-adapters=zip,tar "search term" 
+rga --rga-adapters=zip,tar "search term"
 
 # Disable slow adapters (like OCR)
 rga --rga-adapters=-tesseract "search term"
@@ -489,6 +524,7 @@ rga --rga-cache-max-blob-len=10M "search term"
 ```
 
 #### **Integration with ripgrep Options:**
+
 ```bash
 # Case-insensitive search
 rga -i "Search Term" documents/
@@ -509,6 +545,7 @@ rga -j 8 "performance" large_archive.zip
 ### Performance Considerations:
 
 #### **Caching Strategy:**
+
 ```bash
 # Enable caching for large files
 export RGA_CACHE_DIR=~/.cache/rga
@@ -519,6 +556,7 @@ rga --rga-cache-compression-level=1 "index term" huge_backup.tar.gz
 ```
 
 #### **Resource Management:**
+
 ```bash
 # Limit memory usage for OCR
 rga --rga-adapters=-tesseract "text" images/
@@ -533,6 +571,7 @@ rga --max-filesize=50M "config" archive.zip
 ### Practical Applications:
 
 #### **Log Analysis:**
+
 ```bash
 # Search compressed log archives
 rga "ERROR" logs.tar.gz
@@ -543,12 +582,13 @@ rga "database.*password" system_backup.tar.gz
 ```
 
 #### **Research and Documentation:**
+
 ```bash
 # Academic research
 rga -i "neural network" papers/*.pdf
 rga "methodology" thesis_sources.zip
 
-# Code archaeology  
+# Code archaeology
 rga "deprecated function" legacy_code.tar.gz
 rga "TODO.*security" project_archive.zip
 
@@ -558,6 +598,7 @@ rga "license.*agreement" contracts.zip
 ```
 
 #### **Troubleshooting Script:**
+
 ```bash
 #!/bin/bash
 # search-everywhere.sh - comprehensive search tool
@@ -571,7 +612,7 @@ echo "======================================="
 echo "Regular files:"
 rg "$search_term" "$directory"
 
-echo -e "\nDocuments and archives:"  
+echo -e "\nDocuments and archives:"
 rga "$search_term" "$directory"
 
 echo -e "\nCase-insensitive search:"
@@ -581,4 +622,7 @@ echo -e "\nWith context:"
 rga -C 2 "$search_term" "$directory"
 ```
 
-These tools represent modern approaches to common development and system administration tasks - creating user-friendly CLIs, making complex code editing more accessible, handling unreliable network connections, and searching through diverse file formats efficiently.
+These tools represent modern approaches to common development and system
+administration tasks - creating user-friendly CLIs, making complex code editing
+more accessible, handling unreliable network connections, and searching through
+diverse file formats efficiently.

@@ -2,7 +2,9 @@
 date: 2020-12-11T19:30:00+05:30
 draft: true
 title: "Adventures in PostgreSQL: Building from Source on Raspberry Pi"
-description: "Learning PostgreSQL by building it from source on a Raspberry Pi Zero W, with custom configurations and performance testing."
+description:
+  "Learning PostgreSQL by building it from source on a Raspberry Pi Zero W, with
+  custom configurations and performance testing."
 tags:
   - postgresql
   - raspberry-pi
@@ -12,13 +14,17 @@ tags:
   - system-administration
 ---
 
-This is an article wherein I describe my adventures with learning how to use PostgreSQL properly.
+This is an article wherein I describe my adventures with learning how to use
+PostgreSQL properly.
 
-I wanted to learn how to profile and use PostgreSQL like a boss. So I ssh'd into my Raspberry Pi Zero W which is currently running `pihole`, and I git cloned `git://git.postgresql.org/git/postgresql.git`, the source code for PostgreSQL.
+I wanted to learn how to profile and use PostgreSQL like a boss. So I ssh'd into
+my Raspberry Pi Zero W which is currently running `pihole`, and I git cloned
+`git://git.postgresql.org/git/postgresql.git`, the source code for PostgreSQL.
 
 ## Goals
 
-1. Build from source on a Raspberry Pi Zero W running a pretty old MicroSD Card (Class 10).
+1. Build from source on a Raspberry Pi Zero W running a pretty old MicroSD Card
+   (Class 10).
 2. Build in a custom user.
 3. Build in a separate folder
 4. Install in non-standard directory.
@@ -36,7 +42,11 @@ I wanted to learn how to profile and use PostgreSQL like a boss. So I ssh'd into
 
 **Start time:** 2020-12-11 19:30
 
-First, cloning the source code. Boy this took quite some time. I was able to download the code fast enough, but it took *ages* to resolve the deltas. After this, the next task was to switch to a particular tag. I am learning PostgreSQL v12, and as of this article, the current version is v13. I'd like to stay a bit safe.
+First, cloning the source code. Boy this took quite some time. I was able to
+download the code fast enough, but it took _ages_ to resolve the deltas. After
+this, the next task was to switch to a particular tag. I am learning PostgreSQL
+v12, and as of this article, the current version is v13. I'd like to stay a bit
+safe.
 
 ```bash
 $ time git clone git://git.postgresql.org/git/postgresql.git
@@ -68,4 +78,4 @@ sys     1m12.188s
 $ time make all
 ```
 
-*[Article appears to be incomplete beyond this point]*
+_[Article appears to be incomplete beyond this point]_

@@ -2,26 +2,31 @@
 date: "2025-11-03T15:36:29+05:30"
 draft: false
 title: "A Soiree into Symbols in Ruby"
-description: "A Pythonista opens `irb` and looks at all the symbols in Ruby. Or so the joke begins."
+description:
+  "A Pythonista opens `irb` and looks at all the symbols in Ruby. Or so the joke
+  begins."
 tags:
   - "ruby"
 ---
 
 ## Symbols and Why You Should Care
 
-I should start, aptly, with [the manual.](https://ruby-doc.org/3.4.1/Symbol.html)
+I should start, aptly, with
+[the manual.](https://ruby-doc.org/3.4.1/Symbol.html)
 
 > A `Symbol` object represents a named identifier inside the Ruby interpreter.
 
 Okay, it's a token of a sort, I think.
 
-I've been befuddled when seeing `:name` instead of `name` and I didn't know what it was at first.
-I spent some time reading Michael Hartl's Learn Enough Ruby and I cannot really say I understood Symbols,
-so I wanted to RTFM.
+I've been befuddled when seeing `:name` instead of `name` and I didn't know what
+it was at first. I spent some time reading Michael Hartl's Learn Enough Ruby and
+I cannot really say I understood Symbols, so I wanted to RTFM.
 
-> The same `Symbol` object will be created for a given name or string for the duration of a program's execution,
-> regardless of the context or meaning of that name. Thus, if `Fred` is a constant in one context , a method in another,
-> and a class in a third, the `Symbol` `:Fred` will be the same object in all three contexts.
+> The same `Symbol` object will be created for a given name or string for the
+> duration of a program's execution, regardless of the context or meaning of
+> that name. Thus, if `Fred` is a constant in one context , a method in another,
+> and a class in a third, the `Symbol` `:Fred` will be the same object in all
+> three contexts.
 
 {{< code language="ruby" source="code/ruby-symbols/symbol_identity.rb" >}}
 
@@ -33,12 +38,14 @@ Running this code shows:
 18152204
 ```
 
-All three symbols have the **exact same object_id**, proving they're the same object in memory despite `Fred`
-being a class, a constant, and a method in different contexts.
+All three symbols have the **exact same object_id**, proving they're the same
+object in memory despite `Fred` being a class, a constant, and a method in
+different contexts.
 
-Does that mean all three symbols are the exact same object? At first glance, `:Fred` seems to be the thing that identifies
-the class, variable or the method. But let's expand our example to version 2, where each module has a method that uses
-the symbol `:Fred` to interact with whatever `Fred` means in that context.
+Does that mean all three symbols are the exact same object? At first glance,
+`:Fred` seems to be the thing that identifies the class, variable or the method.
+But let's expand our example to version 2, where each module has a method that
+uses the symbol `:Fred` to interact with whatever `Fred` means in that context.
 
 {{< code language="ruby" source="code/ruby-symbols/symbol_identity_v2.rb" >}}
 
@@ -65,42 +72,51 @@ Returned symbol object_id: 18152204
 All three object_ids match: true
 ```
 
-What is even going on here? `:Fred` has the same `object_id` but when we consume it, it calls different things.
-I originally assumed `:Fred` was like atoms in Erlang, which I have a bare understanding of. But that doesn't seem
-to be the case.
+What is even going on here? `:Fred` has the same `object_id` but when we consume
+it, it calls different things. I originally assumed `:Fred` was like atoms in
+Erlang, which I have a bare understanding of. But that doesn't seem to be the
+case.
 
-To _reiterate_ if you haven't understood, `:Fred` is a `Symbol` object. It doesn't _directly_ reference the actual
-method, class or variable that we are seeing in these code snippets, but it's pointing to the name of these objects
-itself. In a real-world setting, you could conceptualize `:Fred` as a name tag itself with "Fred" written on it.
-In one situation, `Fred` could be the key in a dictionary that you could look up. In another it could be a name in a
-contacts app, or a name in a class roster at university. The symbol `:Fred` is the word itself, not what it points to.
+To _reiterate_ if you haven't understood, `:Fred` is a `Symbol` object. It
+doesn't _directly_ reference the actual method, class or variable that we are
+seeing in these code snippets, but it's pointing to the name of these objects
+itself. In a real-world setting, you could conceptualize `:Fred` as a name tag
+itself with "Fred" written on it. In one situation, `Fred` could be the key in a
+dictionary that you could look up. In another it could be a name in a contacts
+app, or a name in a class roster at university. The symbol `:Fred` is the word
+itself, not what it points to.
 
-It's Ruby's way of turning identifiers into first-class objects. In [the loops post]({{< ref "ruby-loops.md" >}}),
-I've written about `.send(:times)`. Ruby makes this possible _because_ `:times` is the method name as an object.
+It's Ruby's way of turning identifiers into first-class objects. In [the loops
+post]({{< ref "ruby-loops.md" >}}), I've written about `.send(:times)`. Ruby
+makes this possible _because_ `:times` is the method name as an object.
 
-In Python, you'd need to use strings for this purpose. There's no sense of meaning in the string other than the context
-that tells someone reading your code that you're trying to get a method or attribute. And even that is a frail way of
-expressing intent in my opinion.
+In Python, you'd need to use strings for this purpose. There's no sense of
+meaning in the string other than the context that tells someone reading your
+code that you're trying to get a method or attribute. And even that is a frail
+way of expressing intent in my opinion.
 
 | Python                                                       | Ruby                                                  |
 | ------------------------------------------------------------ | ----------------------------------------------------- |
 | `getattr(obj, "method_name")`                                | `obj.send(:method_name)`                              |
 | `"method_name"` is a string - could be data or an identifier | `:method_name` is a symbol - explicitly an identifier |
 
-I've written before about [Ruby's preference for protocol over syntax]({{< ref "ruby-loops.md" >}}).
-This falls perfectly in line with that.
+I've written before about [Ruby's preference for protocol over
+syntax]({{< ref "ruby-loops.md" >}}). This falls perfectly in line with that.
 
 I want to understand symbols a lot better though. What drove this design choice?
 
-Smalltalk method names are symbols, message dispatch is a symbol-based lookup. That's yet another thing Ruby inherited
-from it. Lisp/Scheme have symbols as first-class citizens. All function names are symbols. Clojure has `:keyword` style
-symbols just like Ruby. The dispatch mechanics are also very similar.
+Smalltalk method names are symbols, message dispatch is a symbol-based lookup.
+That's yet another thing Ruby inherited from it. Lisp/Scheme have symbols as
+first-class citizens. All function names are symbols. Clojure has `:keyword`
+style symbols just like Ruby. The dispatch mechanics are also very similar.
 
-When I first started learning Ruby last month, I looked at the `:symbol` syntax and my brain immediately thought of
-Erlang's **atoms.** Erlang calls them `atom`, and Elixir (which runs on the Erlang VM) uses the more familiar `:atom`
+When I first started learning Ruby last month, I looked at the `:symbol` syntax
+and my brain immediately thought of Erlang's **atoms.** Erlang calls them
+`atom`, and Elixir (which runs on the Erlang VM) uses the more familiar `:atom`
 syntax.
 
-Erlang though, has atoms rooted even more deeply into its syntax. Consider the following Elixir code:
+Erlang though, has atoms rooted even more deeply into its syntax. Consider the
+following Elixir code:
 
 ```elixir
 
@@ -124,17 +140,22 @@ end
 
 ```
 
-Erlang's atoms are designed for its actor model. They are used to tag messages and data structures for pattern matching
-in concurrent systems. Using `:ok` or `:error` isn't just convention, it's how Erlang allows communication between processes.
+Erlang's atoms are designed for its actor model. They are used to tag messages
+and data structures for pattern matching in concurrent systems. Using `:ok` or
+`:error` isn't just convention, it's how Erlang allows communication between
+processes.
 
-Ruby's symbols are designed for metaprogramming. With symbols, identifiers become objects you can manipulate at runtime.
-`send(:method_name)` or `define_method(:foo)` would not work without symbols as first-class citizens.
+Ruby's symbols are designed for metaprogramming. With symbols, identifiers
+become objects you can manipulate at runtime. `send(:method_name)` or
+`define_method(:foo)` would not work without symbols as first-class citizens.
 
-Interestingly, Both languages share a historical bug: creating symbols/atoms dynamically from user input could exhaust memory,
-since the symbol/atom table was never garbage collected.
+Interestingly, Both languages share a historical bug: creating symbols/atoms
+dynamically from user input could exhaust memory, since the symbol/atom table
+was never garbage collected.
 [Erlang still warns about this in its efficiency guide](https://erlang.org/documentation/doc-5.8.4/doc/efficiency_guide/advanced.html),
-as atoms remain permanent for the VM's lifetime. Ruby [fixed this in version 2.2](https://bugs.ruby-lang.org/issues/7791)
-by adding garbage collection for dynamically created symbols.
+as atoms remain permanent for the VM's lifetime. Ruby
+[fixed this in version 2.2](https://bugs.ruby-lang.org/issues/7791) by adding
+garbage collection for dynamically created symbols.
 
 ## Symbols in Ruby
 
@@ -145,8 +166,9 @@ user = { "name" => "Alice", "age" => 30 }  # String keys
 user = { :name => "Alice", :age => 30 }    # Symbol keys
 ```
 
-These are two ways to create hash objects with different key types. But when you're writing software that
-_indicates intent_, there's a glaring difference between the two.
+These are two ways to create hash objects with different key types. But when
+you're writing software that _indicates intent_, there's a glaring difference
+between the two.
 
 `:name` is a stronger indication of what you want to do than `'name'`.
 
@@ -173,9 +195,9 @@ But where they're really powerful is when you _reuse the keys_.
 1000.times { { name: "Alice" } }      # Uses the same :name symbol
 ```
 
-Remember what I said about the symbol reusing the same memory space?
-The second example uses only one instance of `:name`, while the first one
-creates `"name"` 1000 times.
+Remember what I said about the symbol reusing the same memory space? The second
+example uses only one instance of `:name`, while the first one creates `"name"`
+1000 times.
 
 ### Metaprogramming 101
 
@@ -202,9 +224,11 @@ class Person
 end
 ```
 
-In this example, Ruby uses the symbol `:name` to dynamically create getter and setter methods at runtime.
+In this example, Ruby uses the symbol `:name` to dynamically create getter and
+setter methods at runtime.
 
-`attr_accessor` is a class method that takes a symbol and uses metaprogramming to define methods.
+`attr_accessor` is a class method that takes a symbol and uses metaprogramming
+to define methods.
 
 ```ruby
 class Module
@@ -225,8 +249,8 @@ end
 I'm hand-waving a lot of the details there, but this is a very clean example of
 how powerful symbols are.
 
-While it is easy to think of `attr_accessor` as special syntax, it _is just a method
-that takes symbols_ as arguments and writes code at runtime.
+While it is easy to think of `attr_accessor` as special syntax, it _is just a
+method that takes symbols_ as arguments and writes code at runtime.
 
 ### Fun with Symbols
 
@@ -249,9 +273,12 @@ add_one = :+.to_proc
 add_one.call(5,1) # 6
 ```
 
-I knew that operators are methods, we can do `5.+(3)` instead of `5 + 3`, which is why this works. I understood that but seeing it like this... _is so **cool!**_
+I knew that operators are methods, we can do `5.+(3)` instead of `5 + 3`, which
+is why this works. I understood that but seeing it like this... _is so
+**cool!**_
 
-The `&` operator calls `.to_proc` on the symbol, which returns a proc that calls the method: `{ |obj, arg| obj.send(:+, arg) }`
+The `&` operator calls `.to_proc` on the symbol, which returns a proc that calls
+the method: `{ |obj, arg| obj.send(:+, arg) }`
 
 Am I rambling? I'm certain I am, but let's go on.
 
@@ -295,14 +322,16 @@ operators = [:+, :-, :*, :/]
 operators.map { |op| 10.send(op, 2)}
 ```
 
-Well, if I see code like that in a PR, I'm going to call DHH personally. I don't have his number though.
+Well, if I see code like that in a PR, I'm going to call DHH personally. I don't
+have his number though.
 
 #### Wait, where are the enums?
 
-I have been wondering, where are the Enums in Ruby? Rust loves Enums, and
-any good python code needs to leverage it.
+I have been wondering, where are the Enums in Ruby? Rust loves Enums, and any
+good python code needs to leverage it.
 
-I think I've seen enums in Rails, and yes I know I haven't touched that yet in my posts but I'm going to, soon.
+I think I've seen enums in Rails, and yes I know I haven't touched that yet in
+my posts but I'm going to, soon.
 
 ```ruby
 # without rails
@@ -320,8 +349,8 @@ user.pending? # true
 user.active! # Changes status to active
 ```
 
-I just had to check the [Rails source code to see if it was actually a new
-type or...](https://api.rubyonrails.org/v7.2.2/classes/ActiveRecord/Enum.html)
+I just had to check the
+[Rails source code to see if it was actually a new type or...](https://api.rubyonrails.org/v7.2.2/classes/ActiveRecord/Enum.html)
 
 ```ruby
 # File activerecord/lib/active_record/enum.rb, line 216
@@ -347,21 +376,26 @@ end
 
 Dang it, Ruby. You never cease to amaze me!
 
-That's a _method!_ This is so cool. I was just thinking how cool
-it would be to define an Enum in ruby so that I could give it a list of accepted
-values as symbols and it would then say something is not a valid option, and
-this exists. So cool!
+That's a _method!_ This is so cool. I was just thinking how cool it would be to
+define an Enum in ruby so that I could give it a list of accepted values as
+symbols and it would then say something is not a valid option, and this exists.
+So cool!
 
 ## Symbols and what they mean
 
 You don't have to be Robert Langdon to appreciate symbols in Ruby. I could spend
-so much more time on them, writing about `Symbols.all_symbols` (Ruby's internal symbol table), method introspection (with `method()`, `.respond_to?`), and runtime reflection. I am sure I'll have more to say about symbols in the future, once I start writing about metaprogramming. Can you tell I'm excited about that post already?
+so much more time on them, writing about `Symbols.all_symbols` (Ruby's internal
+symbol table), method introspection (with `method()`, `.respond_to?`), and
+runtime reflection. I am sure I'll have more to say about symbols in the future,
+once I start writing about metaprogramming. Can you tell I'm excited about that
+post already?
 
 ---
 
 ## Other Posts in This Series
 
 - [Ruby]({{< ref "ruby.md" >}})
-- [Returning from Ruby Blocks, Procs and Lambdas]({{< ref "ruby-block-return.md" >}})
+- [Returning from Ruby Blocks, Procs and
+  Lambdas]({{< ref "ruby-block-return.md" >}})
 - [Ruby Blocks]({{< ref "ruby-blocks.md" >}})
 - [Some Smalltalk about Ruby Loops]({{< ref "ruby-loops.md" >}})

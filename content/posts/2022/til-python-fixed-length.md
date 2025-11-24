@@ -2,7 +2,10 @@
 date: 2022-01-24T10:00:00+05:30
 draft: false
 title: "TIL: Creating Fixed Length Iterables in Python"
-description: TIL how to create fixed-length iterables in Python using collections.deque with maxlen parameter. Perfect for creating circular buffers and bounded collections.
+description:
+  TIL how to create fixed-length iterables in Python using collections.deque
+  with maxlen parameter. Perfect for creating circular buffers and bounded
+  collections.
 tags:
   - TIL
   - Python
@@ -10,7 +13,8 @@ tags:
   - Collections
 ---
 
-If you want to create an iterable of a fixed length in python, use `collections.deque` with the `maxlen` parameter.
+If you want to create an iterable of a fixed length in python, use
+`collections.deque` with the `maxlen` parameter.
 
 ```python
 import collections

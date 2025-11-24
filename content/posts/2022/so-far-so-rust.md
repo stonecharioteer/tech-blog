@@ -1,8 +1,10 @@
 ---
-date: '2022-07-13T00:00:00+05:30'
+date: "2022-07-13T00:00:00+05:30"
 draft: false
-title: 'So Far So Rust'
-description: "My journey learning Rust over 145 days as my primary programming language, including gotchas, resources, and why I chose Rust over Golang."
+title: "So Far So Rust"
+description:
+  "My journey learning Rust over 145 days as my primary programming language,
+  including gotchas, resources, and why I chose Rust over Golang."
 tags:
   - "rust"
   - "programming"
@@ -12,7 +14,9 @@ tags:
 As of July 13, 2022, I've been using Rust as my primary programming language for
 145 days now. In this article, I'm going to discuss my journey so far.
 
-*This is a follow-up to my earlier post [Learning Rust](/posts/2022/learning-rust/) where I talked about getting started with Rust.*
+_This is a follow-up to my earlier post
+[Learning Rust](/posts/2022/learning-rust/) where I talked about getting started
+with Rust._
 
 While I've talked about this at length to my friends and even at meetups, I
 haven't written about Rust as much as I'd like to. I came into this language the
@@ -23,18 +27,17 @@ Python. Today, that choice oddly involved the same friend who's been using Rust
 at work. However, it also stemmed from a gut feeling that I wanted to learn Rust
 and not Golang for my side-projects.
 
-{{< tip title="An Aside" >}}
-A funny thing about my journey with Rust and Ruby is that [Steve Klabnik](https://steveklabnik.com/) is involved in both of them. I chose Python
-over Ruby, and Steve is one of the most prolific contributors to Ruby on
-Rails. And I chose Rust over Golang, and was mildly surprised to find that
-Steve is involved with Rust and is one of the co-authors of the defacto book
-on the topic.
+{{< tip title="An Aside" >}} A funny thing about my journey with Rust and Ruby
+is that [Steve Klabnik](https://steveklabnik.com/) is involved in both of them.
+I chose Python over Ruby, and Steve is one of the most prolific contributors to
+Ruby on Rails. And I chose Rust over Golang, and was mildly surprised to find
+that Steve is involved with Rust and is one of the co-authors of the defacto
+book on the topic.
 
 Another fun fact is that [Armin Ronacher,](https://lucumr.pocoo.org/) the
 creator of Flask, my favourite Web Framework, also shifted to Rust. In fact,
-[Armin's talk at PyCon India 2018](https://www.youtube.com/watch?v=-4fzFKihmJw) convinced me that my gut
-feeling about Rust was right.
-{{< /tip >}}
+[Armin's talk at PyCon India 2018](https://www.youtube.com/watch?v=-4fzFKihmJw)
+convinced me that my gut feeling about Rust was right. {{< /tip >}}
 
 How did I go about learning Rust? As someone who's only coded in Python and a
 little bit of Javascript, I didn't have much of an understanding of low-level
@@ -43,17 +46,15 @@ beginning. The advice most newbies get is "read The Book", and while that is
 great advice, I kept faltering when trying to read it. I wanted to get my hands
 dirty ASAP and I wanted to build something that I could use.
 
-{{< note >}}
-Rust has the reputation of being a Systems Programming Language.
-While the language did originally target itself as being an accessible
-systems language, the home page now says this instead.
+{{< note >}} Rust has the reputation of being a Systems Programming Language.
+While the language did originally target itself as being an accessible systems
+language, the home page now says this instead.
 
-> *A language empowering everyone*  
-> *to build reliable and efficient software.*
+> _A language empowering everyone_  
+> _to build reliable and efficient software._
 
-Don't let the systems programming language tag scare you. Rust is designed to
-be used everywhere.
-{{< /note >}}
+Don't let the systems programming language tag scare you. Rust is designed to be
+used everywhere. {{< /note >}}
 
 The opportunity came at work when I needed to build a health-check endpoint atop
 of our data services at Merkle Science. The original requirements needed me to
@@ -62,24 +63,26 @@ been written in Python. It was introducing latency of its own and clearly that
 was an effect of the way it had been written. I could have rewritten it so that
 it stayed in Python, but that felt like a perfect reason to use Rust. I needed
 to write a webservice, so I sought the framework that looked the most like
-Flask, my preferred web-framework of choice: Rocket. In retrospect I was thrown off the
-more popular choice in Rust, actix-web, because I *thought* I had to use the
-actor-framework model that actix came with. Surprisingly, I learnt a long time
-later that actix-web doesn't use actix under the hood anymore. The names are an
-unfortunate left-over from when the projects stemmed together. However, Rocket
-was easy to understand and I liked what I saw.
+Flask, my preferred web-framework of choice: Rocket. In retrospect I was thrown
+off the more popular choice in Rust, actix-web, because I _thought_ I had to use
+the actor-framework model that actix came with. Surprisingly, I learnt a long
+time later that actix-web doesn't use actix under the hood anymore. The names
+are an unfortunate left-over from when the projects stemmed together. However,
+Rocket was easy to understand and I liked what I saw.
 
 The funny thing about how I started Rust is this. I'd been trying to learn it
-for months and I came upon a book called [Rust Web Programming by Maxwell Filton](https://www.packtpub.com/product/rust-web-programming/9781800560819) and
-began reading it. I didn't complete the book, but the first two chapters gave me
-more than enough to try writing code on my own. Another resource I found helpful
-earlier was [A Half-Hour to Learn Rust](https://fasterthanli.me/articles/a-half-hour-to-learn-rust), by Amos Wenger.
+for months and I came upon a book called
+[Rust Web Programming by Maxwell Filton](https://www.packtpub.com/product/rust-web-programming/9781800560819)
+and began reading it. I didn't complete the book, but the first two chapters
+gave me more than enough to try writing code on my own. Another resource I found
+helpful earlier was
+[A Half-Hour to Learn Rust](https://fasterthanli.me/articles/a-half-hour-to-learn-rust),
+by Amos Wenger.
 
-{{< note >}}
-These resources worked for me, but again, **read** [The Book](https://doc.rust-lang.org/book/), which is the *definitive* resource for
-newbie Rustaceans. I am working my way through the book now, and it teaches
-me a lot that I wish I knew earlier.
-{{< /note >}}
+{{< note >}} These resources worked for me, but again, **read**
+[The Book](https://doc.rust-lang.org/book/), which is the _definitive_ resource
+for newbie Rustaceans. I am working my way through the book now, and it teaches
+me a lot that I wish I knew earlier. {{< /note >}}
 
 I had seen the trait system at work, and wanted to use it for my task, since it
 involved hitting similar APIs which all had their own nuances, while returning a
@@ -93,8 +96,10 @@ period of 3 days and I had to google for the answers to some of them. In
 particular, I recommend the exercises on strings to really grind some of the
 basics into your brain.
 
-While trying to grok how strings work in Rust, my friend recommended the [Let's Get Rusty](https://www.youtube.com/c/LetsGetRusty) YouTube Channel and, in
-particular, the [video on Strings](https://www.youtube.com/watch?v=Mcuqzx3rBWc).
+While trying to grok how strings work in Rust, my friend recommended the
+[Let's Get Rusty](https://www.youtube.com/c/LetsGetRusty) YouTube Channel and,
+in particular, the
+[video on Strings](https://www.youtube.com/watch?v=Mcuqzx3rBWc).
 
 After going through these resources, I began building my service and encountered
 a few gotchas that seem trivial today.
@@ -102,10 +107,13 @@ a few gotchas that seem trivial today.
 - I couldn't return a string slice from within a function because it was created
   inside the function and essentially points to something that no longer exists.
 - Async functions could be called from within a synchronous functions as long as
-  I wrap them inside a blocking runtime, such as the one offered by the [futures](https://docs.rs/futures/latest/futures/) crate or the [tokio crate](https://tokio.rs/)
+  I wrap them inside a blocking runtime, such as the one offered by the
+  [futures](https://docs.rs/futures/latest/futures/) crate or the
+  [tokio crate](https://tokio.rs/)
 - To implement something I'd take for granted in Python, such as a retrying
-  mechanism, I'd have to understand *how* to write a function that returns a
-  generic response. This is something I've documented in my [Rust Reqwest Retry](/posts/2022/rust-reqwest-retry/) post.
+  mechanism, I'd have to understand _how_ to write a function that returns a
+  generic response. This is something I've documented in my
+  [Rust Reqwest Retry](/posts/2022/rust-reqwest-retry/) post.
 
 There are a few more gotchas that I ran into, especially when it came to
 something as simple as the `return` keyword.
@@ -120,7 +128,7 @@ fn add_ten(x: i32) -> i32 {
 ```
 
 Where's the return statement? Turns out Rust `blocks` all operate this way. A
-block can *evaluate* to some value, and you could also write code like this.
+block can _evaluate_ to some value, and you could also write code like this.
 
 ```rust
 fn add_ten(x: i32) -> i32 {
@@ -133,22 +141,20 @@ fn add_ten(x: i32) -> i32 {
 ```
 
 The `block` that contains the `println!` statement and its subsequent line
-*evaluates* to `x+10`. Take this in for a second. Every single statement you
+_evaluates_ to `x+10`. Take this in for a second. Every single statement you
 will see eventually runs on this simple assertion. Match statements, `if-let`
 statements, or even a simple block like above that's only written this way to
-show you what you *could* do, all of them can evaluate to a result.
+show you what you _could_ do, all of them can evaluate to a result.
 
 And the type annotations can coerce functions that use generics to return
 appropriate values.
 
-{{< note >}}
-Rust is the first strongly typed language I have used, so forgive me if I
-sound like a fanboy when it comes to this. I have serious beef with Python's
-type hints, and how it's just a hint and nothing more. I *love* how Rust
-handles types and how constraining it feels, just so that I can use these
-constraints to not only *be a better developer*, but also to control my
-program from going haywire.
-{{< /note >}}
+{{< note >}} Rust is the first strongly typed language I have used, so forgive
+me if I sound like a fanboy when it comes to this. I have serious beef with
+Python's type hints, and how it's just a hint and nothing more. I _love_ how
+Rust handles types and how constraining it feels, just so that I can use these
+constraints to not only _be a better developer_, but also to control my program
+from going haywire. {{< /note >}}
 
 One of the things I've learnt writing Rust as opposed to Python is that my code
 fails, frequently.
@@ -156,7 +162,7 @@ fails, frequently.
 I wrote a crawler to get data out of a paginated API, and my code had to account
 for edgecases pretty early on. The structs I wrote to deserialize payloads would
 fail at the first hint of a mismatch, especially when it came to types. I needed
-to know what *could* be a null value and what wouldn't be. I needed to know the
+to know what _could_ be a null value and what wouldn't be. I needed to know the
 exact format for a timestamp and how to parse it.
 
 Other things about Rust seemed to be harder to grasp. The import system was
@@ -174,8 +180,8 @@ fn main() {
 }
 ```
 
-In this above block, I *assumed* the `use std::env` line was an *import
-statement. I was blissfully unaware that I didn't *need* to import something
+In this above block, I _assumed_ the `use std::env` line was an *import
+statement. I was blissfully unaware that I didn't *need\* to import something
 like this. I could, instead, have written it like follows.
 
 ```rust
@@ -188,14 +194,15 @@ fn main() {
 }
 ```
 
-The `use` keyword wasn't synonymous with Pythons `import` keyword. It was
-more akin to `import requests.client as client`, bringing something into my namespace so
-that I didn't need to constantly refer to the entire import resolution path.
+The `use` keyword wasn't synonymous with Pythons `import` keyword. It was more
+akin to `import requests.client as client`, bringing something into my namespace
+so that I didn't need to constantly refer to the entire import resolution path.
 
-When I didn't know this, using the `env_logger` [crate](https://docs.rs/env_logger/latest/env_logger/) was unnerving.
-I didn't know if Rust was injecting `env_logger` into my namespace somehow. It
-made me really uncomfortable because I hate having variables in my namespace
-that I didn't control.
+When I didn't know this, using the `env_logger`
+[crate](https://docs.rs/env_logger/latest/env_logger/) was unnerving. I didn't
+know if Rust was injecting `env_logger` into my namespace somehow. It made me
+really uncomfortable because I hate having variables in my namespace that I
+didn't control.
 
 However, Rust was doing something else. Every crate was available to use, if I
 didn't want to `use` it, I could have just written out the entire import path.
@@ -209,14 +216,14 @@ to help us load data into our datastores.
 
 ## Choosing Rust - A Retrospective
 
-This article has been about *how* I learnt Rust, and trust me, there's a lot
+This article has been about _how_ I learnt Rust, and trust me, there's a lot
 more to say about that. My advice is pick a problem you'd choose any language
 for and choose Rust to solve it. Remember that it will take you longer, not just
 at first, than it would in a language like Python or Javascript. I don't even
-profess to know that you'll get guaranteed benefits, but what I *can* tell you
+profess to know that you'll get guaranteed benefits, but what I _can_ tell you
 is that you will learn new things; new **paradigms.**
 
-I chose Rust because I *felt* like I wanted to code in Rust. I don't claim to
+I chose Rust because I _felt_ like I wanted to code in Rust. I don't claim to
 have a performance or memory-safety related answer to you. I've been falling
 slightly out of love with Python, largely because of the state of its virtual
 environments ecosystem or the "ship your development machine" gimic that
@@ -228,14 +235,14 @@ it for my side projects. It's a language that feels fresh, and coding in it has
 taught me so much already.
 
 1. I have learnt how to think about the mutability of my variables.
-2. I think a lot more about the *types* of my variables and the scopes they live
+2. I think a lot more about the _types_ of my variables and the scopes they live
    in.
 3. I have learnt a lot about accounting for errors in my code. `Result` is
-   *amazing*.
+   _amazing_.
 4. `Enums` are mind-blowingly amazing.
-5. Pattern matching is just *chef's kiss.*
+5. Pattern matching is just _chef's kiss._
 
-All of this being said and done, I don't know if Rust is for *you*. Perhaps
+All of this being said and done, I don't know if Rust is for _you_. Perhaps
 Golang is. There's no reason to try both. I did, and I still don't have a
 problem with Go. I prefer Rust, that's all. If you're trying to look for a job,
 I don't recommend Rust. There are so few jobs out there for you. If you're
@@ -248,25 +255,23 @@ web-applications, it's your database queries. Don't use an ORM blindly. Learn
 how SQL's `EXPLAIN` statement works, you will build more efficient web
 applications with ease.
 
-Sometimes, a shell-script does everything you need a fancy CLI to do. So do
-that instead.
+Sometimes, a shell-script does everything you need a fancy CLI to do. So do that
+instead.
 
 However, should you choose Rust, great job. You will struggle for a while, I
 know I do even today, but you will also be able to build an amazing application
 because you're closer to the metal. You will enjoy not having to install
-`build-essential`, or other build-time dependencies on your production
-machine. You don't need to install `libgit` or those pesky `openssl`
-libraries either. Your compiled application has everything it needs.
+`build-essential`, or other build-time dependencies on your production machine.
+You don't need to install `libgit` or those pesky `openssl` libraries either.
+Your compiled application has everything it needs.
 
 Rust is fun. Get used to the compiler shouting at you, because it's a good
 teacher.
 
 ## Resources
 
-{{< note >}}
-I'll update this list as and when I get a chance or come across something
-that helps me learn a newer concept.
-{{< /note >}}
+{{< note >}} I'll update this list as and when I get a chance or come across
+something that helps me learn a newer concept. {{< /note >}}
 
 While I used some pretty nondescript resources to learn Rust, I don't recommend
 you do the same. At the time I began, a lot of the below resources didn't exist,
@@ -304,9 +309,12 @@ these instead of following my path.
 
 1. [A Half-hour to Learn Rust](https://fasterthanli.me/articles/a-half-hour-to-learn-rust)
 2. [Sustainability with Rust - AWS](https://aws.amazon.com/blogs/opensource/sustainability-with-rust/)
-3. [Rust for Python Developers by Armin Ronacher](https://lucumr.pocoo.org/2015/5/27/rust-for-pythonistas/) (2015)
-4. [You Can't Rust That by Armin Ronacher](https://lucumr.pocoo.org/2018/3/31/you-cant-rust-that/) (2018)
-5. [Rust Tips and Tricks by Jon Gjengset](https://thesquareplanet.com/blog/rust-tips-and-tricks/) (2018)
+3. [Rust for Python Developers by Armin Ronacher](https://lucumr.pocoo.org/2015/5/27/rust-for-pythonistas/)
+   (2015)
+4. [You Can't Rust That by Armin Ronacher](https://lucumr.pocoo.org/2018/3/31/you-cant-rust-that/)
+   (2018)
+5. [Rust Tips and Tricks by Jon Gjengset](https://thesquareplanet.com/blog/rust-tips-and-tricks/)
+   (2018)
 
 ### Others
 
@@ -315,7 +323,8 @@ these instead of following my path.
 3. [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)
 4. [The Rustonomicon](https://doc.rust-lang.org/nomicon/)
 5. [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
-6. [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/index.html) (WIP)
+6. [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/index.html)
+   (WIP)
 7. [Rust by Example](https://doc.rust-lang.org/rust-by-example/)
 8. [Rustlings - Interactive Exercises to Learn Rust](https://github.com/rust-lang/rustlings)
 9. [The Cargo Book](https://doc.rust-lang.org/cargo/)

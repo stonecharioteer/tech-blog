@@ -1,8 +1,13 @@
 ---
 date: 2021-02-23T10:00:00+05:30
 draft: false
-title: "TIL: Python Performance, REST API Design, Rich Terminal Trees, and Python Launcher"
-description: "Today I learned about achieving 12 requests per second in Python, designing beautiful REST APIs, rendering tree views with Rich, and a Rust-based Python launcher for version management."
+title:
+  "TIL: Python Performance, REST API Design, Rich Terminal Trees, and Python
+  Launcher"
+description:
+  "Today I learned about achieving 12 requests per second in Python, designing
+  beautiful REST APIs, rendering tree views with Rich, and a Rust-based Python
+  launcher for version management."
 tags:
   - TIL
   - Python
@@ -20,14 +25,17 @@ tags:
 Detailed analysis of Python web application performance optimization:
 
 ### The Challenge:
+
 - **Performance Bottlenecks**: Identifying what limits Python web app throughput
-- **Realistic Benchmarking**: Testing with real-world scenarios, not just hello world
+- **Realistic Benchmarking**: Testing with real-world scenarios, not just hello
+  world
 - **Optimization Strategies**: Practical techniques for improving performance
 - **Infrastructure Considerations**: Hardware and deployment factors
 
 ### Performance Analysis:
 
 #### **Baseline Measurements:**
+
 - **Flask Application**: Basic REST API with database operations
 - **Load Testing**: Using realistic request patterns and data
 - **Bottleneck Identification**: CPU, I/O, memory, and network constraints
@@ -36,11 +44,12 @@ Detailed analysis of Python web application performance optimization:
 #### **Optimization Techniques:**
 
 **Database Optimization:**
+
 ```python
 # Connection pooling
 from sqlalchemy.pool import QueuePool
 engine = create_engine(
-    'postgresql://...', 
+    'postgresql://...',
     poolclass=QueuePool,
     pool_size=20,
     max_overflow=30
@@ -59,6 +68,7 @@ for user in users:
 ```
 
 **Caching Strategies:**
+
 ```python
 import redis
 from functools import wraps
@@ -80,6 +90,7 @@ def cached(expiration=3600):
 ```
 
 ### Key Insights:
+
 - **Database is Usually the Bottleneck**: Optimize queries first
 - **Connection Pooling**: Essential for concurrent request handling
 - **Caching**: Dramatic improvements for repeated operations
@@ -94,6 +105,7 @@ Comprehensive guide to REST API design principles:
 ### Core Design Principles:
 
 #### **Resource-Oriented Design:**
+
 ```
 GET    /users           # List users
 POST   /users           # Create user
@@ -103,6 +115,7 @@ DELETE /users/123       # Delete user
 ```
 
 #### **Consistent Naming:**
+
 - **Plural Nouns**: Use `/users` not `/user`
 - **Hierarchical**: `/users/123/posts` for nested resources
 - **Lowercase**: Consistent casing throughout API
@@ -115,27 +128,30 @@ DELETE /users/123       # Delete user
 Roy Fielding's clarification on true REST principles:
 
 #### **HATEOAS (Hypermedia as the Engine of Application State):**
+
 ```json
 {
   "id": 123,
   "name": "John Doe",
   "email": "john@example.com",
   "_links": {
-    "self": {"href": "/users/123"},
-    "posts": {"href": "/users/123/posts"},
-    "edit": {"href": "/users/123", "method": "PUT"},
-    "delete": {"href": "/users/123", "method": "DELETE"}
+    "self": { "href": "/users/123" },
+    "posts": { "href": "/users/123/posts" },
+    "edit": { "href": "/users/123", "method": "PUT" },
+    "delete": { "href": "/users/123", "method": "DELETE" }
   }
 }
 ```
 
 #### **API Evolution:**
+
 - **Discoverability**: Clients discover available actions through links
 - **Loose Coupling**: Clients don't hardcode URLs
 - **Version Independence**: Links adapt to API changes
 - **Self-Documenting**: API structure evident from responses
 
 ### HTTP Status Codes:
+
 ```
 200 OK              # Successful GET, PUT
 201 Created         # Successful POST
@@ -154,6 +170,7 @@ Roy Fielding's clarification on true REST principles:
 Creating beautiful terminal interfaces with the Rich library:
 
 ### Rich Library Features:
+
 - **Styled Output**: Colors, bold, italic, underline in terminal
 - **Complex Layouts**: Tables, panels, columns, and trees
 - **Progress Bars**: Beautiful progress indicators
@@ -162,6 +179,7 @@ Creating beautiful terminal interfaces with the Rich library:
 ### Tree Rendering:
 
 #### **Basic Tree Structure:**
+
 ```python
 from rich.console import Console
 from rich.tree import Tree
@@ -187,13 +205,14 @@ console.print(tree)
 ```
 
 #### **File System Tree:**
+
 ```python
 import os
 from pathlib import Path
 
 def create_file_tree(directory: Path) -> Tree:
     tree = Tree(f"📁 {directory.name}")
-    
+
     for item in sorted(directory.iterdir()):
         if item.is_dir():
             # Recursively add subdirectories
@@ -203,11 +222,12 @@ def create_file_tree(directory: Path) -> Tree:
             # Add files with appropriate icons
             icon = "🐍" if item.suffix == ".py" else "📄"
             tree.add(f"{icon} {item.name}")
-    
+
     return tree
 ```
 
 ### Advanced Features:
+
 - **Styling**: Custom colors and styles for different node types
 - **Interactive**: Combine with click events for navigation
 - **Live Updates**: Dynamic tree updates for monitoring
@@ -220,6 +240,7 @@ def create_file_tree(directory: Path) -> Tree:
 Rust-based Python version launcher and manager:
 
 ### What It Does:
+
 - **Version Detection**: Automatically detects appropriate Python version
 - **PEP 514 Compliance**: Follows Python launcher specification
 - **Fast Performance**: Rust implementation for speed
@@ -228,6 +249,7 @@ Rust-based Python version launcher and manager:
 ### Key Features:
 
 #### **Automatic Version Selection:**
+
 ```bash
 # Checks pyproject.toml, .python-version, or uses default
 python3 script.py
@@ -238,6 +260,7 @@ python3.10 -m pip install package
 ```
 
 #### **Configuration:**
+
 ```toml
 # pyproject.toml
 [tool.python-launcher]
@@ -246,9 +269,12 @@ prefer-active-venv = true
 ```
 
 ### Advantages:
+
 - **Performance**: Faster startup than shell-based launchers
 - **Reliability**: Robust version detection and selection
 - **Standards Compliance**: Follows Python packaging standards
 - **Modern Implementation**: Written in modern Rust with good error handling
 
-Each resource demonstrates different aspects of Python ecosystem optimization - from web application performance tuning to API design best practices, terminal UI enhancement, and development tool innovation.
+Each resource demonstrates different aspects of Python ecosystem optimization -
+from web application performance tuning to API design best practices, terminal
+UI enhancement, and development tool innovation.

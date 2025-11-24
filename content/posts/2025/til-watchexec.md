@@ -1,7 +1,10 @@
 ---
-date: '2025-08-19T12:23:51+05:30'
-title: 'TIL: Watchexec - Modern File Watching for Development Workflows'
-description: 'Today I learned about watchexec, a cross-platform file watcher that replaced entr in my development workflow with better defaults and intuitive usage patterns for Hugo, Rust, and Go projects.'
+date: "2025-08-19T12:23:51+05:30"
+title: "TIL: Watchexec - Modern File Watching for Development Workflows"
+description:
+  "Today I learned about watchexec, a cross-platform file watcher that replaced
+  entr in my development workflow with better defaults and intuitive usage
+  patterns for Hugo, Rust, and Go projects."
 tags:
   - til
   - tools
@@ -14,21 +17,35 @@ tags:
   - command-line-tools
 ---
 
-Today I discovered `watchexec`, a modern cross-platform file watcher that has completely replaced `entr` in my development workflow. It executes commands when files change with much better defaults and a more intuitive interface than traditional file watching tools.
+Today I discovered `watchexec`, a modern cross-platform file watcher that has
+completely replaced `entr` in my development workflow. It executes commands when
+files change with much better defaults and a more intuitive interface than
+traditional file watching tools.
 
-{{< ai title="AI-Generated Content" >}}
-This post was written with assistance from Claude (Anthropic's AI assistant) based on my experiences and requirements. While the technical content and examples reflect real usage patterns, the writing was collaboratively generated. The discovery of watchexec's advantages over entr - particularly the reduction from verbose `find . -name "*.go" | entr -r go test` to clean `watchexec -e go 'go test ./...'` - represents genuine workflow improvements in my development process.
-{{< /ai >}}
+{{< ai title="AI-Generated Content" >}} This post was written with assistance
+from Claude (Anthropic's AI assistant) based on my experiences and requirements.
+While the technical content and examples reflect real usage patterns, the
+writing was collaboratively generated. The discovery of watchexec's advantages
+over entr - particularly the reduction from verbose
+`find . -name "*.go" | entr -r go test` to clean
+`watchexec -e go 'go test ./...'` - represents genuine workflow improvements in
+my development process. {{< /ai >}}
 
 ## The Core Discovery
 
-Watchexec is a Rust-based tool that watches file system changes and triggers commands. Unlike `entr`, which requires explicit file listing and complex `find` commands, watchexec works intelligently out of the box.
+Watchexec is a Rust-based tool that watches file system changes and triggers
+commands. Unlike `entr`, which requires explicit file listing and complex `find`
+commands, watchexec works intelligently out of the box.
 
 ## What is watchexec?
 
-[Watchexec](https://github.com/watchexec/watchexec) is a simple, standalone tool that watches a path and runs a command whenever files change. It's written in Rust, cross-platform, and has sensible defaults that make it easier to use than alternatives like `entr` or `inotifywait`.
+[Watchexec](https://github.com/watchexec/watchexec) is a simple, standalone tool
+that watches a path and runs a command whenever files change. It's written in
+Rust, cross-platform, and has sensible defaults that make it easier to use than
+alternatives like `entr` or `inotifywait`.
 
 Install it with:
+
 ```bash
 # Cargo
 cargo install watchexec-cli
@@ -55,7 +72,9 @@ watchexec -w content -w hugo.yml -w layouts 'hugo'
 watchexec -r 'hugo && hugo serve --port 1314'
 ```
 
-The `-e` flag specifies file extensions to watch, and `-w` specifies directories. The `-r` flag restarts the command (killing the previous process) rather than running concurrent instances.
+The `-e` flag specifies file extensions to watch, and `-w` specifies
+directories. The `-r` flag restarts the command (killing the previous process)
+rather than running concurrent instances.
 
 ## Rust Development with Cargo
 
@@ -78,7 +97,8 @@ watchexec -e rs 'cargo fmt && cargo clippy'
 watchexec -w src -w Cargo.toml 'cargo build'
 ```
 
-I particularly love using it during TDD workflows where I want tests to run immediately after changing code.
+I particularly love using it during TDD workflows where I want tests to run
+immediately after changing code.
 
 ## Go Development
 
@@ -101,13 +121,16 @@ watchexec -w internal/auth 'go test ./internal/auth'
 watchexec -e go 'go fmt ./... && go vet ./...'
 ```
 
-The ability to watch specific directories with `-w` is especially useful in larger Go projects where you only want to run tests for the package you're working on.
+The ability to watch specific directories with `-w` is especially useful in
+larger Go projects where you only want to run tests for the package you're
+working on.
 
 ## Why I Switched from entr
 
 I used `entr` for years, but watchexec has several advantages:
 
 ### Better Defaults
+
 - **entr**: Requires explicit file listing via `find` or similar
 - **watchexec**: Recursively watches current directory by default
 
@@ -115,23 +138,29 @@ I used `entr` for years, but watchexec has several advantages:
 # entr - verbose and error-prone
 find . -name "*.go" | entr -r go test ./...
 
-# watchexec - simple and intuitive  
+# watchexec - simple and intuitive
 watchexec -e go 'go test ./...'
 ```
 
 ### Ignore Patterns
+
 - **entr**: No built-in ignore patterns
 - **watchexec**: Respects `.gitignore`, `.ignore`, and has smart defaults
 
-Watchexec automatically ignores common build artifacts, `.git` directories, and other noise. With entr, I had to carefully craft `find` commands to avoid triggering on build outputs.
+Watchexec automatically ignores common build artifacts, `.git` directories, and
+other noise. With entr, I had to carefully craft `find` commands to avoid
+triggering on build outputs.
 
 ### Process Management
+
 - **entr**: Basic process handling
 - **watchexec**: Better process lifecycle management with `-r` flag
 
-The `-r` flag in watchexec properly kills and restarts long-running processes, which is perfect for development servers.
+The `-r` flag in watchexec properly kills and restarts long-running processes,
+which is perfect for development servers.
 
 ### Cross-Platform
+
 - **entr**: Unix-only
 - **watchexec**: Works on Windows, macOS, and Linux
 
@@ -139,24 +168,27 @@ The `-r` flag in watchexec properly kills and restarts long-running processes, w
 
 While watchexec is excellent, there are some things to watch out for:
 
-{{< warning title="Build Output Loops" >}}
-Be careful not to watch directories that contain build outputs. If your command generates files in a watched directory, you'll create an infinite loop.
+{{< warning title="Build Output Loops" >}} Be careful not to watch directories
+that contain build outputs. If your command generates files in a watched
+directory, you'll create an infinite loop.
 
 ```bash
 # BAD - watching target/ where cargo outputs builds
 watchexec -w . 'cargo build'
 
-# GOOD - exclude target directory  
+# GOOD - exclude target directory
 watchexec -i target/ -e rs 'cargo build'
 ```
+
 {{< /warning >}}
 
-{{< note title="Performance with Large Projects" >}}
-In very large codebases, watching too many files can impact performance. Use `-w` to watch specific directories or `-i` to ignore large directories like `node_modules/` or `target/`.
-{{< /note >}}
+{{< note title="Performance with Large Projects" >}} In very large codebases,
+watching too many files can impact performance. Use `-w` to watch specific
+directories or `-i` to ignore large directories like `node_modules/` or
+`target/`. {{< /note >}}
 
-{{< tip title="Command Escaping" >}}
-Complex commands with pipes or redirections need proper shell escaping:
+{{< tip title="Command Escaping" >}} Complex commands with pipes or redirections
+need proper shell escaping:
 
 ```bash
 # Use quotes for complex commands
@@ -165,13 +197,17 @@ watchexec 'cargo test 2>&1 | grep -E "(test|error)"'
 # Or use shell flag
 watchexec -s 'cargo test | tee test.log'
 ```
+
 {{< /tip >}}
 
 ### Other Considerations
 
-- **Debouncing**: Watchexec debounces file changes by default (50ms), which prevents multiple rapid triggers
-- **Signal Handling**: Long-running processes are sent SIGTERM, then SIGKILL if they don't exit gracefully
-- **Environment**: Commands run in the same directory where watchexec was started
+- **Debouncing**: Watchexec debounces file changes by default (50ms), which
+  prevents multiple rapid triggers
+- **Signal Handling**: Long-running processes are sent SIGTERM, then SIGKILL if
+  they don't exit gracefully
+- **Environment**: Commands run in the same directory where watchexec was
+  started
 
 ## Cheatsheet
 
@@ -196,7 +232,7 @@ watchexec -i '*.tmp' -i build/ 'make'  # Ignore patterns
 # Hugo development
 watchexec -e md,yml,html 'hugo serve --buildDrafts'
 
-# Rust development  
+# Rust development
 watchexec -e rs 'cargo check'          # Fast syntax checking
 watchexec -e rs 'cargo test'           # Run tests
 watchexec -w src 'cargo run'           # Build and run
@@ -212,7 +248,7 @@ watchexec -e go 'go fmt ./... && go vet ./... && go test ./...'
 
 # Useful flags
 -r, --restart           # Restart previous command
--s, --shell             # Use shell for command execution  
+-s, --shell             # Use shell for command execution
 -w, --watch <path>      # Watch specific path
 -i, --ignore <pattern>  # Ignore pattern
 -e, --exts <extensions> # File extensions to watch
@@ -220,4 +256,7 @@ watchexec -e go 'go fmt ./... && go vet ./... && go test ./...'
 -v, --verbose           # Verbose output
 ```
 
-Watchexec has become an essential part of my development workflow. Its intuitive interface and smart defaults make file watching trivial, letting me focus on code instead of build tools. If you're still using `entr` or manually rerunning commands, give watchexec a try.
+Watchexec has become an essential part of my development workflow. Its intuitive
+interface and smart defaults make file watching trivial, letting me focus on
+code instead of build tools. If you're still using `entr` or manually rerunning
+commands, give watchexec a try.

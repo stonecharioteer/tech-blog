@@ -2,7 +2,10 @@
 date: 2021-12-07T10:00:00+05:30
 draft: false
 title: Advent of Code 2021
-description: My journey through Advent of Code 2021, tackling daily programming challenges in multiple languages. Learning Rust, Go, Elixir, and more while improving problem-solving skills and competitive programming abilities.
+description:
+  My journey through Advent of Code 2021, tackling daily programming challenges
+  in multiple languages. Learning Rust, Go, Elixir, and more while improving
+  problem-solving skills and competitive programming abilities.
 tags:
   - Programming
   - Advent of Code
@@ -13,9 +16,14 @@ tags:
 url: aoc-2021
 ---
 
-I'm working on this year's [Advent of Code](https://adventofcode.com/2021) problems. I have wanted to work on this *live* for several years now, and this year, I've started allocating *some* time to this every day.
+I'm working on this year's [Advent of Code](https://adventofcode.com/2021)
+problems. I have wanted to work on this _live_ for several years now, and this
+year, I've started allocating _some_ time to this every day.
 
-I'm working on the problems in Python first, but I want to cover more languages. I want to learn Rust, as I've been saying for quite some time, but I also want to learn other languages. For the outset, the languages I'd like to target, in no particular order, are:
+I'm working on the problems in Python first, but I want to cover more languages.
+I want to learn Rust, as I've been saying for quite some time, but I also want
+to learn other languages. For the outset, the languages I'd like to target, in
+no particular order, are:
 
 1. Python
 2. Rust
@@ -27,10 +35,21 @@ I'm working on the problems in Python first, but I want to cover more languages.
 My targets for doing AoC are fairly simple:
 
 1. I'd like to be able to code in multiple languages.
-2. I want to learn from some of the examples on [/r/adventofcode](https://reddit.com/r/adventofcode)
-3. I want to be able to write a CLI in all the aforementioned languages. As I've described in the [README.rst,](https://github.com/stonecharioteer/advent-of-code/tree/master/README.rst) I'd like to run the code for a particular day using a CLI that I'm going to reimplement in *each* language. The CLI syntax is described in the `README` and I'm not replicating that here.
+2. I want to learn from some of the examples on
+   [/r/adventofcode](https://reddit.com/r/adventofcode)
+3. I want to be able to write a CLI in all the aforementioned languages. As I've
+   described in the
+   [README.rst,](https://github.com/stonecharioteer/advent-of-code/tree/master/README.rst)
+   I'd like to run the code for a particular day using a CLI that I'm going to
+   reimplement in _each_ language. The CLI syntax is described in the `README`
+   and I'm not replicating that here.
 4. I want to learn how to structure code in multiple languages.
 5. I want to improve my problem-solving skills.
-6. I want to start competitive programming. It's one of the most rewarding hobbies to have, especially if you're job hunting. I do poorly on problem-solving interviews and I want to change that.
+6. I want to start competitive programming. It's one of the most rewarding
+   hobbies to have, especially if you're job hunting. I do poorly on
+   problem-solving interviews and I want to change that.
 
-Follow along as I'm coding, and feel free to ask me about my progress. If there's anything interesting, I'm going to expand upon the solution within a README for the year. I'll also attempt to recreate others' solutions and learn from them. This should be fun!
+Follow along as I'm coding, and feel free to ask me about my progress. If
+there's anything interesting, I'm going to expand upon the solution within a
+README for the year. I'll also attempt to recreate others' solutions and learn
+from them. This should be fun!

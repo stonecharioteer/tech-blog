@@ -1,6 +1,6 @@
 ---
-date: '2025-04-15T16:12:53+05:30'
-title: '🧡 Favourites'
+date: "2025-04-15T16:12:53+05:30"
+title: "🧡 Favourites"
 ---
 
 These are a list of my favourites in tech, whether they're podcasts, blogs,
@@ -8,10 +8,13 @@ youtube videos, or books.
 
 ## Books
 
-1. [Designing Data Intensive Applications - Martin Kleppmann](https://dataintensive.net/) [Youtube Playlist of Lectures](https://www.youtube.com/playlist?list=PLeKd45zvjcDFUEv_ohr_HdUFe97RItdiB)
-2. [Database Internals - Alex Petrov](https://www.databass.dev/) (Also watch his talk - [Link](https://www.youtube.com/watch?v=V667vJzDvt4))
+1. [Designing Data Intensive Applications - Martin Kleppmann](https://dataintensive.net/)
+   [Youtube Playlist of Lectures](https://www.youtube.com/playlist?list=PLeKd45zvjcDFUEv_ohr_HdUFe97RItdiB)
+2. [Database Internals - Alex Petrov](https://www.databass.dev/) (Also watch his
+   talk - [Link](https://www.youtube.com/watch?v=V667vJzDvt4))
 3. [The Rust Programming Language - Carol Nichols and Steve Klabnik](https://doc.rust-lang.org/book/title-page.html)
-4. [Learn Python the Hard Way - Zed A. Shaw](https://learnpythonthehardway.org/) (This book taught me how to code in 2014)
+4. [Learn Python the Hard Way - Zed A. Shaw](https://learnpythonthehardway.org/)
+   (This book taught me how to code in 2014)
 5. [Fluent Python - Luciano Ramalho](https://www.oreilly.com/library/view/fluent-python-2nd/9781492056348/)
 6. [Python 101 - Mike Driscoll](https://python101.pythonlibrary.org/)
 7. [Python 201 - Mike Driscoll](https://driscollis.gumroad.com/l/py201)
@@ -26,27 +29,30 @@ youtube videos, or books.
 
 ### 1. Julia Evans [jvns.ca](https://jvns.ca)
 
-All of Julia's articles are *gold*. I recommend reading 5 a day.
+All of Julia's articles are _gold_. I recommend reading 5 a day.
 
 ### 2. Brendan Gregg [www.brendangregg.com/](https://www.brendangregg.com/)
 
-Brendan's articles on performance and his talks across the tech world are really solid.
+Brendan's articles on performance and his talks across the tech world are really
+solid.
 
 ### 3. Giles Thomas [gilesthomas.com](https://www.gilesthomas.com/)
 
-I particularly love [his articles on Sebastian Raschka's Build a Large Language
-Model (from Scratch)](https://www.gilesthomas.com/llm-from-scratch). They're
-ongoing as of this post, but I hope he gets around to finishing them.
+I particularly love
+[his articles on Sebastian Raschka's Build a Large Language Model (from Scratch)](https://www.gilesthomas.com/llm-from-scratch).
+They're ongoing as of this post, but I hope he gets around to finishing them.
 
 ### 4. [Reality Has a Surprising Amount of Detail](http://johnsalvatier.org/blog/2017/reality-has-a-surprising-amount-of-detail)
 
 This article is part philosphy and part advice on a life in programming.
+
 ## Podcasts and Videos
 
 ### 1. [Rich Hickey Talks](https://www.youtube.com/playlist?list=PLZdCLR02grLrEwKaZv-5QbUzK0zGKOOcr)
 
-Rich Hickey's talks throughout the years are *inspiring*. I love listening to
-them from time to time, especially the one on [Hammock Driven Development.](https://www.youtube.com/watch?v=f84n5oFoZBc)
+Rich Hickey's talks throughout the years are _inspiring_. I love listening to
+them from time to time, especially the one on
+[Hammock Driven Development.](https://www.youtube.com/watch?v=f84n5oFoZBc)
 
 ### 2. [PyCon 2017 - Sam Agnew - Hacking Classic Nintendo Games with Python](https://www.youtube.com/watch?v=v75rNdPukuI)
 
@@ -88,6 +94,7 @@ Talk Python is one of my favourite podcasts out there. I've been listening since
 2018, and I really enjoy Michael's interview style.
 
 ### 9. [Python Bytes](https://pythonbytes.fm/)
+
 Python Bytes is Michael's collaborative podcast with Brian Okken, and these
 episodes range around 15 minutes. Byte-sized, if you will!
 

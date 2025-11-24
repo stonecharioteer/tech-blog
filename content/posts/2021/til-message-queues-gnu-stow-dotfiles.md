@@ -1,8 +1,13 @@
 ---
 date: 2020-12-31T10:00:00+05:30
 draft: false
-title: "TIL: Message Queue Organization, Readability Guidelines, GNU Stow for Dotfiles, and Essential Unix Tools"
-description: "Today I learned about organizing background worker queues, typography principles for readability, using GNU Stow for elegant dotfile management, and mastering xxd and hosts file configuration."
+title:
+  "TIL: Message Queue Organization, Readability Guidelines, GNU Stow for
+  Dotfiles, and Essential Unix Tools"
+description:
+  "Today I learned about organizing background worker queues, typography
+  principles for readability, using GNU Stow for elegant dotfile management, and
+  mastering xxd and hosts file configuration."
 tags:
   - TIL
   - Message Queues
@@ -22,6 +27,7 @@ Comprehensive approach to structuring and managing asynchronous job processing:
 ### Queue Organization Principles:
 
 #### **Queue Separation by Characteristics:**
+
 ```python
 # Priority-based queue organization
 HIGH_PRIORITY_QUEUE = "urgent_tasks"      # User-facing operations
@@ -38,6 +44,7 @@ IMAGE_QUEUE = "image_processing"          # Media manipulation
 #### **Queue Design Patterns:**
 
 **Dead Letter Queue Pattern:**
+
 ```python
 import redis
 from celery import Celery
@@ -65,6 +72,7 @@ def process_payment(self, payment_data):
 ```
 
 **Fan-out Pattern:**
+
 ```python
 @app.task
 def process_user_signup(user_id):
@@ -74,13 +82,13 @@ def process_user_signup(user_id):
     setup_user_analytics.delay(user_id)
     create_user_workspace.delay(user_id)
     notify_sales_team.delay(user_id)
-    
+
 @app.task
 def send_welcome_email(user_id):
     # Email-specific processing
     pass
 
-@app.task  
+@app.task
 def setup_user_analytics(user_id):
     # Analytics setup
     pass
@@ -89,23 +97,24 @@ def setup_user_analytics(user_id):
 ### Message Queue Architecture:
 
 #### **Queue Topology Design:**
+
 ```yaml
 # Redis-based queue configuration
 queues:
   critical:
     priority: 9
     workers: 4
-    retry_policy: 
+    retry_policy:
       max_retries: 5
       backoff: exponential
-      
+
   user_facing:
     priority: 7
     workers: 8
     retry_policy:
       max_retries: 3
       backoff: linear
-      
+
   background:
     priority: 3
     workers: 2
@@ -115,6 +124,7 @@ queues:
 ```
 
 #### **Worker Scaling Strategy:**
+
 ```python
 # Dynamic worker scaling based on queue depth
 import psutil
@@ -124,7 +134,7 @@ def get_optimal_worker_count(queue_name):
     queue_depth = get_queue_depth(queue_name)
     cpu_count = psutil.cpu_count()
     memory_available = psutil.virtual_memory().available
-    
+
     if queue_depth > 1000:
         return min(cpu_count * 2, 16)  # Scale up for high load
     elif queue_depth < 10:
@@ -136,6 +146,7 @@ def get_optimal_worker_count(queue_name):
 ### Monitoring and Observability:
 
 #### **Queue Health Metrics:**
+
 ```python
 import time
 from datadog import statsd
@@ -143,7 +154,7 @@ from datadog import statsd
 class QueueMonitor:
     def __init__(self, queue_name):
         self.queue_name = queue_name
-    
+
     def track_task_execution(self, task_func):
         def wrapper(*args, **kwargs):
             start_time = time.time()
@@ -178,6 +189,7 @@ Evidence-based principles for improving text readability:
 ### Optimal Line Length:
 
 #### **Research-Based Guidelines:**
+
 - **45-75 characters per line**: Optimal range for reading speed
 - **50-60 characters**: Sweet spot for most content
 - **Maximum 90 characters**: Beyond this, readability drops significantly
@@ -185,95 +197,99 @@ Evidence-based principles for improving text readability:
 ```css
 /* CSS implementation */
 .readable-text {
-    max-width: 65ch;  /* 65 characters max */
-    line-height: 1.6;  /* 1.4-1.8 recommended */
-    margin: 0 auto;    /* Center content */
+  max-width: 65ch; /* 65 characters max */
+  line-height: 1.6; /* 1.4-1.8 recommended */
+  margin: 0 auto; /* Center content */
 }
 
 .article-content {
-    font-size: 16px;
-    max-width: 700px;  /* Approximately 65-70 characters */
-    margin: 0 auto 2rem;
-    padding: 0 1rem;
+  font-size: 16px;
+  max-width: 700px; /* Approximately 65-70 characters */
+  margin: 0 auto 2rem;
+  padding: 0 1rem;
 }
 ```
 
 #### **Responsive Typography:**
+
 ```css
 /* Fluid typography for different screen sizes */
 .content {
-    font-size: clamp(16px, 2.5vw, 20px);
-    line-height: calc(1.4 + 0.2 * ((100vw - 320px) / (1200 - 320)));
-    max-width: min(65ch, 90vw);
-    margin: 0 auto;
+  font-size: clamp(16px, 2.5vw, 20px);
+  line-height: calc(1.4 + 0.2 * ((100vw - 320px) / (1200 - 320)));
+  max-width: min(65ch, 90vw);
+  margin: 0 auto;
 }
 
 /* Breakpoint-based adjustments */
 @media (max-width: 768px) {
-    .content {
-        max-width: 90vw;
-        padding: 0 1rem;
-    }
+  .content {
+    max-width: 90vw;
+    padding: 0 1rem;
+  }
 }
 
 @media (min-width: 1200px) {
-    .content {
-        max-width: 60ch;  /* Slightly narrower on large screens */
-    }
+  .content {
+    max-width: 60ch; /* Slightly narrower on large screens */
+  }
 }
 ```
 
 ### Margin and Spacing Principles:
 
 #### **White Space Management:**
+
 ```css
 .article {
-    /* Generous margins improve focus */
-    margin: 2rem auto;
-    padding: 2rem;
-    
-    /* Paragraph spacing */
-    p {
-        margin-bottom: 1.5rem;
-    }
-    
-    /* Heading spacing */
-    h2 {
-        margin-top: 3rem;
-        margin-bottom: 1rem;
-    }
-    
-    h3 {
-        margin-top: 2rem;
-        margin-bottom: 0.75rem;
-    }
+  /* Generous margins improve focus */
+  margin: 2rem auto;
+  padding: 2rem;
+
+  /* Paragraph spacing */
+  p {
+    margin-bottom: 1.5rem;
+  }
+
+  /* Heading spacing */
+  h2 {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
 }
 ```
 
 #### **Reading Flow Optimization:**
+
 ```css
 /* Improved reading experience */
 .readable-content {
-    /* Slightly larger text for better readability */
-    font-size: 18px;
-    
-    /* Optimal line height for reading */
-    line-height: 1.7;
-    
-    /* Better paragraph distinction */
-    p + p {
-        margin-top: 1.5rem;
-    }
-    
-    /* List spacing */
-    ul, ol {
-        margin: 1.5rem 0;
-        padding-left: 2rem;
-    }
-    
-    li + li {
-        margin-top: 0.5rem;
-    }
+  /* Slightly larger text for better readability */
+  font-size: 18px;
+
+  /* Optimal line height for reading */
+  line-height: 1.7;
+
+  /* Better paragraph distinction */
+  p + p {
+    margin-top: 1.5rem;
+  }
+
+  /* List spacing */
+  ul,
+  ol {
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+  }
+
+  li + li {
+    margin-top: 0.5rem;
+  }
 }
 ```
 
@@ -285,12 +301,14 @@ Evidence-based principles for improving text readability:
 Elegant solution for managing configuration files across systems:
 
 ### GNU Stow Concept:
+
 - **Symlink Management**: Creates symbolic links from a central directory
 - **Package Organization**: Group related configs into packages
 - **Version Control**: Easily track dotfile changes with Git
 - **Multiple Environments**: Different configs for different machines
 
 ### Directory Structure:
+
 ```
 ~/dotfiles/
 ├── vim/
@@ -315,6 +333,7 @@ Elegant solution for managing configuration files across systems:
 ### Stow Commands:
 
 #### **Basic Operations:**
+
 ```bash
 # Navigate to dotfiles directory
 cd ~/dotfiles
@@ -338,6 +357,7 @@ stow -v vim   # Shows each symlink created
 ```
 
 #### **Advanced Usage:**
+
 ```bash
 # Use different target directory
 stow -t /usr/local/bin scripts
@@ -355,6 +375,7 @@ stow vim zsh git tmux  # Install multiple packages
 ### Dotfile Organization Best Practices:
 
 #### **Modular Configuration:**
+
 ```bash
 # ~/.zshrc
 # Load modular config files
@@ -380,6 +401,7 @@ backup() {
 ```
 
 #### **Machine-Specific Configurations:**
+
 ```bash
 # ~/.zshrc
 # Load machine-specific config if it exists
@@ -396,7 +418,7 @@ backup() {
     name = "Work Name"
     email = "work@company.com"
 
-# ~/.gitconfig.personal  
+# ~/.gitconfig.personal
 [user]
     name = "Personal Name"
     email = "personal@email.com"
@@ -411,6 +433,7 @@ backup() {
 Powerful tool for binary file analysis and manipulation:
 
 #### **Basic Usage:**
+
 ```bash
 # Create hex dump of file
 xxd file.bin
@@ -429,6 +452,7 @@ xxd -r hexdump.txt > restored_file.bin
 ```
 
 #### **Practical Applications:**
+
 ```bash
 # Analyze binary file headers
 xxd -l 64 /bin/ls   # Look at ELF header
@@ -452,6 +476,7 @@ diff <(xxd file1.bin) <(xxd file2.bin)
 Essential system file for DNS resolution:
 
 #### **Hosts File Structure:**
+
 ```bash
 # /etc/hosts format
 # IP_address canonical_hostname [aliases...]
@@ -466,6 +491,7 @@ Essential system file for DNS resolution:
 ```
 
 #### **Common Use Cases:**
+
 ```bash
 # Block websites (redirect to localhost)
 127.0.0.1       facebook.com www.facebook.com
@@ -483,6 +509,7 @@ Essential system file for DNS resolution:
 ```
 
 #### **Management Scripts:**
+
 ```bash
 #!/bin/bash
 # hosts-manager.sh
@@ -490,7 +517,7 @@ Essential system file for DNS resolution:
 add_host() {
     local ip="$1"
     local hostname="$2"
-    
+
     if ! grep -q "$hostname" /etc/hosts; then
         echo "$ip    $hostname" | sudo tee -a /etc/hosts
         echo "Added: $ip -> $hostname"
@@ -515,4 +542,6 @@ list_hosts() {
 # ./hosts-manager.sh list
 ```
 
-These tools and techniques represent fundamental skills for system administration, development workflow optimization, and maintaining readable, professional documentation and interfaces.
+These tools and techniques represent fundamental skills for system
+administration, development workflow optimization, and maintaining readable,
+professional documentation and interfaces.

@@ -1,8 +1,13 @@
 ---
 date: 2020-10-31T10:00:00+05:30
 draft: false
-title: "TIL: /dev/urandom and /dev/random for Cryptographically Secure Random Generation"
-description: "Today I learned about the differences between /dev/urandom and /dev/random, and how to use these devices for generating cryptographically secure random data in Unix systems."
+title:
+  "TIL: /dev/urandom and /dev/random for Cryptographically Secure Random
+  Generation"
+description:
+  "Today I learned about the differences between /dev/urandom and /dev/random,
+  and how to use these devices for generating cryptographically secure random
+  data in Unix systems."
 tags:
   - til
   - cryptography
@@ -12,21 +17,25 @@ tags:
   - entropy
 ---
 
-Today I discovered the important distinctions between `/dev/urandom` and `/dev/random`, and their proper usage for secure random number generation.
+Today I discovered the important distinctions between `/dev/urandom` and
+`/dev/random`, and their proper usage for secure random number generation.
 
 ## Understanding Random Devices
 
-Unix-like systems provide special devices for accessing random data from the kernel's entropy pool:
+Unix-like systems provide special devices for accessing random data from the
+kernel's entropy pool:
 
 ### `/dev/random` vs `/dev/urandom`:
 
 #### **`/dev/random` - "True" Random:**
+
 - Blocks when entropy pool is empty
 - Provides cryptographically secure random data
 - Slower due to blocking behavior
 - Suitable for generating long-term keys
 
 #### **`/dev/urandom` - Pseudo-Random:**
+
 - Never blocks (always returns data)
 - Uses cryptographically secure PRNG
 - Faster for most applications
@@ -85,6 +94,7 @@ echo "Random port: $random_port"
 ## Programming Language Integration
 
 ### Shell Scripting:
+
 ```bash
 #!/bin/bash
 
@@ -92,7 +102,7 @@ echo "Random port: $random_port"
 generate_secure_random() {
     local length=${1:-32}
     local charset=${2:-'[:alnum:]'}
-    
+
     tr -cd "$charset" < /dev/urandom | head -c "$length"
 }
 
@@ -110,6 +120,7 @@ echo "Hex String: $hex_string"
 ```
 
 ### Python Integration:
+
 ```python
 import os
 import secrets
@@ -136,6 +147,7 @@ print(f"Random UUID: {random_uuid}")
 ```
 
 ### System Monitoring:
+
 ```bash
 # Check available entropy
 cat /proc/sys/kernel/random/entropy_avail
@@ -155,6 +167,7 @@ cat /proc/sys/kernel/random/write_wakeup_threshold
 ### When to Use Each Device:
 
 #### **Use `/dev/urandom` for:**
+
 - Session tokens and API keys
 - Password generation
 - Initialization vectors
@@ -162,6 +175,7 @@ cat /proc/sys/kernel/random/write_wakeup_threshold
 - General cryptographic purposes
 
 #### **Use `/dev/random` for:**
+
 - Long-term cryptographic keys
 - Certificate generation (rarely needed directly)
 - One-time pads
@@ -186,6 +200,7 @@ openssl rand -base64 32  # Uses /dev/urandom internally
 ```
 
 ### Common Pitfalls:
+
 ```bash
 # Bad: Predictable random data
 password=$(date +%s | sha256sum | head -c 20)
@@ -204,7 +219,7 @@ session_id=$(tr -cd '[:alnum:]' < /dev/urandom | head -c 32)
 time dd if=/dev/urandom bs=1M count=10 of=/dev/null 2>/dev/null
 # Typically: ~0.1-0.5 seconds
 
-time dd if=/dev/random bs=1M count=10 of=/dev/null 2>/dev/null  
+time dd if=/dev/random bs=1M count=10 of=/dev/null 2>/dev/null
 # May block indefinitely on low-entropy systems
 
 # Test entropy depletion
@@ -212,4 +227,6 @@ dd if=/dev/random bs=1 count=1000 of=/dev/null
 # Will likely block after some bytes
 ```
 
-Understanding these random devices is crucial for implementing secure systems, as using the wrong source of randomness can compromise the security of cryptographic operations.
+Understanding these random devices is crucial for implementing secure systems,
+as using the wrong source of randomness can compromise the security of
+cryptographic operations.

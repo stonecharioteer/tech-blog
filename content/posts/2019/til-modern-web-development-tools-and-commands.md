@@ -2,7 +2,10 @@
 date: 2019-01-01T12:00:00+05:30
 draft: false
 title: "TIL: Modern Web Development Tools and Command-Line Utilities"
-description: "Today I learned about essential modern development tools, from better command-line utilities to web frameworks, that significantly improve developer productivity and workflow."
+description:
+  "Today I learned about essential modern development tools, from better
+  command-line utilities to web frameworks, that significantly improve developer
+  productivity and workflow."
 tags:
   - til
   - command-line-tools
@@ -13,13 +16,17 @@ tags:
   - python-tools
 ---
 
-Today I discovered an impressive collection of modern development tools and command-line utilities that represent significant improvements over traditional Unix tools, showcasing how modern languages like Rust are revolutionizing developer tooling.
+Today I discovered an impressive collection of modern development tools and
+command-line utilities that represent significant improvements over traditional
+Unix tools, showcasing how modern languages like Rust are revolutionizing
+developer tooling.
 
 ## Superior Command-Line Tools
 
 ### HTTPie - Human-Friendly HTTP Client
 
-[HTTPie](https://github.com/jakubroztocil/httpie) positions itself as "HTTP for Humans" and dramatically simplifies API testing and HTTP requests:
+[HTTPie](https://github.com/jakubroztocil/httpie) positions itself as "HTTP for
+Humans" and dramatically simplifies API testing and HTTP requests:
 
 ```bash
 # Simple GET request
@@ -41,17 +48,18 @@ http GET https://example.com X-Custom-Header:value Cookie:session=abc123
 http GET https://api.github.com/repos/python/cpython | jq '.stargazers_count'
 ```
 
-{{< example title="HTTPie vs Curl Comparison" >}}
-**Curl**: `curl -X POST -H "Content-Type: application/json" -d '{"name":"John","age":30}' https://api.example.com/users`
+{{< example title="HTTPie vs Curl Comparison" >}} **Curl**:
+`curl -X POST -H "Content-Type: application/json" -d '{"name":"John","age":30}' https://api.example.com/users`
 
 **HTTPie**: `http POST https://api.example.com/users name=John age:=30`
 
-HTTPie's syntax is more intuitive and requires less boilerplate for common operations.
-{{< /example >}}
+HTTPie's syntax is more intuitive and requires less boilerplate for common
+operations. {{< /example >}}
 
 ### FZF - Fuzzy Finder Revolution
 
-[FZF](https://github.com/junegunn/fzf) transforms command-line history and file searching with fuzzy matching:
+[FZF](https://github.com/junegunn/fzf) transforms command-line history and file
+searching with fuzzy matching:
 
 ```bash
 # Install fzf
@@ -105,18 +113,18 @@ fkill() {
 }
 ```
 
-{{< tip title="FZF Productivity Boost" >}}
-FZF integrates with:
+{{< tip title="FZF Productivity Boost" >}} FZF integrates with:
+
 - **Shell history**: `Ctrl+R` for fuzzy history search
 - **File navigation**: `Ctrl+T` for file picker
 - **Directory jumping**: `Alt+C` for directory picker
 - **Vim integration**: Fuzzy file finding in editors
-- **Git workflows**: Branch switching, log browsing
-{{< /tip >}}
+- **Git workflows**: Branch switching, log browsing {{< /tip >}}
 
 ### Bat - Enhanced Cat with Syntax Highlighting
 
-[Bat](https://github.com/sharkdp/bat) provides beautiful syntax highlighting and Git integration:
+[Bat](https://github.com/sharkdp/bat) provides beautiful syntax highlighting and
+Git integration:
 
 ```bash
 # Install bat
@@ -142,7 +150,8 @@ bat --config-file
 
 ### Ripgrep - Grep on Steroids
 
-[Ripgrep](https://github.com/BurntSushi/ripgrep) offers blazing-fast text search with intelligent defaults:
+[Ripgrep](https://github.com/BurntSushi/ripgrep) offers blazing-fast text search
+with intelligent defaults:
 
 ```bash
 # Basic search
@@ -171,13 +180,14 @@ rg "old_function" --replace "new_function" --type py
 rg "pattern" --json | jq '.data.lines.text'
 ```
 
-{{< note title="Ripgrep Performance" >}}
-Ripgrep is significantly faster than grep, ack, or ag because:
+{{< note title="Ripgrep Performance" >}} Ripgrep is significantly faster than
+grep, ack, or ag because:
+
 - **Parallelization**: Uses multiple threads by default
 - **Optimized algorithms**: Boyer-Moore string searching
 - **Smart filtering**: Respects .gitignore and binary file detection
 - **Memory efficiency**: Streaming search without loading entire files
-{{< /note >}}
+  {{< /note >}}
 
 ## Development Utilities and Automation
 
@@ -199,11 +209,13 @@ python -m http.server 8000 --directory /path/to/files
 python -m http.server 8000 --bind 127.0.0.1
 ```
 
-This needs no additional dependencies and is available everywhere Python is installed.
+This needs no additional dependencies and is available everywhere Python is
+installed.
 
 ### Live-Server for Frontend Development
 
-[Live-Server](https://github.com/tapio/live-server) provides automatic browser refresh for static HTML development:
+[Live-Server](https://github.com/tapio/live-server) provides automatic browser
+refresh for static HTML development:
 
 ```bash
 # Install globally
@@ -224,7 +236,8 @@ live-server --proxy=/api:http://localhost:3000
 
 ### Pre-commit Hooks Management
 
-[Pre-commit](https://pre-commit.com/) standardizes and automates code quality checks:
+[Pre-commit](https://pre-commit.com/) standardizes and automates code quality
+checks:
 
 ```yaml
 # .pre-commit-config.yaml
@@ -271,7 +284,8 @@ pre-commit autoupdate
 
 ### Cookiecutter - Project Templating
 
-[Cookiecutter](https://cookiecutter.readthedocs.io) uses Jinja2 templates to generate project scaffolding:
+[Cookiecutter](https://cookiecutter.readthedocs.io) uses Jinja2 templates to
+generate project scaffolding:
 
 ```bash
 # Install cookiecutter
@@ -294,19 +308,21 @@ my-template/
 ```
 
 Template configuration:
+
 ```json
 {
-    "project_name": "My Project",
-    "module_name": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
-    "author_name": "Your Name",
-    "version": "0.1.0",
-    "license": ["MIT", "BSD", "GPL"]
+  "project_name": "My Project",
+  "module_name": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
+  "author_name": "Your Name",
+  "version": "0.1.0",
+  "license": ["MIT", "BSD", "GPL"]
 }
 ```
 
 ### YouTube-DL - Media Download Utility
 
-[YouTube-DL](https://github.com/ytdl-org/youtube-dl) enables downloading and converting media from numerous platforms:
+[YouTube-DL](https://github.com/ytdl-org/youtube-dl) enables downloading and
+converting media from numerous platforms:
 
 ```bash
 # Install
@@ -362,7 +378,8 @@ cloc --csv .
 
 ### Tokei - Modern Code Counter
 
-[Tokei](https://github.com/XAMPPRocky/tokei) offers faster, more accurate line counting:
+[Tokei](https://github.com/XAMPPRocky/tokei) offers faster, more accurate line
+counting:
 
 ```bash
 # Install
@@ -386,7 +403,8 @@ tokei --output yaml
 
 ### FastAPI - Async Flask Alternative
 
-[FastAPI](https://fastapi.tiangolo.com/) provides high-performance async Python web APIs:
+[FastAPI](https://fastapi.tiangolo.com/) provides high-performance async Python
+web APIs:
 
 ```python
 from fastapi import FastAPI, HTTPException, Depends
@@ -411,7 +429,7 @@ class UserCreate(BaseModel):
 async def get_user(user_id: int):
     if user_id < 1:
         raise HTTPException(status_code=404, detail="User not found")
-    
+
     # Simulate async database call
     await asyncio.sleep(0.1)
     return User(id=user_id, name="John Doe", email="john@example.com")
@@ -434,14 +452,14 @@ async def read_users_me(current_user: User = Depends(get_current_user)):
 ```
 
 {{< example title="FastAPI Benefits" >}}
+
 - **Automatic OpenAPI/Swagger docs** at `/docs`
 - **Type hints** for automatic validation
 - **Async support** for high concurrency
 - **Dependency injection** system
 - **OAuth2 integration** built-in
 - **WebSocket support** for real-time features
-- **Background tasks** for async processing
-{{< /example >}}
+- **Background tasks** for async processing {{< /example >}}
 
 ### Go Web Frameworks
 
@@ -478,7 +496,8 @@ func (c App) Hello(myName string) revel.Result {
 
 ### Bandit - Python Security Scanner
 
-[Bandit](https://github.com/PyCQA/bandit) identifies common security issues in Python code:
+[Bandit](https://github.com/PyCQA/bandit) identifies common security issues in
+Python code:
 
 ```bash
 # Install
@@ -500,7 +519,8 @@ bandit -r . -c bandit.conf
 
 ### Responses - Mock HTTP Requests
 
-[Responses](https://github.com/getsentry/responses) enables safe mocking of HTTP requests in tests:
+[Responses](https://github.com/getsentry/responses) enables safe mocking of HTTP
+requests in tests:
 
 ```python
 import responses
@@ -515,20 +535,20 @@ def test_api_call():
         json={"id": 1, "name": "John Doe"},
         status=200
     )
-    
+
     # Make the request
     resp = requests.get("https://api.example.com/users/1")
-    
+
     # Test the response
     assert resp.status_code == 200
     assert resp.json()["name"] == "John Doe"
 
 # Dynamic responses
-@responses.activate  
+@responses.activate
 def test_dynamic_response():
     def request_callback(request):
         return (200, {}, '{"dynamic": "response"}')
-    
+
     responses.add_callback(
         responses.GET,
         "https://api.example.com/dynamic",
@@ -543,21 +563,23 @@ def test_dynamic_response():
 When choosing modern development tools, key factors include:
 
 {{< tip title="Tool Evaluation Framework" >}}
+
 1. **Performance**: Measurably faster than alternatives
-2. **Ergonomics**: Better default behavior and user experience  
+2. **Ergonomics**: Better default behavior and user experience
 3. **Integration**: Works well with existing workflows
 4. **Maintenance**: Actively maintained with good documentation
-5. **Cross-platform**: Consistent behavior across operating systems  
-6. **Community**: Strong ecosystem and community support
-{{< /tip >}}
+5. **Cross-platform**: Consistent behavior across operating systems
+6. **Community**: Strong ecosystem and community support {{< /tip >}}
 
 ### Command-Line Productivity Multipliers
 
 The modern command-line tools demonstrate several important patterns:
 
 1. **Intelligent Defaults**: Tools like `rg` and `bat` make smart assumptions
-2. **Better Output**: Syntax highlighting and structured display improve usability
-3. **Performance Focus**: Rust-based tools leverage systems programming for speed
+2. **Better Output**: Syntax highlighting and structured display improve
+   usability
+3. **Performance Focus**: Rust-based tools leverage systems programming for
+   speed
 4. **Integration-First**: Designed to work with pipes, scripts, and other tools
 5. **Configuration**: Reasonable defaults with extensive customization options
 
@@ -579,16 +601,19 @@ export FZF_DEFAULT_COMMAND='rg --files'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 ```
 
-{{< warning title="Migration Considerations" >}}
-When adopting new tools:
+{{< warning title="Migration Considerations" >}} When adopting new tools:
+
 - **Script Compatibility**: Some scripts may depend on specific output formats
 - **Team Alignment**: Ensure team members can use the same tools
 - **Learning Curve**: Budget time for learning new command syntax
 - **Fallback Plans**: Keep traditional tools available for compatibility
-{{< /warning >}}
+  {{< /warning >}}
 
-This exploration of modern development tools showcases how thoughtful tool selection can dramatically improve developer productivity and code quality.
+This exploration of modern development tools showcases how thoughtful tool
+selection can dramatically improve developer productivity and code quality.
 
 ---
 
-*These modern development tools from my archive demonstrate the ongoing evolution of developer tooling, with languages like Rust enabling a new generation of fast, reliable, and user-friendly command-line utilities.*
+_These modern development tools from my archive demonstrate the ongoing
+evolution of developer tooling, with languages like Rust enabling a new
+generation of fast, reliable, and user-friendly command-line utilities._

@@ -2,7 +2,11 @@
 date: 2021-01-31T10:00:00+05:30
 draft: false
 title: "TIL: Build Your Own X Repository and Web Dev Junkie YouTube Channel"
-description: "Today I learned about the comprehensive 'Build Your Own X' repository containing tutorials for building everything from operating systems to databases, and discovered the Web Dev Junkie YouTube channel for modern web development tutorials."
+description:
+  "Today I learned about the comprehensive 'Build Your Own X' repository
+  containing tutorials for building everything from operating systems to
+  databases, and discovered the Web Dev Junkie YouTube channel for modern web
+  development tutorials."
 tags:
   - TIL
   - Learning Resources
@@ -16,9 +20,11 @@ tags:
 
 [GitHub - danistefanovic/build-your-own-x: 🤓 Build your own (insert technology here)](https://github.com/danistefanovic/build-your-own-x)
 
-Curated collection of tutorials for building complex software systems from scratch:
+Curated collection of tutorials for building complex software systems from
+scratch:
 
 ### What Makes It Special:
+
 - **Learn by Building**: Hands-on approach to understanding complex systems
 - **Comprehensive Coverage**: Everything from simple tools to operating systems
 - **Multiple Languages**: Tutorials in various programming languages
@@ -27,6 +33,7 @@ Curated collection of tutorials for building complex software systems from scrat
 ### Categories Covered:
 
 #### **System-Level Programming:**
+
 - **3D Renderer**: Graphics programming and computer graphics theory
 - **Blockchain/Cryptocurrency**: Distributed systems and consensus algorithms
 - **Database**: Storage engines, indexing, query processing
@@ -35,6 +42,7 @@ Curated collection of tutorials for building complex software systems from scrat
 - **Operating System**: Kernel development, memory management, scheduling
 
 #### **Network and Web:**
+
 - **BitTorrent Client**: Peer-to-peer networking protocols
 - **Bot**: Automated systems and AI agents
 - **Command-Line Tool**: System utilities and developer tools
@@ -43,6 +51,7 @@ Curated collection of tutorials for building complex software systems from scrat
 - **Web Server**: HTTP servers and web application architecture
 
 #### **Programming Languages and Tools:**
+
 - **Compiler**: Lexical analysis, parsing, code generation
 - **Game**: Game engines, physics simulation, graphics
 - **Neural Network**: Machine learning and artificial intelligence
@@ -57,17 +66,19 @@ Curated collection of tutorials for building complex software systems from scrat
 ### Learning Benefits:
 
 #### **Deep Technical Understanding:**
+
 ```
 Instead of:    "I can use PostgreSQL"
-You get:       "I understand how B-trees work, ACID transactions, 
+You get:       "I understand how B-trees work, ACID transactions,
                query optimization, and storage engines"
 
-Instead of:    "I can deploy with Docker"  
+Instead of:    "I can deploy with Docker"
 You get:       "I understand cgroups, namespaces, union filesystems,
                and container runtime architectures"
 ```
 
 #### **Problem-Solving Skills:**
+
 - **System Design**: Understanding trade-offs and architectural decisions
 - **Debugging**: Low-level debugging and performance analysis
 - **Optimization**: Performance tuning and resource management
@@ -76,6 +87,7 @@ You get:       "I understand cgroups, namespaces, union filesystems,
 ### Example Projects:
 
 #### **Build Your Own Database:**
+
 ```c
 // Simple key-value storage engine
 typedef struct {
@@ -95,6 +107,7 @@ typedef struct btree_node {
 ```
 
 **Topics Covered:**
+
 - Storage engines and file formats
 - B-tree indexing and query optimization
 - Transaction handling and ACID properties
@@ -102,6 +115,7 @@ typedef struct btree_node {
 - Recovery and durability guarantees
 
 #### **Build Your Own Git:**
+
 ```bash
 # Basic git commands to implement
 git init        # Repository initialization
@@ -113,6 +127,7 @@ git log         # History traversal
 ```
 
 **Concepts Learned:**
+
 - Content-addressable storage with SHA-1 hashing
 - Directed acyclic graphs for version history
 - Delta compression and pack files
@@ -122,12 +137,14 @@ git log         # History traversal
 ### Career Impact:
 
 #### **Interview Advantages:**
+
 - **Technical Depth**: Demonstrate deep understanding of fundamental concepts
 - **System Design**: Better equipped for system design interviews
 - **Problem Solving**: Experience with complex, multi-faceted problems
 - **Communication**: Ability to explain complex systems clearly
 
 #### **Professional Development:**
+
 - **Architecture Skills**: Better software architecture and design decisions
 - **Debugging Ability**: Understanding systems from first principles
 - **Innovation**: Foundation for creating new tools and solutions
@@ -142,27 +159,29 @@ YouTube channel focused on modern web development practices and tutorials:
 ### Content Focus:
 
 #### **Modern JavaScript:**
+
 - **ES6+ Features**: Arrow functions, destructuring, async/await
 - **Framework Deep Dives**: React, Vue, Angular, Svelte
 - **Build Tools**: Webpack, Vite, Rollup, Parcel
 - **Testing**: Jest, Cypress, Testing Library
 
 #### **Full-Stack Development:**
+
 ```javascript
 // Modern React with Hooks
-import React, { useState, useEffect } from 'react';
-import { useMutation, useQuery } from '@apollo/client';
+import React, { useState, useEffect } from "react";
+import { useMutation, useQuery } from "@apollo/client";
 
 const UserProfile = ({ userId }) => {
   const { data, loading, error } = useQuery(GET_USER, {
-    variables: { id: userId }
+    variables: { id: userId },
   });
-  
+
   const [updateUser] = useMutation(UPDATE_USER);
-  
+
   if (loading) return <Spinner />;
   if (error) return <ErrorMessage error={error} />;
-  
+
   return (
     <div className="user-profile">
       <h1>{data.user.name}</h1>
@@ -173,6 +192,7 @@ const UserProfile = ({ userId }) => {
 ```
 
 #### **Backend Technologies:**
+
 - **Node.js**: Express, Fastify, NestJS
 - **Database Integration**: MongoDB, PostgreSQL, Redis
 - **API Design**: REST, GraphQL, tRPC
@@ -181,12 +201,14 @@ const UserProfile = ({ userId }) => {
 ### Teaching Approach:
 
 #### **Project-Based Learning:**
+
 - **Real-World Applications**: Build actual applications, not just demos
 - **Best Practices**: Industry-standard coding practices and patterns
 - **Production Ready**: Deployment, monitoring, and maintenance
 - **Code Reviews**: Analysis of code quality and optimization
 
 #### **Modern Tooling:**
+
 ```json
 {
   "scripts": {
@@ -210,18 +232,21 @@ const UserProfile = ({ userId }) => {
 ### Key Topics:
 
 #### **Performance Optimization:**
+
 - **Core Web Vitals**: LCP, FID, CLS optimization
 - **Bundle Analysis**: Code splitting and lazy loading
 - **Caching Strategies**: Service workers and browser caching
 - **Database Optimization**: Query optimization and caching
 
 #### **Developer Experience:**
+
 - **Hot Module Replacement**: Fast development feedback loops
 - **TypeScript Integration**: Type safety in JavaScript projects
 - **Error Handling**: Proper error boundaries and logging
 - **Debugging Tools**: Browser dev tools and debugging strategies
 
 ### Learning Path:
+
 1. **JavaScript Fundamentals**: ES6+, asynchronous programming
 2. **React Ecosystem**: Hooks, context, state management
 3. **Build Tools**: Bundlers, transpilers, development servers
@@ -229,4 +254,7 @@ const UserProfile = ({ userId }) => {
 5. **Testing**: Unit tests, integration tests, e2e tests
 6. **Deployment**: CI/CD, hosting platforms, monitoring
 
-Both resources represent excellent approaches to learning programming - the "Build Your Own X" repository focuses on fundamental computer science concepts through hands-on implementation, while Web Dev Junkie provides practical, modern web development skills for current industry needs.
+Both resources represent excellent approaches to learning programming - the
+"Build Your Own X" repository focuses on fundamental computer science concepts
+through hands-on implementation, while Web Dev Junkie provides practical, modern
+web development skills for current industry needs.

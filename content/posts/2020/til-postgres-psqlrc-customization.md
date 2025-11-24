@@ -2,7 +2,9 @@
 date: 2020-11-08T10:00:00+05:30
 draft: false
 title: "TIL: Customizing PostgreSQL Shell with psqlrc Configuration"
-description: "Today I learned how to customize the PostgreSQL command-line interface using psqlrc configuration files to improve productivity and user experience."
+description:
+  "Today I learned how to customize the PostgreSQL command-line interface using
+  psqlrc configuration files to improve productivity and user experience."
 tags:
   - til
   - postgresql
@@ -12,11 +14,14 @@ tags:
   - sql
 ---
 
-Today I discovered how to transform the PostgreSQL command-line experience through custom psqlrc configuration, making database work more efficient and user-friendly.
+Today I discovered how to transform the PostgreSQL command-line experience
+through custom psqlrc configuration, making database work more efficient and
+user-friendly.
 
 ## PostgreSQL Shell Customization
 
-[Customizing Postgres shell using psqlrc](https://www.citusdata.com/blog/2017/07/16/customizing-my-postgres-shell-using-psqlrc/) demonstrates how to create a personalized and productive PostgreSQL environment.
+[Customizing Postgres shell using psqlrc](https://www.citusdata.com/blog/2017/07/16/customizing-my-postgres-shell-using-psqlrc/)
+demonstrates how to create a personalized and productive PostgreSQL environment.
 
 ### Basic psqlrc Configuration
 
@@ -51,6 +56,7 @@ Create `~/.psqlrc` to customize your PostgreSQL shell:
 ### Advanced Customization Features
 
 #### **Custom Shortcuts and Macros:**
+
 ```sql
 -- Useful shortcuts
 \set conninfo 'SELECT usename, application_name, client_addr, state FROM pg_stat_activity;'
@@ -68,11 +74,12 @@ Create `~/.psqlrc` to customize your PostgreSQL shell:
 ```
 
 #### **Performance Monitoring Shortcuts:**
+
 ```sql
 -- Query performance
 \set slow_queries 'SELECT query, calls, total_time, mean_time, (100.0 * total_time / sum(total_time) OVER()) AS percentage_cpu FROM pg_stat_statements ORDER BY total_time DESC LIMIT 20;'
 
--- Connection monitoring  
+-- Connection monitoring
 \set blocking 'SELECT bl.pid as blocked_pid, a.usename as blocked_user, ka.query as current_statement_in_blocking_process, now() - ka.query_start as blocking_duration, ka.pid as blocking_pid, ka.usename as blocking_user, a.query as blocked_statement, now() - a.query_start as blocked_duration FROM pg_catalog.pg_locks bl JOIN pg_catalog.pg_stat_activity a ON bl.pid = a.pid JOIN pg_catalog.pg_locks kl ON bl.transactionid = kl.transactionid AND bl.pid != kl.pid JOIN pg_catalog.pg_stat_activity ka ON kl.pid = ka.pid WHERE NOT bl.granted;'
 
 -- Cache hit ratio
@@ -82,6 +89,7 @@ Create `~/.psqlrc` to customize your PostgreSQL shell:
 ### Productivity Enhancements
 
 #### **Enhanced Display Settings:**
+
 ```sql
 -- Better null representation
 \pset null '¤'
@@ -104,6 +112,7 @@ Create `~/.psqlrc` to customize your PostgreSQL shell:
 ```
 
 #### **Development Helpers:**
+
 ```sql
 -- Transaction shortcuts
 \set commit 'COMMIT;'
@@ -114,7 +123,7 @@ Create `~/.psqlrc` to customize your PostgreSQL shell:
 -- Schema exploration
 \set desc_table 'SELECT column_name, data_type, is_nullable, column_default FROM information_schema.columns WHERE table_name = '
 \set list_tables '\dt'
-\set list_views '\dv'  
+\set list_views '\dv'
 \set list_functions '\df'
 \set list_indexes '\di'
 
@@ -125,6 +134,7 @@ Create `~/.psqlrc` to customize your PostgreSQL shell:
 ### Usage Examples
 
 #### **Using Custom Shortcuts:**
+
 ```sql
 -- Check database connections
 :conninfo
@@ -143,6 +153,7 @@ Create `~/.psqlrc` to customize your PostgreSQL shell:
 ```
 
 #### **Environment-Specific Configurations:**
+
 ```sql
 -- Different settings for different environments
 \if :{?PRODUCTION}
@@ -161,4 +172,5 @@ Create `~/.psqlrc` to customize your PostgreSQL shell:
 - **Environment awareness**: Visual cues for different database environments
 - **Enhanced history**: Better command history management
 
-This configuration transforms PostgreSQL from a basic command-line tool into a powerful, user-friendly database administration interface.
+This configuration transforms PostgreSQL from a basic command-line tool into a
+powerful, user-friendly database administration interface.

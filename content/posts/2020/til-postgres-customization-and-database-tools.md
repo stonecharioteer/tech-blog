@@ -2,7 +2,10 @@
 date: 2020-11-08T17:00:00+05:30
 draft: false
 title: "TIL: PostgreSQL Customization and Advanced Database Management"
-description: "Today I learned about customizing PostgreSQL shell environments, advanced psql configurations, and database administration best practices for enhanced productivity."
+description:
+  "Today I learned about customizing PostgreSQL shell environments, advanced
+  psql configurations, and database administration best practices for enhanced
+  productivity."
 tags:
   - til
   - postgresql
@@ -13,13 +16,16 @@ tags:
   - productivity
 ---
 
-Today I discovered comprehensive techniques for customizing PostgreSQL environments and learned advanced database management practices that significantly improve developer and DBA productivity.
+Today I discovered comprehensive techniques for customizing PostgreSQL
+environments and learned advanced database management practices that
+significantly improve developer and DBA productivity.
 
 ## PostgreSQL Shell Customization with .psqlrc
 
 ### Advanced .psqlrc Configuration
 
-[Customizing PostgreSQL shell using psqlrc](https://www.citusdata.com/blog/2017/07/16/customizing-my-postgres-shell-using-psqlrc/) reveals powerful techniques for creating a more productive database environment:
+[Customizing PostgreSQL shell using psqlrc](https://www.citusdata.com/blog/2017/07/16/customizing-my-postgres-shell-using-psqlrc/)
+reveals powerful techniques for creating a more productive database environment:
 
 ```sql
 -- ~/.psqlrc - PostgreSQL shell customization
@@ -114,11 +120,11 @@ Enhanced psql environment for database development:
 
 -- 1. Database size and growth trends
 WITH db_size AS (
-    SELECT 
+    SELECT
         datname,
         pg_size_pretty(pg_database_size(datname)) as current_size,
         pg_database_size(datname) as size_bytes
-    FROM pg_database 
+    FROM pg_database
     WHERE datistemplate = false
 )
 SELECT * FROM db_size ORDER BY size_bytes DESC;
@@ -130,17 +136,17 @@ WITH table_bloat AS (
         tablename,
         pg_size_pretty(pg_total_relation_size(schemaname||'.'||tablename)) as table_size,
         pg_size_pretty(pg_relation_size(schemaname||'.'||tablename)) as data_size,
-        pg_size_pretty(pg_total_relation_size(schemaname||'.'||tablename) - 
+        pg_size_pretty(pg_total_relation_size(schemaname||'.'||tablename) -
                       pg_relation_size(schemaname||'.'||tablename)) as index_size,
         ROUND(
-            100.0 * (pg_total_relation_size(schemaname||'.'||tablename) - 
-                    pg_relation_size(schemaname||'.'||tablename)) / 
+            100.0 * (pg_total_relation_size(schemaname||'.'||tablename) -
+                    pg_relation_size(schemaname||'.'||tablename)) /
                     NULLIF(pg_total_relation_size(schemaname||'.'||tablename), 0), 2
         ) as index_ratio
-    FROM pg_tables 
+    FROM pg_tables
     WHERE schemaname = 'public'
 )
-SELECT * FROM table_bloat 
+SELECT * FROM table_bloat
 ORDER BY pg_size_bytes(regexp_replace(table_size, '[^0-9]', '', 'g')::bigint) DESC;
 
 -- 3. Index usage effectiveness
@@ -151,7 +157,7 @@ WITH index_usage AS (
         indexname,
         idx_tup_read,
         idx_tup_fetch,
-        CASE 
+        CASE
             WHEN idx_tup_read = 0 THEN 0
             ELSE ROUND(100.0 * idx_tup_fetch / idx_tup_read, 2)
         END as hit_rate,
@@ -160,12 +166,12 @@ WITH index_usage AS (
     JOIN pg_indexes pi ON psi.indexrelname = pi.indexname
     WHERE schemaname = 'public'
 )
-SELECT * FROM index_usage 
-WHERE idx_tup_read > 0 
+SELECT * FROM index_usage
+WHERE idx_tup_read > 0
 ORDER BY hit_rate ASC, idx_tup_read DESC;
 
 -- 4. Query performance analysis (requires pg_stat_statements)
-SELECT 
+SELECT
     query,
     calls,
     total_time,
@@ -175,9 +181,9 @@ SELECT
     rows,
     100.0 * shared_blks_hit / NULLIF(shared_blks_hit + shared_blks_read, 0) AS hit_percent,
     pg_size_pretty(temp_blks_written * 8192::bigint) as temp_written
-FROM pg_stat_statements 
+FROM pg_stat_statements
 WHERE calls > 100  -- Focus on frequently called queries
-ORDER BY total_time DESC 
+ORDER BY total_time DESC
 LIMIT 20;
 ```
 
@@ -193,41 +199,41 @@ DECLARE
     vacuum_cmd TEXT;
 BEGIN
     -- Loop through all user tables
-    FOR table_record IN 
-        SELECT schemaname, tablename 
-        FROM pg_tables 
+    FOR table_record IN
+        SELECT schemaname, tablename
+        FROM pg_tables
         WHERE schemaname = 'public'
     LOOP
         -- Build vacuum analyze command
-        vacuum_cmd := 'VACUUM ANALYZE ' || 
-                     quote_ident(table_record.schemaname) || '.' || 
+        vacuum_cmd := 'VACUUM ANALYZE ' ||
+                     quote_ident(table_record.schemaname) || '.' ||
                      quote_ident(table_record.tablename);
-        
+
         RAISE NOTICE 'Executing: %', vacuum_cmd;
         EXECUTE vacuum_cmd;
-        
+
         -- Add delay to prevent overwhelming the system
         PERFORM pg_sleep(0.1);
     END LOOP;
-    
+
     RAISE NOTICE 'Vacuum analyze completed for all tables';
 END
 $$;
 
 -- 2. Index maintenance and optimization
 WITH unused_indexes AS (
-    SELECT 
+    SELECT
         schemaname,
         tablename,
         indexname,
         pg_size_pretty(pg_relation_size(indexname::regclass)) as size,
         idx_scan
-    FROM pg_stat_user_indexes 
-    WHERE idx_scan = 0 
+    FROM pg_stat_user_indexes
+    WHERE idx_scan = 0
     AND schemaname = 'public'
     AND pg_relation_size(indexname::regclass) > 1024 * 1024  -- Larger than 1MB
 )
-SELECT 
+SELECT
     'DROP INDEX ' || quote_ident(schemaname) || '.' || quote_ident(indexname) || ';' as drop_command,
     size,
     'Unused index on ' || tablename as reason
@@ -236,7 +242,7 @@ ORDER BY pg_size_bytes(size) DESC;
 
 -- 3. Connection monitoring and cleanup
 WITH connection_stats AS (
-    SELECT 
+    SELECT
         datname,
         usename,
         application_name,
@@ -246,13 +252,13 @@ WITH connection_stats AS (
         MAX(query_start) as last_query,
         SUM(CASE WHEN state = 'idle' THEN 1 ELSE 0 END) as idle_connections,
         SUM(CASE WHEN state = 'active' THEN 1 ELSE 0 END) as active_connections
-    FROM pg_stat_activity 
+    FROM pg_stat_activity
     WHERE pid != pg_backend_pid()  -- Exclude current connection
     GROUP BY datname, usename, application_name, client_addr, state
 )
-SELECT 
+SELECT
     *,
-    CASE 
+    CASE
         WHEN idle_connections > 10 AND last_query < NOW() - INTERVAL '1 hour'
         THEN 'Consider terminating idle connections'
         WHEN active_connections > 50
@@ -366,7 +372,7 @@ echo "Verifying backup integrity..."
 pg_restore --list "${BACKUP_DIR}/full_backup_${DATE}.dump" > /dev/null
 if [ $? -eq 0 ]; then
     echo "Backup verification successful"
-    
+
     # Log backup completion
     echo "$(date): Backup completed successfully - ${BACKUP_DIR}/full_backup_${DATE}.dump" >> "${BACKUP_DIR}/backup.log"
 else
@@ -387,7 +393,7 @@ echo "Backup process completed"
 
 -- 1. Identify slow queries with detailed analysis
 WITH slow_queries AS (
-    SELECT 
+    SELECT
         query,
         calls,
         total_time,
@@ -400,12 +406,12 @@ WITH slow_queries AS (
         shared_blks_written,
         temp_blks_read,
         temp_blks_written
-    FROM pg_stat_statements 
+    FROM pg_stat_statements
     WHERE mean_time > 100  -- Queries averaging more than 100ms
     OR total_time > 10000  -- Queries with high total time
     ORDER BY total_time DESC
 )
-SELECT 
+SELECT
     LEFT(query, 100) as query_snippet,
     calls,
     ROUND(total_time::numeric, 2) as total_time_ms,
@@ -413,7 +419,7 @@ SELECT
     ROUND(max_time::numeric, 2) as max_time_ms,
     rows,
     ROUND(cache_hit_ratio::numeric, 2) as cache_hit_pct,
-    CASE 
+    CASE
         WHEN temp_blks_written > 0 THEN 'Uses temp files'
         WHEN cache_hit_ratio < 95 THEN 'Poor cache utilization'
         WHEN mean_time > 1000 THEN 'Very slow average'
@@ -424,7 +430,7 @@ LIMIT 20;
 
 -- 2. Index recommendations based on query patterns
 WITH table_scans AS (
-    SELECT 
+    SELECT
         schemaname,
         tablename,
         seq_scan,
@@ -436,33 +442,33 @@ WITH table_scans AS (
     WHERE schemaname = 'public'
 ),
 index_candidates AS (
-    SELECT 
+    SELECT
         schemaname,
         tablename,
         seq_scan,
         seq_tup_read,
-        CASE 
-            WHEN seq_scan > 0 THEN seq_tup_read / seq_scan 
-            ELSE 0 
+        CASE
+            WHEN seq_scan > 0 THEN seq_tup_read / seq_scan
+            ELSE 0
         END as avg_seq_read,
         idx_scan,
         modifications,
-        CASE 
-            WHEN seq_scan > idx_scan AND seq_tup_read > 10000 
+        CASE
+            WHEN seq_scan > idx_scan AND seq_tup_read > 10000
             THEN 'High sequential scan activity - consider indexing'
-            WHEN modifications > (idx_scan + seq_scan) * 10 
+            WHEN modifications > (idx_scan + seq_scan) * 10
             THEN 'High modification rate - index overhead may be significant'
             ELSE 'Normal access pattern'
         END as recommendation
     FROM table_scans
 )
-SELECT * FROM index_candidates 
+SELECT * FROM index_candidates
 WHERE recommendation LIKE 'High%'
 ORDER BY avg_seq_read DESC;
 
 -- 3. Connection and lock analysis
 WITH connection_analysis AS (
-    SELECT 
+    SELECT
         datname,
         usename,
         application_name,
@@ -471,13 +477,13 @@ WITH connection_analysis AS (
         AVG(EXTRACT(EPOCH FROM (now() - query_start))) as avg_query_duration,
         MAX(EXTRACT(EPOCH FROM (now() - query_start))) as max_query_duration,
         SUM(CASE WHEN state = 'idle in transaction' THEN 1 ELSE 0 END) as idle_in_transaction
-    FROM pg_stat_activity 
+    FROM pg_stat_activity
     WHERE pid != pg_backend_pid()
     GROUP BY datname, usename, application_name, state
 )
-SELECT 
+SELECT
     *,
-    CASE 
+    CASE
         WHEN idle_in_transaction > 0 THEN 'Idle transactions detected - may cause blocking'
         WHEN max_query_duration > 300 THEN 'Long-running queries detected'
         WHEN connection_count > 100 THEN 'High connection count'
@@ -491,27 +497,28 @@ ORDER BY connection_count DESC;
 
 ### Essential psql Commands and Shortcuts
 
-{{< tip title="Advanced psql Usage" >}}
-**Navigation and Information:**
+{{< tip title="Advanced psql Usage" >}} **Navigation and Information:**
+
 - `\l` - List databases
-- `\dt` - List tables  
+- `\dt` - List tables
 - `\d+ table_name` - Describe table with details
 - `\df` - List functions
 - `\dv` - List views
 - `\dn` - List schemas
 
 **Query Management:**
+
 - `\e` - Edit last query in external editor
 - `\g` - Re-run last query
 - `\s` - Show command history
 - `\i filename.sql` - Execute SQL file
 
 **Output Control:**
+
 - `\x` - Toggle expanded output
 - `\a` - Toggle aligned output
 - `\t` - Toggle tuples-only mode
-- `\pset format html` - HTML output format
-{{< /tip >}}
+- `\pset format html` - HTML output format {{< /tip >}}
 
 ### Database Health Monitoring
 
@@ -522,8 +529,13 @@ ORDER BY connection_count DESC;
 \set weekly_maintenance 'SELECT ''Run VACUUM ANALYZE on all tables'' as task, CASE WHEN MAX(last_autovacuum) < NOW() - INTERVAL ''7 days'' OR MAX(last_autovacuum) IS NULL THEN ''URGENT'' ELSE ''OK'' END as status FROM pg_stat_user_tables UNION ALL SELECT ''Check for unused indexes'', CASE WHEN COUNT(*) > 0 THEN ''REVIEW NEEDED'' ELSE ''OK'' END FROM pg_stat_user_indexes WHERE idx_scan = 0 AND pg_relation_size(indexrelname::regclass) > 1024*1024 UNION ALL SELECT ''Monitor connection count'', CASE WHEN COUNT(*) > 80 THEN ''HIGH'' WHEN COUNT(*) > 50 THEN ''MEDIUM'' ELSE ''OK'' END FROM pg_stat_activity WHERE pid != pg_backend_pid();'
 ```
 
-This comprehensive exploration of PostgreSQL customization and management demonstrates how proper configuration and monitoring can transform database administration from reactive troubleshooting to proactive optimization.
+This comprehensive exploration of PostgreSQL customization and management
+demonstrates how proper configuration and monitoring can transform database
+administration from reactive troubleshooting to proactive optimization.
 
 ---
 
-*These PostgreSQL insights from my archive showcase the evolution from basic database usage to advanced administration practices, emphasizing the importance of proper tooling and systematic monitoring for database reliability and performance.*
+_These PostgreSQL insights from my archive showcase the evolution from basic
+database usage to advanced administration practices, emphasizing the importance
+of proper tooling and systematic monitoring for database reliability and
+performance._
