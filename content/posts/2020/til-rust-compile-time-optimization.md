@@ -2,7 +2,10 @@
 date: 2020-07-22T18:00:00+05:30
 draft: false
 title: "TIL: Optimizing Rust Compile Times"
-description: "Today I learned about techniques to improve Rust compilation performance, including dependency management, feature flags, incremental compilation, and toolchain optimization strategies."
+description:
+  "Today I learned about techniques to improve Rust compilation performance,
+  including dependency management, feature flags, incremental compilation, and
+  toolchain optimization strategies."
 tags:
   - til
   - rust
@@ -12,13 +15,15 @@ tags:
   - optimization
 ---
 
-Today I discovered comprehensive strategies for reducing Rust compilation times, which is crucial for maintaining developer productivity in large Rust projects.
+Today I discovered comprehensive strategies for reducing Rust compilation times,
+which is crucial for maintaining developer productivity in large Rust projects.
 
 ## Understanding Rust Compilation Performance
 
 ### Why Rust Compilation is Slow
 
-[Tips for faster Rust Compile Times](https://endler.dev/2020/rust-compile-times/) explores the fundamental reasons behind Rust's compilation characteristics:
+[Tips for faster Rust Compile Times](https://endler.dev/2020/rust-compile-times/)
+explores the fundamental reasons behind Rust's compilation characteristics:
 
 ```rust
 // Rust's compilation model leads to inherent trade-offs
@@ -38,7 +43,7 @@ fn demonstrate_monomorphization() {
     let numbers = vec![1, 2, 3, 4, 5];
     let strings = vec!["a", "b", "c"];
     let floats = vec![1.0, 2.0, 3.0];
-    
+
     // Three separate compiled versions of process_collection
     let _processed_numbers = process_collection(&numbers);     // process_collection<i32>
     let _processed_strings = process_collection(&strings);     // process_collection<&str>
@@ -73,15 +78,15 @@ trait ComplexTrait<T> {
 // The compiler must resolve all these relationships
 impl<T: Clone + std::fmt::Debug> ComplexTrait<T> for Vec<T> {
     type Output = String;
-    
+
     fn complex_method(&self, _input: T) -> Self::Output {
         format!("Processed {} items", self.len())
     }
 }
 
 // Usage requires complex trait resolution
-fn use_complex_trait<C, T>(container: &C, item: T) -> C::Output 
-where 
+fn use_complex_trait<C, T>(container: &C, item: T) -> C::Output
+where
     C: ComplexTrait<T>,
     T: Clone + std::fmt::Debug,
 {
@@ -143,12 +148,12 @@ impl MyStruct {
     pub fn new(name: String, value: i32) -> Self {
         Self { name, value }
     }
-    
+
     #[cfg(feature = "json")]
     pub fn to_json(&self) -> Result<String, serde_json::Error> {
         serde_json::to_string(self)
     }
-    
+
     #[cfg(feature = "yaml")]
     pub fn to_yaml(&self) -> Result<String, serde_yaml::Error> {
         serde_yaml::to_string(self)
@@ -266,7 +271,7 @@ opt-level = 1
 members = [
     "core",
     "cli",
-    "web", 
+    "web",
     "utils"
 ]
 
@@ -299,27 +304,27 @@ fn main() {
     // Only rebuild when specific files change
     println!("cargo:rerun-if-changed=proto/");
     println!("cargo:rerun-if-changed=build.rs");
-    
+
     // Skip expensive operations in debug builds
     let profile = env::var("PROFILE").unwrap_or_default();
     if profile == "debug" {
         println!("cargo:warning=Skipping expensive build operations in debug mode");
         return;
     }
-    
+
     // Use parallel processing when possible
     let num_jobs = env::var("NUM_JOBS")
         .ok()
         .and_then(|s| s.parse().ok())
         .unwrap_or_else(|| std::thread::available_parallelism().unwrap().get());
-    
+
     // Example: Protocol buffer compilation
     let proto_files = ["proto/api.proto", "proto/messages.proto"];
-    
+
     // Configure protobuf compilation
     let mut config = prost_build::Config::new();
     config.out_dir("src/generated/");
-    
+
     // Only recompile if proto files changed
     for proto_file in &proto_files {
         if is_newer_than_target(proto_file) {
@@ -331,15 +336,15 @@ fn main() {
 fn is_newer_than_target(source: &str) -> bool {
     use std::fs;
     use std::time::SystemTime;
-    
+
     let source_time = fs::metadata(source)
         .and_then(|m| m.modified())
         .unwrap_or(SystemTime::UNIX_EPOCH);
-    
+
     let target_time = fs::metadata("src/generated/")
         .and_then(|m| m.modified())
         .unwrap_or(SystemTime::UNIX_EPOCH);
-    
+
     source_time > target_time
 }
 ```
@@ -384,7 +389,7 @@ impl<const N: usize, const M: usize> Matrix<N, M> {
 trait ComplexRequirements: Clone + std::fmt::Debug + Send + Sync {}
 
 // Automatically implement for types that satisfy requirements
-impl<T> ComplexRequirements for T 
+impl<T> ComplexRequirements for T
 where T: Clone + std::fmt::Debug + Send + Sync {}
 
 fn complex_function<T: ComplexRequirements>(input: T) -> T {
@@ -407,7 +412,7 @@ macro_rules! impl_display_for_enum {
 #[derive(Debug)]
 enum Status {
     Ready,
-    Processing, 
+    Processing,
     Complete,
     Error,
 }
@@ -471,28 +476,28 @@ use std::collections::HashMap;
 fn main() {
     let dependencies = vec![
         "serde",
-        "tokio", 
+        "tokio",
         "clap",
         "reqwest",
         "diesel",
     ];
-    
+
     let mut compile_times = HashMap::new();
-    
+
     for dep in dependencies {
         println!("Testing compilation time for {}", dep);
-        
+
         // Create minimal test project
         let output = Command::new("cargo")
             .args(&["new", "--bin", &format!("test-{}", dep)])
             .output()
             .expect("Failed to create test project");
-        
+
         if !output.status.success() {
             eprintln!("Failed to create project for {}", dep);
             continue;
         }
-        
+
         // Add dependency
         let cargo_toml = format!(
             r#"
@@ -506,10 +511,10 @@ edition = "2021"
 "#,
             dep, dep
         );
-        
+
         std::fs::write(format!("test-{}/Cargo.toml", dep), cargo_toml)
             .expect("Failed to write Cargo.toml");
-        
+
         // Measure compilation time
         let start = Instant::now();
         let output = Command::new("cargo")
@@ -517,25 +522,25 @@ edition = "2021"
             .current_dir(&format!("test-{}", dep))
             .output()
             .expect("Failed to compile");
-        
+
         let compile_time = start.elapsed();
-        
+
         if output.status.success() {
             compile_times.insert(dep.to_string(), compile_time);
             println!("{}: {:?}", dep, compile_time);
         } else {
             eprintln!("Failed to compile {}", dep);
         }
-        
+
         // Cleanup
         std::fs::remove_dir_all(format!("test-{}", dep))
             .unwrap_or_default();
     }
-    
+
     // Sort by compilation time
     let mut sorted_times: Vec<_> = compile_times.iter().collect();
     sorted_times.sort_by_key(|(_, time)| *time);
-    
+
     println!("\nCompilation times (fastest to slowest):");
     for (dep, time) in sorted_times {
         println!("{}: {:?}", dep, time);
@@ -561,61 +566,65 @@ jobs:
     strategy:
       matrix:
         rust-version: [stable, beta]
-    
+
     steps:
-    - uses: actions/checkout@v3
-    
-    # Cache Rust toolchain
-    - name: Cache Rust toolchain
-      uses: actions/cache@v3
-      with:
-        path: |
-          ~/.cargo/registry
-          ~/.cargo/git
-          ~/.rustup
-        key: ${{ runner.os }}-rust-${{ matrix.rust-version }}-${{ hashFiles('**/Cargo.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-rust-${{ matrix.rust-version }}-
-          ${{ runner.os }}-rust-
-    
-    # Install Rust
-    - name: Install Rust
-      uses: actions-rs/toolchain@v1
-      with:
-        toolchain: ${{ matrix.rust-version }}
-        profile: minimal
-        override: true
-        components: rustfmt, clippy
-    
-    # Cache cargo build
-    - name: Cache cargo build
-      uses: actions/cache@v3
-      with:
-        path: target
-        key: ${{ runner.os }}-cargo-${{ matrix.rust-version }}-${{ hashFiles('**/Cargo.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-cargo-${{ matrix.rust-version }}-
-          ${{ runner.os }}-cargo-
-    
-    # Check formatting first (fastest)
-    - name: Check formatting
-      run: cargo fmt --all -- --check
-    
-    # Run clippy (catches issues early)
-    - name: Run clippy
-      run: cargo clippy --all-targets --all-features -- -D warnings
-    
-    # Build (use --locked to ensure reproducible builds)
-    - name: Build
-      run: cargo build --locked --all-features
-    
-    # Test
-    - name: Run tests
-      run: cargo test --all-features
-    
-    # Build documentation
-    - name: Build docs
-      run: cargo doc --no-deps --all-features
+      - uses: actions/checkout@v3
+
+      # Cache Rust toolchain
+      - name: Cache Rust toolchain
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            ~/.rustup
+          key:
+            ${{ runner.os }}-rust-${{ matrix.rust-version }}-${{
+            hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-rust-${{ matrix.rust-version }}-
+            ${{ runner.os }}-rust-
+
+      # Install Rust
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ matrix.rust-version }}
+          profile: minimal
+          override: true
+          components: rustfmt, clippy
+
+      # Cache cargo build
+      - name: Cache cargo build
+        uses: actions/cache@v3
+        with:
+          path: target
+          key:
+            ${{ runner.os }}-cargo-${{ matrix.rust-version }}-${{
+            hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-${{ matrix.rust-version }}-
+            ${{ runner.os }}-cargo-
+
+      # Check formatting first (fastest)
+      - name: Check formatting
+        run: cargo fmt --all -- --check
+
+      # Run clippy (catches issues early)
+      - name: Run clippy
+        run: cargo clippy --all-targets --all-features -- -D warnings
+
+      # Build (use --locked to ensure reproducible builds)
+      - name: Build
+        run: cargo build --locked --all-features
+
+      # Test
+      - name: Run tests
+        run: cargo test --all-features
+
+      # Build documentation
+      - name: Build docs
+        run: cargo doc --no-deps --all-features
 ```
 
 ## Performance Benchmarking
@@ -635,11 +644,11 @@ fn optimized_function(items: &[i32]) -> Vec<i32> {
 
 fn benchmark_monomorphization(c: &mut Criterion) {
     let data = vec![1, 2, 3, 4, 5];
-    
+
     c.bench_function("generic function", |b| {
         b.iter(|| expensive_generic_function(black_box(&data)))
     });
-    
+
     c.bench_function("specialized function", |b| {
         b.iter(|| optimized_function(black_box(&data)))
     });
@@ -649,16 +658,16 @@ criterion_group!(benches, benchmark_monomorphization);
 criterion_main!(benches);
 ```
 
-{{< tip title="Rust Compilation Optimization Summary" >}}
-**Key Strategies for Faster Rust Compilation:**
+{{< tip title="Rust Compilation Optimization Summary" >}} **Key Strategies for
+Faster Rust Compilation:**
+
 - **Minimize dependencies** and use feature flags to avoid unused code
 - **Configure profiles** appropriately for development vs release
 - **Use incremental compilation** and caching tools like sccache
 - **Optimize workspace structure** for parallel compilation
 - **Reduce monomorphization** through trait objects and type erasure
 - **Profile compilation** to identify bottlenecks
-- **Cache aggressively** in CI/CD pipelines
-{{< /tip >}}
+- **Cache aggressively** in CI/CD pipelines {{< /tip >}}
 
 ## Practical Implementation
 
@@ -698,14 +707,20 @@ pub type HashMap<K, V> = std::collections::HashMap<K, V, ahash::RandomState>;
 pub mod prelude {
     pub use crate::core::*;
     pub use crate::Result;
-    
+
     #[cfg(feature = "serde")]
     pub use crate::serialization::*;
 }
 ```
 
-This comprehensive approach to Rust compilation optimization demonstrates that while Rust compilation can be slow, there are many strategies available to significantly improve build times while maintaining the language's safety and performance guarantees.
+This comprehensive approach to Rust compilation optimization demonstrates that
+while Rust compilation can be slow, there are many strategies available to
+significantly improve build times while maintaining the language's safety and
+performance guarantees.
 
 ---
 
-*Today's exploration of Rust compilation optimization reinforced that development velocity in systems programming languages requires careful attention to build performance, and that strategic choices in dependencies, features, and project structure can dramatically impact developer experience.*
+_Today's exploration of Rust compilation optimization reinforced that
+development velocity in systems programming languages requires careful attention
+to build performance, and that strategic choices in dependencies, features, and
+project structure can dramatically impact developer experience._

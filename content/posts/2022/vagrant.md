@@ -2,7 +2,10 @@
 date: 2022-01-10T10:00:00+05:30
 draft: false
 title: Vagrant
-description: Getting started with Vagrant for creating reproducible development environments. Using Vagrant to test Ansible playbooks across multiple Linux distributions with simple text-based VM configurations.
+description:
+  Getting started with Vagrant for creating reproducible development
+  environments. Using Vagrant to test Ansible playbooks across multiple Linux
+  distributions with simple text-based VM configurations.
 tags:
   - Vagrant
   - Developer Environment
@@ -11,11 +14,19 @@ tags:
   - Virtualization
 ---
 
-I'm late to the Vagrant train. I must have heard about it in 2014, but I've never bothered to look it up. I'm using it lately to test out my dotfiles, which I'm creating Ansible playbooks for. It's convenient.
+I'm late to the Vagrant train. I must have heard about it in 2014, but I've
+never bothered to look it up. I'm using it lately to test out my dotfiles, which
+I'm creating Ansible playbooks for. It's convenient.
 
-For those of you who're either too young to have encountered it, or have never heard of it before, Vagrant is a tool that allows you to create a text-based configuration to spin up virtual machines. These machines can be spun up and destroyed at whim, and you will always get an identical machine as long as your configuration is defined and you do not install adhoc stuff directly without recording it in the config.
+For those of you who're either too young to have encountered it, or have never
+heard of it before, Vagrant is a tool that allows you to create a text-based
+configuration to spin up virtual machines. These machines can be spun up and
+destroyed at whim, and you will always get an identical machine as long as your
+configuration is defined and you do not install adhoc stuff directly without
+recording it in the config.
 
-I'm not delving too deep into it, but all I need to know is how to provision a few machines with IPs I can communicate with using Ansible.
+I'm not delving too deep into it, but all I need to know is how to provision a
+few machines with IPs I can communicate with using Ansible.
 
 ```ruby
 Vagrant.configure("2") do |config|
@@ -40,8 +51,19 @@ Vagrant.configure("2") do |config|
 end
 ```
 
-In this file, I'm defining 3 virtual machines: 2 Ubuntu boxes and 1 archlinux box. Each of the machines gets a unique IP address from a subnet I don't use in my local network. I've not yet figured out how to enable host-name broadcasting locally, so I refer to them in my Ansible hosts file with the IP address hard-coded in. This works fine for testing.
+In this file, I'm defining 3 virtual machines: 2 Ubuntu boxes and 1 archlinux
+box. Each of the machines gets a unique IP address from a subnet I don't use in
+my local network. I've not yet figured out how to enable host-name broadcasting
+locally, so I refer to them in my Ansible hosts file with the IP address
+hard-coded in. This works fine for testing.
 
-I bring up the machines with: `vagrant up`, and whenever I want fresh machines, I use `vagrant destroy -f && vagrant up`. If I were to change the config, the `Vagrantfile`, I'd just run `vagrant reload --provision`.
+I bring up the machines with: `vagrant up`, and whenever I want fresh machines,
+I use `vagrant destroy -f && vagrant up`. If I were to change the config, the
+`Vagrantfile`, I'd just run `vagrant reload --provision`.
 
-There's something to be said about learning *only what you need* in today's world, so this is all I'm learning about Vagrant. It helps me test out my Ansible playbooks so I'm happy there. I've looked at the provisioning commands as well, but I don't need those right now. I'm happier running the commands externally through Ansible instead of telling the Vagrantfile to run my playbooks. Call it separation of concerns or standardized usage, if you will.
+There's something to be said about learning _only what you need_ in today's
+world, so this is all I'm learning about Vagrant. It helps me test out my
+Ansible playbooks so I'm happy there. I've looked at the provisioning commands
+as well, but I don't need those right now. I'm happier running the commands
+externally through Ansible instead of telling the Vagrantfile to run my
+playbooks. Call it separation of concerns or standardized usage, if you will.

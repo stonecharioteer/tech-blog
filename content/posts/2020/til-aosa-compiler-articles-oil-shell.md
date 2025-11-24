@@ -1,8 +1,13 @@
 ---
 date: 2020-09-16T10:00:00+05:30
 draft: false
-title: "TIL: Architecture of Open Source Applications, Compiler Development Resources, and Oil Shell"
-description: "Today I learned about comprehensive open source architecture documentation, practical compiler development tutorials, the Cannoli Python compiler in Rust, and the Oil shell project."
+title:
+  "TIL: Architecture of Open Source Applications, Compiler Development
+  Resources, and Oil Shell"
+description:
+  "Today I learned about comprehensive open source architecture documentation,
+  practical compiler development tutorials, the Cannoli Python compiler in Rust,
+  and the Oil shell project."
 tags:
   - til
   - compilers
@@ -13,27 +18,32 @@ tags:
   - programming-languages
 ---
 
-Today's learning focused on understanding complex software architectures and language implementation techniques.
+Today's learning focused on understanding complex software architectures and
+language implementation techniques.
 
 ## Architecture of Open Source Applications
 
-[The Architecture of Open Source Applications](https://www.aosabook.org/en/index.html) provides detailed architectural analysis of major open source projects:
+[The Architecture of Open Source Applications](https://www.aosabook.org/en/index.html)
+provides detailed architectural analysis of major open source projects:
 
 ### Volume Coverage:
 
 #### **Infrastructure Projects:**
+
 - **Apache web server**: Multi-process architecture and module system
 - **PostgreSQL**: Query planning, storage engine, and ACID compliance
 - **MySQL**: Storage engines, replication, and performance optimization
 - **Redis**: In-memory data structures and persistence strategies
 
 #### **Development Tools:**
+
 - **Git**: Distributed version control architecture
 - **Mercurial**: Alternative DVCS design decisions
 - **Eclipse**: Plugin architecture and IDE extensibility
 - **LLVM**: Compiler infrastructure and optimization passes
 
 #### **Application Frameworks:**
+
 - **Django**: Web framework architecture and ORM design
 - **Rails**: Convention over configuration philosophy
 - **jQuery**: JavaScript library design patterns
@@ -42,6 +52,7 @@ Today's learning focused on understanding complex software architectures and lan
 ### Architectural Insights:
 
 #### **Common Patterns:**
+
 ```
 Plugin Architecture:
 - Core system provides stable API
@@ -60,6 +71,7 @@ Event-Driven Architecture:
 ```
 
 #### **Performance Considerations:**
+
 - **Caching strategies**: Redis, web servers, databases
 - **Memory management**: Garbage collection vs manual allocation
 - **Concurrency models**: Threading, async/await, actor systems
@@ -68,9 +80,12 @@ Event-Driven Architecture:
 ## Compiler Development Resources
 
 ### Comprehensive Compiler Articles
-[Phil Eaton's Compiler Articles](https://notes.eatonphil.com/tags/compiler.html) provide practical, hands-on compiler development guidance:
+
+[Phil Eaton's Compiler Articles](https://notes.eatonphil.com/tags/compiler.html)
+provide practical, hands-on compiler development guidance:
 
 #### **Language Implementation Steps:**
+
 1. **Lexical Analysis**: Tokenizing source code
 2. **Parsing**: Building abstract syntax trees
 3. **Semantic Analysis**: Type checking and symbol resolution
@@ -78,6 +93,7 @@ Event-Driven Architecture:
 5. **Optimization**: Improving performance and size
 
 #### **Practical Implementation:**
+
 ```rust
 // Simplified tokenizer example
 #[derive(Debug, PartialEq)]
@@ -99,7 +115,7 @@ struct Lexer {
 impl Lexer {
     fn next_token(&mut self) -> Token {
         self.skip_whitespace();
-        
+
         match self.current_char() {
             Some('+') => { self.advance(); Token::Plus }
             Some('-') => { self.advance(); Token::Minus }
@@ -111,7 +127,7 @@ impl Lexer {
             _ => panic!("Unexpected character: {:?}", self.current_char()),
         }
     }
-    
+
     fn read_number(&mut self) -> Token {
         let mut number = String::new();
         while let Some(c) = self.current_char() {
@@ -128,9 +144,12 @@ impl Lexer {
 ```
 
 ### Cannoli - Python Compiler in Rust
-[Cannoli](https://github.com/joncatanio/cannoli) demonstrates implementing a Python subset compiler in Rust:
+
+[Cannoli](https://github.com/joncatanio/cannoli) demonstrates implementing a
+Python subset compiler in Rust:
 
 #### **Architecture Overview:**
+
 ```rust
 // AST representation
 #[derive(Debug, Clone)]
@@ -169,6 +188,7 @@ pub enum Stmt {
 ```
 
 #### **Code Generation Strategy:**
+
 - Target LLVM IR for optimization and portability
 - Implement Python semantics (dynamic typing, reference counting)
 - Handle Python-specific features (list comprehensions, generators)
@@ -176,17 +196,20 @@ pub enum Stmt {
 
 ## Oil Shell - Unix Shell in Python Subset
 
-[Oil Shell](https://www.oilshell.org/) represents a modern approach to Unix shell design:
+[Oil Shell](https://www.oilshell.org/) represents a modern approach to Unix
+shell design:
 
 ### Design Goals:
 
 #### **Compatibility and Innovation:**
+
 - **Bash compatibility**: Run existing shell scripts
 - **Oil language**: New shell language with better syntax
 - **Type safety**: Optional typing for shell variables
 - **Error handling**: Better error reporting and debugging
 
 #### **Architecture Improvements:**
+
 ```bash
 # Traditional bash
 if [ -f "$file" ]; then
@@ -208,12 +231,14 @@ if test -f $file {
 ### Implementation Strategy:
 
 #### **Python-Based Implementation:**
+
 - Written in OPy (Oil Python) - a subset of Python
 - Transpiles to Python for execution
 - Uses Python's parsing and AST capabilities
 - Leverages Python's standard library
 
 #### **Language Features:**
+
 ```oil
 # Variables with types
 var name: Str = "example"
@@ -242,16 +267,24 @@ try {
 ## Supporting Resources
 
 ### LaTeX Learning
-Understanding LaTeX syntax and best practices, particularly for technical documentation and mathematical notation in compiler documentation.
+
+Understanding LaTeX syntax and best practices, particularly for technical
+documentation and mathematical notation in compiler documentation.
 
 ### Educational Compiler Projects:
+
 - **Small-C**: Historical compiler for C subset
 - **LLVM tutorials**: Official documentation for compiler backend
-- **"So You Want to Be a Compiler Wizard"**: Career guidance for compiler developers
+- **"So You Want to Be a Compiler Wizard"**: Career guidance for compiler
+  developers
 
 ### Advanced Topics:
+
 - **JIT compilation**: Runtime code generation techniques
 - **Functional programming**: Implementing languages with first-class functions
 - **Python singledispatch**: Method overloading for interpreter implementation
 
-These resources provide comprehensive coverage of both the theoretical foundations and practical implementation techniques needed for understanding and building complex software systems, from compilers to shells to large-scale applications.
+These resources provide comprehensive coverage of both the theoretical
+foundations and practical implementation techniques needed for understanding and
+building complex software systems, from compilers to shells to large-scale
+applications.

@@ -2,7 +2,10 @@
 date: 2021-03-14T10:00:00+05:30
 draft: false
 title: "TIL: Python eval(), exec(), and compile() Functions"
-description: "Today I learned about the differences between Python's eval(), exec(), and compile() functions and their appropriate use cases for dynamic code execution."
+description:
+  "Today I learned about the differences between Python's eval(), exec(), and
+  compile() functions and their appropriate use cases for dynamic code
+  execution."
 tags:
   - TIL
   - Python
@@ -27,6 +30,7 @@ result = eval("x * 2")      # Returns 10
 ```
 
 **Characteristics:**
+
 - **Single Expression**: Only works with expressions, not statements
 - **Return Value**: Always returns a value
 - **Use Cases**: Mathematical calculations, simple expressions
@@ -45,6 +49,7 @@ for i in range(3):
 ```
 
 **Characteristics:**
+
 - **Multiple Statements**: Can execute complex code blocks
 - **No Return Value**: Returns None
 - **Use Cases**: Dynamic code execution, configuration scripts
@@ -64,6 +69,7 @@ result2 = eval(code)  # Returns 20
 ```
 
 **Modes:**
+
 - **'eval'**: For expressions (use with eval())
 - **'exec'**: For statements (use with exec())
 - **'single'**: For single interactive statements
@@ -71,11 +77,13 @@ result2 = eval(code)  # Returns 20
 ### Performance Considerations
 
 **Compilation Overhead:**
+
 - `eval()` and `exec()` compile code every time
 - `compile()` allows pre-compilation for repeated use
 - Significant performance improvement for repeated execution
 
 **Example - Repeated Execution:**
+
 ```python
 import timeit
 
@@ -94,11 +102,13 @@ def fast_version():
 ### Security Considerations
 
 **Major Risks:**
+
 - **Code Injection**: User input can execute arbitrary code
 - **System Access**: Malicious code can access file system, network
 - **Data Exposure**: Can access and modify global variables
 
 **Safer Alternatives:**
+
 ```python
 # Restricted globals and locals
 safe_globals = {"__builtins__": {}}
@@ -114,8 +124,9 @@ data = ast.literal_eval("{'key': 'value'}")  # Only literals
 
 1. **Avoid When Possible**: Use alternative approaches first
 2. **Sanitize Input**: Never execute untrusted user input
-3. **Restrict Scope**: Use limited globals and locals dictionaries  
+3. **Restrict Scope**: Use limited globals and locals dictionaries
 4. **Use ast.literal_eval**: For parsing data structures safely
 5. **Pre-compile**: Use compile() for repeated execution
 
-These functions provide powerful dynamic execution capabilities but require careful consideration of security and performance implications.
+These functions provide powerful dynamic execution capabilities but require
+careful consideration of security and performance implications.

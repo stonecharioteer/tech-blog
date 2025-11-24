@@ -1,8 +1,11 @@
 ---
-date: '2022-06-25T10:00:00+05:30'
+date: "2022-06-25T10:00:00+05:30"
 draft: false
-title: 'Retrying HTTP Requests with Rust'
-description: "How to implement retry logic for HTTP requests in Rust using reqwest and the again crate. Handling network failures, rate limiting, and JSON parsing errors with exponential backoff."
+title: "Retrying HTTP Requests with Rust"
+description:
+  "How to implement retry logic for HTTP requests in Rust using reqwest and the
+  again crate. Handling network failures, rate limiting, and JSON parsing errors
+  with exponential backoff."
 tags:
   - "Rust"
   - "HTTP"
@@ -12,21 +15,30 @@ tags:
 
 How do you retry an HTTP request in Rust?
 
-I have been using Rust as my only programming language for a few months now at Merkle Science. One of the things I have been building lately has been a crawler that looks through a paginated API for responses.
+I have been using Rust as my only programming language for a few months now at
+Merkle Science. One of the things I have been building lately has been a crawler
+that looks through a paginated API for responses.
 
-{{< note >}}
-If you're building something like this and shipping a single light-weight binary isn't your requirement, I'd recommend doing this in Python and using the `tenacity` package for retrying queries.
-{{< /note >}}
+{{< note >}} If you're building something like this and shipping a single
+light-weight binary isn't your requirement, I'd recommend doing this in Python
+and using the `tenacity` package for retrying queries. {{< /note >}}
 
-When building one of these, you will definitely need something that incorporates a "retry when you fail" mechanism because repeated API calls, or *any* API calls for that matter, are bound to fail. You might have a rate limited API, or you might just have an unreliable network.
+When building one of these, you will definitely need something that incorporates
+a "retry when you fail" mechanism because repeated API calls, or _any_ API calls
+for that matter, are bound to fail. You might have a rate limited API, or you
+might just have an unreliable network.
 
-I had both these problems and needed to build something that could repeatedly try to make a GET request.
+I had both these problems and needed to build something that could repeatedly
+try to make a GET request.
 
-I was using the `reqwest` crate to make these requests and I kept getting a `reqwest::Error`. Oddly enough, I was getting this both when the network failed, or when the payload didn't have the expected schema.
+I was using the `reqwest` crate to make these requests and I kept getting a
+`reqwest::Error`. Oddly enough, I was getting this both when the network failed,
+or when the payload didn't have the expected schema.
 
 ## Setting Up a Test Server
 
-To understand this, let's first put together a simple server that will mimic unreliable behaviour.
+To understand this, let's first put together a simple server that will mimic
+unreliable behaviour.
 
 For simplicity, I'm going to write this in Flask.
 
@@ -54,22 +66,28 @@ def index(which):
 
 Save the above code snippet into a file named `app.py`.
 
-To run this, create a virtual environment using Python: `python3 -m venv env`, activate it: `source ./env/bin/activate`, and install Flask: `python3 -m pip install flask`. Then, run the following `FLASK_DEBUG=true flask run`
+To run this, create a virtual environment using Python: `python3 -m venv env`,
+activate it: `source ./env/bin/activate`, and install Flask:
+`python3 -m pip install flask`. Then, run the following
+`FLASK_DEBUG=true flask run`
 
-While you don't need to understand how this works, all you need to know is that this now provides a simple, *unreliable* webserver that has only 2 routes: `http://127.0.0.1:5000/1` and `http://127.0.0.1:5000/2`.
+While you don't need to understand how this works, all you need to know is that
+this now provides a simple, _unreliable_ webserver that has only 2 routes:
+`http://127.0.0.1:5000/1` and `http://127.0.0.1:5000/2`.
 
-Both these routes have a 51% chance of returning a 404, and the first URL has an added 71% chance of returning the wrong response.
+Both these routes have a 51% chance of returning a 404, and the first URL has an
+added 71% chance of returning the wrong response.
 
-{{< note >}}
-The term *"wrong"* is subjective, and for the sake of an example, I'm going to pretend that all APIs in the world always return the agreed-upon payload for a given route. Such a world doesn't exist though.
-{{< /note >}}
+{{< note >}} The term _"wrong"_ is subjective, and for the sake of an example,
+I'm going to pretend that all APIs in the world always return the agreed-upon
+payload for a given route. Such a world doesn't exist though. {{< /note >}}
 
 ## Initial Rust Implementation
 
 To get this response, I wrote the following code.
 
-{{< note >}}
-To get the following code running make sure you add the following lines to your `Cargo.toml` file's `[dependencies]` section.
+{{< note >}} To get the following code running make sure you add the following
+lines to your `Cargo.toml` file's `[dependencies]` section.
 
 ```toml
 env_logger = "0.9.0"
@@ -80,8 +98,7 @@ serde_json = "1.0.81"
 tokio = { version = "1.19.2", features = ["full", "rt"] }
 ```
 
-You will need to setup Rust before you try to run this code.
-{{< /note >}}
+You will need to setup Rust before you try to run this code. {{< /note >}}
 
 ```rust
 use std::{fmt::Debug, time::Duration};
@@ -108,7 +125,8 @@ fn main() {
 
 Running this with `RUST_LOG=info cargo run` fails in one of two ways.
 
-First, if the server is running, this fails because the payload is not as expected.
+First, if the server is running, this fails because the payload is not as
+expected.
 
 ```
 thread 'main' panicked at 'called `Result::unwrap()` on an `Err` value: reqwest::Error { kind: Decode, source: Error("missing field `name`", line: 1, column: 2) }', src/main.rs:50:77
@@ -122,24 +140,37 @@ thread 'main' panicked at 'called `Result::unwrap()` on an `Err` value: reqwest:
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 ```
 
-Both of these are standard errors you will encounter when building a crawler. And the answer to both of these is: "just try again". Rust's error handling isn't exactly error handling, so you cannot just bypass an error and try again for a fixed number of times without being extremely verbose about it. One way to handle this is to find a crate that does the job for you.
+Both of these are standard errors you will encounter when building a crawler.
+And the answer to both of these is: "just try again". Rust's error handling
+isn't exactly error handling, so you cannot just bypass an error and try again
+for a fixed number of times without being extremely verbose about it. One way to
+handle this is to find a crate that does the job for you.
 
 ## Using the Again Crate
 
-There were several, but only the [again crate](https://crates.io/crates/again) really worked the way I needed it to. I had several requirements.
+There were several, but only the [again crate](https://crates.io/crates/again)
+really worked the way I needed it to. I had several requirements.
 
 1. I need to be able to retry a query.
 2. I need to be able to wait and retry after some time.
-3. I should be able to introduce some randomness between calls, aka *jitter*, so that the API doesn't realize it's being spammed with programmed calls.
+3. I should be able to introduce some randomness between calls, aka _jitter_, so
+   that the API doesn't realize it's being spammed with programmed calls.
 4. I should stop after a reasonable amount of time because I am not a spammer.
 
-The again crate works for all of these, with one slight caveat. The `again::retry` function, and all of its variants, call *async* functions, not synchronous ones. In more specific terms, calls that `again::retry` makes need to return a `Future` object, one that can be waited upon by the `again` crate itself. So the `reqwest::blocking` calls are out of the question.
+The again crate works for all of these, with one slight caveat. The
+`again::retry` function, and all of its variants, call _async_ functions, not
+synchronous ones. In more specific terms, calls that `again::retry` makes need
+to return a `Future` object, one that can be waited upon by the `again` crate
+itself. So the `reqwest::blocking` calls are out of the question.
 
-Thankfully, reqwest by default uses async calls. However, Rust's `main` function is a synchronous one, and cannot `await` on an async call out of the box.
+Thankfully, reqwest by default uses async calls. However, Rust's `main` function
+is a synchronous one, and cannot `await` on an async call out of the box.
 
 `tokio` to the rescue!
 
-`tokio` comes with a runtime feature that allows us to block upon an async call within a non-async function. I won't dive too much into that right now, but that rabbit hole led down to this code.
+`tokio` comes with a runtime feature that allows us to block upon an async call
+within a non-async function. I won't dive too much into that right now, but that
+rabbit hole led down to this code.
 
 ```rust
 /// Get a specific typed response
@@ -173,14 +204,30 @@ fn main() {
 }
 ```
 
-This above code can be run with `RUST_LOG=info,again=trace cargo run` and will repeatedly try the API until it gets a response. The `retry_policy` sets a starting duration of 1 second, increases it until it reaches 3 seconds, and tries at most 10 times before actually giving up on the URL.
+This above code can be run with `RUST_LOG=info,again=trace cargo run` and will
+repeatedly try the API until it gets a response. The `retry_policy` sets a
+starting duration of 1 second, increases it until it reaches 3 seconds, and
+tries at most 10 times before actually giving up on the URL.
 
-The `get_typed_payload` function is written so as to abstract away the JSON payload extraction, and because the `retry` function needs an async function that returns a result with a very clear Error type. Thankfully reqwest returns only one possible error type.
+The `get_typed_payload` function is written so as to abstract away the JSON
+payload extraction, and because the `retry` function needs an async function
+that returns a result with a very clear Error type. Thankfully reqwest returns
+only one possible error type.
 
 ## Learning About Generics and Lifetimes
 
-Some things I learnt about Rust when writing this was about generics and lifetimes.
+Some things I learnt about Rust when writing this was about generics and
+lifetimes.
 
-The `for<'de> T: serde::Deserialize<'de>` bit denotes that the `get_typed_payload` function can adapt to return any type that implements `serde::Deserialize`. And because the value that it returns *should* live for the lifetime of the variable it is passed, which in this case is the `url`, you need to denote that as well with the `for <'de>` bit. One thing that this also results in is that the actual `url` object should be created outside of both the `retry` block and the `block_on` block, so that it lives beyond those confines.
+The `for<'de> T: serde::Deserialize<'de>` bit denotes that the
+`get_typed_payload` function can adapt to return any type that implements
+`serde::Deserialize`. And because the value that it returns _should_ live for
+the lifetime of the variable it is passed, which in this case is the `url`, you
+need to denote that as well with the `for <'de>` bit. One thing that this also
+results in is that the actual `url` object should be created outside of both the
+`retry` block and the `block_on` block, so that it lives beyond those confines.
 
-This was a fun little exercise of doing something I've done a hundred times or more in Python in Rust. I'm continuing my journey merely because this way I learn how to do things that I've taken for granted in a language like Python, and I'm learning about Rust along the way.
+This was a fun little exercise of doing something I've done a hundred times or
+more in Python in Rust. I'm continuing my journey merely because this way I
+learn how to do things that I've taken for granted in a language like Python,
+and I'm learning about Rust along the way.

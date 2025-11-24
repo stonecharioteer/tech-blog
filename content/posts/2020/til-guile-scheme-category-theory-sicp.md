@@ -1,8 +1,13 @@
 ---
 date: 2020-08-11T10:00:00+05:30
 draft: false
-title: "TIL: Guile Scheme Compiler, Category Theory for Programmers, SICP, and Linux Process Tracking"
-description: "Today I learned about the Guile Scheme baseline compiler, Bartosz Milewski's Category Theory for Programmers, the classic SICP book, and the challenges of tracking running processes on Linux systems."
+title:
+  "TIL: Guile Scheme Compiler, Category Theory for Programmers, SICP, and Linux
+  Process Tracking"
+description:
+  "Today I learned about the Guile Scheme baseline compiler, Bartosz Milewski's
+  Category Theory for Programmers, the classic SICP book, and the challenges of
+  tracking running processes on Linux systems."
 tags:
   - til
   - scheme
@@ -14,24 +19,28 @@ tags:
   - computer-science
 ---
 
-Today's learning spanned from advanced programming language theory to practical Linux system administration challenges.
+Today's learning spanned from advanced programming language theory to practical
+Linux system administration challenges.
 
 ## Guile Scheme Baseline Compiler
 
-[A Baseline Compiler for Guile](https://wingolog.org/archives/2020/06/03/a-baseline-compiler-for-guile) describes modern compiler development for the GNU Guile Scheme implementation:
+[A Baseline Compiler for Guile](https://wingolog.org/archives/2020/06/03/a-baseline-compiler-for-guile)
+describes modern compiler development for the GNU Guile Scheme implementation:
 
 ### Compiler Architecture:
 
 #### **Traditional Guile Compilation Pipeline:**
+
 ```scheme
 ;; Guile's traditional approach
 Source Code → Tree-IL → CPS → Bytecode → VM
 
-;; New baseline compiler approach  
+;; New baseline compiler approach
 Source Code → Tree-IL → Direct Machine Code
 ```
 
 #### **Baseline Compiler Benefits:**
+
 ```scheme
 ;; Traditional interpreted execution
 (define (fibonacci n)
@@ -42,12 +51,13 @@ Source Code → Tree-IL → Direct Machine Code
 
 ;; With baseline compiler:
 ;; - Faster startup (no CPS conversion)
-;; - Better debugging (clearer stack traces)  
+;; - Better debugging (clearer stack traces)
 ;; - Incremental optimization opportunity
 ;; - Reduced memory pressure
 ```
 
 #### **Implementation Strategy:**
+
 ```scheme
 ;; Compiler generates direct assembly
 (define-compiler-pass (compile-application app)
@@ -72,12 +82,15 @@ Source Code → Tree-IL → Direct Machine Code
 ### Performance Implications:
 
 #### **Startup Time Optimization:**
-- **Reduced compilation phases**: Direct translation without intermediate representations
+
+- **Reduced compilation phases**: Direct translation without intermediate
+  representations
 - **Lazy optimization**: Optimize hot paths after profiling
 - **Incremental compilation**: Compile functions as needed
 - **Better caching**: Store compiled code for reuse
 
 #### **Runtime Characteristics:**
+
 - **Predictable performance**: Consistent execution patterns
 - **Debugging support**: Maintain source location information
 - **Memory efficiency**: Reduced intermediate data structures
@@ -85,11 +98,13 @@ Source Code → Tree-IL → Direct Machine Code
 
 ## Category Theory for Programmers
 
-[Bartosz Milewski's Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/) bridges mathematical concepts with practical programming:
+[Bartosz Milewski's Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
+bridges mathematical concepts with practical programming:
 
 ### Core Category Theory Concepts:
 
 #### **Categories and Morphisms:**
+
 ```haskell
 -- Category consists of objects and morphisms (arrows)
 -- In programming: types are objects, functions are morphisms
@@ -107,6 +122,7 @@ compose g f = \x -> g (f x)
 ```
 
 #### **Functors:**
+
 ```haskell
 -- Functor maps between categories
 class Functor f where
@@ -133,6 +149,7 @@ doubled = fmap (*2) maybeValue  -- Just 84
 ```
 
 #### **Natural Transformations:**
+
 ```haskell
 -- Natural transformation between functors
 -- Safe head function using Maybe
@@ -146,6 +163,7 @@ length :: [a] -> Int
 ```
 
 #### **Monads:**
+
 ```haskell
 -- Monad as a category theory concept
 class Functor m => Monad m where
@@ -154,7 +172,7 @@ class Functor m => Monad m where
 
 -- Monad laws (category theory requirements):
 -- Left identity: return a >>= f = f a
--- Right identity: m >>= return = m  
+-- Right identity: m >>= return = m
 -- Associativity: (m >>= f) >>= g = m >>= (\x -> f x >>= g)
 
 -- IO Monad example
@@ -165,13 +183,14 @@ greetUser = do
     putStrLn ("Hello, " ++ name)
 
 -- Desugared version
-greetUser' = 
+greetUser' =
     putStrLn "What's your name?" >>= \_ ->
     getLine >>= \name ->
     putStrLn ("Hello, " ++ name)
 ```
 
 #### **Kleisli Categories:**
+
 ```haskell
 -- Kleisli category for a monad
 -- Objects: same as base category
@@ -198,11 +217,13 @@ safeComputation x y = safeDivide x y >=> safeSquareRoot
 
 ## Structure and Interpretation of Computer Programs
 
-[SICP](https://sarabander.github.io/sicp/html/index.xhtml) remains one of the most influential computer science textbooks:
+[SICP](https://sarabander.github.io/sicp/html/index.xhtml) remains one of the
+most influential computer science textbooks:
 
 ### Core SICP Principles:
 
 #### **Abstraction and Modularity:**
+
 ```scheme
 ;; Building abstractions with procedures
 (define (square x) (* x x))
@@ -233,6 +254,7 @@ safeComputation x y = safeDivide x y >=> safeSquareRoot
 ```
 
 #### **Data Abstraction:**
+
 ```scheme
 ;; Abstract data types
 (define (make-rat n d)
@@ -254,6 +276,7 @@ safeComputation x y = safeDivide x y >=> safeSquareRoot
 ```
 
 #### **Metalinguistic Abstraction:**
+
 ```scheme
 ;; Metacircular evaluator - Scheme interpreter in Scheme
 (define (eval exp env)
@@ -286,11 +309,13 @@ safeComputation x y = safeDivide x y >=> safeSquareRoot
 
 ## Linux Process Tracking Challenges
 
-[The Difficulties of Tracking Running Processes on Linux](https://natanyellin.com/posts/tracking-running-processes-on-linux/) explores the complexities of process monitoring:
+[The Difficulties of Tracking Running Processes on Linux](https://natanyellin.com/posts/tracking-running-processes-on-linux/)
+explores the complexities of process monitoring:
 
 ### Process Tracking Methods:
 
 #### **/proc Filesystem Monitoring:**
+
 ```bash
 # Basic process information
 cat /proc/PID/stat    # Process statistics
@@ -304,6 +329,7 @@ ls /proc/PID/fd/      # Open file descriptors
 ```
 
 #### **Race Conditions in Process Monitoring:**
+
 ```python
 import os
 import time
@@ -316,25 +342,25 @@ def monitor_process_safely(pid):
         proc_path = Path(f"/proc/{pid}")
         if not proc_path.exists():
             return None
-        
+
         # Read multiple files atomically (as much as possible)
         stat_path = proc_path / "stat"
         status_path = proc_path / "status"
-        
+
         # Race condition: process might disappear between checks
         with stat_path.open() as f:
             stat_data = f.read().strip()
-        
+
         # Process might have been replaced by another with same PID
         with status_path.open() as f:
             status_data = f.read()
-        
+
         return {
             'stat': stat_data,
             'status': status_data,
             'timestamp': time.time()
         }
-        
+
     except (FileNotFoundError, ProcessLookupError, PermissionError):
         # Process disappeared or access denied
         return None
@@ -346,7 +372,7 @@ def track_process_with_start_time(pid):
         with open(f"/proc/{pid}/stat") as f:
             fields = f.read().split()
             start_time = int(fields[21])  # Process start time
-        
+
         return {
             'pid': pid,
             'start_time': start_time,
@@ -357,6 +383,7 @@ def track_process_with_start_time(pid):
 ```
 
 #### **System-Level Process Monitoring:**
+
 ```bash
 # Process accounting (if enabled)
 sudo apt-get install acct
@@ -382,6 +409,7 @@ sudo perf script
 ```
 
 #### **Advanced Monitoring Challenges:**
+
 ```python
 # Container process monitoring
 def monitor_container_processes(container_id):
@@ -390,7 +418,7 @@ def monitor_container_processes(container_id):
         # Find container's PID namespace
         with open(f"/sys/fs/cgroup/memory/docker/{container_id}/cgroup.procs") as f:
             container_pids = [int(line.strip()) for line in f if line.strip()]
-        
+
         processes = []
         for pid in container_pids:
             try:
@@ -404,7 +432,7 @@ def monitor_container_processes(container_id):
                     })
             except FileNotFoundError:
                 continue  # Process disappeared
-        
+
         return processes
     except FileNotFoundError:
         return []  # Container not found
@@ -413,10 +441,13 @@ def monitor_container_processes(container_id):
 ### Monitoring Tools Comparison:
 
 #### **User-space vs Kernel-space Monitoring:**
+
 - **ps/top**: Snapshots with race conditions
 - **htop**: Better real-time display but still snapshots
 - **eBPF/BPF**: Kernel-level monitoring with lower overhead
 - **ftrace**: Kernel function tracing
 - **perf**: Hardware and software event monitoring
 
-These topics demonstrate the depth of computer science knowledge, from theoretical foundations in category theory and language design to practical challenges in system programming and process monitoring.
+These topics demonstrate the depth of computer science knowledge, from
+theoretical foundations in category theory and language design to practical
+challenges in system programming and process monitoring.

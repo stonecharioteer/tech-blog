@@ -2,7 +2,10 @@
 date: 2021-01-13T10:00:00+05:30
 draft: false
 title: "TIL: Plain Text Accounting with Beancount, Ledger, and Fava"
-description: "Today I learned about plain text accounting systems that use simple text files to track finances using double-entry bookkeeping principles, with tools like Beancount, Ledger, and the Fava web interface."
+description:
+  "Today I learned about plain text accounting systems that use simple text
+  files to track finances using double-entry bookkeeping principles, with tools
+  like Beancount, Ledger, and the Fava web interface."
 tags:
   - TIL
   - Accounting
@@ -17,9 +20,11 @@ tags:
 
 [Introduction to plain text accounting — sirodoht blog](https://sirodoht.com/blog/introduction-to-plain-text-accounting/)
 
-Revolutionary approach to personal and business accounting using simple text files:
+Revolutionary approach to personal and business accounting using simple text
+files:
 
 ### Core Philosophy:
+
 - **Human Readable**: Accounting records in plain text format
 - **Version Control**: Track financial changes with Git
 - **Durability**: Text files last forever, proprietary formats don't
@@ -29,11 +34,13 @@ Revolutionary approach to personal and business accounting using simple text fil
 ### Double-Entry Bookkeeping Principles:
 
 #### **Fundamental Equation:**
+
 ```
 Assets + Expenses = Liabilities + Equity + Income
 ```
 
 #### **Every Transaction Has Two Sides:**
+
 ```beancount
 2021-01-13 * "Grocery shopping"
   Expenses:Food:Groceries    45.67 USD
@@ -41,6 +48,7 @@ Assets + Expenses = Liabilities + Equity + Income
 ```
 
 **Explanation:**
+
 - Money flows OUT of checking account (asset decreases)
 - Money flows INTO grocery expense (expense increases)
 - Total change = 0 (books balance)
@@ -48,6 +56,7 @@ Assets + Expenses = Liabilities + Equity + Income
 ### Benefits of Plain Text Accounting:
 
 #### **Advantages Over Traditional Software:**
+
 - **No Vendor Lock-in**: Your data remains accessible forever
 - **Version Control**: Complete audit trail of changes
 - **Automation**: Scripts can generate and analyze transactions
@@ -56,6 +65,7 @@ Assets + Expenses = Liabilities + Equity + Income
 - **Cost**: Free and open source tools
 
 #### **Developer-Friendly Features:**
+
 ```bash
 # Version control your finances
 git add finances.beancount
@@ -78,6 +88,7 @@ Modern, powerful plain text accounting system:
 ### Syntax and Structure:
 
 #### **Basic Transaction Format:**
+
 ```beancount
 ; Account declarations
 1900-01-01 open Assets:US:BofA:Checking         USD
@@ -100,6 +111,7 @@ Modern, powerful plain text accounting system:
 ```
 
 #### **Advanced Features:**
+
 ```beancount
 ; Price declarations
 2021-01-13 price AAPL 150.00 USD
@@ -121,6 +133,7 @@ Modern, powerful plain text accounting system:
 ### Command Line Tools:
 
 #### **Basic Operations:**
+
 ```bash
 # Validate file syntax
 bean-check finances.beancount
@@ -139,6 +152,7 @@ bean-report finances.beancount holdings --format=csv > holdings.csv
 ```
 
 ### Data Validation and Error Checking:
+
 ```beancount
 ; Assertions to catch errors
 2021-01-31 balance Assets:US:BofA:Checking  2847.55 USD
@@ -159,12 +173,14 @@ Beautiful web interface for Beancount files:
 ### Key Features:
 
 #### **Interactive Dashboard:**
+
 - **Real-time Updates**: Automatically reload when files change
 - **Charts and Graphs**: Visual representation of financial data
 - **Drill-down Analysis**: Click through from summaries to transactions
 - **Multi-file Support**: Handle complex accounting setups
 
 #### **Web Interface Benefits:**
+
 ```bash
 # Start Fava server
 fava finances.beancount
@@ -181,6 +197,7 @@ fava finances.beancount
 ### Advanced Analysis:
 
 #### **Custom Reports:**
+
 ```beancount
 ; Custom reporting periods
 2021-01-01 custom "fava-option" "fiscal-year-end" "03-31"
@@ -191,6 +208,7 @@ fava finances.beancount
 ```
 
 #### **Import Automation:**
+
 - **Bank CSV Import**: Convert bank statements to Beancount format
 - **Duplicate Detection**: Automatic detection of duplicate transactions
 - **Categorization**: Machine learning-based expense categorization
@@ -205,6 +223,7 @@ The pioneering plain text accounting system:
 ### Core Features:
 
 #### **Simple Syntax:**
+
 ```ledger
 2021/01/13 Grocery Store
     Expenses:Food:Groceries        $45.67
@@ -220,6 +239,7 @@ The pioneering plain text accounting system:
 ```
 
 #### **Powerful Queries:**
+
 ```bash
 # Basic reports
 ledger -f finances.ledger balance
@@ -237,6 +257,7 @@ ledger -f finances.ledger register Expenses:Food --monthly
 ### Advanced Capabilities:
 
 #### **Budgeting and Forecasting:**
+
 ```bash
 # Budget vs actual
 ledger -f finances.ledger balance --budget
@@ -251,6 +272,7 @@ ledger -f finances.ledger balance --market --price-db prices.db
 ### Ecosystem and Tools:
 
 #### **Supporting Applications:**
+
 - **hledger**: Haskell implementation with additional features
 - **PlainTextAccounting.org**: Community and resources
 - **Mobile Apps**: Various mobile entry applications
@@ -261,6 +283,7 @@ ledger -f finances.ledger balance --market --price-db prices.db
 ### Getting Started Workflow:
 
 #### **1. Set Up Account Structure:**
+
 ```beancount
 1900-01-01 open Assets:US:BofA:Checking         USD
 1900-01-01 open Assets:US:BofA:Savings          USD
@@ -272,6 +295,7 @@ ledger -f finances.ledger balance --market --price-db prices.db
 ```
 
 #### **2. Import Historical Data:**
+
 ```bash
 # Convert bank CSV to Beancount
 bean-extract config.py statement.csv > imported.beancount
@@ -281,6 +305,7 @@ cat imported.beancount >> finances.beancount
 ```
 
 #### **3. Establish Routine:**
+
 ```bash
 #!/bin/bash
 # Daily accounting routine
@@ -291,10 +316,13 @@ echo "Add today's transactions and review accounts"
 ```
 
 ### Best Practices:
+
 - **Consistent Naming**: Establish and stick to account naming conventions
 - **Regular Reconciliation**: Match against bank statements monthly
 - **Backup Strategy**: Version control and offsite backups
 - **Documentation**: Comment complex transactions and account purposes
 - **Automation**: Script repetitive tasks like imports and reports
 
-Plain text accounting represents a powerful paradigm shift in financial management, combining the rigor of double-entry bookkeeping with the flexibility and transparency of plain text files.
+Plain text accounting represents a powerful paradigm shift in financial
+management, combining the rigor of double-entry bookkeeping with the flexibility
+and transparency of plain text files.

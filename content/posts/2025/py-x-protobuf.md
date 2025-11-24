@@ -1,8 +1,11 @@
 ---
-date: '2025-04-20T09:44:21+05:30'
+date: "2025-04-20T09:44:21+05:30"
 draft: false
-title: 'Py-x-Protobuf - Or How I Learned to Stop Worrying and Love Protocol Buffers'
-description: "Why Protocol Buffers are superior to JSON for microservice communication. Much faster serialization/deserialization with practical Python examples."
+title:
+  "Py-x-Protobuf - Or How I Learned to Stop Worrying and Love Protocol Buffers"
+description:
+  "Why Protocol Buffers are superior to JSON for microservice communication.
+  Much faster serialization/deserialization with practical Python examples."
 cover:
   image: "/images/py-x-protobuf.jpeg"
   alt: "Use Protobufs not JSON"
@@ -100,15 +103,24 @@ protobuf=0.3009
 For 10^6 (one million) runs of simple serialization/deserialization functions,
 these are the results.
 
-| **Activity**    | **JSON** | **Protobuf** | **% Difference** |
-|:---------------:|:--------:|:------------:|:----------------:|
-| Serialization   | 1.4081   | 0.6609       | 53.0643          |
-| Deserialization | 1.1308   | 0.3009       | 73.389           |
+|  **Activity**   | **JSON** | **Protobuf** | **% Difference** |
+| :-------------: | :------: | :----------: | :--------------: |
+|  Serialization  |  1.4081  |    0.6609    |     53.0643      |
+| Deserialization |  1.1308  |    0.3009    |      73.389      |
 
-For serialization, protobufs are 53% faster, while for deserialization, they're 73.4% faster. The output above is in seconds, so for a million runs, we saved almost 1.5 seconds by using protobufs vs using jsons if we were just serializing and deserializing them.
+For serialization, protobufs are 53% faster, while for deserialization, they're
+73.4% faster. The output above is in seconds, so for a million runs, we saved
+almost 1.5 seconds by using protobufs vs using jsons if we were just serializing
+and deserializing them.
 
-In a large application where the payload also becomes complex, this will aid in speeding things up greatly. Additionally, note the field tags. These are used in lieu of the field names within the definition, so you have the added memory reduction.
+In a large application where the payload also becomes complex, this will aid in
+speeding things up greatly. Additionally, note the field tags. These are used in
+lieu of the field names within the definition, so you have the added memory
+reduction.
 
-Additionally, the `json` library is unaware of whether a field is an int or a string. Protobufs make this explicit and leave no ambiguity to chance when creating the payload or when serializing or deserializing it.
+Additionally, the `json` library is unaware of whether a field is an int or a
+string. Protobufs make this explicit and leave no ambiguity to chance when
+creating the payload or when serializing or deserializing it.
 
-I'll follow up with a part-2 where I discuss using protobufs with the usual suspect: gRPC.
+I'll follow up with a part-2 where I discuss using protobufs with the usual
+suspect: gRPC.

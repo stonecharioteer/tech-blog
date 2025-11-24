@@ -2,7 +2,10 @@
 date: 2021-05-08T10:00:00+05:30
 draft: false
 title: "TIL: Siege Load Testing and Awesome FastAPI Resources"
-description: "Today I learned about Siege for load testing and benchmarking web applications, plus discovered a curated collection of FastAPI resources and tools."
+description:
+  "Today I learned about Siege for load testing and benchmarking web
+  applications, plus discovered a curated collection of FastAPI resources and
+  tools."
 tags:
   - TIL
   - Load Testing
@@ -18,6 +21,7 @@ tags:
 Siege is a powerful load testing and benchmarking utility for web applications:
 
 ### Features:
+
 - **Multi-threaded**: Simulates concurrent users
 - **Flexible Configuration**: Supports various HTTP methods and headers
 - **Detailed Reporting**: Provides comprehensive performance metrics
@@ -26,6 +30,7 @@ Siege is a powerful load testing and benchmarking utility for web applications:
 - **Cookie Management**: Maintains session state during tests
 
 ### Common Use Cases:
+
 - Performance testing before deployment
 - Capacity planning and benchmarking
 - Stress testing under load
@@ -33,9 +38,11 @@ Siege is a powerful load testing and benchmarking utility for web applications:
 
 ## Awesome FastAPI
 
-[GitHub - mjhea0/awesome-fastapi](https://github.com/mjhea0/awesome-fastapi) - A curated list of awesome things related to FastAPI.
+[GitHub - mjhea0/awesome-fastapi](https://github.com/mjhea0/awesome-fastapi) - A
+curated list of awesome things related to FastAPI.
 
 Comprehensive collection of FastAPI resources including:
+
 - **Tutorials and Guides**: Learning materials for FastAPI
 - **Tools and Extensions**: Third-party packages and utilities
 - **Example Projects**: Real-world FastAPI applications
@@ -43,4 +50,5 @@ Comprehensive collection of FastAPI resources including:
 - **Deployment Guides**: Production deployment strategies
 - **Performance Tips**: Optimization techniques
 
-Perfect resource for anyone working with FastAPI, from beginners to advanced users looking for specific tools and patterns.
+Perfect resource for anyone working with FastAPI, from beginners to advanced
+users looking for specific tools and patterns.

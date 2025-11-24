@@ -1,8 +1,13 @@
 ---
 date: 2020-08-31T10:00:00+05:30
 draft: false
-title: "TIL: Asciimatics Terminal Effects, Lock-Free Programming, EOPL, and Ranger File Manager"
-description: "Today I learned about creating full-screen terminal animations with Asciimatics, wait-free and lock-free programming concepts, the Essentials of Programming Languages book, and the Vim-inspired Ranger file manager."
+title:
+  "TIL: Asciimatics Terminal Effects, Lock-Free Programming, EOPL, and Ranger
+  File Manager"
+description:
+  "Today I learned about creating full-screen terminal animations with
+  Asciimatics, wait-free and lock-free programming concepts, the Essentials of
+  Programming Languages book, and the Vim-inspired Ranger file manager."
 tags:
   - til
   - terminal
@@ -13,15 +18,18 @@ tags:
   - vim
 ---
 
-Today's discoveries ranged from terminal user interfaces to advanced concurrency concepts and programming language theory.
+Today's discoveries ranged from terminal user interfaces to advanced concurrency
+concepts and programming language theory.
 
 ## Asciimatics - Full-Screen Terminal Animations
 
-[Asciimatics](https://github.com/peterbrittain/asciimatics) enables creating sophisticated terminal-based animations and effects in Python:
+[Asciimatics](https://github.com/peterbrittain/asciimatics) enables creating
+sophisticated terminal-based animations and effects in Python:
 
 ### Core Features:
 
 #### **Screen Management:**
+
 ```python
 from asciimatics.screen import Screen
 from asciimatics.scene import Scene
@@ -44,7 +52,7 @@ def demo(screen):
         Stars(screen, 200)
     ]
     scenes.append(Scene(effects, 500))
-    
+
     # Fireworks effect
     fireworks = []
     for _ in range(20):
@@ -54,16 +62,17 @@ def demo(screen):
             screen.height // 2,
             screen.height,
             start_frame=randint(0, 250)))
-    
+
     effects = fireworks + [Stars(screen, 200)]
     scenes.append(Scene(effects, 500))
-    
+
     screen.play(scenes, stop_on_resize=True, start_scene=scenes[0])
 
 Screen.wrapper(demo)
 ```
 
 #### **Advanced Effects:**
+
 ```python
 from asciimatics.effects import Print, Snow
 from asciimatics.particles import Explosion
@@ -74,7 +83,7 @@ class CustomPath(Path):
     def process_colour_map(self, screen, colour_map):
         # Custom path animation logic
         return colour_map
-    
+
     def is_finished(self, frame):
         return frame > self._max_frames
 
@@ -83,7 +92,7 @@ def complex_demo(screen):
     path = Path()
     path.jump_to(-20, screen.height // 2)
     path.move_straight_to(screen.width + 20, screen.height // 2, screen.width // 4)
-    
+
     effects = [
         Sam(screen, path),
         Snow(screen),
@@ -93,12 +102,13 @@ def complex_demo(screen):
               speed=1,
               transparent=False),
     ]
-    
+
     scenes = [Scene(effects, -1)]
     screen.play(scenes)
 ```
 
 #### **Interactive Applications:**
+
 ```python
 from asciimatics.widgets import Frame, ListBox, Layout, Divider, Text, Button
 from asciimatics.widgets import TextBox, Widget
@@ -111,28 +121,28 @@ class DemoFrame(Frame):
                                       hover_focus=True,
                                       title="Contact Details",
                                       reduce_cpu=True)
-        
+
         # Create layout
         layout = Layout([100], fill_frame=True)
         self.add_layout(layout)
-        
+
         # Add widgets
         layout.add_widget(Text("Name:", "name"))
         layout.add_widget(Text("Email:", "email"))
         layout.add_widget(TextBox(3, "Address:", "address", as_string=True))
         layout.add_widget(Divider())
-        
+
         layout2 = Layout([1, 1, 1, 1])
         self.add_layout(layout2)
         layout2.add_widget(Button("OK", self._ok), 0)
         layout2.add_widget(Button("Cancel", self._cancel), 3)
-        
+
         self.fix()
-    
+
     def _ok(self):
         # Handle OK button
         self._scene.add_effect(PopUpDialog(self._screen, "Saved!", ["OK"]))
-    
+
     def _cancel(self):
         raise StopApplication("User pressed quit")
 
@@ -141,18 +151,21 @@ def interactive_demo(screen):
 ```
 
 ### Use Cases:
-- **System monitoring dashboards**: Real-time resource visualization  
+
+- **System monitoring dashboards**: Real-time resource visualization
 - **Game development**: Text-based games with visual effects
 - **Data visualization**: Charts and graphs in terminal environments
 - **Interactive tools**: Menu-driven applications and wizards
 
 ## Awesome Lock-Free Programming
 
-[Awesome Lock-Free](https://github.com/rigtorp/awesome-lockfree) compiles resources on wait-free and lock-free programming:
+[Awesome Lock-Free](https://github.com/rigtorp/awesome-lockfree) compiles
+resources on wait-free and lock-free programming:
 
 ### Core Concepts:
 
 #### **Lock-Free vs Wait-Free:**
+
 ```cpp
 // Lock-based (traditional)
 class Counter {
@@ -164,7 +177,7 @@ public:
         std::lock_guard<std::mutex> lock(mtx);
         ++value;  // Thread blocks if lock is held
     }
-    
+
     int get() {
         std::lock_guard<std::mutex> lock(mtx);
         return value;
@@ -179,7 +192,7 @@ public:
     void increment() {
         value.fetch_add(1);  // Never blocks, but may retry
     }
-    
+
     int get() {
         return value.load();  // Always completes in finite steps
     }
@@ -193,7 +206,7 @@ public:
     void set(int index, int val) {
         data[index].store(val);  // Always completes in bounded steps
     }
-    
+
     int get(int index) {
         return data[index].load();  // No possibility of indefinite delay
     }
@@ -201,6 +214,7 @@ public:
 ```
 
 #### **Memory Ordering:**
+
 ```cpp
 #include <atomic>
 
@@ -221,7 +235,7 @@ void producer() {
     ready.store(true, std::memory_order_release);  // Synchronizes with acquire
 }
 
-// Consumer thread  
+// Consumer thread
 void consumer() {
     while (!ready.load(std::memory_order_acquire)) {
         // Wait for producer
@@ -231,6 +245,7 @@ void consumer() {
 ```
 
 #### **ABA Problem and Solutions:**
+
 ```cpp
 // ABA Problem: Value changes from A to B to A, appearing unchanged
 template<typename T>
@@ -240,28 +255,28 @@ private:
         T data;
         Node* next;
     };
-    
+
     std::atomic<Node*> head{nullptr};
-    
+
 public:
     void push(T data) {
         Node* new_node = new Node{data, nullptr};
         new_node->next = head.load();
-        
+
         // Compare-and-swap loop
         while (!head.compare_exchange_weak(new_node->next, new_node)) {
             // Retry if another thread modified head
         }
     }
-    
+
     bool pop(T& result) {
         Node* old_head = head.load();
-        
-        while (old_head && 
+
+        while (old_head &&
                !head.compare_exchange_weak(old_head, old_head->next)) {
             // Handle ABA: old_head updated by compare_exchange_weak
         }
-        
+
         if (old_head) {
             result = old_head->data;
             delete old_head;  // Memory management challenge
@@ -273,6 +288,7 @@ public:
 ```
 
 ### Advanced Techniques:
+
 - **Hazard pointers**: Safe memory reclamation in lock-free structures
 - **RCU (Read-Copy-Update)**: Optimized for read-heavy workloads
 - **Compare-and-swap loops**: Building complex operations from atomic primitives
@@ -280,11 +296,13 @@ public:
 
 ## Essentials of Programming Languages (EOPL)
 
-[EOPL](http://eopl3.com/) provides comprehensive coverage of programming language implementation:
+[EOPL](http://eopl3.com/) provides comprehensive coverage of programming
+language implementation:
 
 ### Core Topics:
 
 #### **Interpreter Implementation:**
+
 ```scheme
 ; Simple expression language
 (define-datatype expression expression?
@@ -308,6 +326,7 @@ public:
 ```
 
 #### **Type Systems:**
+
 ```scheme
 ; Type checker for simple language
 (define-datatype type type?
@@ -330,6 +349,7 @@ public:
 ```
 
 ### Language Features Covered:
+
 - **Lexical scoping**: Environment models and closure implementation
 - **Control structures**: Continuations and exception handling
 - **Object-oriented features**: Classes, inheritance, and method dispatch
@@ -337,11 +357,13 @@ public:
 
 ## Ranger - Vim-Inspired File Manager
 
-[Ranger](https://github.com/ranger/ranger) provides a powerful, keyboard-driven file management experience:
+[Ranger](https://github.com/ranger/ranger) provides a powerful, keyboard-driven
+file management experience:
 
 ### Key Features:
 
 #### **Installation and Basic Usage:**
+
 ```bash
 # Install ranger
 pip install ranger-fm
@@ -362,6 +384,7 @@ n/N     # Next/previous search result
 ```
 
 #### **Advanced Navigation:**
+
 ```bash
 # Bookmarks
 m<key>  # Set bookmark
@@ -375,7 +398,7 @@ gn      # New tab
 
 # File operations
 yy      # Copy file
-dd      # Cut file  
+dd      # Cut file
 pp      # Paste file
 dD      # Delete file
 cw      # Rename file
@@ -383,6 +406,7 @@ cw      # Rename file
 ```
 
 #### **Configuration:**
+
 ```python
 # ~/.config/ranger/rc.conf
 set column_ratios 1,3,4
@@ -408,6 +432,7 @@ alias qall quitall
 ```
 
 #### **Plugin Integration:**
+
 ```bash
 # Image preview (requires w3m-img or similar)
 set preview_images true
@@ -423,4 +448,6 @@ set preview_archives true
 set preview_pdfs true
 ```
 
-These tools demonstrate the diversity of terminal-based applications possible in modern computing environments, from visual effects and concurrent programming to language implementation and efficient file management.
+These tools demonstrate the diversity of terminal-based applications possible in
+modern computing environments, from visual effects and concurrent programming to
+language implementation and efficient file management.

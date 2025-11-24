@@ -2,7 +2,10 @@
 date: 2020-11-11T15:00:00+05:30
 draft: false
 title: "TIL: Web Security Fundamentals and OWASP Best Practices"
-description: "Today I learned about essential web security practices, OWASP guidelines, secure headers implementation, and security testing methodologies for web applications."
+description:
+  "Today I learned about essential web security practices, OWASP guidelines,
+  secure headers implementation, and security testing methodologies for web
+  applications."
 tags:
   - til
   - web-security
@@ -13,15 +16,19 @@ tags:
   - http-security
 ---
 
-Today I explored comprehensive web security resources and discovered essential practices for building secure web applications, from OWASP guidelines to practical security header implementation.
+Today I explored comprehensive web security resources and discovered essential
+practices for building secure web applications, from OWASP guidelines to
+practical security header implementation.
 
 ## OWASP Security Framework
 
 ### OWASP Top 10 Web Application Security Risks
 
-The [OWASP Top 10](https://owasp.org/www-project-top-ten/) represents the most critical web application security risks:
+The [OWASP Top 10](https://owasp.org/www-project-top-ten/) represents the most
+critical web application security risks:
 
 {{< warning title="OWASP Top 10 (2021)" >}}
+
 1. **Broken Access Control** - Improper access restrictions
 2. **Cryptographic Failures** - Weak encryption or exposure of sensitive data
 3. **Injection** - SQL, NoSQL, OS command injection vulnerabilities
@@ -29,19 +36,23 @@ The [OWASP Top 10](https://owasp.org/www-project-top-ten/) represents the most c
 5. **Security Misconfiguration** - Default configurations and missing updates
 6. **Vulnerable Components** - Using components with known vulnerabilities
 7. **Identification & Authentication Failures** - Weak authentication mechanisms
-8. **Software & Data Integrity Failures** - Untrusted software updates and CI/CD pipelines
-9. **Security Logging & Monitoring Failures** - Insufficient logging and detection
+8. **Software & Data Integrity Failures** - Untrusted software updates and CI/CD
+   pipelines
+9. **Security Logging & Monitoring Failures** - Insufficient logging and
+   detection
 10. **Server-Side Request Forgery (SSRF)** - Improper server request validation
-{{< /warning >}}
+    {{< /warning >}}
 
 ### OWASP Cheat Sheets
 
-The [OWASP Cheat Sheet Series](https://github.com/OWASP/CheatSheetSeries) provides practical security guidance:
+The [OWASP Cheat Sheet Series](https://github.com/OWASP/CheatSheetSeries)
+provides practical security guidance:
 
 ```markdown
 Key Cheat Sheets for Developers:
+
 - Authentication Cheat Sheet
-- Authorization Cheat Sheet  
+- Authorization Cheat Sheet
 - Cross-Site Request Forgery Prevention
 - Cross-Site Scripting Prevention
 - SQL Injection Prevention
@@ -52,33 +63,37 @@ Key Cheat Sheets for Developers:
 
 ### OWASP Web Security Testing Guide
 
-The [OWASP Web Security Testing Guide](https://owasp.org/www-project-web-security-testing-guide/v41/) offers systematic security testing methodology:
+The
+[OWASP Web Security Testing Guide](https://owasp.org/www-project-web-security-testing-guide/v41/)
+offers systematic security testing methodology:
 
-{{< example title="Security Testing Categories" >}}
-**Information Gathering**
+{{< example title="Security Testing Categories" >}} **Information Gathering**
+
 - Conduct Search Engine Discovery
 - Fingerprint Web Server
 - Review Webserver Metafiles
 - Enumerate Applications on Webserver
 
 **Configuration Management Testing**
+
 - Test Network Infrastructure Configuration
-- Test Application Platform Configuration  
+- Test Application Platform Configuration
 - Test File Extensions Handling
 - Test HTTP Methods and XST
 
 **Authentication Testing**
+
 - Test Credentials Transportation
 - Test Default Credentials
 - Test Weak Password Policy
-- Test Account Lockout Mechanism
-{{< /example >}}
+- Test Account Lockout Mechanism {{< /example >}}
 
 ## Secure Headers Implementation
 
 ### OWASP Secure Headers
 
-[OWASP Secure Headers](https://owasp.org/www-project-secure-headers/) defines essential HTTP security headers:
+[OWASP Secure Headers](https://owasp.org/www-project-secure-headers/) defines
+essential HTTP security headers:
 
 ```python
 # Flask implementation with secure headers
@@ -91,7 +106,7 @@ def add_security_headers(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         response = make_response(f(*args, **kwargs))
-        
+
         # Content Security Policy
         response.headers['Content-Security-Policy'] = (
             "default-src 'self'; "
@@ -102,30 +117,30 @@ def add_security_headers(f):
             "connect-src 'self'; "
             "frame-ancestors 'none';"
         )
-        
+
         # Strict Transport Security
         response.headers['Strict-Transport-Security'] = (
             'max-age=31536000; includeSubDomains; preload'
         )
-        
+
         # X-Frame-Options
         response.headers['X-Frame-Options'] = 'DENY'
-        
+
         # X-Content-Type-Options
         response.headers['X-Content-Type-Options'] = 'nosniff'
-        
+
         # X-XSS-Protection (legacy browsers)
         response.headers['X-XSS-Protection'] = '1; mode=block'
-        
+
         # Referrer Policy
         response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
-        
+
         # Permissions Policy
         response.headers['Permissions-Policy'] = (
             'geolocation=(), microphone=(), camera=(), '
             'payment=(), usb=(), magnetometer=(), gyroscope=()'
         )
-        
+
         return response
     return decorated_function
 
@@ -137,7 +152,8 @@ def home():
 
 ### Python Secure Headers Library
 
-The [`secure.py`](https://secure.readthedocs.io/en/latest/index.html) library simplifies secure header implementation:
+The [`secure.py`](https://secure.readthedocs.io/en/latest/index.html) library
+simplifies secure header implementation:
 
 ```python
 from secure import Secure
@@ -176,7 +192,8 @@ custom_secure = Secure(
 
 ### hsecscan - HTTP Security Scanner
 
-[`hsecscan`](https://github.com/riramar/hsecscan) is a Python tool for checking HTTP security headers:
+[`hsecscan`](https://github.com/riramar/hsecscan) is a Python tool for checking
+HTTP security headers:
 
 ```bash
 # Install hsecscan
@@ -196,6 +213,7 @@ echo "https://site1.com\nhttps://site2.com" | hsecscan --stdin
 ```
 
 Example output analysis:
+
 ```python
 import subprocess
 import json
@@ -207,46 +225,46 @@ def security_audit(url):
         capture_output=True,
         text=True
     )
-    
+
     if result.returncode == 0:
         data = json.loads(result.stdout)
-        
+
         security_score = 0
         recommendations = []
-        
+
         # Check for critical headers
         if data.get('csp'):
             security_score += 30
         else:
             recommendations.append("Implement Content Security Policy")
-        
+
         if data.get('hsts'):
             security_score += 25
         else:
             recommendations.append("Add Strict-Transport-Security header")
-        
+
         if data.get('xfo') or data.get('frame_ancestors'):
             security_score += 20
         else:
             recommendations.append("Prevent clickjacking with X-Frame-Options")
-        
+
         if data.get('xcto'):
             security_score += 15
         else:
             recommendations.append("Add X-Content-Type-Options: nosniff")
-        
+
         if data.get('xxp'):
             security_score += 10
         else:
             recommendations.append("Add X-XSS-Protection header")
-        
+
         return {
             'url': url,
             'security_score': security_score,
             'recommendations': recommendations,
             'headers': data
         }
-    
+
     return None
 
 # Usage
@@ -258,23 +276,26 @@ print(f"Security Score: {audit_result['security_score']}/100")
 
 ### HTTP Status Codes Security Implications
 
-Understanding [HTTP Status Codes](https://devhints.io/http-status) from a security perspective:
+Understanding [HTTP Status Codes](https://devhints.io/http-status) from a
+security perspective:
 
-{{< note title="Security-Relevant Status Codes" >}}
-**Information Disclosure:**
+{{< note title="Security-Relevant Status Codes" >}} **Information Disclosure:**
+
 - **200 OK** - Reveals successful access
-- **404 Not Found** vs **403 Forbidden** - Information leakage about resource existence
+- **404 Not Found** vs **403 Forbidden** - Information leakage about resource
+  existence
 - **401 Unauthorized** - Prompts for authentication
 - **429 Too Many Requests** - Rate limiting indicator
 
 **Redirect Security:**
+
 - **301/302** - Permanent/temporary redirects (potential for redirect attacks)
 - **307/308** - Method-preserving redirects
 
 **Server Errors:**
+
 - **500 Internal Server Error** - May expose stack traces
-- **502/503/504** - Infrastructure information disclosure
-{{< /note >}}
+- **502/503/504** - Infrastructure information disclosure {{< /note >}}
 
 ### Secure HTTP Configuration
 
@@ -305,17 +326,17 @@ def security_checks():
     # Force HTTPS in production
     if not request.is_secure and app.env == 'production':
         return redirect(request.url.replace('http://', 'https://'))
-    
+
     # Basic rate limiting by IP
     client_ip = request.remote_addr
     if is_rate_limited(client_ip):
         abort(429)  # Too Many Requests
-    
+
     # Content-Type validation for POST requests
     if request.method == 'POST':
         if not request.content_type:
             abort(400)  # Bad Request
-            
+
         allowed_types = ['application/json', 'application/x-www-form-urlencoded']
         if not any(ct in request.content_type for ct in allowed_types):
             abort(415)  # Unsupported Media Type
@@ -324,17 +345,17 @@ def is_rate_limited(ip):
     # Simple in-memory rate limiting (use Redis in production)
     from collections import defaultdict
     import time
-    
+
     rate_limits = defaultdict(list)
     current_time = time.time()
-    
+
     # Clean old entries
     rate_limits[ip] = [t for t in rate_limits[ip] if current_time - t < 60]
-    
+
     # Check rate limit (10 requests per minute)
     if len(rate_limits[ip]) >= 10:
         return True
-    
+
     rate_limits[ip].append(current_time)
     return False
 ```
@@ -388,6 +409,7 @@ head -c 16 /dev/urandom | xxd -p -c 16
 ```
 
 Python integration:
+
 ```python
 import os
 import secrets
@@ -415,7 +437,7 @@ def hash_password(password, salt=None):
     """Secure password hashing"""
     if salt is None:
         salt = generate_salt()
-    
+
     # Using PBKDF2 with SHA-256
     key = hashlib.pbkdf2_hmac('sha256', password.encode(), salt, 100000)
     return salt + key
@@ -443,6 +465,7 @@ docker run -p 127.0.0.1:8080:80 nginx  # Bind only to localhost
 ```
 
 Container security hardening:
+
 ```dockerfile
 # Security-hardened Dockerfile
 FROM python:3.11-slim
@@ -475,13 +498,15 @@ CMD ["python", "app.py"]
 ### Defense in Depth Strategy
 
 {{< tip title="Layered Security Approach" >}}
+
 1. **Network Security**: Firewalls, VPNs, network segmentation
 2. **Application Security**: Input validation, output encoding, authentication
 3. **Transport Security**: HTTPS, secure headers, certificate management
 4. **Data Security**: Encryption at rest and in transit, secure key management
-5. **Infrastructure Security**: Secure configurations, regular updates, monitoring
+5. **Infrastructure Security**: Secure configurations, regular updates,
+   monitoring
 6. **Operational Security**: Logging, monitoring, incident response procedures
-{{< /tip >}}
+   {{< /tip >}}
 
 ### Security Testing Methodology
 
@@ -498,23 +523,23 @@ def comprehensive_security_test(target_url):
         'input_validation': test_input_validation,
         'error_handling': test_error_disclosure
     }
-    
+
     results = {}
     for test_name, test_func in tests.items():
         try:
             results[test_name] = test_func(target_url)
         except Exception as e:
             results[test_name] = {'error': str(e)}
-    
+
     return generate_security_report(results)
 
 def test_security_headers(url):
     """Test for presence and configuration of security headers"""
     import requests
-    
+
     response = requests.get(url)
     headers = response.headers
-    
+
     return {
         'csp': headers.get('Content-Security-Policy'),
         'hsts': headers.get('Strict-Transport-Security'),
@@ -537,7 +562,7 @@ class SecurityMonitor:
     def __init__(self, alert_email=None):
         self.alert_email = alert_email
         self.security_logger = logging.getLogger('security')
-        
+
     def log_security_event(self, event_type, details, severity='INFO'):
         """Log security events with structured data"""
         log_entry = {
@@ -548,16 +573,16 @@ class SecurityMonitor:
             'source_ip': getattr(request, 'remote_addr', 'unknown'),
             'user_agent': getattr(request, 'user_agent', 'unknown')
         }
-        
+
         self.security_logger.log(
             getattr(logging, severity),
             f"SECURITY_EVENT: {log_entry}"
         )
-        
+
         # Alert on high-severity events
         if severity in ['WARNING', 'ERROR', 'CRITICAL']:
             self.send_security_alert(log_entry)
-    
+
     def send_security_alert(self, event_data):
         """Send email alerts for critical security events"""
         if self.alert_email:
@@ -579,8 +604,12 @@ def security_monitoring():
         abort(400)
 ```
 
-This comprehensive exploration of web security fundamentals demonstrates that effective security requires systematic implementation of multiple protective layers, from secure headers to continuous monitoring.
+This comprehensive exploration of web security fundamentals demonstrates that
+effective security requires systematic implementation of multiple protective
+layers, from secure headers to continuous monitoring.
 
 ---
 
-*These security insights from my archive highlight the evolution of web security practices, showing how frameworks like OWASP provide structured approaches to building and maintaining secure web applications.*
+_These security insights from my archive highlight the evolution of web security
+practices, showing how frameworks like OWASP provide structured approaches to
+building and maintaining secure web applications._

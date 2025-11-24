@@ -1,8 +1,13 @@
 ---
 date: 2020-12-12T10:00:00+05:30
 draft: false
-title: "TIL: Python Behind the Scenes - CPython VM, Compiler, and Object System Deep Dive"
-description: "Today I learned about the comprehensive 'Python Behind the Scenes' series covering CPython's virtual machine, compiler architecture, bytecode execution, variable implementation, and object system internals."
+title:
+  "TIL: Python Behind the Scenes - CPython VM, Compiler, and Object System Deep
+  Dive"
+description:
+  "Today I learned about the comprehensive 'Python Behind the Scenes' series
+  covering CPython's virtual machine, compiler architecture, bytecode execution,
+  variable implementation, and object system internals."
 tags:
   - TIL
   - Python
@@ -28,6 +33,7 @@ Comprehensive deep dive into CPython internals across multiple articles:
 ### Part 1: CPython Virtual Machine Architecture
 
 #### **High-Level Overview:**
+
 ```
 Python Source Code (.py)
        ↓
@@ -41,6 +47,7 @@ Python Source Code (.py)
 ```
 
 #### **Core Components:**
+
 ```c
 // Simplified CPython VM structure
 typedef struct {
@@ -75,12 +82,14 @@ PyEval_EvalFrameEx(PyFrameObject *f, int throwflag) {
 ### Part 2: CPython Compiler Pipeline
 
 #### **Compilation Phases:**
+
 1. **Lexical Analysis**: Source code → tokens
 2. **Parsing**: Tokens → Abstract Syntax Tree (AST)
 3. **AST Optimization**: Tree transformations
 4. **Code Generation**: AST → bytecode
 
 #### **AST Structure Example:**
+
 ```python
 # Python code
 def factorial(n):
@@ -118,6 +127,7 @@ FunctionDef(
 ```
 
 #### **Bytecode Generation:**
+
 ```python
 import dis
 
@@ -130,6 +140,7 @@ dis.dis(factorial)
 ```
 
 Output:
+
 ```
   2           0 LOAD_FAST                0 (n)
               2 LOAD_CONST               1 (1)
@@ -152,13 +163,14 @@ Output:
 ### Part 3: Bytecode Execution Engine
 
 #### **Stack-Based Virtual Machine:**
+
 ```c
 // Bytecode execution example: BINARY_ADD
 case BINARY_ADD: {
     PyObject *right = POP();   // Pop right operand
     PyObject *left = TOP();    // Get left operand (don't pop yet)
     PyObject *sum;
-    
+
     // Try fast path for integers
     if (PyLong_CheckExact(left) && PyLong_CheckExact(right)) {
         sum = long_add(left, right);
@@ -166,7 +178,7 @@ case BINARY_ADD: {
         // General case: call __add__ method
         sum = PyNumber_Add(left, right);
     }
-    
+
     SET_TOP(sum);              // Replace left operand with result
     Py_DECREF(right);          // Clean up
     if (sum == NULL) goto error;
@@ -175,6 +187,7 @@ case BINARY_ADD: {
 ```
 
 #### **Execution Stack Management:**
+
 ```python
 # Python code demonstrating stack operations
 x = 10
@@ -184,7 +197,7 @@ result = x + y * 2
 # Corresponding stack operations:
 # LOAD_CONST 10        -> Stack: [10]
 # STORE_FAST x         -> Stack: [], x = 10
-# LOAD_CONST 20        -> Stack: [20]  
+# LOAD_CONST 20        -> Stack: [20]
 # STORE_FAST y         -> Stack: [], y = 20
 # LOAD_FAST x          -> Stack: [10]
 # LOAD_FAST y          -> Stack: [10, 20]
@@ -197,6 +210,7 @@ result = x + y * 2
 ### Part 4: Variable Implementation
 
 #### **Local Variables (LEGB Rule):**
+
 ```c
 // Local variable access in CPython
 typedef struct {
@@ -224,12 +238,13 @@ case LOAD_FAST: {
 ```
 
 #### **Global and Built-in Lookup:**
+
 ```c
 // Global variable lookup (LOAD_GLOBAL)
 case LOAD_GLOBAL: {
     PyObject *name = GETITEM(names, oparg);
     PyObject *v;
-    
+
     // Try global namespace first
     v = PyDict_GetItem(f->f_globals, name);
     if (v == NULL) {
@@ -240,7 +255,7 @@ case LOAD_GLOBAL: {
             goto error;
         }
     }
-    
+
     Py_INCREF(v);
     PUSH(v);
     DISPATCH();
@@ -248,6 +263,7 @@ case LOAD_GLOBAL: {
 ```
 
 #### **Closure and Cell Variables:**
+
 ```python
 def outer(x):
     def inner():
@@ -261,6 +277,7 @@ def outer(x):
 ### Part 5: Python Object System
 
 #### **PyObject Structure:**
+
 ```c
 // Base object structure
 typedef struct _object {
@@ -282,33 +299,35 @@ typedef struct {
 ```
 
 #### **Type System:**
+
 ```c
 // Type object structure (simplified)
 typedef struct _typeobject {
     PyVarObject_HEAD
     const char *tp_name;          // Type name
     Py_ssize_t tp_basicsize;      // Size of instances
-    
+
     // Method slots
     destructor tp_dealloc;        // Destructor
     printfunc tp_print;           // Print function
     getattrfunc tp_getattr;       // Attribute access
     setattrfunc tp_setattr;       // Attribute setting
-    
+
     // Number methods
     PyNumberMethods *tp_as_number;
-    
-    // Sequence methods  
+
+    // Sequence methods
     PySequenceMethods *tp_as_sequence;
-    
+
     // Mapping methods
     PyMappingMethods *tp_as_mapping;
-    
+
     // ... many more slots
 } PyTypeObject;
 ```
 
 #### **Method Resolution and Dispatch:**
+
 ```python
 class A:
     def method(self):
@@ -335,6 +354,7 @@ print(D.__mro__)
 ### Performance Implications:
 
 #### **Optimization Strategies:**
+
 ```python
 # Understanding performance through internals
 
@@ -344,7 +364,7 @@ def fast_locals():
     for i in range(1000000):
         y = x + i  # x is local, very fast
 
-# 2. Global lookups are slower (LOAD_GLOBAL)  
+# 2. Global lookups are slower (LOAD_GLOBAL)
 global_var = 10
 def slower_globals():
     for i in range(1000000):
@@ -360,13 +380,13 @@ def attribute_access():
     p = Point(1, 2)
     for i in range(1000000):
         # Each p.x triggers __getattribute__ or __getattr__
-        y = p.x + i  
+        y = p.x + i
 
 # 4. Built-in functions are optimized
 def builtin_vs_custom():
     # Fast: built-in sum() is implemented in C
     result1 = sum(range(1000000))
-    
+
     # Slower: Python loop with bytecode overhead
     result2 = 0
     for i in range(1000000):
@@ -374,6 +394,7 @@ def builtin_vs_custom():
 ```
 
 #### **Memory Management Insights:**
+
 ```python
 import sys
 
@@ -384,7 +405,7 @@ print(sys.getrefcount(x))  # Should be 2 (x + getrefcount parameter)
 y = x  # Increment reference count
 print(sys.getrefcount(x))  # Should be 3
 
-del y  # Decrement reference count  
+del y  # Decrement reference count
 print(sys.getrefcount(x))  # Back to 2
 
 # Circular references require garbage collector
@@ -407,6 +428,7 @@ child.parent = parent  # Circular reference
 ### Debugging and Introspection:
 
 #### **Useful Tools:**
+
 ```python
 import dis
 import ast
@@ -416,10 +438,10 @@ import inspect
 def debug_bytecode():
     def sample(x, y):
         return x + y * 2
-    
+
     print("Bytecode:")
     dis.dis(sample)
-    
+
     print("\nCode object attributes:")
     code = sample.__code__
     print(f"co_names: {code.co_names}")        # Global names
@@ -441,15 +463,17 @@ def debug_frames():
     print(f"Globals count: {len(frame.f_globals)}")
 
 debug_bytecode()
-debug_ast()  
+debug_ast()
 debug_frames()
 ```
 
 Understanding CPython internals provides valuable insights for:
+
 - **Performance optimization**: Knowing what operations are expensive
 - **Memory management**: Understanding reference counting and GC
 - **Debugging**: Better tools for investigating issues
 - **Language design**: Appreciating the complexity of dynamic languages
 - **Extension development**: Writing efficient C extensions
 
-This knowledge bridges the gap between high-level Python programming and low-level system understanding, making you a more effective Python developer.
+This knowledge bridges the gap between high-level Python programming and
+low-level system understanding, making you a more effective Python developer.

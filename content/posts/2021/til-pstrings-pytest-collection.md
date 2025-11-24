@@ -1,8 +1,13 @@
 ---
 date: 2021-01-30T10:00:00+05:30
 draft: false
-title: "TIL: Gary Bernhardt's 'It's Fine' Talk, pstrings for Process Memory, and pytest Collection Techniques"
-description: "Today I learned about Gary Bernhardt's humorous take on software development culture, the pstrings tool for examining process memory strings, and pytest's powerful test collection and filtering capabilities."
+title:
+  "TIL: Gary Bernhardt's 'It's Fine' Talk, pstrings for Process Memory, and
+  pytest Collection Techniques"
+description:
+  "Today I learned about Gary Bernhardt's humorous take on software development
+  culture, the pstrings tool for examining process memory strings, and pytest's
+  powerful test collection and filtering capabilities."
 tags:
   - TIL
   - Software Culture
@@ -20,7 +25,9 @@ tags:
 Brilliant satirical talk about software development culture and technical debt:
 
 ### The Premise:
-- **Satirical Commentary**: Humorous take on "this is fine" mentality in software
+
+- **Satirical Commentary**: Humorous take on "this is fine" mentality in
+  software
 - **Technical Debt**: How developers normalize increasingly broken systems
 - **Cultural Critique**: Examination of acceptance culture in tech industry
 - **Historical Perspective**: How we got to "everything is broken but fine"
@@ -28,6 +35,7 @@ Brilliant satirical talk about software development culture and technical debt:
 ### Key Themes:
 
 #### **Normalization of Dysfunction:**
+
 ```javascript
 // "It's fine" examples
 setTimeout(() => {
@@ -42,6 +50,7 @@ setTimeout(() => {
 ```
 
 #### **Accumulated Workarounds:**
+
 - **Layer Upon Layer**: Fixes built on top of previous fixes
 - **Historical Context**: Solutions that made sense years ago
 - **Knowledge Loss**: Original reasons for workarounds forgotten
@@ -50,12 +59,14 @@ setTimeout(() => {
 ### Cultural Observations:
 
 #### **Developer Mindset:**
+
 - **Pragmatic Acceptance**: "Ship it now, fix it later"
 - **Stockholm Syndrome**: Growing fond of broken systems
 - **Learned Helplessness**: Accepting that things are just broken
 - **Tribal Knowledge**: Undocumented fixes passed down through teams
 
 #### **System Evolution:**
+
 ```bash
 # The evolution of a "simple" deployment
 ./run.sh                     # 2010: It's fine!
@@ -68,6 +79,7 @@ kubectl apply -f deploy.yaml  # 2020: "Simple" Kubernetes
 ```
 
 ### The Deeper Message:
+
 - **Systemic Issues**: Individual "it's fine" decisions compound
 - **Technical Debt**: Accumulation leads to unmaintainable systems
 - **Culture Change**: Need for higher standards and better practices
@@ -80,6 +92,7 @@ kubectl apply -f deploy.yaml  # 2020: "Simple" Kubernetes
 Advanced tool for examining strings in running process memory:
 
 ### What It Does:
+
 - **Live Process Analysis**: Extract strings from running processes
 - **Memory Mapping**: Analyze different memory regions (heap, stack, libs)
 - **Dynamic Analysis**: Monitor string changes over time
@@ -88,6 +101,7 @@ Advanced tool for examining strings in running process memory:
 ### Key Features:
 
 #### **Memory Region Targeting:**
+
 ```bash
 # Analyze specific memory regions
 pstrings -h <pid>    # Heap only
@@ -101,6 +115,7 @@ pstrings -m 100 <pid>  # Maximum 100 characters
 ```
 
 #### **Output Formatting:**
+
 ```bash
 # Show memory addresses
 pstrings -t x <pid>    # Hexadecimal addresses
@@ -114,6 +129,7 @@ pstrings -r <pid>      # Show which memory region
 ### Use Cases:
 
 #### **Security Analysis:**
+
 ```bash
 # Look for sensitive data in memory
 pstrings $(pgrep myapp) | grep -i password
@@ -127,6 +143,7 @@ done
 ```
 
 #### **Debugging:**
+
 ```bash
 # Find configuration strings
 pstrings $(pgrep myservice) | grep -E '(config|setting|option)'
@@ -139,6 +156,7 @@ pstrings $(pgrep myapp) | grep -E '^/'
 ```
 
 #### **Performance Analysis:**
+
 - **Memory Leaks**: Find repeated strings indicating leaks
 - **Cache Analysis**: Examine cached data in memory
 - **Resource Usage**: Identify large string allocations
@@ -146,6 +164,7 @@ pstrings $(pgrep myapp) | grep -E '^/'
 ### Advanced Usage:
 
 #### **Comparative Analysis:**
+
 ```bash
 # Before operation
 pstrings $(pgrep myapp) > before.txt
@@ -161,6 +180,7 @@ comm -13 before.txt after.txt
 ```
 
 #### **Security Monitoring:**
+
 ```bash
 #!/bin/bash
 # Monitor for credential patterns
@@ -174,13 +194,16 @@ pstrings -a $(pgrep -f "web|server|app") | \
 
 ## pytest Collection and Filtering
 
-**Pytest Tip**: `pytest --collect-only -q` will collect all test names, with parameters, and just print out the names in a way that you can use with `pytest <name>`
+**Pytest Tip**: `pytest --collect-only -q` will collect all test names, with
+parameters, and just print out the names in a way that you can use with
+`pytest <name>`
 
 Powerful pytest feature for test discovery and selective execution:
 
 ### Test Collection:
 
 #### **Basic Collection:**
+
 ```bash
 # List all tests without running them
 pytest --collect-only
@@ -193,6 +216,7 @@ pytest --collect-only -qq
 ```
 
 #### **Output Format:**
+
 ```bash
 $ pytest --collect-only -q
 test_user.py::TestUserAuth::test_login
@@ -206,6 +230,7 @@ test_api.py::test_create_user[regular-user]
 ### Selective Test Execution:
 
 #### **Run Specific Tests:**
+
 ```bash
 # Run single test
 pytest test_user.py::TestUserAuth::test_login
@@ -221,6 +246,7 @@ pytest -k "login or logout"
 ```
 
 #### **Advanced Filtering:**
+
 ```bash
 # Run tests with specific markers
 pytest -m "slow"
@@ -240,6 +266,7 @@ pytest --ff
 ### Practical Applications:
 
 #### **CI/CD Integration:**
+
 ```yaml
 # GitHub Actions example
 - name: List all tests
@@ -256,6 +283,7 @@ pytest --ff
 ```
 
 #### **Development Workflow:**
+
 ```bash
 # Find tests related to feature
 pytest --collect-only -q | grep -i "user.*auth"
@@ -268,6 +296,7 @@ pytest --collect-only -q | grep -E "(login|logout|auth)" | xargs pytest -v
 ```
 
 #### **Test Analysis:**
+
 ```python
 # conftest.py - Collect test metadata
 def pytest_collection_modifyitems(config, items):
@@ -277,15 +306,17 @@ def pytest_collection_modifyitems(config, items):
             item.add_marker(pytest.mark.slow)
         if "integration" in item.nodeid:
             item.add_marker(pytest.mark.integration)
-        
+
         # Log test discovery
         print(f"Discovered: {item.nodeid}")
 ```
 
 ### Benefits:
+
 - **Faster Feedback**: Run only relevant tests during development
 - **CI Optimization**: Parallel test execution based on collection
 - **Debugging**: Isolate and focus on specific failing tests
 - **Documentation**: Test names serve as executable documentation
 
-These tools and techniques represent different aspects of software development - cultural awareness, system-level debugging, and efficient testing practices.
+These tools and techniques represent different aspects of software development -
+cultural awareness, system-level debugging, and efficient testing practices.
