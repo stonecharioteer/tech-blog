@@ -53,6 +53,7 @@ params:
     keys: ["title", "permalink", "summary", "content"]
   ShowShareButtons: true
   ShowReadingTime: true
+  ShowWordCount: true
   ShowBreadCrumbs: true
   ShowPostNavLinks: true
   ShowCodeCopyButtons: true

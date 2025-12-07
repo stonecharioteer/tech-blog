@@ -213,3 +213,7 @@ _Choosing an export template for generating blog posts_
 I am not done building KOllector. I plan to use this regularly to publish book
 posts to my blog, and continuously upgrade it. I think there's a lot more I can
 envision here, and I'm happy I spent my weekend building this.
+
+I used KOllector to publish my reading notes on
+[Adam Hochschild's King Leopold's Ghost](https://stonecharioteer.com/reading/2025/king-leopolds-ghost),
+and that made this entirely worth the effort.
