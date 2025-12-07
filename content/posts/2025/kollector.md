@@ -10,6 +10,8 @@ tags:
   - "homelab"
   - "show-and-tell"
   - "open-source"
+images:
+  - "https://tech.stonecharioteer.com/images/posts/kollector/banner.png"
 cover:
   image: "/images/posts/kollector/banner.png"
   alt:
