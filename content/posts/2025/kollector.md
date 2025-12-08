@@ -144,7 +144,7 @@ used [this online tool](https://coolors.co/image-picker) to generate a color
 palette from the image.
 
 I originally called it `koreader-highlights-collector`, until the idea to call
-it `KOllector` became obvious.
+it [`KOllector`](https://github.com/stonecharioteer/kollector) became obvious.
 
 My goal with KOllector was extremely personal. I wanted to write something
 simple that solved a deeply personal need. I remarked to my friends that I do
@@ -219,3 +219,7 @@ envision here, and I'm happy I spent my weekend building this.
 I used KOllector to publish my reading notes on
 [Adam Hochschild's King Leopold's Ghost](https://stonecharioteer.com/reading/2025/king-leopolds-ghost),
 and that made this entirely worth the effort.
+
+You can get
+[KOllector on my github here.](https://github.com/stonecharioteer/KOllector). I
+recommend deployment through `docker compose`.
