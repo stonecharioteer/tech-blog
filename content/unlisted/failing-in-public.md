@@ -204,3 +204,33 @@ I'm doing a lot better than I was when I started this year, my anxiety is under
 control and my interest in technology is alive again. I think I will continue to
 do better, and in time, I might look back at this and be able to articulate what
 went on.
+
+## Note 4
+
+**January 8, 2026**
+
+It feels strange to say I'm still failing and I feel okay. I bombed an interview
+at Tensorlake, I felt horrible even before the interview because that was my
+dream role, something I wanted to work on. I look up to people like Brendan
+Gregg, and I tell people that's what I want my career to be. I want to be a
+performance engineer, the person you go to to squeeze every inch out of an
+application by designing its architecture for scale. There is no one size fits
+all, but this is what excites me. I'm never usually interested in the product I
+work on, it's more about the scaling problem, the issues about moving large
+data. I love building developer facing tools, and that's where my forte is. Or
+at least that's where it was headed.
+
+I meandered. At my current job, I'm a round peg in a square hole. I'm shoehorned
+into a role that I do not fit into. I am going to leave, I've made up my mind.
+It's a great company, and the team is great, but that role isn't for me. I know
+what I want now, and that's why I'm also making a
+[direction]({{< ref "direction.md" >}}) document. For the moment, I've failed,
+I've had to stop an interview even though the interviewer was helpful enough to
+support me. I felt really lacking while talking to him. My knowledge of first
+principles has addled thanks to the burnout, and my skills are in hibernation.
+
+I had a panic attack because of this, and I'm not willing to compromise my
+health just because I'll get some paycheck. I need to move on.
+
+I will pick myself up again, and I'm going to focus on what to study next.
+Oddly, I knew, even last year. It's what I want to do.
