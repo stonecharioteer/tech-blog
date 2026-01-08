@@ -1,6 +1,5 @@
 ---
 date: "2026-01-08T11:43:15+05:30"
-draft: true
 title: "Direction"
 description: "Reflections on my career and where I want to go"
 tags:
@@ -19,5 +18,5 @@ I'm not sure I'll be able to complete all of them before April, but I want to
 finish the most important ones and learn from them to be the best engineer I can
 be.
 
-For a comprehensive list of learning resources, see
-[Distributed Systems Learning Resources](/distributed-systems).
+For a comprehensive list of learning resources, see [Distributed Systems
+Learning Resources]({{< ref "/distributed-systems.md" >}}).

@@ -224,7 +224,7 @@ I meandered. At my current job, I'm a round peg in a square hole. I'm shoehorned
 into a role that I do not fit into. I am going to leave, I've made up my mind.
 It's a great company, and the team is great, but that role isn't for me. I know
 what I want now, and that's why I'm also making a
-[direction]({{< ref "direction.md" >}}) document. For the moment, I've failed,
+[direction]({{< ref "posts/2026/direction.md" >}}) document. For the moment, I've failed,
 I've had to stop an interview even though the interviewer was helpful enough to
 support me. I felt really lacking while talking to him. My knowledge of first
 principles has addled thanks to the burnout, and my skills are in hibernation.
