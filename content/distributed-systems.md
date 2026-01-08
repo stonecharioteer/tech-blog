@@ -1,15 +1,18 @@
 ---
 date: "2026-01-08T12:21:16+05:30"
-draft: true
 title: "Distributed Systems Learning Resources"
-description: "Curated collection of books, papers, and articles for learning distributed systems and performance engineering"
+description:
+  "Curated collection of books, papers, and articles for learning distributed
+  systems and performance engineering"
 tags:
   - "Distributed Systems"
   - "Performance Engineering"
   - "Learning"
+url: "distributed"
 ---
 
-A comprehensive collection of resources for learning distributed systems, performance engineering, and scalable system design.
+A comprehensive collection of resources for learning distributed systems,
+performance engineering, and scalable system design.
 
 ## Books
 
@@ -53,7 +56,8 @@ concurrency in Python. These are what I have so far.
 
 ## Blog Articles
 
-- [Napkin Math](https://sirupsen.com/napkin/) - Back-of-the-envelope calculations for systems design
+- [Napkin Math](https://sirupsen.com/napkin/) - Back-of-the-envelope
+  calculations for systems design
 
 ### Brendan Gregg - Performance Engineering
 
@@ -81,22 +85,32 @@ concurrency in Python. These are what I have so far.
 
 ## Papers
 
-{{< warning title="Uncurated List" >}}
-This list hasn't been curated yet. I'll prune or strikethrough papers that I haven't found useful or won't read for my preparation.
-{{< /warning >}}
+{{< warning title="Uncurated List" >}} This list hasn't been curated yet. I'll
+prune or strikethrough papers that I haven't found useful or won't read for my
+preparation. {{< /warning >}}
 
 ### Essential Papers (Start Here)
 
-1. [Time, clocks, and the ordering of events in a distributed system](https://doi.org/10.1145/359545.359563) - Leslie Lamport, 1978
-2. [The Byzantine Generals Problem](https://doi.org/10.1145/357172.357176) - Leslie Lamport, Robert Shostak, and Marshall Pease, 1982
-3. [Distributed snapshots: determining global states of distributed systems](https://doi.org/10.1145/214451.214456) - K. Mani Chandy and Leslie Lamport, 1985
-4. [Impossibility of distributed consensus with one faulty process](https://doi.org/10.1145/3149.214121) - Michael J. Fischer, Nancy A. Lynch, and Michael S. Paterson, 1985
-5. [Viewstamped Replication: A New Primary Copy Method to Support Highly-Available Distributed Systems](https://doi.org/10.1145/62546.62549) - Brian M. Oki and Barbara H. Liskov, 1988
-6. [The part-time parliament (Paxos)](https://doi.org/10.1145/279227.279229) - Leslie Lamport, 1998
-7. [Paxos Made Simple](https://www.microsoft.com/en-us/research/publication/paxos-made-simple/) - Leslie Lamport, 2001
-8. [Bitcoin: A Peer-to-Peer Electronic Cash System](https://bitcoin.org/en/bitcoin-paper) - Satoshi Nakamoto, 2008
-9. [Conflict-free replicated data types](https://dl.acm.org/doi/10.5555/2050613.2050642) - Marc Shapiro, Nuno Preguiça, Carlos Baquero, and Marek Zawirski, 2011
-10. [In search of an understandable consensus algorithm (Raft)](https://dl.acm.org/doi/10.5555/2643634.2643666) - Diego Ongaro and John Ousterhout, 2014
+1. [Time, clocks, and the ordering of events in a distributed system](https://doi.org/10.1145/359545.359563) -
+   Leslie Lamport, 1978
+2. [The Byzantine Generals Problem](https://doi.org/10.1145/357172.357176) -
+   Leslie Lamport, Robert Shostak, and Marshall Pease, 1982
+3. [Distributed snapshots: determining global states of distributed systems](https://doi.org/10.1145/214451.214456) -
+   K. Mani Chandy and Leslie Lamport, 1985
+4. [Impossibility of distributed consensus with one faulty process](https://doi.org/10.1145/3149.214121) -
+   Michael J. Fischer, Nancy A. Lynch, and Michael S. Paterson, 1985
+5. [Viewstamped Replication: A New Primary Copy Method to Support Highly-Available Distributed Systems](https://doi.org/10.1145/62546.62549) -
+   Brian M. Oki and Barbara H. Liskov, 1988
+6. [The part-time parliament (Paxos)](https://doi.org/10.1145/279227.279229) -
+   Leslie Lamport, 1998
+7. [Paxos Made Simple](https://www.microsoft.com/en-us/research/publication/paxos-made-simple/) -
+   Leslie Lamport, 2001
+8. [Bitcoin: A Peer-to-Peer Electronic Cash System](https://bitcoin.org/en/bitcoin-paper) -
+   Satoshi Nakamoto, 2008
+9. [Conflict-free replicated data types](https://dl.acm.org/doi/10.5555/2050613.2050642) -
+   Marc Shapiro, Nuno Preguiça, Carlos Baquero, and Marek Zawirski, 2011
+10. [In search of an understandable consensus algorithm (Raft)](https://dl.acm.org/doi/10.5555/2643634.2643666) -
+    Diego Ongaro and John Ousterhout, 2014
 
 ### Comprehensive Reading List
 
@@ -171,12 +185,19 @@ This list hasn't been curated yet. I'll prune or strikethrough papers that I hav
 - [Scalable Eventually Consistent Counters over Unreliable Networks](https://arxiv.org/pdf/1307.3207v1.pdf)
 
 **Expository and Tutorial Resources:**
-- [There is No Now](https://queue.acm.org/detail.cfm?id=2745385) - Justin Sheehy, ACM Queue 2015
-- [Why Logical Clocks are Easy](https://queue.acm.org/detail.cfm?id=2917756) - Carlos Baquero and Nuno Preguiça, ACM Queue 2016
-- [Hybrid logical clocks](http://muratbuffalo.blogspot.com/2014/07/hybrid-logical-clocks.html) - Murat Buffalo blog
-- [Logical clocks and Vector clocks modeling in TLA+/PlusCal](http://muratbuffalo.blogspot.com/2018/01/logical-clocks-and-vector-clocks.html) - Murat Buffalo blog
-- [A Brief Tour of FLP Impossibility](http://the-paper-trail.org/blog/a-brief-tour-of-flp-impossibility/) - Paper Trail blog
-- [Paper summary: Perspectives on the CAP theorem](http://muratbuffalo.blogspot.com/2015/02/paper-summary-perspectives-on-cap.html) - Murat Buffalo blog
+
+- [There is No Now](https://queue.acm.org/detail.cfm?id=2745385) - Justin
+  Sheehy, ACM Queue 2015
+- [Why Logical Clocks are Easy](https://queue.acm.org/detail.cfm?id=2917756) -
+  Carlos Baquero and Nuno Preguiça, ACM Queue 2016
+- [Hybrid logical clocks](http://muratbuffalo.blogspot.com/2014/07/hybrid-logical-clocks.html) -
+  Murat Buffalo blog
+- [Logical clocks and Vector clocks modeling in TLA+/PlusCal](http://muratbuffalo.blogspot.com/2018/01/logical-clocks-and-vector-clocks.html) -
+  Murat Buffalo blog
+- [A Brief Tour of FLP Impossibility](http://the-paper-trail.org/blog/a-brief-tour-of-flp-impossibility/) -
+  Paper Trail blog
+- [Paper summary: Perspectives on the CAP theorem](http://muratbuffalo.blogspot.com/2015/02/paper-summary-perspectives-on-cap.html) -
+  Murat Buffalo blog
 
 #### Languages and Tools
 
@@ -210,8 +231,11 @@ This list hasn't been curated yet. I'll prune or strikethrough papers that I hav
 - [WormSpace: A modular foundation for simple, verifiable distributed systems](https://flint.cs.yale.edu/flint/publications/socc19.pdf)
 
 **Expository and Tutorial Resources:**
-- [Modeling Paxos and Flexible Paxos in Pluscal and TLA+](http://muratbuffalo.blogspot.com/2016/11/modeling-paxos-and-flexible-paxos-in.html) - Murat Buffalo blog
-- [Dissecting performance bottlenecks of Paxos protocols](http://muratbuffalo.blogspot.com/2019/07/dissecting-performance-bottlenecks-of.html) - Murat Buffalo blog
+
+- [Modeling Paxos and Flexible Paxos in Pluscal and TLA+](http://muratbuffalo.blogspot.com/2016/11/modeling-paxos-and-flexible-paxos-in.html) -
+  Murat Buffalo blog
+- [Dissecting performance bottlenecks of Paxos protocols](http://muratbuffalo.blogspot.com/2019/07/dissecting-performance-bottlenecks-of.html) -
+  Murat Buffalo blog
 
 #### Gossip Protocols and Epidemic Algorithms
 
@@ -240,8 +264,11 @@ This list hasn't been curated yet. I'll prune or strikethrough papers that I hav
 - [The Arrow Distributed Directory Protocol](http://cs.brown.edu/people/mph/DemmerH98/disc.pdf)
 
 **Expository and Tutorial Resources:**
-- [Dijkstra's stabilizing token ring algorithm](http://muratbuffalo.blogspot.com/2015/01/dijkstras-stabilizing-token-ring.html) - Murat Buffalo blog
-- [Modeling the hygienic dining philosophers algorithm in TLA+](http://muratbuffalo.blogspot.com/2016/11/hygienic-dining-philosophers.html) - Murat Buffalo blog
+
+- [Dijkstra's stabilizing token ring algorithm](http://muratbuffalo.blogspot.com/2015/01/dijkstras-stabilizing-token-ring.html) -
+  Murat Buffalo blog
+- [Modeling the hygienic dining philosophers algorithm in TLA+](http://muratbuffalo.blogspot.com/2016/11/hygienic-dining-philosophers.html) -
+  Murat Buffalo blog
 
 #### System Design and Architecture
 
@@ -251,7 +278,9 @@ This list hasn't been curated yet. I'll prune or strikethrough papers that I hav
 - [Crash only software](http://usenix.org/events/hotos03/tech/full_papers/candea/candea.pdf)
 
 **Expository and Tutorial Resources:**
-- [Learning about distributed systems: where to start?](http://muratbuffalo.blogspot.com/2020/06/learning-about-distributed-systems.html) - Murat Buffalo blog
+
+- [Learning about distributed systems: where to start?](http://muratbuffalo.blogspot.com/2020/06/learning-about-distributed-systems.html) -
+  Murat Buffalo blog
 
 #### Cloud Computing and Big Data
 
