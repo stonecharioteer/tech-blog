@@ -35,6 +35,9 @@ menus:
       pageRef: /archive
       weight: 40
 markup:
+  goldmark:
+    renderer:
+      unsafe: true
   highlight:
     lineNos: true
     lineNumbersInTable: true

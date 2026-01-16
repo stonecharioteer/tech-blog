@@ -1,0 +1,24 @@
+%%{init: {'flowchart': {'nodeSpacing': 30, 'rankSpacing': 50}}}%%
+flowchart LR
+    Client["Client Device"]
+    OW["OpenWRT<br/>192.168.1.1"]
+
+    subgraph DNS["LXC - 192.168.1.2"]
+        AG["AdGuard"]
+        UB["Unbound"]
+    end
+
+    Internet((Internet))
+
+    Client -->|DNS Query| OW
+    OW -->|Forward to| AG
+    AG -->|Filter & Forward| UB
+    UB -->|Recursive Lookup| Internet
+
+    %% Color-blind friendly palette (Paul Tol's bright scheme)
+    style Client fill:#4477AA,stroke:#333,color:#fff
+    style OW fill:#EE6677,stroke:#333,color:#fff
+    style AG fill:#228833,stroke:#333,color:#fff
+    style UB fill:#CCBB44,stroke:#333,color:#000
+    style Internet fill:#66CCEE,stroke:#333,color:#000
+    style DNS fill:#BBBBBB,stroke:#333
