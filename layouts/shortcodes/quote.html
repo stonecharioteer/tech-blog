@@ -9,7 +9,7 @@
     <div class="admonition-content">
         {{- if eq $blockquote "true" }}
         <blockquote>
-            {{ .Inner | markdownify }}
+            {{ .Inner | replaceRE "\n\n" "</p><p>" | replaceRE "\n" "<br>" | safeHTML }}
         </blockquote>
         {{- else }}
         {{ .Inner | markdownify }}

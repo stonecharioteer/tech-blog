@@ -1,24 +1,57 @@
 ---
 date: "2026-01-23T23:07:15+05:30"
-title: "Data Structures & Algorithms - Overcoming Inertia"
-description: "My progress"
+title: "Data Structures & Algorithms - Preparing for Interviews"
+description:
+  "My process for learning Data Structures and Algorithms, with some segues into
+  data visualization"
 tags:
   - "interviews"
   - "data structures"
   - "data visualization"
+cover:
+  image: "https://github.com/stonecharioteer/interview-prep/raw/main/progress.png"
+  alt: "DSA Prep Progress Visualization"
+  relative: false
 ---
+
+## Overcoming Interview Anxiety
 
 I won't call it a fear, but I would like to overcome interview anxiety. I do not
 enjoy DSA interviews, it comes with some performance anxiety for me. I overcame
 my fear of swimming, and that's a _real_ fear for me. I get anxiety in
 interviews because I don't enjoy them, and I decided to address this.
 
-My plan is gradual progress. I want to code out different data structures and
-algorithms step by step. To that aim, I'm maintain
+My plan is gradual progress. Leetcode is a lot of pattern recognition, and it is
+very targetted towards knowing what tools you have at your disposal before you
+attempt the problems. Just staring a Leetcode problem in the face for a few
+hours will not help you if you do not know you can code a specific way to solve
+this. I want to code out different data structures and algorithms step by step.
+To that aim, I'm maintain
 [this repo](https://github.com/stonecharioteer/interview-prep).
 
+I've tried this before, and I've never really enjoyed preparing for interviews.
+However, this time, [I have purpose.]({{< ref "posts/2026/direction.md" >}}) I
+am trying to steer my career towards systems and performance engineering and I
+do not have the luxury of denying DSA interviews anymore. I do not want to take
+any job I get any longer, it has to meet my standards, and when it does, I will
+have to be ready to ace any manner of interview that the company desires to
+throw at me.
+
+To that end, my approach is simple, gradual progress. I've asked Claude to come
+up with a list of exercises for me, small ones. Starting with stuff as small as
+"print every item of a list", "print the largest item in a list", "find if an
+item exists in a list", "sum a list", repeat for linked lists, maps, trees,
+graphs and so on. Then, I asked it to use incremental progress to draft up a
+TODO list of sorts, which is maintained in that repo in the README. I want to do
+this in Python, Javascript, and Rust. I'm not aiming for 100% completion, of
+course, besides in Python. In Rust, I do not want to waste time trying to build
+dynamic data structures, no matter how tempting that may be.
+
+## Following My Progress
+
 I originally wanted to track my progress here, but I have a very simple way of
-doing that now, by linking to the public image.
+doing that now, by linking to the public image, which is what the header image
+of this post is.
 
 ![DSA Prep Practice](https://github.com/stonecharioteer/interview-prep/raw/main/progress.png)
 
@@ -27,7 +60,7 @@ and when it was last updated, the story of how I got to this image is pretty
 interesting, but not relevant to the task of learning. Yet, I'm going to share
 it below.
 
-## Visualizing DSA Progress using Claude
+## How I Visualize Progress using Claude
 
 I was using Claude for housekeeping in that repo:
 
@@ -44,7 +77,7 @@ I was using Claude for housekeeping in that repo:
 When doing the last step in the above list, I realized I could now plot the
 progress in some way to show it off.
 
-I asked claude to make a single PNG file that had two plots:
+I asked Claude to make a single PNG file that had two plots:
 
 1. A progress-bar view that showed different topics and how many exercises I was
    doing on them.
