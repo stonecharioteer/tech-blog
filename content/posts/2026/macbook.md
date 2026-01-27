@@ -51,6 +51,10 @@ and the X13 Flow will continue to run Linux. I am going to write that post, but
 for now, my priorities are [directed towards what I need to
 study,]({{< ref "posts/2026/direction.md" >}}) especially given the job market.
 
+{{< note title="Damn" >}} In the process of writing this post, I copied text
+from this Macbook and pasted it into my workplace's macbook. I've heard that
+this was possible, but never got the chance to try it out. Damn. {{</note>}}
+
 ## Also, What Gives, Apple?
 
 The list of things I'm having to install to make this machine's GUI usable is
