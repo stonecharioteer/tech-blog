@@ -9,7 +9,8 @@ tags:
   - "OSX"
 ---
 
-I got a Macbook. This feels like something you need to announce, especially when
+I got a Macbook. I mean, I've used a Mac for work for years. But this is my
+_own_ Macbook. This feels like something you need to announce, especially when
 you were planning on writing a post that you have been using Linux for 20 years.
 I feel like I lost something by ordering one, but I have the following reasons.
 
