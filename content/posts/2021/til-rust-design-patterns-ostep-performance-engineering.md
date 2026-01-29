@@ -9,13 +9,13 @@ description:
   excellent OSTEP operating systems textbook, MIT's performance engineering
   course, and other valuable computer science learning resources."
 tags:
-  - TIL
-  - Rust
-  - Design Patterns
-  - Operating Systems
-  - Performance Engineering
-  - Computer Science
-  - Education
+  - "til"
+  - "rust"
+  - "design-patterns"
+  - "operating-systems"
+  - "performance"
+  - "computer-science"
+  - "education"
 ---
 
 ## Rust Design Patterns

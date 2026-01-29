@@ -7,11 +7,11 @@ description:
   arguing against pre-publication censorship and for the freedom of the press -
   a foundational text for free speech principles."
 tags:
-  - TIL
-  - Literature
-  - Free Speech
-  - History
-  - Philosophy
+  - "til"
+  - "literature"
+  - "free-speech"
+  - "history"
+  - "philosophy"
 ---
 
 ## Areopagitica - A Defense of Free Press

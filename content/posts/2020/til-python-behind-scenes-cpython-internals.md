@@ -9,14 +9,14 @@ description:
   covering CPython's virtual machine, compiler architecture, bytecode execution,
   variable implementation, and object system internals."
 tags:
-  - TIL
-  - Python
-  - CPython
-  - Virtual Machine
-  - Compiler
-  - Bytecode
-  - Object System
-  - Language Internals
+  - "til"
+  - "python"
+  - "cpython"
+  - "virtual-machine"
+  - "compiler"
+  - "bytecode"
+  - "object-system"
+  - "language-internals"
 ---
 
 ## Python Behind the Scenes Series

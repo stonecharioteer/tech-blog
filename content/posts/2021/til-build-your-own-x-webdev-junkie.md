@@ -8,12 +8,12 @@ description:
   databases, and discovered the Web Dev Junkie YouTube channel for modern web
   development tutorials."
 tags:
-  - TIL
-  - Learning Resources
-  - Programming Tutorials
-  - Web Development
-  - System Programming
-  - YouTube
+  - "til"
+  - "learning"
+  - "programming"
+  - "web-development"
+  - "system-programming"
+  - "youtube"
 ---
 
 ## Build Your Own X - Comprehensive Programming Tutorials

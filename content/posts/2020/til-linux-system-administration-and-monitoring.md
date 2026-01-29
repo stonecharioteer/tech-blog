@@ -7,14 +7,14 @@ description:
   monitoring utilities, and command-line tools that enhance productivity and
   system observability."
 tags:
-  - til
-  - linux
-  - system-administration
-  - monitoring
-  - command-line-tools
-  - productivity
-  - devops
-  - system-observability
+  - "til"
+  - "linux"
+  - "system-administration"
+  - "monitoring"
+  - "cli"
+  - "productivity"
+  - "devops"
+  - "system-observability"
 ---
 
 Today I explored advanced Linux system administration tools and discovered

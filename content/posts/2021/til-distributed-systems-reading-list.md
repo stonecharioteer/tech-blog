@@ -7,11 +7,11 @@ description:
   systems, covering essential papers, books, and resources for building
   scalable, fault-tolerant systems."
 tags:
-  - TIL
-  - Distributed Systems
-  - System Design
-  - Research Papers
-  - Architecture
+  - "til"
+  - "distributed-systems"
+  - "system-design"
+  - "research-papers"
+  - "architecture"
 ---
 
 ## Distributed Systems Reading List

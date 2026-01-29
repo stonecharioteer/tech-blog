@@ -7,11 +7,11 @@ description:
   clusters used in high-performance computing environments for job scheduling
   and resource management."
 tags:
-  - TIL
-  - HPC
-  - Cluster Computing
-  - Job Scheduling
-  - Linux
+  - "til"
+  - "hpc"
+  - "cluster-computing"
+  - "job-scheduling"
+  - "linux"
 ---
 
 ## Slurm Workload Manager

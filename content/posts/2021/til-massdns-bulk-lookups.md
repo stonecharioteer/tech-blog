@@ -7,11 +7,11 @@ description:
   for bulk lookups and reconnaissance, useful for subdomain enumeration and DNS
   analysis."
 tags:
-  - TIL
-  - DNS
-  - Security
-  - Networking
-  - Tools
+  - "til"
+  - "dns"
+  - "security"
+  - "networking"
+  - "tools"
 ---
 
 ## MassDNS - Bulk DNS Resolution

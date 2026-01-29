@@ -7,10 +7,10 @@ description:
   with maxlen parameter. Perfect for creating circular buffers and bounded
   collections.
 tags:
-  - TIL
-  - Python
-  - Data Structures
-  - Collections
+  - "til"
+  - "python"
+  - "data-structures"
+  - "collections"
 ---
 
 If you want to create an iterable of a fixed length in python, use

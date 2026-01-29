@@ -7,10 +7,10 @@ description:
   you write. From README files to Getting Started guides, every document serves
   different readers with different needs.
 tags:
-  - Documentation
-  - Writing
-  - Teaching
-  - Technical Writing
+  - "documentation"
+  - "writing"
+  - "teaching"
+  - "documentation"
 ---
 
 Nod if you've come across this before. You find an _amazing_ software library

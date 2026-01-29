@@ -7,12 +7,12 @@ description:
   GoAccess, a powerful visual web log analyzer for understanding website traffic
   patterns."
 tags:
-  - TIL
-  - GitHub
-  - Monitoring
-  - Web Analytics
-  - Log Analysis
-  - DevOps
+  - "til"
+  - "github"
+  - "monitoring"
+  - "web-analytics"
+  - "log-analysis"
+  - "devops"
 ---
 
 ## ghtop - Real-time GitHub Activity Monitor

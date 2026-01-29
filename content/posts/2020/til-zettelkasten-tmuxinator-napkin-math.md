@@ -9,14 +9,14 @@ description:
   knowledge systems, using Tmuxinator for tmux session templating, and advanced
   napkin math techniques for system estimation."
 tags:
-  - TIL
-  - Knowledge Management
-  - Zettelkasten
-  - tmux
-  - Tmuxinator
-  - System Design
-  - Estimation
-  - SRE
+  - "til"
+  - "knowledge-management"
+  - "zettelkasten"
+  - "tmux"
+  - "tmuxinator"
+  - "system-design"
+  - "estimation"
+  - "sre"
 ---
 
 ## Zettelkasten Knowledge Management System

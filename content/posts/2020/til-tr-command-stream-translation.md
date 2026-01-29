@@ -7,11 +7,11 @@ description:
   another, providing powerful text transformation capabilities in Unix
   pipelines."
 tags:
-  - til
-  - unix
-  - text-processing
-  - streams
-  - command-line
+  - "til"
+  - "unix"
+  - "text-processing"
+  - "streams"
+  - "cli"
 ---
 
 Today I discovered the versatile `tr` command for translating and manipulating

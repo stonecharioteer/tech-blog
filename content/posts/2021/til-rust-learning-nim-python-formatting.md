@@ -3,16 +3,7 @@ date: "2021-01-02T23:59:59+05:30"
 draft: false
 title: "TIL: Rust Learning Resources, Nim Language, and Python Code Formatting"
 tags:
-  [
-    "til",
-    "rust",
-    "nim",
-    "python",
-    "cpython",
-    "programming-languages",
-    "code-formatting",
-    "cli-development",
-  ]
+  ["til", "rust", "nim", "python", "cpython", "programming-languages", "code-formatting", "cli"]
 ---
 
 ## Rust Programming Resources

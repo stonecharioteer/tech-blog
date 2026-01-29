@@ -2,7 +2,7 @@
 date: "2020-09-27T23:59:59+05:30"
 draft: false
 title: "TIL: Josh Comeau Remote Work Guide"
-tags: ["til", "remote-work", "career", "job-search", "josh-comeau"]
+tags: ["til", "remote-work", "career", "career", "josh-comeau"]
 ---
 
 ## TIL 2020-09-27

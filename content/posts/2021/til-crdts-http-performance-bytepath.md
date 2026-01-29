@@ -7,12 +7,12 @@ description:
   tuning achieving 1.2M API requests/second, and BYTEPATH - a replayable arcade
   shooter game."
 tags:
-  - TIL
-  - Distributed Systems
-  - Performance
-  - HTTP
-  - Game Development
-  - CRDTs
+  - "til"
+  - "distributed-systems"
+  - "performance"
+  - "http"
+  - "game-development"
+  - "crdts"
 ---
 
 ## CRDTs: The Hard Parts

@@ -6,13 +6,13 @@ description:
   "Today I learned about ALGPT2, a project using GPT-2 for algorithm generation,
   and discovered a comprehensive 30-day JavaScript learning challenge."
 tags:
-  - machine-learning
-  - gpt-2
-  - algorithms
-  - javascript
-  - learning-challenges
-  - programming-education
-  - artificial-intelligence
+  - "machine-learning"
+  - "gpt-2"
+  - "algorithms"
+  - "javascript"
+  - "learning"
+  - "programming"
+  - "artificial-intelligence"
 ---
 
 ## AI and Algorithm Generation

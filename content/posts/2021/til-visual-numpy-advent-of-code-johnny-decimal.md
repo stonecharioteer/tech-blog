@@ -9,14 +9,14 @@ description:
   Norvig's Advent of Code solutions for learning algorithms, and the Johnny
   Decimal system for organizing digital information."
 tags:
-  - TIL
-  - NumPy
-  - Data Science
-  - Python
-  - Advent of Code
-  - Algorithms
-  - Organization
-  - Productivity
+  - "til"
+  - "numpy"
+  - "data-science"
+  - "python"
+  - "advent-of-code"
+  - "algorithms"
+  - "organization"
+  - "productivity"
 ---
 
 ## Visual NumPy and Data Representation

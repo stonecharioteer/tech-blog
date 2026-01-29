@@ -5,17 +5,7 @@ title:
   "TIL: Coding Interview Patterns, Backstage Platform, LeetCode Lists, and
   Tengwar"
 tags:
-  [
-    "til",
-    "coding-interviews",
-    "leetcode",
-    "backstage",
-    "developer-portals",
-    "tengwar",
-    "privacy",
-    "browsers",
-    "less-pager",
-  ]
+  ["til", "interview-prep", "leetcode", "backstage", "developer-portals", "tengwar", "privacy", "browsers", "less-pager"]
 ---
 
 ## Coding Interviews and Algorithms

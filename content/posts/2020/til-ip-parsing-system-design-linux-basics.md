@@ -3,15 +3,7 @@ date: "2020-12-27T23:59:59+05:30"
 draft: false
 title: "TIL: IP Address Parsing, System Design, and Linux Command Basics"
 tags:
-  [
-    "til",
-    "ip-parsing",
-    "system-design",
-    "linux",
-    "commands",
-    "networking",
-    "low-level-design",
-  ]
+  ["til", "ip-parsing", "system-design", "linux", "commands", "networking", "system-design"]
 ---
 
 ## TIL 2020-12-27

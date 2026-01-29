@@ -9,13 +9,13 @@ description:
   editors from scratch, the mathematical argument for Tau over Pi, and improving
   typing skills with classic literature."
 tags:
-  - til
-  - rust
-  - text-editors
-  - mathematics
-  - typing
-  - terminal
-  - programming
+  - "til"
+  - "rust"
+  - "text-editor"
+  - "mathematics"
+  - "typing"
+  - "terminal"
+  - "programming"
 ---
 
 Today's discoveries spanned from practical Rust development to mathematical

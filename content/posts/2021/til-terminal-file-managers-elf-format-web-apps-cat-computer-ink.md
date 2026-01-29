@@ -10,15 +10,15 @@ description:
   debugging involving cats, and Ink narrative scripting language for interactive
   storytelling."
 tags:
-  - TIL
-  - Terminal
-  - File Managers
-  - ELF
-  - Executables
-  - Web Development
-  - Debugging
-  - Storytelling
-  - Scripting Languages
+  - "til"
+  - "terminal"
+  - "file-managers"
+  - "elf"
+  - "executables"
+  - "web-development"
+  - "debugging"
+  - "storytelling"
+  - "scripting-languages"
 ---
 
 ## Modern Terminal File Managers

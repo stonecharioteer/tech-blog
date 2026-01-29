@@ -7,12 +7,12 @@ description:
   sites into powerful blogging platforms, combining technical writing with blog
   functionality."
 tags:
-  - TIL
-  - Sphinx
-  - Documentation
-  - Blogging
-  - Python
-  - Static Sites
+  - "til"
+  - "sphinx"
+  - "documentation"
+  - "blogging"
+  - "python"
+  - "static-sites"
 ---
 
 ## ABlog for Sphinx

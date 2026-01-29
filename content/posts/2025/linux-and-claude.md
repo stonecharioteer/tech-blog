@@ -11,7 +11,7 @@ tags:
   - "linux"
   - "laptop"
   - "claude"
-  - "AI"
+  - "ai"
   - "asus-rog"
   - "problem-solving"
   - "linux-mint"

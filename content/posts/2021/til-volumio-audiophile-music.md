@@ -7,11 +7,11 @@ description:
   high-quality music playback on Raspberry Pi and other devices, perfect for
   audiophiles and music enthusiasts."
 tags:
-  - TIL
-  - Audio
-  - Raspberry Pi
-  - Music
-  - Linux
+  - "til"
+  - "audio"
+  - "raspberry-pi"
+  - "music"
+  - "linux"
 ---
 
 ## Volumio - Audiophile Music Server

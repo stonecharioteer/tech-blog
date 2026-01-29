@@ -7,13 +7,13 @@ description:
   reverse-engineering Dockerfiles, Kubernetes Descheduler for pod optimization,
   and Dive for Docker image analysis."
 tags:
-  - docker
-  - kubernetes
-  - containers
-  - reverse-engineering
-  - image-analysis
-  - pod-scheduling
-  - devops-tools
+  - "docker"
+  - "kubernetes"
+  - "containers"
+  - "reverse-engineering"
+  - "image-analysis"
+  - "pod-scheduling"
+  - "devops"
 ---
 
 ## Docker Image Analysis and Reverse Engineering

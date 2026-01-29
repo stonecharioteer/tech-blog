@@ -9,13 +9,13 @@ description:
   plugin for object hierarchy visualization, enhanced Git CLI tools, SSH host
   key management, and online typing practice."
 tags:
-  - kubernetes
-  - kubectl
-  - git
-  - ssh
-  - typing
-  - cli-tools
-  - productivity
+  - "kubernetes"
+  - "kubectl"
+  - "git"
+  - "ssh"
+  - "typing"
+  - "cli"
+  - "productivity"
 ---
 
 ## Kubernetes Configuration

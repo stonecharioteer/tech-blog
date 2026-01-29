@@ -9,14 +9,14 @@ description:
   creation, found useful monitoring tools, explored curated engineering blogs,
   and learned about academic thesis writing in Markdown."
 tags:
-  - llvm
-  - programming-languages
-  - compiler-design
-  - monitoring
-  - engineering-blogs
-  - academic-writing
-  - markdown
-  - bash
+  - "llvm"
+  - "programming-languages"
+  - "compiler"
+  - "monitoring"
+  - "engineering-blogs"
+  - "academic-writing"
+  - "markdown"
+  - "bash"
 ---
 
 ## Programming Language Development

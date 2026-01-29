@@ -3,16 +3,7 @@ date: "2020-12-22T23:59:59+05:30"
 draft: false
 title: "TIL: SolarWinds Solorigate Analysis and DoIt Automation Tool"
 tags:
-  [
-    "til",
-    "cybersecurity",
-    "solorigate",
-    "solarwinds",
-    "microsoft",
-    "doit",
-    "automation",
-    "python",
-  ]
+  ["til", "security", "solorigate", "solarwinds", "microsoft", "doit", "automation", "python"]
 ---
 
 ## TIL 2020-12-22

@@ -3,7 +3,7 @@ date: "2026-01-08T11:43:15+05:30"
 title: "Direction"
 description: "Reflections on my career and where I want to go"
 tags:
-  - "Career"
+  - "career"
 ---
 
 I've been doing a lot of thinking about my career trajectory, and I know what I

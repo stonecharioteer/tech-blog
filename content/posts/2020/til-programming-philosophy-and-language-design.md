@@ -7,13 +7,13 @@ description:
   principles from Guy Steele, and the philosophy behind growing programming
   languages."
 tags:
-  - til
-  - programming-philosophy
-  - language-design
-  - clojure
-  - epigrams
-  - guy-steele
-  - alan-perlis
+  - "til"
+  - "programming"
+  - "language-design"
+  - "clojure"
+  - "epigrams"
+  - "guy-steele"
+  - "alan-perlis"
 ---
 
 Today I discovered profound insights into programming philosophy and language

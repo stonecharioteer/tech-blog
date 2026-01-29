@@ -9,14 +9,14 @@ description:
   photography processing software, found a Git-versioned Indian Constitution,
   and explored media server solutions."
 tags:
-  - rust
-  - embedded-programming
-  - stm32
-  - photography
-  - git
-  - constitution
-  - media-server
-  - home-lab
+  - "rust"
+  - "embedded-programming"
+  - "stm32"
+  - "photography"
+  - "git"
+  - "constitution"
+  - "media-server"
+  - "homelab"
 ---
 
 ## Embedded Systems Development

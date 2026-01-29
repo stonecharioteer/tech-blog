@@ -3,15 +3,7 @@ date: "2021-01-16T23:59:59+05:30"
 draft: false
 title: "TIL: Progress Monitor for Linux Commands and Linux Handbook"
 tags:
-  [
-    "til",
-    "linux",
-    "system-administration",
-    "monitoring",
-    "command-line",
-    "progress",
-    "learning-resources",
-  ]
+  ["til", "linux", "system-administration", "monitoring", "cli", "progress", "learning"]
 ---
 
 ## Linux System Administration Tools

@@ -7,10 +7,10 @@ description:
   beginnings to overwhelming tooling choices - reflecting on developer
   experience and the Zen of Python."
 tags:
-  - "Python"
-  - "Developer Experience"
-  - "Reflection"
-  - "Programming"
+  - "python"
+  - "developer-experience"
+  - "reflection"
+  - "programming"
 ---
 
 I built my career on Python. In 2014, I had to make a decision. It was between

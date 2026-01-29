@@ -7,10 +7,10 @@ description:
   being kicked out of school and struggling at factory jobs to teaching myself
   Python and building a career in tech."
 tags:
-  - "Career"
-  - "Personal"
-  - "Reflection"
-  - "Learning"
+  - "career"
+  - "personal"
+  - "reflection"
+  - "learning"
 ---
 
 This is a very personal post. It's about my journey so far. A few of you might

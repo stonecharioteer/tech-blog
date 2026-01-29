@@ -9,13 +9,13 @@ description:
   found resources for Python developers learning Java, and explored advanced
   Python context manager utilities."
 tags:
-  - data-serialization
-  - java
-  - python
-  - context-managers
-  - programming-languages
-  - data-processing
-  - learning-resources
+  - "data-serialization"
+  - "java"
+  - "python"
+  - "context-managers"
+  - "programming-languages"
+  - "data-processing"
+  - "learning"
 ---
 
 ## Data Processing Tools

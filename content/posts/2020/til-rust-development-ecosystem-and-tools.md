@@ -7,13 +7,13 @@ description:
   compiler internals to command-line utilities, showcasing Rust's growing
   influence in systems programming."
 tags:
-  - til
-  - rust
-  - systems-programming
-  - compiler-development
-  - command-line-tools
-  - performance-optimization
-  - rust-ecosystem
+  - "til"
+  - "rust"
+  - "systems-programming"
+  - "compiler"
+  - "cli"
+  - "performance"
+  - "rust-ecosystem"
 ---
 
 Today I explored the sophisticated Rust development ecosystem and discovered

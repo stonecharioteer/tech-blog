@@ -7,13 +7,13 @@ description:
   files to track finances using double-entry bookkeeping principles, with tools
   like Beancount, Ledger, and the Fava web interface."
 tags:
-  - TIL
-  - Accounting
-  - Finance
-  - Plain Text
-  - Beancount
-  - Double-entry Bookkeeping
-  - Personal Finance
+  - "til"
+  - "accounting"
+  - "finance"
+  - "plain-text"
+  - "beancount"
+  - "double-entry-bookkeeping"
+  - "personal-finance"
 ---
 
 ## Introduction to Plain Text Accounting

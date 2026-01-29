@@ -7,13 +7,13 @@ description:
   Python gotchas, Rust concurrent data structures, and various development tools
   and learning resources."
 tags:
-  - til
-  - advent-of-code
-  - rust
-  - python
-  - gpu-computing
-  - haskell
-  - programming-challenges
+  - "til"
+  - "advent-of-code"
+  - "rust"
+  - "python"
+  - "gpu-computing"
+  - "haskell"
+  - "programming"
 ---
 
 Today I discovered a wealth of programming challenges, advanced data structures,

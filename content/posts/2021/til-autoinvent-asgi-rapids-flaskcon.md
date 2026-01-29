@@ -8,12 +8,12 @@ description:
   async Python web apps, dh-virtualenv for Python packaging, RAPIDS for GPU data
   science, and FlaskCon 2020 talks."
 tags:
-  - TIL
-  - Python
-  - ASGI
-  - GPU Computing
-  - Packaging
-  - Conferences
+  - "til"
+  - "python"
+  - "asgi"
+  - "gpu-computing"
+  - "packaging"
+  - "conferences"
 ---
 
 ## AutoInvent - Development Tools

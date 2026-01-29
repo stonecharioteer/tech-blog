@@ -8,13 +8,13 @@ description:
   strings seem challenging, and Deno's standard library for modern JavaScript
   runtime."
 tags:
-  - TIL
-  - CORS
-  - Deployment
-  - Rust
-  - Strings
-  - Deno
-  - JavaScript
+  - "til"
+  - "cors"
+  - "deployment"
+  - "rust"
+  - "strings"
+  - "deno"
+  - "javascript"
 ---
 
 ## Deep Dive into CORS

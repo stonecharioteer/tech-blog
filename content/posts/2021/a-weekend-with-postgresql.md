@@ -7,11 +7,11 @@ description:
   the complete PostgreSQL docs over a weekend to explore one of the
   best-documented OSS projects.
 tags:
-  - PostgreSQL
-  - Databases
-  - Documentation
-  - Learning
-  - Streaming
+  - "postgresql"
+  - "database"
+  - "documentation"
+  - "learning"
+  - "streaming"
 ---
 
 ## Introduction

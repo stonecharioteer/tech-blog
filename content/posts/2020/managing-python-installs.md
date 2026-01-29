@@ -7,10 +7,10 @@ description:
   system package managers. Simple advice for clean Python environment management
   on Linux and Mac.
 tags:
-  - Python
-  - Conda
-  - Environment Management
-  - Tutorial
+  - "python"
+  - "conda"
+  - "environment-management"
+  - "tutorial"
 ---
 
 If you are running a Linux or Mac machine and would like to run multiple

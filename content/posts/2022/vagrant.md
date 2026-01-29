@@ -7,11 +7,11 @@ description:
   environments. Using Vagrant to test Ansible playbooks across multiple Linux
   distributions with simple text-based VM configurations.
 tags:
-  - Vagrant
-  - Developer Environment
-  - Ansible
-  - DevOps
-  - Virtualization
+  - "vagrant"
+  - "development-tools"
+  - "ansible"
+  - "devops"
+  - "virtualization"
 ---
 
 I'm late to the Vagrant train. I must have heard about it in 2014, but I've

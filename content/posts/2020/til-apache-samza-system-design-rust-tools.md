@@ -5,15 +5,7 @@ title:
   "TIL: Apache Samza, System Design, Terminal Tools, and Python Data
   Visualization"
 tags:
-  [
-    "til",
-    "apache-samza",
-    "system-design",
-    "rust",
-    "python",
-    "terminal-tools",
-    "data-visualization",
-  ]
+  ["til", "apache-samza", "system-design", "rust", "python", "terminal", "data-visualization"]
 ---
 
 ## TIL 2020-08-08

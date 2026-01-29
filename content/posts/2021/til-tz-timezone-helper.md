@@ -6,11 +6,11 @@ description:
   "Today I discovered tz, a simple and useful command-line tool for managing and
   converting between different time zones."
 tags:
-  - timezone
-  - cli-tools
-  - time-management
-  - productivity
-  - global-collaboration
+  - "timezone"
+  - "cli"
+  - "time-management"
+  - "productivity"
+  - "global-collaboration"
 ---
 
 ## Time Zone Management

@@ -7,10 +7,10 @@ description:
   Raspberry Pi clusters, learning new technologies, and planning future
   technical explorations.
 tags:
-  - Programming
-  - Learning
-  - Raspberry Pi
-  - Projects
+  - "programming"
+  - "learning"
+  - "raspberry-pi"
+  - "projects"
 ---
 
 I have not been working on side projects in a few months. I've been busy with

@@ -9,13 +9,13 @@ description:
   discovered resources for low-level system design, and found comprehensive
   Linux command tutorials."
 tags:
-  - networking
-  - ip-addresses
-  - system-design
-  - linux
-  - parsing
-  - low-level-design
-  - command-line
+  - "networking"
+  - "ip-addresses"
+  - "system-design"
+  - "linux"
+  - "parsing"
+  - "system-design"
+  - "cli"
 ---
 
 ## Network Programming Complexities

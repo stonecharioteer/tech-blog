@@ -6,12 +6,12 @@ description:
   "Today I discovered a comprehensive collection of tmux resources, including
   plugins, configurations, and tools for enhancing terminal productivity."
 tags:
-  - tmux
-  - terminal
-  - productivity
-  - command-line
-  - shell
-  - workflow
+  - "tmux"
+  - "terminal"
+  - "productivity"
+  - "cli"
+  - "shell"
+  - "workflow"
 ---
 
 ## Terminal Multiplexing

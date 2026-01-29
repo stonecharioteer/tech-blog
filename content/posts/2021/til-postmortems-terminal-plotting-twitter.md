@@ -7,13 +7,13 @@ description:
   Python library for terminal-based plotting, and an interesting technical
   Twitter account."
 tags:
-  - post-mortems
-  - incident-response
-  - data-visualization
-  - terminal
-  - python
-  - twitter
-  - learning-resources
+  - "post-mortems"
+  - "incident-response"
+  - "data-visualization"
+  - "terminal"
+  - "python"
+  - "twitter"
+  - "learning"
 ---
 
 ## Engineering Learning Resources

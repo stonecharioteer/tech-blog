@@ -7,12 +7,12 @@ description:
   cheat sheets for secure development, the Top 10 web application risks, and the
   detailed web security testing guide."
 tags:
-  - til
-  - security
-  - owasp
-  - web-security
-  - penetration-testing
-  - secure-development
+  - "til"
+  - "security"
+  - "owasp"
+  - "web-security"
+  - "penetration-testing"
+  - "security"
 ---
 
 Today I discovered a treasure trove of security resources from OWASP (Open Web

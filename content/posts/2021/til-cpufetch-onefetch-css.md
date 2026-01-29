@@ -7,11 +7,11 @@ description:
   for beautiful Git repository summaries, and Google's comprehensive CSS
   learning resource."
 tags:
-  - TIL
-  - Tools
-  - Git
-  - CSS
-  - System Info
+  - "til"
+  - "tools"
+  - "git"
+  - "css"
+  - "system-info"
 ---
 
 ## CPUFetch - CPU Architecture Tool

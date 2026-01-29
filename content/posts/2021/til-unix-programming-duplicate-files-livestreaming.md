@@ -8,13 +8,13 @@ description:
   techniques for finding duplicate files on Linux, and found practical tips for
   technical livestreaming."
 tags:
-  - unix-programming
-  - system-administration
-  - duplicate-files
-  - livestreaming
-  - education
-  - linux
-  - content-creation
+  - "unix"
+  - "system-administration"
+  - "duplicate-files"
+  - "livestreaming"
+  - "education"
+  - "linux"
+  - "content-creation"
 ---
 
 ## UNIX Systems Programming Education

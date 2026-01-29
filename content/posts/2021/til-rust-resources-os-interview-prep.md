@@ -9,13 +9,13 @@ description:
   operating systems and performance engineering materials, and explored
   interview preparation guides and web security resources."
 tags:
-  - rust
-  - operating-systems
-  - performance-engineering
-  - interview-preparation
-  - web-security
-  - learning-resources
-  - computer-science
+  - "rust"
+  - "operating-systems"
+  - "performance"
+  - "interview-prep"
+  - "web-security"
+  - "learning"
+  - "computer-science"
 ---
 
 ## Rust Programming Resources

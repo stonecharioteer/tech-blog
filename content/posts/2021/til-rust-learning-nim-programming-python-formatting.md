@@ -9,13 +9,13 @@ description:
   programming language and its web framework Karax, and learned about Python
   code formatting proposals for CPython."
 tags:
-  - rust
-  - nim
-  - python
-  - programming-languages
-  - web-frameworks
-  - code-formatting
-  - learning-resources
+  - "rust"
+  - "nim"
+  - "python"
+  - "programming-languages"
+  - "web-development"
+  - "code-formatting"
+  - "learning"
 ---
 
 ## Rust Programming Deep Dive

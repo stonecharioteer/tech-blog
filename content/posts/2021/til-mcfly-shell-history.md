@@ -7,11 +7,11 @@ description:
   your usage patterns and provides intelligent command suggestions with fuzzy
   searching."
 tags:
-  - TIL
-  - Shell
-  - CLI
-  - Productivity
-  - Tools
+  - "til"
+  - "shell"
+  - "cli"
+  - "productivity"
+  - "tools"
 ---
 
 ## McFly - Intelligent Shell History
