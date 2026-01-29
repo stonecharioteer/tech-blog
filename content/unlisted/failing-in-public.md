@@ -8,9 +8,7 @@ hiddenInHomeList: true
 url: "failure"
 ---
 
-## Note 1
-
-**June 17, 2025**
+## June 17, 2025
 
 I was 17 when I failed school for the very first time.
 
@@ -131,9 +129,7 @@ after seeing that the company didn't offer me at least two of three things. I
 only got money, no semblance of good people or work. I didn't belong, and
 neither did they.
 
-## Note 2
-
-**September 5, 2025**
+## September 5, 2025
 
 I've been thinking a lot about my career and how I feel right now. It's
 September, and I left Company C after a little over a month there in the first
@@ -178,9 +174,7 @@ A part of me also tells me that my career has ended because I didn't keep up
 with AI over the last two years. I had a chance to, but I was... unable to
 focus.
 
-## Note 3
-
-**September 26, 2025**
+## September 26, 2025
 
 It's been 25 days since I wrote the previous note, but I wanted to expand on
 what's been going on since then.
@@ -205,9 +199,7 @@ control and my interest in technology is alive again. I think I will continue to
 do better, and in time, I might look back at this and be able to articulate what
 went on.
 
-## Note 4
-
-**January 8, 2026**
+## January 8, 2026
 
 It feels strange to say I'm still failing and I feel okay. I bombed an interview
 at Tensorlake, I felt horrible even before the interview because that was my
@@ -224,13 +216,37 @@ I meandered. At my current job, I'm a round peg in a square hole. I'm shoehorned
 into a role that I do not fit into. I am going to leave, I've made up my mind.
 It's a great company, and the team is great, but that role isn't for me. I know
 what I want now, and that's why I'm also making a
-[direction]({{< ref "posts/2026/direction.md" >}}) document. For the moment, I've failed,
-I've had to stop an interview even though the interviewer was helpful enough to
-support me. I felt really lacking while talking to him. My knowledge of first
-principles has addled thanks to the burnout, and my skills are in hibernation.
+[direction]({{< ref "posts/2026/direction.md" >}}) document. For the moment,
+I've failed, I've had to stop an interview even though the interviewer was
+helpful enough to support me. I felt really lacking while talking to him. My
+knowledge of first principles has addled thanks to the burnout, and my skills
+are in hibernation.
 
 I had a panic attack because of this, and I'm not willing to compromise my
 health just because I'll get some paycheck. I need to move on.
 
 I will pick myself up again, and I'm going to focus on what to study next.
 Oddly, I knew, even last year. It's what I want to do.
+
+## January 29, 2026
+
+I've said my farewells at Chatwoot. I feel really sad about leaving this
+company. I like the people, but I wasn't in a role that followed the direction I
+want to take my career. I wish I can work with them in the future some day, even
+for free. It would be fun to help them. I'd consider it payback, honestly.
+
+This document is unlisted here in my blog and I've been thinking about whether I
+should just make it visible front and centre. There are companies that would
+perceive that poorly. Today, someone told me that having left Composio in 40
+days and Chatwoot in 4 months is bad on my profile. It was someone I consider
+knowledgable in this industry, but what he doesn't understand is that I cannot
+lie to my core. Lying to my values and my core will kill me. I cannot do that. I
+think I'll find a job when I'm ready. I'm not done studying. I couldn't study at
+all today since I was busy being pensieve about my last day here. I'm handing
+off my laptop tomorrow, and I think that I will be anxious about not having a
+job again. It's not a good time to feel this way, but I need to focus and study
+the topics I've originally had on my list. Joining another startup without a
+plan will lead me down a similar path. I don't regret having joined Chatwoot. I
+met some lovely people. I just regret joining it solely because I needed a job.
+I forgot that every time a company interviews you, you interview the company for
+the role they're hiring for.
