@@ -6,9 +6,9 @@ description:
   A zen-like reflection on career choices and finding meaning in work. Sometimes
   taking on difficult tasks preserves what you truly love about your profession.
 tags:
-  - Career
-  - Reflection
-  - Philosophy
+  - "career"
+  - "reflection"
+  - "philosophy"
 ---
 
 That is all.

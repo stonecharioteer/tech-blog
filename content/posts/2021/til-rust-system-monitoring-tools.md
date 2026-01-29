@@ -7,15 +7,15 @@ description:
   for system monitoring, xh for HTTP requests, and nip.io for wildcard DNS
   resolution."
 tags:
-  - rust
-  - system-monitoring
-  - cli-tools
-  - performance
-  - unix-utilities
-  - system-administration
-  - http-client
-  - dns
-  - development-tools
+  - "rust"
+  - "system-monitoring"
+  - "cli"
+  - "performance"
+  - "unix"
+  - "system-administration"
+  - "http-client"
+  - "dns"
+  - "development-tools"
 ---
 
 ## Modern System Monitoring Tools

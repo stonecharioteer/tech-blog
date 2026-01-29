@@ -9,13 +9,13 @@ description:
   alternative, Google's technical writing courses, low-level memory programming
   concepts, and why the NES acts like a TV station."
 tags:
-  - TIL
-  - Analytics
-  - Privacy
-  - Technical Writing
-  - Memory
-  - Hardware
-  - NES
+  - "til"
+  - "analytics"
+  - "privacy"
+  - "documentation"
+  - "memory"
+  - "hardware"
+  - "nes"
 ---
 
 ## Matomo - Privacy-Focused Analytics

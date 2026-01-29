@@ -7,10 +7,10 @@ description:
   Apache Airflow or other template engines. Alternative approaches for nested
   templating scenarios."
 tags:
-  - "Python"
-  - "Jinja"
-  - "Airflow"
-  - "Templates"
+  - "python"
+  - "jinja"
+  - "airflow"
+  - "templates"
 ---
 
 Apache Airflow uses Jinja templates for variable expansion and templating.

@@ -7,10 +7,10 @@ description:
   obvious. How assumption-free writing prevents confusion and creates better
   developer experiences."
 tags:
-  - "Documentation"
-  - "Developer Relations"
-  - "Writing"
-  - "Culture"
+  - "documentation"
+  - "developer-relations"
+  - "writing"
+  - "culture"
 ---
 
 Whenever you write documentation, always try to focus on your audience. I've

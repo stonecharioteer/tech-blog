@@ -9,13 +9,13 @@ description:
   accessible distributed systems book, high-performance browser networking
   principles, and building roguelike games in Rust."
 tags:
-  - TIL
-  - C Programming
-  - Distributed Systems
-  - Networking
-  - Browser Performance
-  - Rust
-  - Game Development
+  - "til"
+  - "c-programming"
+  - "distributed-systems"
+  - "networking"
+  - "browser-performance"
+  - "rust"
+  - "game-development"
 ---
 
 ## Cosmopolitan C Library

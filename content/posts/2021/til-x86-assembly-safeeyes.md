@@ -7,13 +7,13 @@ description:
   SafeEyes, an extensible break reminder application to protect against eye
   strain during long coding sessions."
 tags:
-  - TIL
-  - Assembly
-  - x86
-  - Low-level Programming
-  - Health
-  - Eye Care
-  - Productivity
+  - "til"
+  - "assembly"
+  - "x86"
+  - "low-level-programming"
+  - "health"
+  - "eye-care"
+  - "productivity"
 ---
 
 ## x86 Assembly Programming Fundamentals

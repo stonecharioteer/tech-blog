@@ -9,13 +9,13 @@ description:
   practical compiler development tutorials, the Cannoli Python compiler in Rust,
   and the Oil shell project."
 tags:
-  - til
-  - compilers
-  - architecture
-  - python
-  - rust
-  - shell
-  - programming-languages
+  - "til"
+  - "compiler"
+  - "architecture"
+  - "python"
+  - "rust"
+  - "shell"
+  - "programming-languages"
 ---
 
 Today's learning focused on understanding complex software architectures and

@@ -9,15 +9,15 @@ description:
   Security for multi-tenant isolation, Zerodha's free trading education
   platform, and building Git from scratch."
 tags:
-  - TIL
-  - PDF
-  - PostgreSQL
-  - Security
-  - Multi-tenancy
-  - Finance
-  - Trading
-  - Git
-  - Version Control
+  - "til"
+  - "pdf"
+  - "postgresql"
+  - "security"
+  - "multi-tenancy"
+  - "finance"
+  - "trading"
+  - "git"
+  - "version-control"
 ---
 
 ## Camelot - PDF Table Extraction

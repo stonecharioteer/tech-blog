@@ -6,11 +6,11 @@ description:
   "Today I learned about Ventoy for creating multi-boot USB drives and
   Justniffer for network traffic analysis and HTTP debugging."
 tags:
-  - TIL
-  - Tools
-  - Networking
-  - USB Boot
-  - System Administration
+  - "til"
+  - "tools"
+  - "networking"
+  - "usb-boot"
+  - "system-administration"
 ---
 
 ## Ventoy - Multi-Boot USB Solution

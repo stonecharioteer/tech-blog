@@ -7,10 +7,10 @@ description:
   certificates. Setting up environment variables and configuration files to work
   around common enterprise networking challenges.
 tags:
-  - Python
-  - Pip
-  - Enterprise
-  - Configuration
+  - "python"
+  - "pip"
+  - "enterprise"
+  - "configuration"
 ---
 
 The hardest thing about using package managers within an enterprise is getting

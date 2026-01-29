@@ -7,11 +7,11 @@ description:
   2.5 million concurrent voice users, including their technical challenges and
   solutions for massive scale real-time communication."
 tags:
-  - TIL
-  - WebRTC
-  - Architecture
-  - Real-time Communication
-  - Scale
+  - "til"
+  - "webrtc"
+  - "architecture"
+  - "real-time-communication"
+  - "scale"
 ---
 
 ## Discord's WebRTC Architecture at Scale

@@ -7,12 +7,12 @@ description:
   tours to dangerous practices, and how Rust addresses common development
   challenges."
 tags:
-  - til
-  - rust
-  - learning-resources
-  - systems-programming
-  - memory-safety
-  - performance
+  - "til"
+  - "rust"
+  - "learning"
+  - "systems-programming"
+  - "memory-safety"
+  - "performance"
 ---
 
 Today I discovered excellent resources for learning Rust systematically, from

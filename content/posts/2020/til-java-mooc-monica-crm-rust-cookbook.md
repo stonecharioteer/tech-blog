@@ -9,13 +9,13 @@ description:
   relationship management software, practical Rust programming recipes, and
   advanced video processing with FFmpeg."
 tags:
-  - til
-  - java
-  - crm
-  - rust
-  - video-processing
-  - ffmpeg
-  - learning-resources
+  - "til"
+  - "java"
+  - "crm"
+  - "rust"
+  - "video-processing"
+  - "ffmpeg"
+  - "learning"
 ---
 
 Today's discoveries spanned programming education, personal productivity tools,

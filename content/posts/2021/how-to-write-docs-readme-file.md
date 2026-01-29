@@ -7,11 +7,11 @@ description:
   audiences. Covering project naming, installation guides, screenshots, and what
   to include or exclude from your repository's front door.
 tags:
-  - Documentation
-  - Writing
-  - Teaching
-  - Technical Writing
-  - README
+  - "documentation"
+  - "writing"
+  - "teaching"
+  - "documentation"
+  - "documentation"
 ---
 
 In the introduction post to this series, I discussed how to write a `README.md`

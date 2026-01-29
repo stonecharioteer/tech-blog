@@ -7,11 +7,11 @@ description:
   applications, plus discovered a curated collection of FastAPI resources and
   tools."
 tags:
-  - TIL
-  - Load Testing
-  - Performance
-  - FastAPI
-  - Python
+  - "til"
+  - "load-testing"
+  - "performance"
+  - "fastapi"
+  - "python"
 ---
 
 ## Siege - Load Testing Tool

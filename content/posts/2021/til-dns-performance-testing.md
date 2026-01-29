@@ -6,11 +6,11 @@ description:
   "Today I learned about DNS performance testing tools and troubleshooting
   Pi-hole performance issues with Unbound recursive DNS server."
 tags:
-  - TIL
-  - DNS
-  - Performance
-  - Pi-hole
-  - Networking
+  - "til"
+  - "dns"
+  - "performance"
+  - "pihole"
+  - "networking"
 ---
 
 ## DNS Performance Testing

@@ -9,17 +9,17 @@ description:
   statecharts to model Redux application behavior, HashiCorp Nomad for workload
   orchestration, and comprehensive Python socket programming techniques."
 tags:
-  - TIL
-  - Formal Methods
-  - TLA+
-  - State Management
-  - Statecharts
-  - Redux
-  - Orchestration
-  - Nomad
-  - Python
-  - Socket Programming
-  - Networking
+  - "til"
+  - "formal-methods"
+  - "tla+"
+  - "state-management"
+  - "statecharts"
+  - "redux"
+  - "orchestration"
+  - "nomad"
+  - "python"
+  - "socket-programming"
+  - "networking"
 ---
 
 ## TLA+ - Formal System Specification

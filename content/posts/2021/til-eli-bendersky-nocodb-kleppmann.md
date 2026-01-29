@@ -8,12 +8,12 @@ description:
   Kleppmann, discovered NoCoDB as an Airtable alternative, and found a curated
   list of example-based learning resources."
 tags:
-  - TIL
-  - Blogs
-  - Learning
-  - Database
-  - Open Source
-  - Distributed Systems
+  - "til"
+  - "blogs"
+  - "learning"
+  - "database"
+  - "open-source"
+  - "distributed-systems"
 ---
 
 ## Eli Bendersky's Technical Blog

@@ -9,14 +9,14 @@ description:
   tools for monitoring code debt in Git repositories, effective essay writing
   techniques, and Python programming best practices."
 tags:
-  - til
-  - cpp
-  - web-frameworks
-  - git
-  - code-quality
-  - writing
-  - python
-  - best-practices
+  - "til"
+  - "cpp"
+  - "web-development"
+  - "git"
+  - "code-quality"
+  - "writing"
+  - "python"
+  - "best-practices"
 ---
 
 Today's learning covered modern C++ web development, code quality management,

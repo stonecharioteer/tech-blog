@@ -7,11 +7,11 @@ description:
   multiplexing, written in Rust, offering an intuitive alternative to tmux and
   screen."
 tags:
-  - TIL
-  - Terminal
-  - Multiplexer
-  - Rust
-  - Productivity
+  - "til"
+  - "terminal"
+  - "multiplexer"
+  - "rust"
+  - "productivity"
 ---
 
 ## Zellij - Terminal Workspace

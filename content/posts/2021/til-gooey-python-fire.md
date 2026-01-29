@@ -7,11 +7,11 @@ description:
   applications and Python Fire for automatically generating command line
   interfaces from any Python object."
 tags:
-  - TIL
-  - Python
-  - GUI
-  - CLI
-  - Tools
+  - "til"
+  - "python"
+  - "gui"
+  - "cli"
+  - "tools"
 ---
 
 ## Gooey - Turn CLI into GUI

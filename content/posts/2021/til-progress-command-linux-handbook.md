@@ -7,12 +7,12 @@ description:
   file operations like cp, mv, and dd, and found the comprehensive Linux
   Handbook learning resource."
 tags:
-  - linux
-  - command-line
-  - file-operations
-  - system-administration
-  - learning-resources
-  - productivity
+  - "linux"
+  - "cli"
+  - "file-operations"
+  - "system-administration"
+  - "learning"
+  - "productivity"
 ---
 
 ## Linux Command Line Tools

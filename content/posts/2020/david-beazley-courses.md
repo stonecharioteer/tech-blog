@@ -7,11 +7,11 @@ description:
   during 2020 - SICP, Write a Compiler, and RAFT Consensus. A deep dive into
   computer science fundamentals through hands-on learning.
 tags:
-  - Learning
-  - Python
-  - Computer Science
-  - Courses
-  - Review
+  - "learning"
+  - "python"
+  - "computer-science"
+  - "courses"
+  - "review"
 url: dabeaz
 ---
 

@@ -9,11 +9,11 @@ description:
   security including CSRF/CORS, Microsoft's Event Sourcing pattern, and
   Mozilla's web security guidelines."
 tags:
-  - TIL
-  - Mathematics
-  - Security
-  - Web Development
-  - Architecture Patterns
+  - "til"
+  - "mathematics"
+  - "security"
+  - "web-development"
+  - "architecture-patterns"
 ---
 
 ## Benford's Law - Statistical Fraud Detection

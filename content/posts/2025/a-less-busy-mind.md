@@ -4,7 +4,7 @@ draft: false
 title: "A Less Busy Mind"
 description: "Using Coding Assistants frees me up to do other things"
 tags:
-  - "AI"
+  - "ai"
   - "projects"
   - "life"
 ---

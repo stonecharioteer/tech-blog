@@ -6,11 +6,11 @@ description:
   "Today I learned about MangaDesk, a terminal client for MangaDex that lets you
   browse and read manga directly from the command line."
 tags:
-  - TIL
-  - Terminal
-  - CLI
-  - Manga
-  - Tools
+  - "til"
+  - "terminal"
+  - "cli"
+  - "manga"
+  - "tools"
 ---
 
 ## MangaDesk - Terminal Manga Client

@@ -9,12 +9,12 @@ description:
   principles for readability, using GNU Stow for elegant dotfile management, and
   mastering xxd and hosts file configuration."
 tags:
-  - TIL
-  - Message Queues
-  - Typography
-  - Dotfiles
-  - Unix Tools
-  - System Administration
+  - "til"
+  - "message-queues"
+  - "typography"
+  - "dotfiles"
+  - "unix"
+  - "system-administration"
 ---
 
 ## Organizing Background Worker Queues

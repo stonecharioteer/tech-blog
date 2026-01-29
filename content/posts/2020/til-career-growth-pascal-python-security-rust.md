@@ -2,7 +2,7 @@
 date: "2020-08-24T23:59:59+05:30"
 draft: false
 title: "TIL: Career Growth, Pascal IDE, Python Security, and Rust CLI Tools"
-tags: ["til", "career", "pascal", "python", "security", "rust", "cli-tools"]
+tags: ["til", "career", "pascal", "python", "security", "rust", "cli"]
 ---
 
 ## TIL 2020-08-24

@@ -8,11 +8,11 @@ description:
   practices, and practical examples of protecting web applications from common
   vulnerabilities.
 tags:
-  - Python
-  - Flask
-  - Security
-  - Web Development
-  - OWASP
+  - "python"
+  - "flask"
+  - "security"
+  - "web-development"
+  - "owasp"
 ---
 
 A common pitfall when developing web applications is not knowing how to design a

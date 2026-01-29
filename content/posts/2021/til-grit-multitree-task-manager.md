@@ -7,12 +7,12 @@ description:
   multitree data structure to organize tasks and projects in a hierarchical,
   interconnected way."
 tags:
-  - task-management
-  - productivity
-  - cli-tools
-  - data-structures
-  - project-management
-  - organization
+  - "task-management"
+  - "productivity"
+  - "cli"
+  - "data-structures"
+  - "project-management"
+  - "organization"
 ---
 
 ## Personal Task Management

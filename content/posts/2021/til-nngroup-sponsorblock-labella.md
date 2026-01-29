@@ -7,11 +7,11 @@ description:
   skipping YouTube sponsors, and Labella - a Python library for avoiding label
   overlaps in visualizations."
 tags:
-  - TIL
-  - UX
-  - YouTube
-  - Python
-  - Data Visualization
+  - "til"
+  - "ux"
+  - "youtube"
+  - "python"
+  - "data-visualization"
 ---
 
 ## NNgroup - UX Research Authority

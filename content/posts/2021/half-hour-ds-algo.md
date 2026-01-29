@@ -7,11 +7,11 @@ description:
   self-taught developers preparing for technical interviews, with practical
   Python examples."
 tags:
-  - data-structures-and-algorithms
-  - python
-  - interview-prep
-  - learning
-  - programming-tutorials
+  - "data-structures"
+  - "python"
+  - "interview-prep"
+  - "learning"
+  - "programming"
 ---
 
 As a self-taught developer, one of my weaknesses is interviewing. I suck at

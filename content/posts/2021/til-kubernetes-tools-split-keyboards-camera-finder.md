@@ -7,13 +7,13 @@ description:
   world of ergonomic split keyboards, and found an interesting service for
   tracking stolen cameras through EXIF data."
 tags:
-  - kubernetes
-  - kubectl
-  - split-keyboards
-  - ergonomics
-  - photography
-  - security
-  - cli-tools
+  - "kubernetes"
+  - "kubectl"
+  - "split-keyboards"
+  - "ergonomics"
+  - "photography"
+  - "security"
+  - "cli"
 ---
 
 ## Kubernetes Productivity Tools

@@ -8,9 +8,9 @@ description:
   stay, or leave a company."
 url: "two-of-three"
 tags:
-  - "Career"
-  - "Culture"
-  - "Reflection"
+  - "career"
+  - "culture"
+  - "reflection"
 ---
 
 How do you decide when to join a company, when to stay and when to leave?

@@ -7,11 +7,11 @@ description:
   and Oso's Authorization Academy for learning modern authorization patterns and
   best practices."
 tags:
-  - TIL
-  - Data Visualization
-  - Authorization
-  - Security
-  - Design
+  - "til"
+  - "data-visualization"
+  - "authorization"
+  - "security"
+  - "design"
 ---
 
 ## Data Visualization Guide

@@ -9,15 +9,15 @@ description:
   Spotify's Backstage developer portal platform, found curated LeetCode problem
   lists, and explored privacy-focused browsers."
 tags:
-  - coding-interviews
-  - algorithms
-  - backstage
-  - developer-portals
-  - leetcode
-  - privacy
-  - browsers
-  - elvish
-  - tengwar
+  - "interview-prep"
+  - "algorithms"
+  - "backstage"
+  - "developer-portals"
+  - "leetcode"
+  - "privacy"
+  - "browsers"
+  - "elvish"
+  - "tengwar"
 ---
 
 ## Coding Interview Preparation

@@ -7,13 +7,13 @@ description:
   discovered a curated collection of LeetCode problems organized by common
   algorithmic patterns."
 tags:
-  - postgresql
-  - database-performance
-  - scaling
-  - algorithms
-  - leetcode
-  - problem-solving
-  - data-structures
+  - "postgresql"
+  - "database"
+  - "scaling"
+  - "algorithms"
+  - "leetcode"
+  - "problem-solving"
+  - "data-structures"
 ---
 
 ## Database Scaling

@@ -8,7 +8,7 @@ description:
   considerations."
 tags:
   - "python"
-  - "data-structures-and-algorithms"
+  - "data-structures"
 ---
 
 There are a couple of ways to reverse a list in python:

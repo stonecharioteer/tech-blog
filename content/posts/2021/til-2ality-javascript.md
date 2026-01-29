@@ -6,11 +6,11 @@ description:
   "Today I learned about 2ality, an excellent JavaScript and ECMAScript blog by
   Dr. Axel Rauschmayer covering modern JavaScript features and best practices."
 tags:
-  - TIL
-  - JavaScript
-  - Blog
-  - Learning
-  - ECMAScript
+  - "til"
+  - "javascript"
+  - "blog"
+  - "learning"
+  - "ecmascript"
 ---
 
 ## 2ality - JavaScript and More

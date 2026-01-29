@@ -6,15 +6,15 @@ description:
   entr in my development workflow with better defaults and intuitive usage
   patterns for Hugo, Rust, and Go projects."
 tags:
-  - til
-  - tools
-  - productivity
-  - development-workflow
-  - file-watching
-  - hugo
-  - rust
-  - go
-  - command-line-tools
+  - "til"
+  - "tools"
+  - "productivity"
+  - "development-tools"
+  - "file-watching"
+  - "hugo"
+  - "rust"
+  - "go"
+  - "cli"
 ---
 
 Today I discovered `watchexec`, a modern cross-platform file watcher that has

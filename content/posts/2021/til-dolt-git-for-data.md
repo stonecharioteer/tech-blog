@@ -7,11 +7,11 @@ description:
   Git-style version control with relational database functionality, enabling
   true data versioning and collaboration."
 tags:
-  - TIL
-  - Database
-  - Version Control
-  - Data Management
-  - SQL
+  - "til"
+  - "database"
+  - "version-control"
+  - "data-management"
+  - "sql"
 ---
 
 ## Dolt - Version Control for Data

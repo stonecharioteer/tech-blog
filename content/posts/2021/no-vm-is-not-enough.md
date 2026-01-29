@@ -7,11 +7,11 @@ description:
   workarounds fail to provide the productivity and experience that native Linux
   offers to power users."
 tags:
-  - productivity
-  - linux
-  - corporate
-  - development-environment
-  - rant
+  - "productivity"
+  - "linux"
+  - "corporate"
+  - "development-tools"
+  - "rant"
 ---
 
 I use a MacBook Pro 2018 for work. I work in a company which, like many

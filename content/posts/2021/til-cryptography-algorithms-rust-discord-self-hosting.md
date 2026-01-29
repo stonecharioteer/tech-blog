@@ -9,14 +9,14 @@ description:
   explored Rust development tools including Discord API libraries, and found
   valuable self-hosting and productivity solutions."
 tags:
-  - cryptography
-  - algorithms
-  - rust
-  - discord-api
-  - self-hosting
-  - data-structures
-  - robotics
-  - learning-resources
+  - "cryptography"
+  - "algorithms"
+  - "rust"
+  - "discord-api"
+  - "self-hosting"
+  - "data-structures"
+  - "robotics"
+  - "learning"
 ---
 
 ## Computer Science Fundamentals

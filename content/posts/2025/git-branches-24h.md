@@ -5,11 +5,11 @@ description:
   "A tiny Fish function I use at Chatwoot to remind myself which Git branches I
   touched in the last day."
 tags:
-  - til
-  - git
-  - fish
-  - tooling
-  - chatwoot
+  - "til"
+  - "git"
+  - "fish"
+  - "tools"
+  - "chatwoot"
 ---
 
 I keep too many branches alive when I'm working on Chatwoot. A day later I

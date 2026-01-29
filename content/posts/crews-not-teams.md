@@ -7,8 +7,8 @@ description:
   competing. Inspired by tactical video games where each member has specialized
   skills."
 tags:
-  - "Career"
-  - "Culture"
+  - "career"
+  - "culture"
 ---
 
 When was the last time you reached out to someone you worked with and said,

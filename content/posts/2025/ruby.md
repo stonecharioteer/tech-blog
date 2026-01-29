@@ -211,7 +211,7 @@ some [exercism](https://exercism.org) exercises with Ruby. I have a long way to
 go, but I've been
 [live-xeeting my experience.](https://xcancel.com/stonecharioteer/status/1970035592076664835)
 
-{{< tweet user="stonecharioteer" id="1970035592076664835" >}}
+{{< x user="stonecharioteer" id="1970035592076664835" >}}
 
 I have a lot of things to talk about my experience, and I wanted to speak about
 this at the Bangalore Rust User Group as well.

@@ -9,15 +9,15 @@ description:
   setup, Redis with Python, Amazon's famous 6-page narrative structure, and
   useful CLI utilities."
 tags:
-  - team-collaboration
-  - silent-meetings
-  - flask
-  - redis
-  - python
-  - amazon
-  - writing
-  - cli-tools
-  - project-management
+  - "team-collaboration"
+  - "silent-meetings"
+  - "flask"
+  - "redis"
+  - "python"
+  - "amazon"
+  - "writing"
+  - "cli"
+  - "project-management"
 ---
 
 ## Team Collaboration and Management

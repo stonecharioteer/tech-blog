@@ -7,12 +7,12 @@ description:
   embedded in git repositories, and Omni - a lightweight monitoring system for
   Raspberry Pi Kubernetes clusters."
 tags:
-  - TIL
-  - Git
-  - Issue Tracking
-  - Kubernetes
-  - Monitoring
-  - Raspberry Pi
+  - "til"
+  - "git"
+  - "issue-tracking"
+  - "kubernetes"
+  - "monitoring"
+  - "raspberry-pi"
 ---
 
 ## Git-Bug - Distributed Issue Tracking

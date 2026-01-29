@@ -7,10 +7,10 @@ description:
   Shewhart charts. Understanding process variation, control limits, and
   statistical manufacturing principles."
 tags:
-  - "Statistics"
-  - "Manufacturing"
-  - "Quality Control"
-  - "Learning"
+  - "statistics"
+  - "manufacturing"
+  - "quality-control"
+  - "learning"
 ---
 
 I'm a trained statistician. I worked on a motorcycle manufacturing shop floor

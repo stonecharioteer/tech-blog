@@ -7,14 +7,14 @@ description:
   and mathematical foundations of computer science, with comprehensive video
   lectures and materials."
 tags:
-  - til
-  - algorithms
-  - computer-science
-  - mit-opencourseware
-  - mathematics
-  - data-structures
-  - education
-  - learning-resources
+  - "til"
+  - "algorithms"
+  - "computer-science"
+  - "mit-opencourseware"
+  - "mathematics"
+  - "data-structures"
+  - "education"
+  - "learning"
 ---
 
 Today I discovered MIT's exceptional OpenCourseWare resources for computer

@@ -9,13 +9,13 @@ description:
   culture, the pstrings tool for examining process memory strings, and pytest's
   powerful test collection and filtering capabilities."
 tags:
-  - TIL
-  - Software Culture
-  - System Programming
-  - Testing
-  - pytest
-  - Memory Analysis
-  - Linux Tools
+  - "til"
+  - "software-culture"
+  - "system-programming"
+  - "testing"
+  - "pytest"
+  - "memory-analysis"
+  - "linux-tools"
 ---
 
 ## Gary Bernhardt: "It's Fine" - Software Development Culture

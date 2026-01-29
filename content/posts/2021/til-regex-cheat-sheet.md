@@ -7,11 +7,11 @@ description:
   cheat sheet with interactive examples and common patterns for developers who
   struggle with regular expressions."
 tags:
-  - TIL
-  - Regex
-  - Regular Expressions
-  - Development Tools
-  - Reference
+  - "til"
+  - "regex"
+  - "regular-expressions"
+  - "development-tools"
+  - "reference"
 ---
 
 ## i Hate Regex - Making Regex Approachable

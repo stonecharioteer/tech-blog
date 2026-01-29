@@ -7,13 +7,13 @@ description:
   secure headers implementation, and security testing methodologies for web
   applications."
 tags:
-  - til
-  - web-security
-  - owasp
-  - security-headers
-  - security-testing
-  - python-security
-  - http-security
+  - "til"
+  - "web-security"
+  - "owasp"
+  - "security-headers"
+  - "security-testing"
+  - "python-security"
+  - "security"
 ---
 
 Today I explored comprehensive web security resources and discovered essential

@@ -7,10 +7,10 @@ description:
   concrete goals for CLI development, API interactions, and building REST
   services to measure progress."
 tags:
-  - "Golang"
-  - "Learning"
-  - "Programming"
-  - "TDD"
+  - "go"
+  - "learning"
+  - "programming"
+  - "testing"
 ---
 
 Despite my numerous failed attempts at learning golang, I've decided to bite the

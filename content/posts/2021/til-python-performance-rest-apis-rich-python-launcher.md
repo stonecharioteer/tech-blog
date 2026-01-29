@@ -9,13 +9,13 @@ description:
   beautiful REST APIs, rendering tree views with Rich, and a Rust-based Python
   launcher for version management."
 tags:
-  - TIL
-  - Python
-  - Performance
-  - REST API
-  - Terminal UI
-  - Rust
-  - Tools
+  - "til"
+  - "python"
+  - "performance"
+  - "rest-api"
+  - "terminal"
+  - "rust"
+  - "tools"
 ---
 
 ## 12 Requests Per Second in Python

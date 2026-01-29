@@ -2,7 +2,7 @@
 date: "2020-09-05T23:59:59+05:30"
 draft: false
 title: "TIL: Mastering Hard Parts of JavaScript"
-tags: ["til", "javascript", "callbacks", "async", "programming-concepts"]
+tags: ["til", "javascript", "callbacks", "async", "programming"]
 ---
 
 ## TIL 2020-09-05

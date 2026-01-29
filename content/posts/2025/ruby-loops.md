@@ -6,7 +6,7 @@ title: "Some Smalltalk about Ruby Loops"
 description:
   "Sending a message about why you shouldn't write `for` loops in Ruby."
 tags:
-  - "Ruby"
+  - "ruby"
 ---
 
 Let's talk about loops.

@@ -10,13 +10,13 @@ description:
   principle in computing, and the legendary Jargon File documenting hacker
   culture."
 tags:
-  - TIL
-  - Program Design
-  - Distributed Systems
-  - Consensus Algorithms
-  - Computer Culture
-  - Hacker Culture
-  - Software Philosophy
+  - "til"
+  - "program-design"
+  - "distributed-systems"
+  - "consensus-algorithms"
+  - "computer-culture"
+  - "hacker-culture"
+  - "software-philosophy"
 ---
 
 ## How to Design Programs (HtDP)

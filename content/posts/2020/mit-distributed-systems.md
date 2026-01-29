@@ -7,10 +7,10 @@ description:
   distributed system design. A brief announcement of my learning journey into
   distributed systems concepts.
 tags:
-  - Distributed Systems
-  - MIT OCW
-  - Learning
-  - Computer Science
+  - "distributed-systems"
+  - "mit-ocw"
+  - "learning"
+  - "computer-science"
 ---
 
 To learn more about how distributed system design works, I have decided to spend

@@ -7,11 +7,11 @@ description:
   can run in-memory or with file storage, perfect for testing and lightweight
   applications."
 tags:
-  - TIL
-  - Python
-  - MongoDB
-  - Database
-  - Testing
+  - "til"
+  - "python"
+  - "mongodb"
+  - "database"
+  - "testing"
 ---
 
 ## MontyDB - Pure Python MongoDB

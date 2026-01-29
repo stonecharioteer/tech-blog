@@ -7,14 +7,14 @@ description:
   implementation strategies, and practical approaches to building interpreters
   and compilers from scratch."
 tags:
-  - til
-  - compilers
-  - programming-languages
-  - interpreters
-  - llvm
-  - python-internals
-  - language-design
-  - compiler-theory
+  - "til"
+  - "compiler"
+  - "programming-languages"
+  - "interpreters"
+  - "llvm"
+  - "python-internals"
+  - "language-design"
+  - "compiler"
 ---
 
 Today I explored comprehensive resources on compiler design and programming

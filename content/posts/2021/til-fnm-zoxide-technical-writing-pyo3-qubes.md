@@ -9,13 +9,13 @@ description:
   smarter cd command, technical writing resources, PyO3 for Python-Rust
   integration, and Qubes OS security architecture."
 tags:
-  - TIL
-  - Node.js
-  - Shell
-  - Writing
-  - Python
-  - Rust
-  - Security
+  - "til"
+  - "nodejs"
+  - "shell"
+  - "writing"
+  - "python"
+  - "rust"
+  - "security"
 ---
 
 ## fnm - Fast Node Manager

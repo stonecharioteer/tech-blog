@@ -7,10 +7,10 @@ description:
   again crate. Handling network failures, rate limiting, and JSON parsing errors
   with exponential backoff."
 tags:
-  - "Rust"
-  - "HTTP"
-  - "Error Handling"
-  - "Programming"
+  - "rust"
+  - "http"
+  - "error-handling"
+  - "programming"
 ---
 
 How do you retry an HTTP request in Rust?

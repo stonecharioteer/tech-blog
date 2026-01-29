@@ -8,12 +8,12 @@ description:
   productivity and workflow."
 tags:
   - til
-  - command-line-tools
-  - web-development
+  - cli
+  - "web-development"
   - productivity
-  - developer-tools
-  - rust-tools
-  - python-tools
+  - "development-tools"
+  - "rust-tools"
+  - "python-tools"
 ---
 
 Today I discovered an impressive collection of modern development tools and

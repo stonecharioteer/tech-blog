@@ -7,10 +7,10 @@ description:
   Learning to accept different learning styles and avoiding the trap of
   technical elitism."
 tags:
-  - "Career"
-  - "Culture"
-  - "Mentoring"
-  - "Reflection"
+  - "career"
+  - "culture"
+  - "mentoring"
+  - "reflection"
 ---
 
 I've been meaning to write about empathy in tech for a long time. Oddly, this is

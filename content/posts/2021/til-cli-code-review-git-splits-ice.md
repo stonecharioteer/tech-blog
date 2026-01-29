@@ -7,11 +7,11 @@ description:
   diffs in the terminal, and an amazing interactive explanation of internal
   combustion engines."
 tags:
-  - TIL
-  - Git
-  - Code Review
-  - CLI
-  - Engineering
+  - "til"
+  - "git"
+  - "code-review"
+  - "cli"
+  - "engineering"
 ---
 
 ## CLI Code Review Workflow

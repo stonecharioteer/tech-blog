@@ -5,9 +5,9 @@ description:
   "My process for learning Data Structures and Algorithms, with some segues into
   data visualization"
 tags:
-  - "interviews"
-  - "data structures"
-  - "data visualization"
+  - "interview-prep"
+  - "data-structures"
+  - "data-visualization"
 cover:
   image: "https://github.com/stonecharioteer/interview-prep/raw/main/progress.png"
   alt: "DSA Prep Progress Visualization"

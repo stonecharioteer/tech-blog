@@ -7,11 +7,11 @@ description:
   identifying which processes are using specific files, directories, or network
   ports."
 tags:
-  - TIL
-  - Linux
-  - System Administration
-  - Process Management
-  - Debugging
+  - "til"
+  - "linux"
+  - "system-administration"
+  - "process-management"
+  - "debugging"
 ---
 
 ## fuser - Identify Process Using Files/Ports

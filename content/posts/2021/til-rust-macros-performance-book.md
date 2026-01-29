@@ -6,11 +6,11 @@ description:
   "Today I learned about two essential Rust resources: a comprehensive guide to
   Rust macros and a detailed book on Rust performance optimization techniques."
 tags:
-  - TIL
-  - Rust
-  - Programming
-  - Performance
-  - Macros
+  - "til"
+  - "rust"
+  - "programming"
+  - "performance"
+  - "macros"
 ---
 
 ## The Little Book of Rust Macros

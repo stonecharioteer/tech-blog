@@ -7,11 +7,11 @@ description:
   systems over outcomes, consistent practice, and measuring the right metrics
   for long-term improvement."
 tags:
-  - "Learning"
-  - "Interview Prep"
-  - "Data Structures and Algorithms"
-  - "Career"
-  - "Programming"
+  - "learning"
+  - "interview-prep"
+  - "data-structures"
+  - "career"
+  - "programming"
 ---
 
 For the longest time I was in denial about the benefits of studying algorithms

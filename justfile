@@ -172,3 +172,21 @@ status:
     # Draft posts
     echo "✍️  Draft Posts:"
     find content -name "*.md" -exec grep -l "draft: true" {} \; 2>/dev/null | head -5 || echo "   No drafts found"
+
+# Validate post tags against tags.txt (case-sensitive)
+validate-tags:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    python3 scripts/validate_tags.py
+
+# List all tags found in posts with counts
+list-tags:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    python3 scripts/validate_tags.py --list
+
+# Extract all current tags to tags.txt (overwrites existing)
+extract-tags:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    python3 scripts/validate_tags.py --extract

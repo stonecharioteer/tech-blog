@@ -7,12 +7,12 @@ description:
   productive Vim shortcuts, discovering advanced techniques for efficient text
   editing."
 tags:
-  - vim
-  - text-editor
-  - productivity
-  - shortcuts
-  - cli-tools
-  - workflow
+  - "vim"
+  - "text-editor"
+  - "productivity"
+  - "shortcuts"
+  - "cli"
+  - "workflow"
 ---
 
 ## Vim Productivity Techniques

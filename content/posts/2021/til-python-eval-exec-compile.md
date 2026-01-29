@@ -7,10 +7,10 @@ description:
   compile() functions and their appropriate use cases for dynamic code
   execution."
 tags:
-  - TIL
-  - Python
-  - Dynamic Execution
-  - Built-ins
+  - "til"
+  - "python"
+  - "dynamic-execution"
+  - "built-ins"
 ---
 
 ## Python Dynamic Code Execution Functions

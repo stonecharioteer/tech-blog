@@ -8,13 +8,13 @@ description:
   a comprehensive shell scripting field guide, and found darkhttpd for
   lightweight HTTP serving."
 tags:
-  - kubernetes
-  - lens
-  - shell-scripting
-  - bash
-  - http-server
-  - development-tools
-  - devops
+  - "kubernetes"
+  - "lens"
+  - "shell"
+  - "bash"
+  - "http-server"
+  - "development-tools"
+  - "devops"
 ---
 
 ## Kubernetes Management

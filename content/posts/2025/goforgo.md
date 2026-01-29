@@ -10,8 +10,8 @@ cover:
 images:
   - "/images/posts/goforgo-banner.png"
 tags:
-  - "Go"
-  - "AI"
+  - "go"
+  - "ai"
   - "showcase"
 ---
 

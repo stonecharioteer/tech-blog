@@ -7,12 +7,12 @@ description:
   in multiple languages. Learning Rust, Go, Elixir, and more while improving
   problem-solving skills and competitive programming abilities.
 tags:
-  - Programming
-  - Advent of Code
-  - Learning
-  - Data Structures
-  - Algorithms
-  - Multi-language
+  - "programming"
+  - "advent-of-code"
+  - "learning"
+  - "data-structures"
+  - "algorithms"
+  - "multi-language"
 url: aoc-2021
 ---
 

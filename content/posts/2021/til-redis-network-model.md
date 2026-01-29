@@ -7,12 +7,12 @@ description:
   architecture, and internal implementation details that make it one of the
   fastest in-memory data stores."
 tags:
-  - TIL
-  - Redis
-  - Networking
-  - Architecture
-  - Performance
-  - Event-driven
+  - "til"
+  - "redis"
+  - "networking"
+  - "architecture"
+  - "performance"
+  - "event-driven"
 ---
 
 ## Redis Network Model Analysis

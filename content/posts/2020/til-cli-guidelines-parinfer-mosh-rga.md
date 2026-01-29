@@ -9,15 +9,15 @@ description:
   revolutionary approach to Lisp code editing, Mosh as a robust replacement for
   SSH, and ripgrep-all for searching inside various document formats."
 tags:
-  - TIL
-  - CLI Design
-  - User Experience
-  - Lisp
-  - Code Editing
-  - SSH
-  - Network Tools
-  - File Search
-  - Document Processing
+  - "til"
+  - "cli"
+  - "user-experience"
+  - "lisp"
+  - "code-editing"
+  - "ssh"
+  - "networking"
+  - "file-search"
+  - "document-processing"
 ---
 
 ## CLI Guidelines - Designing Great Command-Line Interfaces

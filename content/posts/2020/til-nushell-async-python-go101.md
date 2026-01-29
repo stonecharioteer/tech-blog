@@ -9,14 +9,14 @@ description:
   async Python isn't always faster, comprehensive Go language resources, and
   effective techniques for asking technical questions."
 tags:
-  - til
-  - shell
-  - rust
-  - python
-  - async
-  - go
-  - golang
-  - performance
+  - "til"
+  - "shell"
+  - "rust"
+  - "python"
+  - "async"
+  - "go"
+  - "go"
+  - "performance"
 ---
 
 Today's discoveries challenged conventional wisdom about async programming while

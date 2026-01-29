@@ -7,14 +7,14 @@ description:
   backend development patterns, Pi-hole networking setup, and various
   development productivity tools and resources."
 tags:
-  - til
-  - rust
-  - systems-programming
-  - terminal-applications
-  - productivity
-  - pi-hole
-  - networking
-  - development-tools
+  - "til"
+  - "rust"
+  - "systems-programming"
+  - "terminal"
+  - "productivity"
+  - "pihole"
+  - "networking"
+  - "development-tools"
 ---
 
 Today I explored the intersection of systems programming and productivity tools,

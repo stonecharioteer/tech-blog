@@ -7,13 +7,13 @@ description:
   psql configurations, and database administration best practices for enhanced
   productivity."
 tags:
-  - til
-  - postgresql
-  - database-administration
-  - psql
-  - sql
-  - database-tools
-  - productivity
+  - "til"
+  - "postgresql"
+  - "database"
+  - "psql"
+  - "sql"
+  - "database"
+  - "productivity"
 ---
 
 Today I discovered comprehensive techniques for customizing PostgreSQL

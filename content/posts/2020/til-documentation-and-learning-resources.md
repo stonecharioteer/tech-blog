@@ -7,14 +7,14 @@ description:
   resources for computer science, and modern educational platforms from my
   archive."
 tags:
-  - til
-  - documentation
-  - education
-  - computer-science
-  - learning-resources
-  - sphinx
-  - rust
-  - cryptography
+  - "til"
+  - "documentation"
+  - "education"
+  - "computer-science"
+  - "learning"
+  - "sphinx"
+  - "rust"
+  - "cryptography"
 ---
 
 Today I explored my archive and discovered excellent resources on documentation

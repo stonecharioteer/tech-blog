@@ -5,8 +5,8 @@ description:
   "After using Linux for nearly 20 years, I've gotten an M5 Macbook Pro as my
   daily driver."
 tags:
-  - "Macbook"
-  - "OSX"
+  - "macbook"
+  - "osx"
 ---
 
 I got a Macbook. I mean, I've used a Mac for work for years. But this is my

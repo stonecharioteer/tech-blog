@@ -11,7 +11,7 @@ cover:
 images:
   - "/images/rfc-tutorial-site-thumbnail.png"
 tags:
-  - "AI"
+  - "ai"
   - "learning"
   - "showcase"
 ---
