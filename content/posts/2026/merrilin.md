@@ -2,11 +2,16 @@
 date: "2026-02-27T12:12:17+05:30"
 draft: false
 title: "Merrilin - We built an app to read books"
-description: ""
+description: "We built Merrilin, an AI-powered reading app with spoiler-free book companions, live sync, and beautiful themes."
 tags:
   - "AI"
   - "ebooks"
   - "merrilin"
+  - "reading"
+  - "epub"
+cover:
+  image: "/images/posts/merrilin/merrilin-hero.webp"
+  alt: "Merrilin - AI-powered reading app"
 ---
 
 ## Trying to Read War and Peace
@@ -20,10 +25,6 @@ I was always told it's the book _everyone_ gives up on.
 
 I bought a copy in the early noughts. I tried to read 2 pages perhaps. I didn't
 make much headway. There were other things to read.
-
-Here's my pristine copy.
-
-![My copy of War and Peace]()
 
 I didn't have this problem with Dostoevsky so it wasn't a Russian Literature
 problem. I've read _The Brothers Karamazov_ at 14, not sure how much of the
@@ -47,7 +48,7 @@ reading War and Peace with ChatGPT on the side.
 
 I got about 4 chapters in, which was farther than I ever had until that point.
 
-I began thinking then, that there's something here.
+I began thinking then that there was something here.
 
 Now I'd tried NotebookLM when it came out, and I haven't been very happy with
 the experience. Both using ChatGPT and NotebookLM involved having to take my
@@ -70,7 +71,7 @@ A reading app should:
    across books;
 2. allow you to read on any device;
 3. allow you to organize your library into collections in a meaningful way;
-4. Provide you a choice of themes that account for a variety of accessibility
+4. provide you a choice of themes that account for a variety of accessibility
    options;
 5. have easy-to-discover menu options and not be a UI clusterf\*ck;
 6. provide _accurate_ estimates of reading time; and, most importantly,
@@ -95,7 +96,7 @@ its cover but bibliophiles _do_. I have strong opinions about which hardcovers
 to buy. I own multiple copies of _the Lord of the Rings._ I even want to get
 some pretty hardcovers which use a decently sized font for _War and Peace_.
 
-It is absymal then our reading apps are not that well made. Some are good. I've
+It is abysmal that our reading apps are not that well made. Some are good. I've
 used them for years. But I've had separate apps for different styles of books.
 And sync has _always_ been broken.
 
@@ -112,7 +113,7 @@ This idea began 2 years ago, when I tried to read _War and Peace_ with ChatGPT.
 But it also began when dominant reading apps could not retain my attention. They
 _all_ lacked something.
 
-When [`@loststoic`](https://loststoic) and I kept talking about "something to
+When [`@loststoic`](https://loststoic.com) and I kept talking about "something to
 build" as a side project, even early in 2025, I always rounded myself towards "a
 reading app".
 
@@ -145,7 +146,7 @@ Seussian way. They give you Grand Purpose, perhaps. At least they did to me.
 Whenever [`@loststoic`](https://loststoic.com) asked if I "had any ideas", I'd
 always come back to "The Idea."
 
-I never really thought that the idea would come into fruition to be honest with
+I never really thought that the idea would come to fruition to be honest with
 you.
 
 A plethora of themes? Check.
@@ -168,7 +169,7 @@ still want to make queries anyway? Why the hell not?
 Live sync across devices? I was hoping for sync without me having to press sync,
 but _this_ is what Dr. Frankenstein felt, I suppose.
 
-<!--  insert video of live sync -->
+{{< youtube IdPDcr0fgwY >}}
 
 Share quotes with your friends and family without needing _another_ service to
 collect them? Check.
@@ -186,8 +187,133 @@ read using statistics? You'll have to see it to believe it.
 I've read 2 books on this app so far myself in the last week, and I have started
 reading _War and Peace_ on it already.
 
+![War and Peace spoiler safety](/images/posts/merrilin/war-and-peace-spoiler-safety.webp)
+
 ## Register for the Wait List
 
 [Merrilin](https://merrilin.ai) is currently open for signups for the
 newsletter, but I'll reach out to whoever signs up in the upcoming weeks for a
 limited trial.
+
+## Gallery
+
+{{< gallery >}}
+<div class="box">
+  <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img" style="background-image: url('/images/posts/merrilin/desktop-shelf-view-library.webp');">
+      <img itemprop="thumbnail" src="/images/posts/merrilin/desktop-shelf-view-library.webp" alt="Desktop shelf view" />
+    </div>
+    <figcaption><p>Desktop Shelf View</p></figcaption>
+    <a href="/images/posts/merrilin/desktop-shelf-view-library.webp" itemprop="contentUrl"></a>
+  </figure>
+</div>
+<div class="box">
+  <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img" style="background-image: url('/images/posts/merrilin/desktop-shelf-view-library-theme-2.webp');">
+      <img itemprop="thumbnail" src="/images/posts/merrilin/desktop-shelf-view-library-theme-2.webp" alt="Desktop shelf view alternate theme" />
+    </div>
+    <figcaption><p>Shelf View Alternate Theme</p></figcaption>
+    <a href="/images/posts/merrilin/desktop-shelf-view-library-theme-2.webp" itemprop="contentUrl"></a>
+  </figure>
+</div>
+<div class="box">
+  <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img" style="background-image: url('/images/posts/merrilin/desktop-list-view.webp');">
+      <img itemprop="thumbnail" src="/images/posts/merrilin/desktop-list-view.webp" alt="Desktop list view" />
+    </div>
+    <figcaption><p>Desktop List View</p></figcaption>
+    <a href="/images/posts/merrilin/desktop-list-view.webp" itemprop="contentUrl"></a>
+  </figure>
+</div>
+<div class="box">
+  <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img" style="background-image: url('/images/posts/merrilin/desktop-thumbnail-view.webp');">
+      <img itemprop="thumbnail" src="/images/posts/merrilin/desktop-thumbnail-view.webp" alt="Desktop thumbnail view" />
+    </div>
+    <figcaption><p>Desktop Thumbnail View</p></figcaption>
+    <a href="/images/posts/merrilin/desktop-thumbnail-view.webp" itemprop="contentUrl"></a>
+  </figure>
+</div>
+<div class="box">
+  <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img" style="background-image: url('/images/posts/merrilin/reader-desktop-wide.webp');">
+      <img itemprop="thumbnail" src="/images/posts/merrilin/reader-desktop-wide.webp" alt="Reader desktop wide view" />
+    </div>
+    <figcaption><p>Reader Wide View</p></figcaption>
+    <a href="/images/posts/merrilin/reader-desktop-wide.webp" itemprop="contentUrl"></a>
+  </figure>
+</div>
+<div class="box">
+  <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img" style="background-image: url('/images/posts/merrilin/reader-desktop-narrow.webp');">
+      <img itemprop="thumbnail" src="/images/posts/merrilin/reader-desktop-narrow.webp" alt="Reader desktop narrow view" />
+    </div>
+    <figcaption><p>Reader Narrow View</p></figcaption>
+    <a href="/images/posts/merrilin/reader-desktop-narrow.webp" itemprop="contentUrl"></a>
+  </figure>
+</div>
+<div class="box">
+  <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img" style="background-image: url('/images/posts/merrilin/reader-desktop-narrow-light-theme.webp');">
+      <img itemprop="thumbnail" src="/images/posts/merrilin/reader-desktop-narrow-light-theme.webp" alt="Reader light theme" />
+    </div>
+    <figcaption><p>Reader Light Theme</p></figcaption>
+    <a href="/images/posts/merrilin/reader-desktop-narrow-light-theme.webp" itemprop="contentUrl"></a>
+  </figure>
+</div>
+<div class="box">
+  <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img" style="background-image: url('/images/posts/merrilin/reader-desktop-narrow-sepia.webp');">
+      <img itemprop="thumbnail" src="/images/posts/merrilin/reader-desktop-narrow-sepia.webp" alt="Reader sepia theme" />
+    </div>
+    <figcaption><p>Reader Sepia Theme</p></figcaption>
+    <a href="/images/posts/merrilin/reader-desktop-narrow-sepia.webp" itemprop="contentUrl"></a>
+  </figure>
+</div>
+<div class="box">
+  <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img" style="background-image: url('/images/posts/merrilin/light-theme-mobile.webp');">
+      <img itemprop="thumbnail" src="/images/posts/merrilin/light-theme-mobile.webp" alt="Mobile light theme" />
+    </div>
+    <figcaption><p>Mobile Light Theme</p></figcaption>
+    <a href="/images/posts/merrilin/light-theme-mobile.webp" itemprop="contentUrl"></a>
+  </figure>
+</div>
+<div class="box">
+  <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img" style="background-image: url('/images/posts/merrilin/series-page.webp');">
+      <img itemprop="thumbnail" src="/images/posts/merrilin/series-page.webp" alt="Series page" />
+    </div>
+    <figcaption><p>Series Page</p></figcaption>
+    <a href="/images/posts/merrilin/series-page.webp" itemprop="contentUrl"></a>
+  </figure>
+</div>
+<div class="box">
+  <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img" style="background-image: url('/images/posts/merrilin/analytics-1.webp');">
+      <img itemprop="thumbnail" src="/images/posts/merrilin/analytics-1.webp" alt="Analytics overview" />
+    </div>
+    <figcaption><p>Analytics Overview</p></figcaption>
+    <a href="/images/posts/merrilin/analytics-1.webp" itemprop="contentUrl"></a>
+  </figure>
+</div>
+<div class="box">
+  <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img" style="background-image: url('/images/posts/merrilin/analytics-reader-profile.webp');">
+      <img itemprop="thumbnail" src="/images/posts/merrilin/analytics-reader-profile.webp" alt="Analytics reader profile" />
+    </div>
+    <figcaption><p>Reader Profile</p></figcaption>
+    <a href="/images/posts/merrilin/analytics-reader-profile.webp" itemprop="contentUrl"></a>
+  </figure>
+</div>
+<div class="box">
+  <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img" style="background-image: url('/images/posts/merrilin/analytics-most-likely-reading-time.webp');">
+      <img itemprop="thumbnail" src="/images/posts/merrilin/analytics-most-likely-reading-time.webp" alt="Most likely reading time analytics" />
+    </div>
+    <figcaption><p>Reading Time Analytics</p></figcaption>
+    <a href="/images/posts/merrilin/analytics-most-likely-reading-time.webp" itemprop="contentUrl"></a>
+  </figure>
+</div>
+{{< /gallery >}}
+{{< load-photoswipe >}}
