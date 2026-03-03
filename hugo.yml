@@ -63,18 +63,19 @@ params:
   ShowToc: true
   TocOpen: false
   # logo: "/logo/stonecharioteer-banner.png"
+  openToHire: true
   homeInfoParams:
     Title: Hello world!
     Content: I'm *Vinay Keerthi*, `stonecharioteer` around the webs.
 
-
-      **Quick Links:** [🖥️ My Gear](/gear) • [🧡 Favourites](/favourites) • [🫀 Values](/values) • [📚 Learning Resources](/distributed)
+      **Quick Links:** [🖥️ My Gear](/gear) • [🧡 Favourites](/favourites) • [🫀
+      Values](/values) • [📚 Learning Resources](/distributed)
 
       ![The Stone Chariot of Hampi](/logo/stonecharioteer.png)
 
-      I'm a developer who's worked with Python and Rust, and here I'm collecting
-      my thoughts on software development, technology and having a career I am
-      passionate about.
+      I'm a developer who's worked with Python, Rust and Ruby, and here I'm
+      collecting my thoughts on software development, technology and having a
+      career I am passionate about.
 
   socialIcons: # optional
     - name: "github"
