@@ -1,6 +1,6 @@
 ---
 date: "2026-03-03T23:00:10+05:30"
-title: "Goforgo v0.9.0"
+title: "GoForGo v0.9.0"
 description:
   "I've made some updates to https://github.com/stonecharioteer/goforgo"
 tags:
@@ -9,9 +9,13 @@ tags:
   - "learning"
   - "programming"
   - "tools"
+cover:
+  image: "/images/posts/goforgo-updates/home-screen.png"
+  alt: "GoForGo - Interactive Go Learning Platform home screen"
 ---
 
-It's been a while since I've worked on GoForGo. I hadn't gotten around to
+It's been a while since I've worked on
+[GoForGo](https://github.com/stonecharioteer/goforgo). I hadn't gotten around to
 maintaining it and didn't realize there was a little interest about it on the
 repo.
 
@@ -29,6 +33,14 @@ I've made some updates and fixes and I thought I'd list them down here.
    away.
 5. Added about 50 new exercises, mostly go-gotchas and nuances. I've tacked them
    onto the end, but I'm okay with them being there.
+
+Here are some screenshots of the current state of the tool:
+
+![Exercise List](/images/posts/goforgo-updates/exercise-list.png)
+
+![Exercise View](/images/posts/goforgo-updates/exercise-view.png)
+
+![Hints](/images/posts/goforgo-updates/hints.png)
 
 I'm going to be testing it out a lot more in the upcoming weeks, but I am glad
 this little tool I made for myself is turning out useful for others.
