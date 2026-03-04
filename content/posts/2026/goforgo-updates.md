@@ -1,6 +1,5 @@
 ---
 date: "2026-03-03T23:00:10+05:30"
-draft: true
 title: "Goforgo v0.9.0"
 description:
   "I've made some updates to https://github.com/stonecharioteer/goforgo"
