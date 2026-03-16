@@ -18,20 +18,31 @@ images:
   - "/images/posts/merrilin/tech/code-block-preview.png"
 ---
 
-# No one tried?
+## Why Does Code Look Horrible in Books?
+
+I'll say it. Code looks like shit in books. Publishers strip out all the color,
+they seldom add line numbers, they wrap code at weird spots, trim it even, and
+programming books look terrible.
 
 I have always used PDF for tech books. It's for a simple reason, really. Code
 blocks look ugly in EPUB.
 
+![Python tokenizer code listing in a PDF — monospace, no syntax highlighting](/images/posts/merrilin/tech/pdf-code-ugly-tokenizer-listing.jpg)
+
 Not that they look great in PDF either. It depends on the publisher, and there
-are a lot of variations in how they choose to render code blocks, honestly.
+are a lot of variations in how they choose to render code blocks, honestly. Most
+just choose to render them indentically. I never understood why though, at least
+in PDF, they should render with color. In EPUB, you know that there's a lot of
+the styling that happens at the client-side.
+
+![Like an editor](/images/posts/merrilin/tech/code-block-preview.png)
 
 I wanted my code blocks to look like the image above, like it would in an
 editor.
 
-That's an editor, right?
+That's an editor, right? _Right?_
 
-No.
+_*No.*_
 
 ![LLM book with Python code blocks rendered in Merrilin on phone](/images/posts/merrilin/tech/llm-book-phone.jpg)
 
