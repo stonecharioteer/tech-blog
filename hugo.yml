@@ -43,6 +43,8 @@ markup:
     lineNumbersInTable: true
     noClasses: false
 params:
+  images:
+    - /logo/stonecharioteer-og.png
   env: production
   ShowRssButtonInSectionTermList: true
   fuseOpts:
