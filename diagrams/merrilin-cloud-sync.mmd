@@ -1,0 +1,18 @@
+sequenceDiagram
+    participant D as Device
+    participant S as SQLite
+    participant O as Outbox
+    participant C as Cloud
+
+    D->>S: Turn page (instant)
+    D->>O: Queue progress update
+    Note over O: Debounce timer<br/>collapses rapid turns
+
+    O->>C: POST /api/v1/batch/reading-events
+    C-->>O: Accepted (new version)
+
+    Note over C: Another device<br/>pushes an update
+
+    D->>C: GET /api/v1/sync/events?after=cursor
+    C-->>D: New deltas from other devices
+    D->>S: Apply after conflict check

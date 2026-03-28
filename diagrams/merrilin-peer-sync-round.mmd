@@ -1,0 +1,15 @@
+sequenceDiagram
+    participant A as Phone A
+    participant B as Phone B
+
+    Note over A: Build local snapshot<br/>(changes since last sync)
+
+    A->>B: POST /api/local-sync/manifest<br/>{ watermark, my snapshot }
+
+    Note over B: Merge A's snapshot<br/>Build response with<br/>B's changes
+
+    B-->>A: { watermark, B's deltas }
+
+    Note over A: Merge B's deltas<br/>Advance watermark
+
+    Note over A,B: Both devices fully synced<br/>in one round-trip

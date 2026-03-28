@@ -1,0 +1,30 @@
+%%{init: {'flowchart': {'nodeSpacing': 30, 'rankSpacing': 50}}}%%
+flowchart TB
+    subgraph Guest["Guest-Peer Lane"]
+        direction LR
+        PA["Phone A<br/>SQLite"]
+        PB["Phone B<br/>SQLite"]
+        PA <-->|"mDNS + mTLS<br/>on WiFi"| PB
+    end
+
+    subgraph Cloud["Account-Cloud Lane"]
+        direction LR
+        CA["Phone A<br/>SQLite + Outbox"]
+        Server["Merrilin Cloud<br/>PostgreSQL"]
+        CB["Tablet B<br/>SQLite + Outbox"]
+        CA -->|"HTTPS + JWT<br/>batch flush"| Server
+        Server -->|"poll / WebSocket"| CA
+        CB -->|"HTTPS + JWT<br/>batch flush"| Server
+        Server -->|"poll / WebSocket"| CB
+    end
+
+    Guest -.->|"Sign in"| Cloud
+
+    %% Color-blind friendly palette
+    style PA fill:#4477AA,stroke:#333,color:#fff
+    style PB fill:#4477AA,stroke:#333,color:#fff
+    style CA fill:#4477AA,stroke:#333,color:#fff
+    style CB fill:#4477AA,stroke:#333,color:#fff
+    style Server fill:#EE6677,stroke:#333,color:#fff
+    style Guest fill:#E8F4E8,stroke:#228833
+    style Cloud fill:#E8ECF4,stroke:#4477AA
