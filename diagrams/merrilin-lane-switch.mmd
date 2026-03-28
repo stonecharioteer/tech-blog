@@ -1,0 +1,25 @@
+%%{init: {'flowchart': {'nodeSpacing': 30, 'rankSpacing': 50}}}%%
+flowchart LR
+    subgraph Before["Guest Lane"]
+        L1["Local SQLite<br/>progress, highlights,<br/>events, collections"]
+    end
+
+    L1 -->|"Sign in →<br/>replay all history"| Batch
+
+    subgraph Migration["Lane Switch"]
+        Batch["Batch ingest<br/>keyed by file_hash<br/>dedup by event_id"]
+    end
+
+    Batch --> Cloud
+
+    subgraph After["Cloud Lane"]
+        Cloud["Cloud PostgreSQL<br/>(metadata-only records,<br/>no file upload needed)"]
+    end
+
+    %% Color-blind friendly palette
+    style L1 fill:#4477AA,stroke:#333,color:#fff
+    style Batch fill:#CCBB44,stroke:#333,color:#000
+    style Cloud fill:#EE6677,stroke:#333,color:#fff
+    style Before fill:#E8F4E8,stroke:#228833
+    style Migration fill:#FFF8E1,stroke:#CCBB44
+    style After fill:#E8ECF4,stroke:#4477AA

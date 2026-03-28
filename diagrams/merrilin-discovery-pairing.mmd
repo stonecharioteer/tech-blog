@@ -1,0 +1,19 @@
+sequenceDiagram
+    participant A as Phone A
+    participant Net as Local WiFi
+    participant B as Phone B
+
+    Note over A,B: Discovery (automatic)
+
+    A->>Net: mDNS: "I'm Vinay's Pixel<br/>on _merrilin-sync._tcp."
+    B->>Net: mDNS: "I'm Vinay's Tab<br/>on _merrilin-sync._tcp."
+    Net-->>A: peerDiscovered: Vinay's Tab
+    Net-->>B: peerDiscovered: Vinay's Pixel
+
+    Note over A,B: Pairing (user-initiated)
+
+    A->>A: Display QR code<br/>(endpoint + fingerprint)
+    B->>A: Scan QR → POST /api/local-sync/pair<br/>{ code, my fingerprint }
+    A-->>B: { your shared secret,<br/>my fingerprint }
+
+    Note over A,B: Both store:<br/>fingerprint + shared secret<br/>Trust established
