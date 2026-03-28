@@ -16,7 +16,7 @@ When I began building Merrilin, I wanted to solve a deeply personal problem. I
 use multiple devices, and wanted to sync files, progress and annotations between
 them.
 
-I used KoReader until Feb 2025, and I relied on SyncThing to sync my files,
+I used [KoReader][koreader] until Feb 2025, and I relied on [SyncThing][syncthing] to sync my files,
 WebDav with Koofr for my reading progress, and koReader's cloud instance for
 file progress. That felt like a lot of work for getting what should be a simple
 feature working.
@@ -29,7 +29,7 @@ perfectly.
 But what if we don't want to sync to a cloud?
 
 When we began designing the UX of the offline-mode app, I wanted sync to work
-flawlessly. I'd seen it work fairly well with apps such as SyncThing, and I knew
+flawlessly. I'd seen it work fairly well with apps such as [SyncThing][syncthing], and I knew
 that peer-to-peer sync should definitely possible over LAN. I didn't know the
 specifics yet, but I had a laundry-list of items:
 
@@ -98,17 +98,18 @@ spending cloud storage on every book.
 ## Discovery and Pairing
 
 The first problem to solve was how do 2 devices on the same network discover
-each other. I use SyncThing and LocalSend a lot, and I liked how they do that.
+each other. I use [SyncThing][syncthing] and [LocalSend][localsend] a lot, and I liked how
+they do that.
 
 When you launch Merrilin on one device and decide to use it locally without
 signing into the cloud, it does two things in the background.
 
-{{< info title="What is mDNS?" >}} mDNS (Multicast DNS) is a protocol that lets
-devices find each other on a local network without a central DNS server. When
-your printer shows up on your laptop without any configuration, that's mDNS.
-Devices announce themselves by broadcasting a service name and port to everyone
-on the same WiFi segment. Android exposes this through NSD (Network Service
-Discovery). {{< /info >}}
+{{< info title="What is mDNS?" >}} [mDNS][mdns] (Multicast DNS) is a protocol that
+lets devices find each other on a local network without a central DNS server.
+When your printer shows up on your laptop without any configuration, that's
+mDNS. Devices announce themselves by broadcasting a service name and port to
+everyone on the same WiFi segment. Android exposes this through [NSD][android-nsd]
+(Network Service Discovery). {{< /info >}}
 
 **Advertising**: the app announces itself on the local network using mDNS with a
 custom service type (`_merrilin-sync._tcp.`). This is the same protocol a
@@ -141,7 +142,7 @@ first time, you've seen "The authenticity of host X can't be established."
 Merrilin's pairing works the same way. First connection: verify out-of-band (QR
 code or pairing code). Every subsequent connection: the stored fingerprint must
 match. If it doesn't, the peer is deactivated, just like SSH's "WARNING: REMOTE
-HOST IDENTIFICATION HAS CHANGED." This is called Trust-On-First-Use (TOFU).
+HOST IDENTIFICATION HAS CHANGED." This is called [Trust-On-First-Use (TOFU)][tofu].
 {{< /tip >}}
 
 The coolest thing was that this was mentally similar to SSH. At first
@@ -184,7 +185,7 @@ you want to minimize how long the radio stays active.
 The cloud lane works differently. It's not a bidirectional exchange, it's two
 separate flows.
 
-{{< info title="What is the Outbox Pattern?" >}} The outbox pattern is a
+{{< info title="What is the Outbox Pattern?" >}} The [outbox pattern][outbox] is a
 technique from microservices architecture. Instead of sending data directly to a
 remote server (which might be down), you write it to a local queue first. A
 background process drains the queue when the network is available. This gives
@@ -238,10 +239,10 @@ between two phones?
 
 {{< info title="What is mTLS?" >}} Regular TLS (what HTTPS uses) is one-sided:
 the server proves its identity to the client, but the client is anonymous.
-Mutual TLS (mTLS) means both sides present certificates and verify each other.
-It's commonly used in service-to-service communication in microservices, but
-here we're using it between two phones. The "mutual" part is what makes it work
-without a central server, both devices authenticate simultaneously.
+[Mutual TLS (mTLS)][mtls] means both sides present certificates and verify each
+other. It's commonly used in service-to-service communication in microservices,
+but here we're using it between two phones. The "mutual" part is what makes it
+work without a central server, both devices authenticate simultaneously.
 {{< /info >}}
 
 Each device generates a self-signed X.509 certificate and stores it in Android's
@@ -272,15 +273,15 @@ The answer depends on which lane you're in and what kind of data it is.
 ### In the Guest-Peer Lane
 
 Peers are equals. Neither device is authoritative. Conflicts are resolved using
-timestamps from a Hybrid Logical Clock.
+timestamps from a [Hybrid Logical Clock][hlc-paper].
 
 {{< info title="What is a Hybrid Logical Clock (HLC)?" >}} A Hybrid Logical
 Clock combines a physical wall-clock timestamp with a logical counter. Plain
 wall clocks drift between devices, and pure logical clocks (like Lamport clocks)
 lose track of real time. An HLC stays close to wall-clock time while still
 guaranteeing a consistent ordering even when device clocks are slightly off.
-CockroachDB and YugabyteDB use HLCs internally for the same reason.
-{{< /info >}}
+CockroachDB and YugabyteDB use HLCs internally for the same reason. The
+original paper is [Kulkarni et al., 2014][hlc-paper]. {{< /info >}}
 
 **Reading position**: most recent HLC timestamp wins. This works because you can
 only actively read on one device at a time. If your phone says chapter 12 and
@@ -316,7 +317,7 @@ match, the transfer is rejected.
 The cloud lane has a different trust model. The server is the coordination
 point, and it gets the final say.
 
-{{< info title="What is Compare-and-Swap?" >}} Compare-and-swap (CAS) is a
+{{< info title="What is Compare-and-Swap?" >}} [Compare-and-swap (CAS)][cas] is a
 concurrency primitive from CPU architecture that's used throughout distributed
 systems. The idea: "I expect the current value to be X. If it is, change it to
 Y. If not, tell me what it actually is." Databases use this for optimistic
@@ -340,8 +341,8 @@ past you, your rewind is stale.
 server deduplicates by event ID and uses HLC for ordering. The server is more of
 a relay here than an arbiter.
 
-{{< note title="CRDTs" >}} CRDT stands for Conflict-free Replicated Data Type.
-It's a data structure designed so that multiple replicas can be updated
+{{< note title="CRDTs" >}} [CRDT][crdt] stands for Conflict-free Replicated Data
+Type. It's a data structure designed so that multiple replicas can be updated
 independently and always converge to the same state when they sync, without any
 coordination. The "conflict-free" part means the merge function is
 mathematically guaranteed to produce the same result regardless of the order
@@ -350,7 +351,8 @@ central coordinator. {{< /note >}}
 
 ### Why Two Models
 
-Most local-first systems I've read about pick one consistency model. We run
+Most [local-first][local-first] systems I've read about pick one consistency
+model. We run
 both, because the trust relationship is fundamentally different.
 
 Peers are autonomous. They might never see a server. They need to converge with
@@ -413,8 +415,40 @@ converges regardless. That's the core promise of CRDTs, and it's well suited to
 a mobile context where devices appear and disappear unpredictably.
 
 If I were to point someone at the closest real-world analog, it would be
-CouchDB's replication protocol. Same idea of local-first databases syncing via
-bidirectional cursor exchange with conflict resolution at the document level.
-The main difference is we do it peer-to-peer over mTLS rather than
-client-to-server, and we use different conflict resolution strategies for
-different data types rather than one-size-fits-all.
+[CouchDB's replication protocol][couchdb-replication]. Same idea of local-first
+databases syncing via bidirectional cursor exchange with conflict resolution at
+the document level. The main difference is we do it peer-to-peer over mTLS
+rather than client-to-server, and we use different conflict resolution
+strategies for different data types rather than one-size-fits-all.
+
+---
+
+## References
+
+- [KoReader](https://koreader.rocks/) — open source e-book reader
+- [SyncThing](https://syncthing.net/) — continuous file synchronization
+- [LocalSend](https://localsend.org/) — local network file sharing
+- [Multicast DNS (mDNS)](https://en.wikipedia.org/wiki/Multicast_DNS) — zero-configuration service discovery
+- [Android Network Service Discovery](https://developer.android.com/training/connect-devices-wirelessly/nsd) — Android's mDNS API
+- [Trust on First Use (TOFU)](https://en.wikipedia.org/wiki/Trust_on_first_use) — the SSH trust model
+- [Mutual TLS (mTLS)](https://en.wikipedia.org/wiki/Mutual_authentication#mTLS) — two-way certificate authentication
+- [Hybrid Logical Clocks](https://cse.buffalo.edu/tech-reports/2014-04.pdf) — Kulkarni et al., 2014 (PDF)
+- [Compare-and-Swap](https://en.wikipedia.org/wiki/Compare-and-swap) — optimistic concurrency primitive
+- [Conflict-free Replicated Data Types (CRDTs)](https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type)
+- [Transactional Outbox Pattern](https://microservices.io/patterns/data/transactional-outbox.html)
+- [Local-first Software](https://www.inkandswitch.com/local-first/) — Ink & Switch
+- [CouchDB Replication Protocol](https://docs.couchdb.org/en/stable/replication/protocol.html)
+<!-- Reference link definitions (invisible, used for inline [text][ref] links above) -->
+[koreader]: https://koreader.rocks/
+[syncthing]: https://syncthing.net/
+[localsend]: https://localsend.org/
+[mdns]: https://en.wikipedia.org/wiki/Multicast_DNS
+[android-nsd]: https://developer.android.com/training/connect-devices-wirelessly/nsd
+[tofu]: https://en.wikipedia.org/wiki/Trust_on_first_use
+[mtls]: https://en.wikipedia.org/wiki/Mutual_authentication#mTLS
+[hlc-paper]: https://cse.buffalo.edu/tech-reports/2014-04.pdf
+[cas]: https://en.wikipedia.org/wiki/Compare-and-swap
+[crdt]: https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type
+[outbox]: https://microservices.io/patterns/data/transactional-outbox.html
+[local-first]: https://www.inkandswitch.com/local-first/
+[couchdb-replication]: https://docs.couchdb.org/en/stable/replication/protocol.html
