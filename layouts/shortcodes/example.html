@@ -1,7 +1,10 @@
 {{- $title := .Get "title" | default "Example" -}}
+{{- $refs := findRE `(?m)^\[.+\]:\s+.+$` .Page.RawContent -}}
+{{- $refBlock := delimit $refs "\n" -}}
+{{- $content := printf "%s\n\n%s" .Inner $refBlock -}}
 <div class="admonition example">
     <div class="admonition-title">{{ $title }}</div>
     <div class="admonition-content">
-        {{ .Inner | markdownify }}
+        {{ $content | markdownify }}
     </div>
 </div>
