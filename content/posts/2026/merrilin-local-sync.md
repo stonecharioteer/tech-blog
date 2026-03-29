@@ -12,7 +12,7 @@ tags:
   - "peer-to-peer"
 ---
 
-When I began building Merrilin, I wanted to solve a deeply personal problem. I
+When I began building [Merrilin](https://merrilin.ai), I wanted to solve a deeply personal problem. I
 use multiple devices, and wanted to sync files, progress and annotations between
 them.
 
@@ -438,6 +438,10 @@ strategies for different data types rather than one-size-fits-all.
 - [Transactional Outbox Pattern](https://microservices.io/patterns/data/transactional-outbox.html)
 - [Local-first Software](https://www.inkandswitch.com/local-first/) — Ink & Switch
 - [CouchDB Replication Protocol](https://docs.couchdb.org/en/stable/replication/protocol.html)
+
+---
+
+*Discuss this post on [Hacker News](https://news.ycombinator.com/item?id=47560053).*
 <!-- Reference link definitions (invisible, used for inline [text][ref] links above) -->
 [koreader]: https://koreader.rocks/
 [syncthing]: https://syncthing.net/
