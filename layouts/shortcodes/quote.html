@@ -1,6 +1,9 @@
 {{- $title := .Get "title" | default "Quote" -}}
 {{- $footer := .Get "footer" -}}
 {{- $blockquote := .Get "blockquote" | default "false" -}}
+{{- $refs := findRE `(?m)^\[.+\]:\s+.+$` .Page.RawContent -}}
+{{- $refBlock := delimit $refs "\n" -}}
+{{- $content := printf "%s\n\n%s" .Inner $refBlock -}}
 <div class="admonition quote">
     <div class="admonition-title">{{ $title }}</div>
     <div class="admonition-content">
@@ -9,7 +12,7 @@
             {{ .Inner | replaceRE "\n\n" "</p><p>" | replaceRE "\n" "<br>" | safeHTML }}
         </blockquote>
         {{- else }}
-        {{ .Inner | markdownify }}
+        {{ $content | markdownify }}
         {{- end }}
         {{- if $footer }}
         <div class="admonition-quote-footer">
