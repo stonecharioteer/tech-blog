@@ -1,0 +1,23 @@
+%%{init: {'flowchart': {'nodeSpacing': 30, 'rankSpacing': 50}}}%%
+flowchart TD
+    CP["Tailscale<br/>Control Plane"]
+    CLIENT["Client Device"]
+    EXIT["Exit Node<br/>(home LXC)"]
+    DERP["DERP Relay<br/>(fallback only)"]
+
+    CP -->|"1. auth + keys<br/>+ peer endpoints"| CLIENT
+    CP -->|"1. auth + keys<br/>+ peer endpoints"| EXIT
+
+    CLIENT -->|"2. NAT hole-punch<br/>(UDP probes)"| EXIT
+    EXIT -->|"2. NAT hole-punch<br/>(UDP probes)"| CLIENT
+
+    CLIENT -.->|"3. if direct fails:<br/>encrypted relay"| DERP
+    DERP -.->|"3. forwards<br/>ciphertext"| EXIT
+
+    CLIENT ==>|"direct WireGuard<br/>(usual path)"| EXIT
+
+    %% Color-blind friendly palette (Paul Tol's bright scheme)
+    style CP fill:#AA3377,stroke:#333,color:#fff
+    style CLIENT fill:#4477AA,stroke:#333,color:#fff
+    style EXIT fill:#228833,stroke:#333,color:#fff
+    style DERP fill:#CCBB44,stroke:#333,color:#000

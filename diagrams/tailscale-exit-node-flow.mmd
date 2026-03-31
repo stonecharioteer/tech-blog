@@ -1,0 +1,42 @@
+%%{init: {'flowchart': {'nodeSpacing': 30, 'rankSpacing': 50}}}%%
+flowchart LR
+    subgraph without["Without Exit Node"]
+        direction LR
+        D1["Your Device<br/>(cafe WiFi)"]
+        R1["Local Router"]
+        ISP1["Cafe ISP"]
+        WEB1((Internet))
+
+        D1 -->|plain route| R1
+        R1 --> ISP1
+        ISP1 --> WEB1
+    end
+
+    subgraph with["With Tailscale Exit Node"]
+        direction LR
+        D2["Your Device<br/>(cafe WiFi)"]
+        TUN["WireGuard<br/>Tunnel"]
+        EXIT["Exit Node<br/>(home LXC)"]
+        ISP2["Home ISP"]
+        WEB2((Internet))
+
+        D2 -->|encrypted| TUN
+        TUN -->|peer-to-peer| EXIT
+        EXIT --> ISP2
+        ISP2 --> WEB2
+    end
+
+    %% Color-blind friendly palette (Paul Tol's bright scheme)
+    style D1 fill:#4477AA,stroke:#333,color:#fff
+    style R1 fill:#BBBBBB,stroke:#333,color:#000
+    style ISP1 fill:#EE6677,stroke:#333,color:#fff
+    style WEB1 fill:#66CCEE,stroke:#333,color:#000
+
+    style D2 fill:#4477AA,stroke:#333,color:#fff
+    style TUN fill:#CCBB44,stroke:#333,color:#000
+    style EXIT fill:#228833,stroke:#333,color:#fff
+    style ISP2 fill:#EE6677,stroke:#333,color:#fff
+    style WEB2 fill:#66CCEE,stroke:#333,color:#000
+
+    style without fill:#f5f5f5,stroke:#999
+    style with fill:#f5f5f5,stroke:#999
