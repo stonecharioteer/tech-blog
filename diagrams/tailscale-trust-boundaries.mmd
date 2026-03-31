@@ -1,0 +1,35 @@
+%%{init: {'flowchart': {'nodeSpacing': 30, 'rankSpacing': 50}}}%%
+flowchart LR
+    subgraph untrusted["Untrusted Zone<br/>(cafe network)"]
+        DEVICE["Your Device"]
+        CAFE["Cafe Router"]
+    end
+
+    subgraph tunnel["Encrypted Tunnel"]
+        WG["WireGuard<br/>Peer Connection"]
+    end
+
+    subgraph trusted["Trusted Zone<br/>(your home)"]
+        EXIT["Exit Node<br/>(LXC)"]
+        HOME_ISP["Home ISP"]
+    end
+
+    WEB((Internet))
+
+    DEVICE -->|"cafe sees:<br/>encrypted blob +<br/>traffic volume"| CAFE
+    CAFE --> WG
+    WG --> EXIT
+    EXIT -->|"exit node sees:<br/>destination IPs,<br/>volume, timing"| HOME_ISP
+    HOME_ISP --> WEB
+
+    %% Color-blind friendly palette (Paul Tol's bright scheme)
+    style DEVICE fill:#4477AA,stroke:#333,color:#fff
+    style CAFE fill:#EE6677,stroke:#333,color:#fff
+    style WG fill:#CCBB44,stroke:#333,color:#000
+    style EXIT fill:#228833,stroke:#333,color:#fff
+    style HOME_ISP fill:#BBBBBB,stroke:#333,color:#000
+    style WEB fill:#66CCEE,stroke:#333,color:#000
+
+    style untrusted fill:#FFDDDD,stroke:#CC4444
+    style tunnel fill:#FFFFDD,stroke:#CCBB44
+    style trusted fill:#DDFFDD,stroke:#228833

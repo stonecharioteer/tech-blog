@@ -37,6 +37,10 @@ for f in "${DIAGRAMS_DIR}"/*.mmd; do
       name="${basename#homelab-}"
       out_dir="${IMAGES_DIR}/homelab"
       ;;
+    tailscale-*)
+      name="${basename#tailscale-}"
+      out_dir="${IMAGES_DIR}/tailscale"
+      ;;
     *)
       name="$basename"
       out_dir="${IMAGES_DIR}"
@@ -47,7 +51,7 @@ for f in "${DIAGRAMS_DIR}"/*.mmd; do
   out_path="${out_dir}/${name}.png"
 
   echo "Rendering ${f} → ${out_path}"
-  mmdc -i "$f" -o "$out_path" -b white
+  mmdc -i "$f" -o "$out_path" -b white -s 3
 done
 
 echo "Done."
