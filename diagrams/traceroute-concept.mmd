@@ -1,0 +1,32 @@
+sequenceDiagram
+    participant S as Your Machine
+    participant R1 as Router 1
+    participant R2 as Router 2
+    participant R3 as Router 3
+    participant D as Destination
+
+    Note over S: TTL = 1
+    S->>R1: UDP packet (TTL=1)
+    R1-->>S: ICMP Time Exceeded (Type 11)
+    Note over S: Got Router 1's IP ✓
+
+    Note over S: TTL = 2
+    S->>R1: UDP packet (TTL=2)
+    R1->>R2: TTL decremented to 1
+    R2-->>S: ICMP Time Exceeded (Type 11)
+    Note over S: Got Router 2's IP ✓
+
+    Note over S: TTL = 3
+    S->>R1: UDP packet (TTL=3)
+    R1->>R2: TTL decremented to 2
+    R2->>R3: TTL decremented to 1
+    R3-->>S: ICMP Time Exceeded (Type 11)
+    Note over S: Got Router 3's IP ✓
+
+    Note over S: TTL = 4
+    S->>R1: UDP packet (TTL=4)
+    R1->>R2: TTL decremented to 3
+    R2->>R3: TTL decremented to 2
+    R3->>D: TTL decremented to 1
+    D-->>S: ICMP Port Unreachable (Type 3)
+    Note over S: Reached destination ✓

@@ -41,6 +41,10 @@ for f in "${DIAGRAMS_DIR}"/*.mmd; do
       name="${basename#tailscale-}"
       out_dir="${IMAGES_DIR}/tailscale"
       ;;
+    traceroute-*)
+      name="${basename#traceroute-}"
+      out_dir="${IMAGES_DIR}/traceroute"
+      ;;
     *)
       name="$basename"
       out_dir="${IMAGES_DIR}"

@@ -1,0 +1,17 @@
+block-beta
+    columns 4
+
+    block:ip["IP Header (20 bytes)"]:4
+        columns 4
+        a["Bytes 0-3\nVersion, IHL\nTOS, Length"] b["Bytes 4-7\nID, Flags\nFragment"] c["Bytes 8-11\nTTL, Protocol\nChecksum"] d["Bytes 12-19\nSource IP\nDest IP"]
+    end
+
+    block:icmp["ICMP Message (starts at byte 20)"]:4
+        columns 4
+        e["Byte 20\nType\n(11 or 3)"] f["Byte 21\nCode"] g["Bytes 22-23\nChecksum"] h["Bytes 24-27\nUnused"]
+    end
+
+    block:orig["Original Packet (embedded in ICMP payload)"]:4
+        columns 4
+        i["Original\nIP Header\n(20 bytes)"] j["Original\nUDP Header\n(8 bytes)"] k[" "] l[" "]
+    end
