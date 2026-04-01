@@ -1,6 +1,5 @@
 ---
 date: "2026-04-01T11:37:18+05:30"
-draft: true
 title: "I Rebuilt Traceroute in Rust and It Was Simpler Than I Expected"
 description:
   "I never understood how traceroute discovers each hop. Turns out it's a clever
