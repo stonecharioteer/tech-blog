@@ -1,6 +1,6 @@
 ---
 date: "2026-04-01T11:37:18+05:30"
-title: "I Rebuilt Traceroute in Rust and It Was Simpler Than I Expected"
+title: "Understanding Traceroute"
 description:
   "I never understood how traceroute discovers each hop. Turns out it's a clever
   TTL trick, and about 80 lines of Rust."
