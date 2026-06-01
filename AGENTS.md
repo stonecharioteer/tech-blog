@@ -1,4 +1,4 @@
-# Claude Instructions for Tech Blog
+# Agent Instructions for Tech Blog
 
 ## Project Overview
 
@@ -89,8 +89,14 @@ url: "custom-path" # Optional - custom URL
 ### Development Workflow
 
 ```bash
-# Theme setup (one-time)
-git submodule update --init --recursive
+# Repository setup (includes git hooks)
+just init
+
+# Install hooks again if needed
+just install-hooks
+
+# Run linting/formatting checks across the repo
+just lint
 
 # Local development
 hugo serve --buildDrafts
@@ -98,6 +104,15 @@ hugo serve --buildDrafts
 # New post creation
 hugo new content content/posts/YYYY/title.md
 ```
+
+### Git Hooks
+
+This repository uses `pre-commit` via `uvx`.
+
+- Install hooks with `just init` or `just install-hooks`
+- Hooks enforce Conventional Commits
+- Hooks block direct commits to `main`
+- Hooks autoformat staged Markdown before commit
 
 ### Dependencies
 
