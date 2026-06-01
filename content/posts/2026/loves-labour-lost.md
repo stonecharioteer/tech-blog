@@ -10,24 +10,27 @@ tags:
   - "startups"
   - "building"
 images:
-  - "/images/posts/merrilin/loves-labour-lost-share.png"
+  - "/images/posts/merrilin/loves-labour-lost-share.webp"
 cover:
-  image: "/images/posts/merrilin/loves-labour-lost-share.png"
+  image: "/images/posts/merrilin/loves-labour-lost-share.webp"
   alt: "Merrilin branding banner"
 ---
 
 We've been working on [Merrilin](https://merrilin.ai) for a little under 4
 months now. I'm building it with Abinav, who writes at
-[Lost Stoic](https://loststoic.com). We started the project on Feb 7. There was
-a post I wanted to write when I hit day 90 that I could not because I was busy
-building.
+[Lost Stoic](https://loststoic.com). We started the project on Feb 7, and there
+was a post I wanted to write when we hit day 90 that I never got around to,
+because we were too busy building.
 
-I'm not sure where this project will take me. That is the strangest part of
-building something in the blind: you can love the work, believe in it deeply,
-and still have no light at the end of the tunnel. It began when, a few years
-ago, I told myself that the Kindle wasn't good enough. We tried Moon Reader and
-it felt like something was missing. We tried Readera and KoReader after that,
-and that feeling never went away.
+We still do not know where this project will take us. That is the strangest
+part of building something in the blind: you can love the work, believe in it
+deeply, and still have no light at the end of the tunnel. No proof that anyone
+will care enough, no proof that it will make money, no proof that the obsession
+is wise.
+
+For me, it began a few years ago, when I told myself that the Kindle wasn't
+good enough. We tried Moon Reader and it felt like something was missing. We
+tried Readera and KOReader after that, and that feeling never went away.
 
 We have had a laundry list of features we wanted in an app that's meant to empower
 someone who reads a lot. I read at nearly 800 WPM, perhaps faster if I'm in the
