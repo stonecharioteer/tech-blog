@@ -1,6 +1,6 @@
 ---
 date: "2026-06-02T00:14:00+05:30"
-draft: true
+draft: false
 title: "Love's Labour Lost"
 description: "On building Merrilin in the blind, choosing a hard problem with no promise of money and no light at the end of the tunnel"
 tags:
@@ -16,21 +16,22 @@ cover:
   alt: "Merrilin branding banner"
 ---
 
-We've been working on [Merrilin](https://merrilin.ai) for a little under 4
-months now. I'm building it with Abinav, who writes at
-[Lost Stoic](https://loststoic.com). We started the project on Feb 7, and there
-was a post I wanted to write when we hit day 90 that I never got around to,
-because we were too busy building.
+We've been building [Merrilin](https://merrilin.ai) for a little under four
+months now, and we still do not know where it leads. I'm building it with
+Abinav, who writes at [Lost Stoic](https://loststoic.com). We started on Feb 7,
+and by day 90 there was already a post I meant to write and could not, because
+we were too busy building.
 
-We still do not know where this project will take us. That is the strangest
-part of building something in the blind: you can love the work, believe in it
-deeply, and still have no light at the end of the tunnel. No proof that anyone
-will care enough, no proof that it will make money, no proof that the obsession
-is wise.
+That is the strangest part of building something in the blind: you can love the
+work, believe in it deeply, and still have no light at the end of the tunnel.
+No proof that anyone will care enough, no proof that it will make money, no
+proof that the obsession is wise.
 
 For me, it began a few years ago, when I told myself that the Kindle wasn't
-good enough. We tried Moon Reader and it felt like something was missing. We
-tried Readera and KOReader after that, and that feeling never went away.
+good enough. I tried Moon Reader and it felt like something was missing. I
+tried Readera and KOReader after that, and that feeling never went away. At
+some point, my dissatisfaction stopped being a complaint and became a problem we
+could no longer ignore.
 
 We have had a laundry list of features we wanted in an app that's meant to empower
 someone who reads a lot. I read at nearly 800 WPM, perhaps faster if I'm in the
@@ -79,9 +80,16 @@ don't want to take your money if there are bugs that annoy us. We want this to
 be the best damned reader app you will ever use before we even think of asking
 people to pay for it.
 
-Right now though, I don't even know if this will make us any money. We'd still
-do it anyways, since this is a problem that has possessed us. It is the great
-problem we have chosen to tackle.
+Right now though, I don't even know if this will make us any money. I am anxious
+about whether it will ever pay my rent, whether it will help keep my family
+afloat. Honestly, I would be happy just to break even on the cloud and AI
+costs. I think twice before paying the cloud bill, before assessing infra
+costs. I self-host our GitHub runner to save money. I do not even know what it
+means to approach a VC with something like this, or to say that we need
+sponsorships.
+
+We'd still do it anyway, since this is a problem that has possessed us. It is
+the great problem we have chosen to tackle.
 
 We love this app because we see what it can be. We aren't setting out to make a
 Kindle competitor, we are making something that didn't exist before. We wanted it
@@ -125,6 +133,9 @@ for ourselves first. I wanted to forge my own path, my own sword.
 Maybe that is what this really is: building in the blind. You work because the
 work feels necessary. You keep going because you can see the thing in your head,
 even when you cannot see the market, the money, or the finish line.
+
+We have seen enough in brief glimmers to know we cannot leave this problem to
+someone else.
 
 It is and always will be a labour of love, although there is every chance this
 labour may yet be lost.
