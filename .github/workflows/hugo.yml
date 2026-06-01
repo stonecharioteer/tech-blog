@@ -50,8 +50,6 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
-      - name: Update submodules to latest remote
-        run: git submodule update --init --recursive --remote
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
@@ -63,7 +61,7 @@ jobs:
           HUGO_ENVIRONMENT: production
         run: |
           hugo \
-            -- minify \
+            --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
