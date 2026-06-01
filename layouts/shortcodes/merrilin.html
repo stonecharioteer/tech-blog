@@ -1,0 +1,10 @@
+{{- $title := .Get "title" | default "Merrilin" -}}
+{{- $refs := findRE `(?m)^\[.+\]:\s+.+$` .Page.RawContent -}}
+{{- $refBlock := delimit $refs "\n" -}}
+{{- $content := printf "%s\n\n%s" .Inner $refBlock -}}
+<div class="admonition merrilin">
+    <div class="admonition-title">{{ $title }}</div>
+    <div class="admonition-content">
+        {{ $content | markdownify }}
+    </div>
+</div>

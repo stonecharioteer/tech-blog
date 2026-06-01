@@ -139,3 +139,8 @@ someone else.
 
 It is and always will be a labour of love, although there is every chance this
 labour may yet be lost.
+
+{{< merrilin title="Signup now!" >}}
+[Merrilin](https://merrilin.ai) is now open to the public for signups. We will
+also be live on the [Google Play Store](https://play.google.com/store/apps/details?id=ai.merrilin.reader&hl=en-US&ah=YId9x8oiNcD3iUoDX_JNnF7Pw_I) after June 5.
+{{< /merrilin >}}
