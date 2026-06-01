@@ -305,6 +305,26 @@
         background-image: url('/sprites/cyborg_1.png');
     }
 
+    /* Merrilin */
+    .admonition.merrilin {
+        border-left-color: #2563eb;
+        background-color: #eff6ff;
+    }
+
+    .admonition.merrilin .admonition-title {
+        background-color: #dbeafe;
+        color: #1d4ed8;
+    }
+
+    .admonition.merrilin .admonition-title::before {
+        background-image: url('/images/branding/merrilin-logo-transparent.png');
+        background-size: 46px auto;
+    }
+
+    [data-theme="dark"] .admonition.merrilin .admonition-title::before {
+        filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.35));
+    }
+
     /* Dark mode styles */
     [data-theme="dark"] .admonition.note {
         background-color: #1e3a8a;
@@ -406,6 +426,20 @@
 
     [data-theme="dark"] .admonition.ai .admonition-content {
         color: #ffedd5;
+    }
+
+    [data-theme="dark"] .admonition.merrilin {
+        background-color: #172554;
+        border-left-color: #60a5fa;
+    }
+
+    [data-theme="dark"] .admonition.merrilin .admonition-title {
+        background-color: #1f2937;
+        color: #e5e7eb;
+    }
+
+    [data-theme="dark"] .admonition.merrilin .admonition-content {
+        color: #dbeafe;
     }
 
     /* Responsive: smaller sprites on mobile */

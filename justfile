@@ -5,7 +5,7 @@
 default:
     @just --list
 
-# Initialize repository: check Hugo version, setup submodules
+# Initialize repository: check Hugo version, setup submodules, install hooks
 init:
     #!/usr/bin/env bash
     set -euo pipefail
@@ -46,8 +46,37 @@ init:
         exit 1
     fi
     
+    echo "🪝 Installing git hooks..."
+    just install-hooks
+
     echo "✅ Repository initialized successfully!"
     echo "💡 Run 'just serve' to start development server"
+
+# Install git hooks via uvx pre-commit
+install-hooks:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    if ! command -v uvx &> /dev/null; then
+        echo "❌ uvx is not installed. Install uv first: https://docs.astral.sh/uv/"
+        exit 1
+    fi
+
+    echo "🪝 Installing pre-commit hooks..."
+    uvx pre-commit install --install-hooks --hook-type pre-commit --hook-type commit-msg
+    echo "✅ Hooks installed"
+
+# Run repo linting and formatting checks
+lint:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    if ! command -v uvx &> /dev/null; then
+        echo "❌ uvx is not installed. Install uv first: https://docs.astral.sh/uv/"
+        exit 1
+    fi
+
+    uvx pre-commit run --all-files
 
 # Build the Hugo site (passes through all arguments)
 build *ARGS:
