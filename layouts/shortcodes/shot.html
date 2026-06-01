@@ -1,0 +1,8 @@
+<figure class="no-photoswipe" style="margin: 2rem auto; text-align: center;">
+  <img
+    src="{{ .Get "src" }}"
+    alt="{{ .Get "alt" }}"
+    style="display: block; margin: 0 auto; width: 100%; max-width: {{ .Get "maxWidth" | default "320px" }}; height: auto; border-radius: 12px;"
+  >
+  {{ with .Get "caption" }}<figcaption style="margin-top: 0.75rem; font-size: 0.95rem; opacity: 0.85;">{{ . }}</figcaption>{{ end }}
+</figure>
