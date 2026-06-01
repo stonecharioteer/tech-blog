@@ -39,3 +39,28 @@ personally.
 Right now though, I don't even know if this will make us any money. We'd still
 do it anyways, since this is a problem that has possessed us. It is _the_ great
 problem we have chosen to tackle, to paraphrase Richard Hamming.
+
+We love this app because we see what it can be. We see greatness underneath,
+betwixt the crevices. We aren't setting out to make a Kindle competitor, we are
+making something that didn't exist before. Do we bundle an AI chat with it?
+Sure. But the point is that I wanted it to be an app to read on. You don't even
+need to pay us or sign in, in fact. The app will sync your files between devices
+without a hiccup. I aim to provide the best damned experience for syncing a
+library of files across devices without relying on Google Drive or Apple Cloud.
+Just over your local WiFi.
+
+And themes? I was tired of book apps playing second fiddle to coding IDEs. We
+have so many themes in VS Code that no other ebook app has. Which is why we
+decided to bundle all of them in. Ask me why I use the Red theme most of the
+time, I kid you not.
+
+I've said a lot but I haven't said why I'm building this without funding,
+without paying users. To quote George Mallory: because it exists. It's my
+problem to solve, something I'm deeply well equipped to do. Both of us read,
+have read for our entire lives, but I could not help be the more opinionated one
+when it came to reading apps. I could tell that reading apps were not written by
+people who used them as much as I did. I wanted to forge my own path, my own
+sword.
+
+It is and always will be a labour of love, although there is a chance it could
+be a love lost.
