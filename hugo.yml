@@ -20,7 +20,7 @@ menus:
       pageRef: /
       weight: 10
     - name: 📄 Resume
-      url: https://github.com/stonecharioteer/resume/releases/latest
+      url: https://cv.stonecharioteer.com
       weight: 10
     - name: TIL
       pageRef: /tags/til
