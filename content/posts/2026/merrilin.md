@@ -1,5 +1,6 @@
 ---
 date: "2026-02-27T12:12:17+05:30"
+lastmod: "2026-06-22T12:00:00+05:30"
 draft: false
 title: "Merrilin - We built an app to read books"
 description: "We built Merrilin, an AI-powered reading app with spoiler-free book companions, live sync, and beautiful themes."
@@ -10,7 +11,7 @@ tags:
   - "reading"
   - "epub"
 cover:
-  image: "/images/posts/merrilin/merrilin-hero.webp"
+  image: "/images/posts/merrilin/merrilin-share.webp"
   alt: "Merrilin - AI-powered reading app"
 ---
 
@@ -109,6 +110,8 @@ it _is_ deeply personal to me.
 
 ## Merrilin
 
+![Merrilin Hero](/images/posts/merrilin/merrilin-hero.webp)
+
 This idea began 2 years ago, when I tried to read _War and Peace_ with ChatGPT.
 But it also began when dominant reading apps could not retain my attention. They
 _all_ lacked something.
@@ -189,11 +192,14 @@ reading _War and Peace_ on it already.
 
 ![War and Peace spoiler safety](/images/posts/merrilin/war-and-peace-spoiler-safety.webp)
 
-## Register for the Wait List
+## Get Merrilin
 
-[Merrilin](https://merrilin.ai) is currently open for signups for the
-newsletter, but I'll reach out to whoever signs up in the upcoming weeks for a
-limited trial.
+[Merrilin](https://merrilin.ai) is now open for signups. You can create an
+account and start reading right away through the web app.
+
+We are also working on bringing Merrilin to both Google Play and the Apple
+App Store. In the meantime, you can install the web app directly on your
+device as a Progressive Web App (PWA) for a native-like reading experience.
 
 ## Gallery
 
