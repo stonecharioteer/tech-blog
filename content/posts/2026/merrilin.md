@@ -11,7 +11,7 @@ tags:
   - "reading"
   - "epub"
 cover:
-  image: "/images/posts/merrilin/merrilin-hero.webp"
+  image: "/images/posts/merrilin/merrilin-share.webp"
   alt: "Merrilin - AI-powered reading app"
 ---
 
@@ -109,6 +109,8 @@ I have always wanted to build a reading app. It's not the fanciest of ideas, but
 it _is_ deeply personal to me.
 
 ## Merrilin
+
+![Merrilin Hero](/images/posts/merrilin/merrilin-hero.webp)
 
 This idea began 2 years ago, when I tried to read _War and Peace_ with ChatGPT.
 But it also began when dominant reading apps could not retain my attention. They
