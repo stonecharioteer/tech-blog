@@ -133,11 +133,11 @@
                 background: var(--theme);
             }
 
-            .list:not([data-theme="dark"])::-webkit-scrollbar-track {
+            body:not(.dark) .list::-webkit-scrollbar-track {
                 background: 0 0;
             }
 
-            .list:not([data-theme="dark"])::-webkit-scrollbar-thumb {
+            body:not(.dark) .list::-webkit-scrollbar-thumb {
                 border-color: var(--theme);
             }
         }
@@ -298,7 +298,7 @@
 
     .admonition.ai .admonition-title {
         background-color: #fed7aa;
-        color: #c2410c;
+        color: #9a3412;
     }
 
     .admonition.ai .admonition-title::before {
@@ -321,124 +321,124 @@
         background-size: 46px auto;
     }
 
-    [data-theme="dark"] .admonition.merrilin .admonition-title::before {
+    body.dark .admonition.merrilin .admonition-title::before {
         filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.35));
     }
 
     /* Dark mode styles */
-    [data-theme="dark"] .admonition.note {
+    body.dark .admonition.note {
         background-color: #1e3a8a;
         border-left-color: #60a5fa;
     }
 
-    [data-theme="dark"] .admonition.note .admonition-title {
+    body.dark .admonition.note .admonition-title {
         background-color: #1e40af;
         color: #bfdbfe;
     }
 
-    [data-theme="dark"] .admonition.note .admonition-content {
+    body.dark .admonition.note .admonition-content {
         color: #e0e7ff;
     }
 
-    [data-theme="dark"] .admonition.info {
+    body.dark .admonition.info {
         background-color: #164e63;
         border-left-color: #22d3ee;
     }
 
-    [data-theme="dark"] .admonition.info .admonition-title {
+    body.dark .admonition.info .admonition-title {
         background-color: #0e7490;
-        color: #a5f3fc;
+        color: #ecfeff;
     }
 
-    [data-theme="dark"] .admonition.info .admonition-content {
+    body.dark .admonition.info .admonition-content {
         color: #cffafe;
     }
 
-    [data-theme="dark"] .admonition.warning {
-        background-color: #92400e;
+    body.dark .admonition.warning {
+        background-color: #78350f;
         border-left-color: #fbbf24;
     }
 
-    [data-theme="dark"] .admonition.warning .admonition-title {
-        background-color: #b45309;
+    body.dark .admonition.warning .admonition-title {
+        background-color: #92400e;
         color: #fde68a;
     }
 
-    [data-theme="dark"] .admonition.warning .admonition-content {
+    body.dark .admonition.warning .admonition-content {
         color: #fef3c7;
     }
 
-    [data-theme="dark"] .admonition.tip {
+    body.dark .admonition.tip {
         background-color: #064e3b;
         border-left-color: #34d399;
     }
 
-    [data-theme="dark"] .admonition.tip .admonition-title {
+    body.dark .admonition.tip .admonition-title {
         background-color: #065f46;
         color: #a7f3d0;
     }
 
-    [data-theme="dark"] .admonition.tip .admonition-content {
+    body.dark .admonition.tip .admonition-content {
         color: #d1fae5;
     }
 
-    [data-theme="dark"] .admonition.quote {
+    body.dark .admonition.quote {
         background-color: #374151;
         border-left-color: #9ca3af;
     }
 
-    [data-theme="dark"] .admonition.quote .admonition-title {
+    body.dark .admonition.quote .admonition-title {
         background-color: #4b5563;
         color: #d1d5db;
     }
 
-    [data-theme="dark"] .admonition.quote .admonition-content {
+    body.dark .admonition.quote .admonition-content {
         color: #f3f4f6;
     }
 
-    [data-theme="dark"] .admonition-quote-footer {
+    body.dark .admonition-quote-footer {
         color: #d1d5db;
     }
 
-    [data-theme="dark"] .admonition.example {
+    body.dark .admonition.example {
         background-color: #581c87;
         border-left-color: #a78bfa;
     }
 
-    [data-theme="dark"] .admonition.example .admonition-title {
+    body.dark .admonition.example .admonition-title {
         background-color: #6b21a8;
         color: #c4b5fd;
     }
 
-    [data-theme="dark"] .admonition.example .admonition-content {
+    body.dark .admonition.example .admonition-content {
         color: #e9d5ff;
     }
 
-    [data-theme="dark"] .admonition.ai {
+    body.dark .admonition.ai {
         background-color: #7c2d12;
         border-left-color: #fb923c;
     }
 
-    [data-theme="dark"] .admonition.ai .admonition-title {
+    body.dark .admonition.ai .admonition-title {
         background-color: #9a3412;
         color: #fed7aa;
     }
 
-    [data-theme="dark"] .admonition.ai .admonition-content {
+    body.dark .admonition.ai .admonition-content {
         color: #ffedd5;
     }
 
-    [data-theme="dark"] .admonition.merrilin {
+    body.dark .admonition.merrilin {
         background-color: #172554;
         border-left-color: #60a5fa;
     }
 
-    [data-theme="dark"] .admonition.merrilin .admonition-title {
+    body.dark .admonition.merrilin .admonition-title {
         background-color: #1f2937;
         color: #e5e7eb;
     }
 
-    [data-theme="dark"] .admonition.merrilin .admonition-content {
+    body.dark .admonition.merrilin .admonition-content {
         color: #dbeafe;
     }
 
@@ -486,54 +486,54 @@
     }
     
     /* Dark mode code blocks - target ALL possible containers */
-    [data-theme="dark"] .chroma,
-    [data-theme="dark"] .highlight,
-    [data-theme="dark"] .highlight .chroma,
-    [data-theme="dark"] div.highlight,
-    [data-theme="dark"] div.highlight .chroma,
-    [data-theme="dark"] pre.chroma,
-    [data-theme="dark"] .highlight pre.chroma,
-    [data-theme="dark"] .highlight pre,
-    [data-theme="dark"] pre,
-    [data-theme="dark"] .lntable,
-    [data-theme="dark"] .lntd,
-    [data-theme="dark"] .lntd pre,
-    [data-theme="dark"] .lntd pre.chroma,
-    [data-theme="dark"] .highlight .lntable,
-    [data-theme="dark"] .highlight .lntd,
-    [data-theme="dark"] .highlight .lntd pre,
-    [data-theme="dark"] .highlight .lntd pre.chroma,
-    [data-theme="dark"] div.highlight .lntable,
-    [data-theme="dark"] div.highlight .lntd,
-    [data-theme="dark"] div.highlight .lntd pre,
-    [data-theme="dark"] div.highlight .lntd pre.chroma {
+    body.dark .chroma,
+    body.dark .highlight,
+    body.dark .highlight .chroma,
+    body.dark div.highlight,
+    body.dark div.highlight .chroma,
+    body.dark pre.chroma,
+    body.dark .highlight pre.chroma,
+    body.dark .highlight pre,
+    body.dark pre,
+    body.dark .lntable,
+    body.dark .lntd,
+    body.dark .lntd pre,
+    body.dark .lntd pre.chroma,
+    body.dark .highlight .lntable,
+    body.dark .highlight .lntd,
+    body.dark .highlight .lntd pre,
+    body.dark .highlight .lntd pre.chroma,
+    body.dark div.highlight .lntable,
+    body.dark div.highlight .lntd,
+    body.dark div.highlight .lntd pre,
+    body.dark div.highlight .lntd pre.chroma {
         background-color: #24273a !important;
         color: #cad3f5 !important;
     }
     
     /* Media query fallback - target ALL possible containers */
     @media (prefers-color-scheme: dark) {
-        :root:not([data-theme="light"]) .chroma,
-        :root:not([data-theme="light"]) .highlight,
-        :root:not([data-theme="light"]) .highlight .chroma,
-        :root:not([data-theme="light"]) div.highlight,
-        :root:not([data-theme="light"]) div.highlight .chroma,
-        :root:not([data-theme="light"]) pre.chroma,
-        :root:not([data-theme="light"]) .highlight pre.chroma,
-        :root:not([data-theme="light"]) .highlight pre,
-        :root:not([data-theme="light"]) pre,
-        :root:not([data-theme="light"]) .lntable,
-        :root:not([data-theme="light"]) .lntd,
-        :root:not([data-theme="light"]) .lntd pre,
-        :root:not([data-theme="light"]) .lntd pre.chroma,
-        :root:not([data-theme="light"]) .highlight .lntable,
-        :root:not([data-theme="light"]) .highlight .lntd,
-        :root:not([data-theme="light"]) .highlight .lntd pre,
-        :root:not([data-theme="light"]) .highlight .lntd pre.chroma,
-        :root:not([data-theme="light"]) div.highlight .lntable,
-        :root:not([data-theme="light"]) div.highlight .lntd,
-        :root:not([data-theme="light"]) div.highlight .lntd pre,
-        :root:not([data-theme="light"]) div.highlight .lntd pre.chroma {
+        body:not(.light) .chroma,
+        body:not(.light) .highlight,
+        body:not(.light) .highlight .chroma,
+        body:not(.light) div.highlight,
+        body:not(.light) div.highlight .chroma,
+        body:not(.light) pre.chroma,
+        body:not(.light) .highlight pre.chroma,
+        body:not(.light) .highlight pre,
+        body:not(.light) pre,
+        body:not(.light) .lntable,
+        body:not(.light) .lntd,
+        body:not(.light) .lntd pre,
+        body:not(.light) .lntd pre.chroma,
+        body:not(.light) .highlight .lntable,
+        body:not(.light) .highlight .lntd,
+        body:not(.light) .highlight .lntd pre,
+        body:not(.light) .highlight .lntd pre.chroma,
+        body:not(.light) div.highlight .lntable,
+        body:not(.light) div.highlight .lntd,
+        body:not(.light) div.highlight .lntd pre,
+        body:not(.light) div.highlight .lntd pre.chroma {
             background-color: #24273a !important;
             color: #cad3f5 !important;
         }
@@ -541,11 +541,11 @@
     
     /* WORKING SOLUTION - Use attribute selectors for maximum coverage */
     /* Extra specific for light mode */
-    :root:not([data-theme="dark"]) [class*="chroma"],
-    :root:not([data-theme="dark"]) [class*="highlight"],
-    :root:not([data-theme="dark"]) [class*="lnt"],
-    :root:not([data-theme="dark"]) pre,
-    :root:not([data-theme="dark"]) code,
+    body:not(.dark) [class*="chroma"],
+    body:not(.dark) [class*="highlight"],
+    body:not(.dark) [class*="lnt"],
+    body:not(.dark) pre,
+    body:not(.dark) code,
     [class*="chroma"],
     [class*="highlight"],
     [class*="lnt"],
@@ -555,32 +555,32 @@
         color: #24292e !important;
     }
     
-    [data-theme="dark"] [class*="chroma"],
-    [data-theme="dark"] [class*="highlight"],
-    [data-theme="dark"] [class*="lnt"],
-    [data-theme="dark"] pre,
-    [data-theme="dark"] code {
+    body.dark [class*="chroma"],
+    body.dark [class*="highlight"],
+    body.dark [class*="lnt"],
+    body.dark pre,
+    body.dark code {
         background-color: #24273a !important;
         color: #cad3f5 !important;
     }
     
     /* Media query fallback */
     @media (prefers-color-scheme: dark) {
-        :root:not([data-theme="light"]) [class*="chroma"],
-        :root:not([data-theme="light"]) [class*="highlight"],
-        :root:not([data-theme="light"]) [class*="lnt"],
-        :root:not([data-theme="light"]) pre,
-        :root:not([data-theme="light"]) code {
+        body:not(.light) [class*="chroma"],
+        body:not(.light) [class*="highlight"],
+        body:not(.light) [class*="lnt"],
+        body:not(.light) pre,
+        body:not(.light) code {
             background-color: #24273a !important;
             color: #cad3f5 !important;
         }
     }
     
     /* FINAL OVERRIDE - Ensure light mode works with better contrast */
-    :root:not([data-theme="dark"]) [class*="chroma"],
-    :root:not([data-theme="dark"]) [class*="highlight"],
-    :root:not([data-theme="dark"]) pre,
-    :root:not([data-theme="dark"]) code {
+    body:not(.dark) [class*="chroma"],
+    body:not(.dark) [class*="highlight"],
+    body:not(.dark) pre,
+    body:not(.dark) code {
         background-color: #f8f9fa !important;
         color: #1a1a1a !important;
         border: none !important;
@@ -590,78 +590,78 @@
     }
     
     /* Light mode line numbers - match dark mode behavior exactly */
-    :root:not([data-theme="dark"]) [class*="lnt"],
-    :root:not([data-theme="dark"]) [class*="ln"] {
+    body:not(.dark) [class*="lnt"],
+    body:not(.dark) [class*="ln"] {
         background-color: #f8f9fa !important;
         color: #6c757d !important;
         border-radius: 0 !important;
     }
     
     /* Remove ALL borders and outlines from light mode code elements */
-    :root:not([data-theme="dark"]) .highlight,
-    :root:not([data-theme="dark"]) .highlight > div,
-    :root:not([data-theme="dark"]) .lntable,
-    :root:not([data-theme="dark"]) .lntd {
+    body:not(.dark) .highlight,
+    body:not(.dark) .highlight > div,
+    body:not(.dark) .lntable,
+    body:not(.dark) .lntd {
         border: none !important;
         outline: none !important;
         box-shadow: none !important;
     }
     
     /* Enhanced syntax colors for light mode - maximum contrast */
-    :root:not([data-theme="dark"]) .chroma .k,
-    :root:not([data-theme="dark"]) .chroma .kd,
-    :root:not([data-theme="dark"]) .chroma .kn,
-    :root:not([data-theme="dark"]) .chroma .kp,
-    :root:not([data-theme="dark"]) .chroma .kr,
-    :root:not([data-theme="dark"]) .chroma .kt { color: #d01040 !important; font-weight: 600 !important; } /* Keywords - bold red */
+    body:not(.dark) .chroma .k,
+    body:not(.dark) .chroma .kd,
+    body:not(.dark) .chroma .kn,
+    body:not(.dark) .chroma .kp,
+    body:not(.dark) .chroma .kr,
+    body:not(.dark) .chroma .kt { color: #d01040 !important; font-weight: 600 !important; } /* Keywords - bold red */
     
-    :root:not([data-theme="dark"]) .chroma .s,
-    :root:not([data-theme="dark"]) .chroma .s1,
-    :root:not([data-theme="dark"]) .chroma .s2,
-    :root:not([data-theme="dark"]) .chroma .sb,
-    :root:not([data-theme="dark"]) .chroma .sc { color: #003d99 !important; } /* Strings - much darker blue */
+    body:not(.dark) .chroma .s,
+    body:not(.dark) .chroma .s1,
+    body:not(.dark) .chroma .s2,
+    body:not(.dark) .chroma .sb,
+    body:not(.dark) .chroma .sc { color: #003d99 !important; } /* Strings - much darker blue */
     
-    :root:not([data-theme="dark"]) .chroma .nf,
-    :root:not([data-theme="dark"]) .chroma .fm { color: #6610f2 !important; font-weight: 500 !important; } /* Functions - bold purple */
+    body:not(.dark) .chroma .nf,
+    body:not(.dark) .chroma .fm { color: #6610f2 !important; font-weight: 500 !important; } /* Functions - bold purple */
     
-    :root:not([data-theme="dark"]) .chroma .c,
-    :root:not([data-theme="dark"]) .chroma .c1,
-    :root:not([data-theme="dark"]) .chroma .cm { color: #198754 !important; font-style: italic !important; } /* Comments - green italic */
+    body:not(.dark) .chroma .c,
+    body:not(.dark) .chroma .c1,
+    body:not(.dark) .chroma .cm { color: #198754 !important; font-style: italic !important; } /* Comments - green italic */
     
-    :root:not([data-theme="dark"]) .chroma .m,
-    :root:not([data-theme="dark"]) .chroma .mi,
-    :root:not([data-theme="dark"]) .chroma .mf { color: #fd7e14 !important; } /* Numbers - orange */
+    body:not(.dark) .chroma .m,
+    body:not(.dark) .chroma .mi,
+    body:not(.dark) .chroma .mf { color: #fd7e14 !important; } /* Numbers - orange */
     
-    :root:not([data-theme="dark"]) .chroma .ln,
-    :root:not([data-theme="dark"]) .chroma .lnt { color: #adb5bd !important; } /* Line numbers - gray */
+    body:not(.dark) .chroma .ln,
+    body:not(.dark) .chroma .lnt { color: #adb5bd !important; } /* Line numbers - gray */
     
-    :root:not([data-theme="dark"]) .chroma .p { color: #495057 !important; } /* Punctuation - dark gray */
+    body:not(.dark) .chroma .p { color: #495057 !important; } /* Punctuation - dark gray */
     
     /* Fix specific problematic elements */
-    :root:not([data-theme="dark"]) .chroma .nc,
-    :root:not([data-theme="dark"]) .chroma .no { color: #d63384 !important; font-weight: 600 !important; } /* Types like "Package" - magenta */
+    body:not(.dark) .chroma .nc,
+    body:not(.dark) .chroma .no { color: #d63384 !important; font-weight: 600 !important; } /* Types like "Package" - magenta */
     
-    :root:not([data-theme="dark"]) .chroma .nt { color: #003d99 !important; font-weight: 600 !important; } /* Type hints like "String" - much darker blue */
+    body:not(.dark) .chroma .nt { color: #003d99 !important; font-weight: 600 !important; } /* Type hints like "String" - much darker blue */
     
-    :root:not([data-theme="dark"]) .chroma .na,
-    :root:not([data-theme="dark"]) .chroma .nx { color: #1a1a1a !important; } /* Attributes and names - black */
+    body:not(.dark) .chroma .na,
+    body:not(.dark) .chroma .nx { color: #1a1a1a !important; } /* Attributes and names - black */
     
     /* Target self/&self parameters and other variable references */
-    :root:not([data-theme="dark"]) .chroma .nv,
-    :root:not([data-theme="dark"]) .chroma .vc,
-    :root:not([data-theme="dark"]) .chroma .vg,
-    :root:not([data-theme="dark"]) .chroma .vi,
-    :root:not([data-theme="dark"]) .chroma .vm { color: #003d99 !important; font-weight: 500 !important; } /* Variables like self/&self - dark blue */
+    body:not(.dark) .chroma .nv,
+    body:not(.dark) .chroma .vc,
+    body:not(.dark) .chroma .vg,
+    body:not(.dark) .chroma .vi,
+    body:not(.dark) .chroma .vm { color: #003d99 !important; font-weight: 500 !important; } /* Variables like self/&self - dark blue */
     
     /* AGGRESSIVE OVERRIDE - catch any remaining light blue elements */
-    :root:not([data-theme="dark"]) .chroma .nb,
-    :root:not([data-theme="dark"]) .chroma .bp,
-    :root:not([data-theme="dark"]) .chroma .nd,
-    :root:not([data-theme="dark"]) .chroma .nn { color: #003d99 !important; font-weight: 500 !important; } /* Built-ins, decorators, namespaces - dark blue */
+    body:not(.dark) .chroma .nb,
+    body:not(.dark) .chroma .bp,
+    body:not(.dark) .chroma .nd,
+    body:not(.dark) .chroma .nn { color: #003d99 !important; font-weight: 500 !important; } /* Built-ins, decorators, namespaces - dark blue */
     
     /* Final catchall for any elements that might still be light blue */
-    :root:not([data-theme="dark"]) .chroma [style*="color:#8aadf4"],
-    :root:not([data-theme="dark"]) .chroma [style*="color:#91d7e3"] { color: #003d99 !important; }
+    body:not(.dark) .chroma [style*="color:#8aadf4"],
+    body:not(.dark) .chroma [style*="color:#91d7e3"] { color: #003d99 !important; }
 
     /* Simple dotted underline for all links */
     a {
@@ -782,7 +782,7 @@
     }
 
     /* Dark mode dropdown support */
-    [data-theme="dark"] .tag-dropdown {
+    body.dark .tag-dropdown {
         background-color: var(--entry);
         color: var(--primary);
     }
@@ -885,7 +885,7 @@
     }
 
     /* Dark mode for tags page */
-    [data-theme="dark"] .tag-card:hover {
+    body.dark .tag-card:hover {
         box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
     }
 
@@ -967,17 +967,17 @@
     }
 
     /* Dark mode TIL styling */
-    [data-theme="dark"] .til-post {
+    body.dark .til-post {
         background: linear-gradient(135deg, #0c1929 0%, #1e293b 100%);
         border-left-color: #38bdf8;
     }
 
-    [data-theme="dark"] .til-post::before {
+    body.dark .til-post::before {
         background: #38bdf8;
         color: #0f172a;
     }
 
-    [data-theme="dark"] .til-post:hover {
+    body.dark .til-post:hover {
         background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
         box-shadow: 0 4px 6px -1px rgba(56, 189, 248, 0.2), 0 2px 4px -1px rgba(56, 189, 248, 0.1);
     }
@@ -1015,10 +1015,10 @@
     .chroma .ln,
     .highlight .lnt,
     .highlight .ln,
-    :root:not([data-theme="dark"]) .lnt,
-    :root:not([data-theme="dark"]) .ln,
-    :root:not([data-theme="dark"]) [class*="lnt"],
-    :root:not([data-theme="dark"]) [class*="ln"] {
+    body:not(.dark) .lnt,
+    body:not(.dark) .ln,
+    body:not(.dark) [class*="lnt"],
+    body:not(.dark) [class*="ln"] {
         border-radius: 0 !important;
         border-top-left-radius: 0 !important;
         border-top-right-radius: 0 !important;
@@ -1037,29 +1037,29 @@
     .chroma .lntable,
     .highlight > div,
     .chroma > div,
-    :root:not([data-theme="dark"]) .highlight,
-    :root:not([data-theme="dark"]) .chroma,
-    :root:not([data-theme="dark"]) div.highlight,
-    :root:not([data-theme="dark"]) .lntable,
-    :root:not([data-theme="dark"]) .highlight .lntable,
-    :root:not([data-theme="dark"]) .chroma .lntable,
-    :root:not([data-theme="dark"]) .highlight > div,
-    :root:not([data-theme="dark"]) .chroma > div {
+    body:not(.dark) .highlight,
+    body:not(.dark) .chroma,
+    body:not(.dark) div.highlight,
+    body:not(.dark) .lntable,
+    body:not(.dark) .highlight .lntable,
+    body:not(.dark) .chroma .lntable,
+    body:not(.dark) .highlight > div,
+    body:not(.dark) .chroma > div {
         background-color: #f8f9fa !important;
         background: #f8f9fa !important;
     }
 
     /* LINE HIGHLIGHTING - Light mode */
-    :root:not([data-theme="dark"]) .chroma .hl,
-    :root:not([data-theme="dark"]) .highlight .hl {
+    body:not(.dark) .chroma .hl,
+    body:not(.dark) .highlight .hl {
         background-color: #fff3cd !important;
         display: block;
         width: 100%;
     }
 
     /* LINE HIGHLIGHTING - Dark mode */
-    [data-theme="dark"] .chroma .hl,
-    [data-theme="dark"] .highlight .hl {
+    body.dark .chroma .hl,
+    body.dark .highlight .hl {
         background-color: #3d3d00 !important;
         display: block;
         width: 100%;
@@ -1067,8 +1067,8 @@
 
     /* Media query fallback for line highlighting */
     @media (prefers-color-scheme: dark) {
-        :root:not([data-theme="light"]) .chroma .hl,
-        :root:not([data-theme="light"]) .highlight .hl {
+        body:not(.light) .chroma .hl,
+        body:not(.light) .highlight .hl {
             background-color: #3d3d00 !important;
         }
     }
@@ -1097,7 +1097,7 @@
         opacity: 0.85;
     }
 
-    [data-theme="dark"] .hire-banner {
+    body.dark .hire-banner {
         background: linear-gradient(135deg, #059669, #047857);
     }
 
@@ -1205,17 +1205,17 @@
     }
 
     /* Dark mode newsletter styling */
-    [data-theme="dark"] .newsletter-container {
+    body.dark .newsletter-container {
         background-color: var(--entry);
     }
 
-    [data-theme="dark"] .picoletter-form-embed input[type="text"],
-    [data-theme="dark"] .picoletter-form-embed input[type="email"] {
+    body.dark .picoletter-form-embed input[type="text"],
+    body.dark .picoletter-form-embed input[type="email"] {
         background-color: var(--theme);
         border-color: var(--border);
     }
 
-    [data-theme="dark"] .picoletter-form-embed input[type="submit"] {
+    body.dark .picoletter-form-embed input[type="submit"] {
         background-color: var(--primary);
         color: var(--theme);
     }
@@ -1234,6 +1234,35 @@
         .newsletter-description {
             font-size: 0.9rem;
         }
+    }
+
+    /* Final PaperMod dark-mode code override.
+       PaperMod toggles dark mode with body.dark, not data-theme="dark". */
+    body.dark code,
+    body.dark pre,
+    body.dark .highlight,
+    body.dark .chroma,
+    body.dark .lntable,
+    body.dark .lntd,
+    body.dark .highlight pre,
+    body.dark .highlight code,
+    body.dark .highlight .chroma,
+    body.dark .highlight .lntable,
+    body.dark .highlight .lntd,
+    body.dark .chroma .lntable,
+    body.dark .chroma .lntd {
+        background-color: #24273a !important;
+        background: #24273a !important;
+        color: #cad3f5 !important;
+    }
+
+    body.dark .post-content code:not(pre code),
+    body.dark p code,
+    body.dark li code,
+    body.dark td code {
+        background-color: var(--code-bg) !important;
+        background: var(--code-bg) !important;
+        color: var(--primary) !important;
     }
 </style>
 
