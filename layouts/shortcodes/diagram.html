@@ -1,0 +1,14 @@
+{{- $type := .Get "type" | default "flow" -}}
+{{- if not ($.Page.Scratch.Get "diagramassetsloaded") -}}
+  {{- $.Page.Scratch.Set "diagramassetsloaded" 1 -}}
+  <link rel="stylesheet" href="{{ "css/diagrams.css" | relURL }}">
+  <script src="{{ "js/diagrams.js" | relURL }}" defer></script>
+{{- end -}}
+{{- $raw := trim .Inner "\n " -}}
+<figure class="ts-diagram-figure">
+  <div class="ts-diagram" data-type="{{ $type }}" data-orientation="{{ .Get "orientation" | default "vertical" }}" data-animate="{{ .Get "animate" | default "true" }}"{{ with .Get "title" }} data-title="{{ . }}"{{ end }}>
+    <script type="application/json" class="ts-diagram-data">{{ $raw | safeJS }}</script>
+    <noscript><pre class="ts-fallback">{{ $raw }}</pre></noscript>
+  </div>
+  {{- with .Get "caption" }}<figcaption>{{ . }}</figcaption>{{ end }}
+</figure>

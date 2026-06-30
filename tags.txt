@@ -581,6 +581,7 @@ system-programming
 systemd
 systems-engineering
 systems-programming
+tailscale
 talks
 task-management
 teaching
@@ -648,6 +649,7 @@ web-security
 webassembly
 webmentions
 webrtc
+wireguard
 window-manager
 windows
 workflow
