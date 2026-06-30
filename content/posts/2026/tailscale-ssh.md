@@ -1,8 +1,8 @@
 ---
 date: "2026-06-29T16:42:01+05:30"
 draft: false
-title: "Tailscale SSH Without sshd"
-description: "Why Tailscale SSH can log you in when OpenSSH password auth is disabled and authorized_keys is empty: tailscaled, ACLs, root privileges, and Unix users."
+title: "Why Tailscale SSH Works When OpenSSH Doesn't"
+description: "Why Tailscale SSH can log you in when OpenSSH would reject you: tailscaled, ACLs, root privileges, and Unix users."
 tags:
   - "tailscale"
   - "ssh"
@@ -14,11 +14,11 @@ tags:
 
 I was setting up a machine recently and noticed something odd.
 
-Tailscale was running on it. OpenSSH password authentication was disabled. The
-user I was logging in as didn't have anything useful in
-`~/.ssh/authorized_keys`. I don't expose SSH on this box to the internet either.
+OpenSSH password authentication was disabled. The user I was logging in as did
+not have anything useful in `~/.ssh/authorized_keys`. I do not expose SSH on
+this box to the internet either.
 
-Still, this worked:
+Regular SSH should have failed. This still worked:
 
 ```bash
 tailscale ssh vinay@my-server
@@ -27,16 +27,16 @@ tailscale ssh vinay@my-server
 I got a shell as the local Unix user `vinay`.
 
 That was the bit I wanted to understand. OpenSSH did not accept a password, and
-it did not find a public key in `authorized_keys`. In this path, OpenSSH wasn't
+it did not find a public key in `authorized_keys`. In this path, OpenSSH was not
 the thing deciding whether I could log in. Tailscale was.
 
 I have been using Tailscale more deliberately lately. I previously wrote about
-[setting up a Tailscale exit node][tailscale-exit-node], where the mental model
-was mostly: _how does traffic leave my machine and reach the internet through a
-home gateway?_
+[setting up a Tailscale exit node][tailscale-exit-node], where the question was
+mostly: _how does traffic leave my machine and reach the internet through a home
+gateway?_
 
 This post is me working through Tailscale SSH. I started with the assumption
-that it was mostly a convenience wrapper around SSH. It isn't quite that.
+that it was mostly a convenience wrapper around SSH. It is not quite that.
 
 The questions I had were:
 
@@ -218,6 +218,127 @@ key-based SSH is unusable, but Tailscale SSH still works from inside the tailnet
 
 The destination can be behind NAT, on a home connection, with no port forwarding,
 and still be reachable from my laptop.
+
+{{< note title="Same port, different address" >}}
+This is the part that finally made the socket model click for me. A port is not
+just a number floating around on the machine. A listener is tied to a local
+address and a port.
+
+So `100.x.y.z:22` and `192.168.1.50:22` are different sockets. Tailscale SSH can
+answer port 22 for connections arriving over the tailnet address while OpenSSH
+answers port 22 somewhere else.
+
+<!-- TODO: An interactive diagram would fit here: same host, multiple local addresses, same port number, different listener/process. -->
+
+The same idea is not limited to SSH:
+
+```text
+100.x.y.z:80       → internal tailnet dashboard
+192.168.1.50:80    → LAN-only service
+127.0.0.1:80       → local development server
+```
+
+All three are "port 80", but they are not the same endpoint. The address matters
+as much as the port.
+
+This also reminded me of how I use Nginx at home, though the mechanism is a bit
+different. I run Unbound for DNS and use `.home.arpa` names for homelab services.
+Several names can point at the same machine:
+
+```text
+service1.home.arpa → 192.168.1.50
+service2.home.arpa → 192.168.1.50
+```
+
+Both requests arrive at the same machine on port 80. Nginx can still send them
+to different upstream services because HTTP carries the requested hostname in the
+`Host` header:
+
+```text
+GET / HTTP/1.1
+Host: service1.home.arpa
+```
+
+So the exact comparison is not "different IP, same port" anymore. It is "same
+IP, same port, different HTTP host". But it rhymes with the same lesson: port 80
+alone does not tell the whole story. The OS first routes traffic to a socket
+based on address and port; then a protocol-aware service like Nginx can make a
+second decision based on HTTP metadata and reverse proxy internally.
+
+The caveat is `0.0.0.0`. A service bound to `0.0.0.0:80` asks the OS to listen
+on all IPv4 interfaces, so it may prevent another process from binding a more
+specific address like `192.168.1.50:80`. But the basic shape is still: listeners
+are about address plus port, not port alone.
+{{< /note >}}
+
+## How can Tailscale become a Unix user?
+
+Tailscale is not mapping my Tailscale account into a Unix user in some global
+directory. It is using a privileged local daemon to create a normal local
+session.
+
+On Linux, `tailscaled` usually runs as `root` under systemd:
+
+```bash
+systemctl status tailscaled
+```
+
+It needs elevated privileges for normal Tailscale networking work too: creating
+or managing the `tailscale0` interface, installing routes, configuring DNS, and
+handling traffic for the tailnet. Tailscale SSH uses that same privileged daemon
+as the login broker.
+
+Once the ACL says a login is allowed, `tailscaled` can look up the requested
+local user through the operating system's user database: `/etc/passwd`, NSS,
+LDAP, or whatever the machine is configured to use.
+
+Conceptually, the privileged process can then do the standard Unix identity
+switch:
+
+{{< diagram type="flow" orientation="vertical" caption="The privileged drop-into-a-user dance." >}}
+[
+  {"label": "lookup local user \"vinay\"", "detail": "Resolve the requested account through /etc/passwd, NSS, LDAP, or whatever the host uses."},
+  {"label": "set supplementary groups", "detail": "Initialize vinay's group memberships."},
+  {"label": "setgid(primary group)", "detail": "Drop the process group identity."},
+  {"label": "setuid(UID)", "detail": "Drop the process user identity; after this the process is no longer root."},
+  {"label": "exec shell / session", "detail": "Replace the process image with vinay's shell/session."}
+]
+{{< /diagram >}}
+
+So if the machine has a user like this:
+
+```text
+vinay:x:1000:1000:Vinay:/home/vinay:/bin/bash
+```
+
+then the resulting shell is a process with `vinay`'s UID, GID, supplementary
+groups, home directory, and shell. The shell is not running as my Tailscale
+account. It is not running as some special cloud user. It is running as the local
+Unix user `vinay`.
+
+The model I ended up with:
+
+{{< diagram type="flow" orientation="vertical" animate="false" caption="Four responsibilities, four layers." >}}
+[
+  {"label": "Tailscale identity", "accent": "blue", "sub": "who I am in the tailnet", "detail": "An SSO-backed tailnet user, tied to my devices."},
+  {"label": "Tailscale SSH ACL", "accent": "blue", "sub": "which local user I may become", "detail": "Central policy maps identities to destination machines and local accounts."},
+  {"label": "tailscaled (root)", "accent": "orange", "sub": "creates the local session", "detail": "The privileged daemon performs the Unix identity switch."},
+  {"label": "Linux permissions", "accent": "green", "sub": "what the session can do", "detail": "Groups, sudo rules, and filesystem ACLs are still the OS boundary."}
+]
+{{< /diagram >}}
+
+There is a real security trade here. Enabling `tailscale up --ssh` is not a
+harmless UX toggle. It makes `tailscaled` a login authority for that machine.
+
+That means I trust three things:
+
+1. the `tailscaled` daemon on the destination machine;
+1. the tailnet SSH ACLs that decide who can log in;
+1. the tailnet admins who can change those ACLs.
+
+The power moved. It moved from per-host OpenSSH config to a privileged local
+Tailscale daemon plus centralized tailnet policy. That may be exactly what I
+want, but it is not nothing.
 
 ## The OpenSSH way to get multiple policies
 
@@ -405,75 +526,6 @@ can do once the session exists.
 Tailscale decides whether I may become `vinay`; Linux decides what `vinay` can do
 after that.
 
-## How can Tailscale become a Unix user?
-
-Tailscale is not mapping my Tailscale account into a Unix user in some global
-directory. It is using a privileged local daemon to create a normal local
-session.
-
-On Linux, `tailscaled` usually runs as `root` under systemd:
-
-```bash
-systemctl status tailscaled
-```
-
-It needs elevated privileges for normal Tailscale networking work too: creating
-or managing the `tailscale0` interface, installing routes, configuring DNS, and
-handling traffic for the tailnet. Tailscale SSH uses that same privileged daemon
-as the login broker.
-
-Once the ACL says a login is allowed, `tailscaled` can look up the requested
-local user through the operating system's user database: `/etc/passwd`, NSS,
-LDAP, or whatever the machine is configured to use.
-
-Conceptually, the privileged process can then do the standard Unix identity
-switch:
-
-{{< diagram type="flow" orientation="vertical" caption="The privileged drop-into-a-user dance." >}}
-[
-  {"label": "lookup local user \"vinay\"", "detail": "Resolve the requested account through /etc/passwd, NSS, LDAP, or whatever the host uses."},
-  {"label": "set supplementary groups", "detail": "Initialize vinay's group memberships."},
-  {"label": "setgid(primary group)", "detail": "Drop the process group identity."},
-  {"label": "setuid(UID)", "detail": "Drop the process user identity; after this the process is no longer root."},
-  {"label": "exec shell / session", "detail": "Replace the process image with vinay's shell/session."}
-]
-{{< /diagram >}}
-
-So if the machine has a user like this:
-
-```text
-vinay:x:1000:1000:Vinay:/home/vinay:/bin/bash
-```
-
-then the resulting shell is a process with `vinay`'s UID, GID, supplementary
-groups, home directory, and shell. The shell is not running as my Tailscale
-account. It is not running as some special cloud user. It is running as the local
-Unix user `vinay`.
-
-The model I ended up with:
-
-{{< diagram type="flow" orientation="vertical" animate="false" caption="Four responsibilities, four layers." >}}
-[
-  {"label": "Tailscale identity", "accent": "blue", "sub": "who I am in the tailnet", "detail": "An SSO-backed tailnet user, tied to my devices."},
-  {"label": "Tailscale SSH ACL", "accent": "blue", "sub": "which local user I may become", "detail": "Central policy maps identities to destination machines and local accounts."},
-  {"label": "tailscaled (root)", "accent": "orange", "sub": "creates the local session", "detail": "The privileged daemon performs the Unix identity switch."},
-  {"label": "Linux permissions", "accent": "green", "sub": "what the session can do", "detail": "Groups, sudo rules, and filesystem ACLs are still the OS boundary."}
-]
-{{< /diagram >}}
-
-There is a real security trade here. Enabling `tailscale up --ssh` is not a
-harmless UX toggle. It makes `tailscaled` a login authority for that machine.
-
-That means I trust three things:
-
-1. the `tailscaled` daemon on the destination machine;
-1. the tailnet SSH ACLs that decide who can log in;
-1. the tailnet admins who can change those ACLs.
-
-The power moved. It moved from per-host OpenSSH config to a privileged local
-Tailscale daemon plus centralized tailnet policy. That may be exactly what I
-want, but it is not nothing.
-
 ## `accept` vs `check`
 
 Tailscale SSH policies can require an additional check before allowing access.
@@ -658,17 +710,6 @@ those layers, Tailscale SSH stops looking like a special exception and starts
 looking like a composition of WireGuard, identity, policy, a privileged daemon,
 and ordinary Unix users.
 
-{{< merrilin title="A small plug" >}}
-If you enjoyed this post, or anything else I've written here, please check out
-[Merrilin](https://merrilin.ai). It's the reading app I'm building, with
-spoiler-aware AI companions, series-aware questions, live sync, themes, quote
-sharing, and e-ink support.
-
-I've written more about it in [the launch post](/posts/2026/merrilin/), and in
-the posts about [local sync](/posts/2026/merrilin-local-sync/) and
-[code block rendering](/posts/2026/merrilin-code-blocks/).
-{{< /merrilin >}}
-
 ## References
 
 - [Tailscale SSH documentation][ts-ssh]
@@ -682,3 +723,11 @@ the posts about [local sync](/posts/2026/merrilin-local-sync/) and
 [ts-acls]: https://tailscale.com/kb/1018/acls
 [ts-userspace]: https://tailscale.com/kb/1112/userspace-networking
 [ts-how]: https://tailscale.com/blog/how-tailscale-works
+
+{{< merrilin title="A small plug" >}}
+If you liked this post, you might also like [Merrilin](https://merrilin.ai), the
+reading app I'm building. It has spoiler-aware AI companions, series-aware
+questions, live sync, themes, quote sharing, and e-ink support.
+
+I've written more about it in [the launch post](/posts/2026/merrilin/).
+{{< /merrilin >}}
