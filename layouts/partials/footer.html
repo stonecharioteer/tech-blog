@@ -81,16 +81,25 @@
 
 {{- if (not site.Params.disableThemeToggle) }}
 <script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        const html = document.querySelector("html");
-        if (html.dataset.theme === "dark") {
-            html.dataset.theme = 'light';
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            html.dataset.theme = 'dark';
-            localStorage.setItem("pref-theme", 'dark');
+    (function () {
+        var el = document.documentElement;
+        var sel = document.getElementById("theme-select");
+        if (sel) {
+            sel.value = el.dataset.theme || "light";
+            sel.addEventListener("change", function () {
+                el.dataset.theme = sel.value;
+                localStorage.setItem("pref-theme", sel.value);
+            });
         }
-    })
+        var fb = document.getElementById("font-toggle");
+        if (fb) {
+            fb.addEventListener("click", function () {
+                var next = el.dataset.font === "serif" ? "sans" : "serif";
+                el.dataset.font = next;
+                localStorage.setItem("pref-font", next);
+            });
+        }
+    })();
 
 </script>
 {{- end }}

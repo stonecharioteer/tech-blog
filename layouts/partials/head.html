@@ -146,7 +146,102 @@
     {{- end }}
 </noscript>
 
+<script>
+    /* Resolve theme + font before paint to avoid FOUC. */
+    (function () {
+        var THEMES = ['light', 'dark', 'sepia', 'red'];
+        var t = localStorage.getItem('pref-theme');
+        if (THEMES.indexOf(t) === -1) {
+            t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        var f = localStorage.getItem('pref-font');
+        if (f !== 'sans' && f !== 'serif') f = 'sans';
+        var el = document.documentElement;
+        el.setAttribute('data-theme', t);
+        el.setAttribute('data-font', f);
+    })();
+</script>
+
 <style>
+
+    /* ===== Self-hosted fonts ===== */
+    @font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url('/fonts/inter-latin-normal.woff2') format('woff2');}
+    @font-face{font-family:'Inter';font-style:italic;font-weight:100 900;font-display:swap;src:url('/fonts/inter-latin-italic.woff2') format('woff2');}
+    @font-face{font-family:'Source Serif 4';font-style:normal;font-weight:200 900;font-display:swap;src:url('/fonts/source-serif-4-latin-normal.woff2') format('woff2');}
+    @font-face{font-family:'Source Serif 4';font-style:italic;font-weight:200 900;font-display:swap;src:url('/fonts/source-serif-4-latin-italic.woff2') format('woff2');}
+
+    /* ===== Theme tokens: light | dark | sepia | red ===== */
+    :root,
+    :root[data-theme="light"] {
+        --theme:#ffffff; --entry:#ffffff; --primary:#1f2328; --secondary:#5b6470; --tertiary:#eaecef;
+        --content:#24292f; --primary-rgb:31,35,40; --border:#e6e8eb;
+        --code-block-bg:#f6f8fa; --code-fg:#1f2328; --code-bg:#eceef0; --hl-bg:#fff3cd;
+        --link:#0b62d6;
+        --syn-keyword:#cf222e; --syn-string:#0a3069; --syn-func:#6639ba; --syn-comment:#5a6b4f;
+        --syn-number:#b35900; --syn-name:#1f2328; --syn-type:#953800; --syn-builtin:#0550ae;
+        --syn-punct:#57606a; --syn-linenum:#8b939c;
+    }
+    :root[data-theme="dark"] {
+        --theme:#1d1e20; --entry:#2a2b30; --primary:#e4e5e7; --secondary:#9b9ca0; --tertiary:#3a3b40;
+        --content:#c8c9cc; --primary-rgb:228,229,231; --border:#3a3b40;
+        --code-block-bg:#24273a; --code-fg:#cad3f5; --code-bg:#33343c; --hl-bg:#3a3d2a;
+        --link:#8aadf4;
+        --syn-keyword:#c6a0f6; --syn-string:#a6da95; --syn-func:#8aadf4; --syn-comment:#9098ad;
+        --syn-number:#f5a97f; --syn-name:#cad3f5; --syn-type:#eed49f; --syn-builtin:#91d7e3;
+        --syn-punct:#a0a6bd; --syn-linenum:#6e738d;
+    }
+    :root[data-theme="sepia"] {
+        --theme:#f4ecd8; --entry:#efe5cd; --primary:#3a2f24; --secondary:#7c6a52; --tertiary:#e2d5b8;
+        --content:#473a2c; --primary-rgb:58,47,36; --border:#ddccab;
+        --code-block-bg:#ece0c4; --code-fg:#3a2f24; --code-bg:#e6d8ba; --hl-bg:#e6d29a;
+        --link:#985b22;
+        --syn-keyword:#9b2226; --syn-string:#34603f; --syn-func:#6a4a8a; --syn-comment:#6b5d3f;
+        --syn-number:#8a541a; --syn-name:#3a2f24; --syn-type:#8a4a2a; --syn-builtin:#2f5a7a;
+        --syn-punct:#6b5d49; --syn-linenum:#8a7b54;
+    }
+    :root[data-theme="red"] {
+        --theme:#1a1416; --entry:#241a1c; --primary:#f0e3e3; --secondary:#b7a0a0; --tertiary:#3a2a2d;
+        --content:#e6d8d8; --primary-rgb:240,227,227; --border:#3d2c30;
+        --code-block-bg:#241a1c; --code-fg:#f0dada; --code-bg:#33252a; --hl-bg:#3a1f22;
+        --link:#ff6b6b;
+        --syn-keyword:#ff7b72; --syn-string:#e8b88a; --syn-func:#ff9e9e; --syn-comment:#a78487;
+        --syn-number:#ffb86c; --syn-name:#f0e3e3; --syn-type:#ffd9a0; --syn-builtin:#ff8fb0;
+        --syn-punct:#c9aaaa; --syn-linenum:#7a6063;
+    }
+
+    /* ===== Fonts: sans (Inter) / serif (Source Serif 4) via data-font ===== */
+    :root{
+        --font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+        --font-serif:'Source Serif 4','Iowan Old Style',Georgia,Cambria,'Times New Roman',serif;
+        --font-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+        --font-body:var(--font-sans);
+    }
+    :root[data-font="serif"]{ --font-body:var(--font-serif); }
+    html body{ font-family:var(--font-body); }
+    code,kbd,pre,samp,.chroma,.highlight,.lntd,.ln,.lnt{ font-family:var(--font-mono); }
+    a{ color:inherit; }
+    a:not(.logo):not(.btn){ color:var(--link); }
+
+    /* ===== Theme + font picker ===== */
+    .theme-switches{ display:inline-flex; align-items:center; gap:0.4rem; vertical-align:middle; }
+    #theme-select{
+        font:inherit; font-size:0.85rem; padding:0.15rem 1.4rem 0.15rem 0.5rem; line-height:1.2;
+        color:var(--primary); background-color:var(--entry); border:1px solid var(--border);
+        border-radius:6px; cursor:pointer; appearance:none; -webkit-appearance:none;
+        background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23888' stroke-width='1.5'%3E%3Cpath d='M3 4.5 6 7.5 9 4.5'/%3E%3C/svg%3E");
+        background-repeat:no-repeat; background-position:right 0.4rem center; background-size:12px;
+    }
+    #theme-select:hover, #font-toggle:hover{ border-color:var(--primary); }
+    #theme-select:focus-visible, #font-toggle:focus-visible{ outline:2px solid var(--link); outline-offset:1px; }
+    #theme-select option{ color:#1f2328; background:#fff; }
+    #font-toggle{
+        font:inherit; font-weight:600; font-size:0.85rem; line-height:1; padding:0.2rem 0.45rem;
+        color:var(--primary); background-color:var(--entry); border:1px solid var(--border);
+        border-radius:6px; cursor:pointer; min-width:2rem;
+    }
+    :root[data-font="serif"] #font-toggle{ font-family:var(--font-serif); }
+    :root[data-font="sans"] #font-toggle{ font-family:var(--font-sans); }
+
     .admonition {
         margin: 1.5rem 0;
         border-left: 4px solid;
@@ -185,263 +280,40 @@
         margin-bottom: 0;
     }
 
-    /* Note - plain_1.png */
-    .admonition.note {
-        border-left-color: #3b82f6;
-        background-color: #eff6ff;
-    }
+    /* ===== Admonition colors (adapt to every theme via color-mix) ===== */
+    .admonition.note     { --adm:#3b82f6; }
+    .admonition.info     { --adm:#06b6d4; }
+    .admonition.warning  { --adm:#f59e0b; }
+    .admonition.tip      { --adm:#10b981; }
+    .admonition.quote    { --adm:#8b94a3; }
+    .admonition.example  { --adm:#8b5cf6; }
+    .admonition.ai       { --adm:#f97316; }
+    .admonition.merrilin { --adm:#3b82f6; }
 
-    .admonition.note .admonition-title {
-        background-color: #dbeafe;
-        color: #1e40af;
+    .admonition {
+        background-color:color-mix(in srgb, var(--adm) 12%, var(--entry));
+        border-left-color:var(--adm);
     }
-
-    .admonition.note .admonition-title::before {
-        background-image: url('/sprites/plain_1.png');
+    .admonition-title {
+        background-color:color-mix(in srgb, var(--adm) 24%, var(--entry));
+        color:var(--primary);
     }
+    .admonition-content { color:var(--content); }
 
-    /* Info - smile_bashful_1.png */
-    .admonition.info {
-        border-left-color: #06b6d4;
-        background-color: #ecfeff;
-    }
+    .admonition.note .admonition-title::before     { background-image:url('/sprites/plain_1.png'); }
+    .admonition.info .admonition-title::before     { background-image:url('/sprites/smile_bashful_1.png'); }
+    .admonition.warning .admonition-title::before  { background-image:url('/sprites/yell_angry.png'); }
+    .admonition.tip .admonition-title::before      { background-image:url('/sprites/happy_1.png'); }
+    .admonition.quote .admonition-title::before    { background-image:url('/sprites/love_1.png'); }
+    .admonition.example .admonition-title::before  { background-image:url('/sprites/smile_wicked_1.png'); }
+    .admonition.ai .admonition-title::before       { background-image:url('/sprites/cyborg_1.png'); }
+    .admonition.merrilin .admonition-title::before { background-image:url('/images/branding/merrilin-logo-transparent.png'); background-size:46px auto; }
 
-    .admonition.info .admonition-title {
-        background-color: #cffafe;
-        color: #0e7490;
-    }
+    .admonition.quote .admonition-content { font-family:var(--font-serif); font-style:italic; line-height:1.6; }
+    .admonition-quote-footer { margin-top:1rem; text-align:right; font-style:normal; font-weight:500; font-size:0.9em; opacity:0.8; }
 
-    .admonition.info .admonition-title::before {
-        background-image: url('/sprites/smile_bashful_1.png');
-    }
-
-    /* Warning - yell_angry.png */
-    .admonition.warning {
-        border-left-color: #f59e0b;
-        background-color: #fffbeb;
-    }
-
-    .admonition.warning .admonition-title {
-        background-color: #fef3c7;
-        color: #92400e;
-    }
-
-    .admonition.warning .admonition-title::before {
-        background-image: url('/sprites/yell_angry.png');
-    }
-
-    /* Tip - happy_1.png */
-    .admonition.tip {
-        border-left-color: #10b981;
-        background-color: #ecfdf5;
-    }
-
-    .admonition.tip .admonition-title {
-        background-color: #d1fae5;
-        color: #065f46;
-    }
-
-    .admonition.tip .admonition-title::before {
-        background-image: url('/sprites/happy_1.png');
-    }
-
-    /* Quote - love_1.png */
-    .admonition.quote {
-        border-left-color: #6b7280;
-        background-color: #f9fafb;
-    }
-
-    .admonition.quote .admonition-title {
-        background-color: #f3f4f6;
-        color: #374151;
-    }
-
-    .admonition.quote .admonition-title::before {
-        background-image: url('/sprites/love_1.png');
-    }
-
-    .admonition.quote .admonition-content {
-        font-family: Georgia, "Times New Roman", Times, serif;
-        font-style: italic;
-        line-height: 1.6;
-    }
-
-    .admonition-quote-footer {
-        margin-top: 1rem;
-        text-align: right;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 0.9em;
-        opacity: 0.8;
-    }
-
-    /* Example - smile_wicked_1.png */
-    .admonition.example {
-        border-left-color: #8b5cf6;
-        background-color: #f5f3ff;
-    }
-
-    .admonition.example .admonition-title {
-        background-color: #ede9fe;
-        color: #5b21b6;
-    }
-
-    .admonition.example .admonition-title::before {
-        background-image: url('/sprites/smile_wicked_1.png');
-    }
-
-    /* AI - cyborg_1.png */
-    .admonition.ai {
-        border-left-color: #f97316;
-        background-color: #fff7ed;
-    }
-
-    .admonition.ai .admonition-title {
-        background-color: #fed7aa;
-        color: #9a3412;
-    }
-
-    .admonition.ai .admonition-title::before {
-        background-image: url('/sprites/cyborg_1.png');
-    }
-
-    /* Merrilin */
-    .admonition.merrilin {
-        border-left-color: #2563eb;
-        background-color: #eff6ff;
-    }
-
-    .admonition.merrilin .admonition-title {
-        background-color: #dbeafe;
-        color: #1d4ed8;
-    }
-
-    .admonition.merrilin .admonition-title::before {
-        background-image: url('/images/branding/merrilin-logo-transparent.png');
-        background-size: 46px auto;
-    }
-
-    body.dark .admonition.merrilin .admonition-title::before {
-        filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.35));
-    }
-
-    /* Dark mode styles */
-    body.dark .admonition.note {
-        background-color: #1e3a8a;
-        border-left-color: #60a5fa;
-    }
-
-    body.dark .admonition.note .admonition-title {
-        background-color: #1e40af;
-        color: #bfdbfe;
-    }
-
-    body.dark .admonition.note .admonition-content {
-        color: #e0e7ff;
-    }
-
-    body.dark .admonition.info {
-        background-color: #164e63;
-        border-left-color: #22d3ee;
-    }
-
-    body.dark .admonition.info .admonition-title {
-        background-color: #0e7490;
-        color: #ecfeff;
-    }
-
-    body.dark .admonition.info .admonition-content {
-        color: #cffafe;
-    }
-
-    body.dark .admonition.warning {
-        background-color: #78350f;
-        border-left-color: #fbbf24;
-    }
-
-    body.dark .admonition.warning .admonition-title {
-        background-color: #92400e;
-        color: #fde68a;
-    }
-
-    body.dark .admonition.warning .admonition-content {
-        color: #fef3c7;
-    }
-
-    body.dark .admonition.tip {
-        background-color: #064e3b;
-        border-left-color: #34d399;
-    }
-
-    body.dark .admonition.tip .admonition-title {
-        background-color: #065f46;
-        color: #a7f3d0;
-    }
-
-    body.dark .admonition.tip .admonition-content {
-        color: #d1fae5;
-    }
-
-    body.dark .admonition.quote {
-        background-color: #374151;
-        border-left-color: #9ca3af;
-    }
-
-    body.dark .admonition.quote .admonition-title {
-        background-color: #4b5563;
-        color: #d1d5db;
-    }
-
-    body.dark .admonition.quote .admonition-content {
-        color: #f3f4f6;
-    }
-
-    body.dark .admonition-quote-footer {
-        color: #d1d5db;
-    }
-
-    body.dark .admonition.example {
-        background-color: #581c87;
-        border-left-color: #a78bfa;
-    }
-
-    body.dark .admonition.example .admonition-title {
-        background-color: #6b21a8;
-        color: #c4b5fd;
-    }
-
-    body.dark .admonition.example .admonition-content {
-        color: #e9d5ff;
-    }
-
-    body.dark .admonition.ai {
-        background-color: #7c2d12;
-        border-left-color: #fb923c;
-    }
-
-    body.dark .admonition.ai .admonition-title {
-        background-color: #9a3412;
-        color: #fed7aa;
-    }
-
-    body.dark .admonition.ai .admonition-content {
-        color: #ffedd5;
-    }
-
-    body.dark .admonition.merrilin {
-        background-color: #172554;
-        border-left-color: #60a5fa;
-    }
-
-    body.dark .admonition.merrilin .admonition-title {
-        background-color: #1f2937;
-        color: #e5e7eb;
-    }
-
-    body.dark .admonition.merrilin .admonition-content {
-        color: #dbeafe;
-    }
-
+    :root[data-theme="dark"] .admonition.merrilin .admonition-title::before,
+    :root[data-theme="red"] .admonition.merrilin .admonition-title::before { filter:drop-shadow(0 0 2px rgba(255,255,255,0.35)); }
     /* Responsive: smaller sprites on mobile */
     @media (max-width: 480px) {
         .admonition-title {
@@ -458,211 +330,42 @@
     
     /* REMOVED DUPLICATE LINE NUMBER RULES */
     
-    /* CHROMA SYNTAX HIGHLIGHTING FIX - HIGHEST PRIORITY */
-    /* Light mode code blocks - target ALL possible containers */
-    .chroma,
-    .highlight,
-    .highlight .chroma,
-    div.highlight,
-    div.highlight .chroma,
-    pre.chroma,
-    .highlight pre.chroma,
-    .highlight pre,
-    pre,
-    .lntable,
-    .lntd,
-    .lntd pre,
-    .lntd pre.chroma,
-    .highlight .lntable,
-    .highlight .lntd,
-    .highlight .lntd pre,
-    .highlight .lntd pre.chroma,
-    div.highlight .lntable,
-    div.highlight .lntd,
-    div.highlight .lntd pre,
-    div.highlight .lntd pre.chroma {
-        background-color: #f6f8fa !important;
-        color: #24292e !important;
+    /* ===== Code blocks (theme-variable driven) ===== */
+    .chroma,.highlight,.highlight .chroma,div.highlight,div.highlight .chroma,pre.chroma,
+    .highlight pre.chroma,.highlight pre,pre,
+    .lntable,.lntd,.lntd pre,.lntd pre.chroma,
+    .highlight .lntable,.highlight .lntd,.highlight .lntd pre,.highlight .lntd pre.chroma,
+    div.highlight .lntable,div.highlight .lntd,div.highlight .lntd pre,div.highlight .lntd pre.chroma {
+        background-color:var(--code-block-bg) !important;
+        color:var(--code-fg) !important;
     }
-    
-    /* Dark mode code blocks - target ALL possible containers */
-    body.dark .chroma,
-    body.dark .highlight,
-    body.dark .highlight .chroma,
-    body.dark div.highlight,
-    body.dark div.highlight .chroma,
-    body.dark pre.chroma,
-    body.dark .highlight pre.chroma,
-    body.dark .highlight pre,
-    body.dark pre,
-    body.dark .lntable,
-    body.dark .lntd,
-    body.dark .lntd pre,
-    body.dark .lntd pre.chroma,
-    body.dark .highlight .lntable,
-    body.dark .highlight .lntd,
-    body.dark .highlight .lntd pre,
-    body.dark .highlight .lntd pre.chroma,
-    body.dark div.highlight .lntable,
-    body.dark div.highlight .lntd,
-    body.dark div.highlight .lntd pre,
-    body.dark div.highlight .lntd pre.chroma {
-        background-color: #24273a !important;
-        color: #cad3f5 !important;
-    }
-    
-    /* Media query fallback - target ALL possible containers */
-    @media (prefers-color-scheme: dark) {
-        body:not(.light) .chroma,
-        body:not(.light) .highlight,
-        body:not(.light) .highlight .chroma,
-        body:not(.light) div.highlight,
-        body:not(.light) div.highlight .chroma,
-        body:not(.light) pre.chroma,
-        body:not(.light) .highlight pre.chroma,
-        body:not(.light) .highlight pre,
-        body:not(.light) pre,
-        body:not(.light) .lntable,
-        body:not(.light) .lntd,
-        body:not(.light) .lntd pre,
-        body:not(.light) .lntd pre.chroma,
-        body:not(.light) .highlight .lntable,
-        body:not(.light) .highlight .lntd,
-        body:not(.light) .highlight .lntd pre,
-        body:not(.light) .highlight .lntd pre.chroma,
-        body:not(.light) div.highlight .lntable,
-        body:not(.light) div.highlight .lntd,
-        body:not(.light) div.highlight .lntd pre,
-        body:not(.light) div.highlight .lntd pre.chroma {
-            background-color: #24273a !important;
-            color: #cad3f5 !important;
-        }
-    }
-    
-    /* WORKING SOLUTION - Use attribute selectors for maximum coverage */
-    /* Extra specific for light mode */
-    body:not(.dark) [class*="chroma"],
-    body:not(.dark) [class*="highlight"],
-    body:not(.dark) [class*="lnt"],
-    body:not(.dark) pre,
-    body:not(.dark) code,
-    [class*="chroma"],
-    [class*="highlight"],
-    [class*="lnt"],
-    pre,
-    code {
-        background-color: #f6f8fa !important;
-        color: #24292e !important;
-    }
-    
-    body.dark [class*="chroma"],
-    body.dark [class*="highlight"],
-    body.dark [class*="lnt"],
-    body.dark pre,
-    body.dark code {
-        background-color: #24273a !important;
-        color: #cad3f5 !important;
-    }
-    
-    /* Media query fallback */
-    @media (prefers-color-scheme: dark) {
-        body:not(.light) [class*="chroma"],
-        body:not(.light) [class*="highlight"],
-        body:not(.light) [class*="lnt"],
-        body:not(.light) pre,
-        body:not(.light) code {
-            background-color: #24273a !important;
-            color: #cad3f5 !important;
-        }
-    }
-    
-    /* FINAL OVERRIDE - Ensure light mode works with better contrast */
-    body:not(.dark) [class*="chroma"],
-    body:not(.dark) [class*="highlight"],
-    body:not(.dark) pre,
-    body:not(.dark) code {
-        background-color: #f8f9fa !important;
-        color: #1a1a1a !important;
-        border: none !important;
-        outline: none !important;
-        box-shadow: none !important;
-        border-radius: 0 !important; /* Remove rounded corners to eliminate black corner issue */
-    }
-    
-    /* Light mode line numbers - match dark mode behavior exactly */
-    body:not(.dark) [class*="lnt"],
-    body:not(.dark) [class*="ln"] {
-        background-color: #f8f9fa !important;
-        color: #6c757d !important;
-        border-radius: 0 !important;
-    }
-    
-    /* Remove ALL borders and outlines from light mode code elements */
-    body:not(.dark) .highlight,
-    body:not(.dark) .highlight > div,
-    body:not(.dark) .lntable,
-    body:not(.dark) .lntd {
-        border: none !important;
-        outline: none !important;
-        box-shadow: none !important;
-    }
-    
-    /* Enhanced syntax colors for light mode - maximum contrast */
-    body:not(.dark) .chroma .k,
-    body:not(.dark) .chroma .kd,
-    body:not(.dark) .chroma .kn,
-    body:not(.dark) .chroma .kp,
-    body:not(.dark) .chroma .kr,
-    body:not(.dark) .chroma .kt { color: #d01040 !important; font-weight: 600 !important; } /* Keywords - bold red */
-    
-    body:not(.dark) .chroma .s,
-    body:not(.dark) .chroma .s1,
-    body:not(.dark) .chroma .s2,
-    body:not(.dark) .chroma .sb,
-    body:not(.dark) .chroma .sc { color: #003d99 !important; } /* Strings - much darker blue */
-    
-    body:not(.dark) .chroma .nf,
-    body:not(.dark) .chroma .fm { color: #6610f2 !important; font-weight: 500 !important; } /* Functions - bold purple */
-    
-    body:not(.dark) .chroma .c,
-    body:not(.dark) .chroma .c1,
-    body:not(.dark) .chroma .cm { color: #198754 !important; font-style: italic !important; } /* Comments - green italic */
-    
-    body:not(.dark) .chroma .m,
-    body:not(.dark) .chroma .mi,
-    body:not(.dark) .chroma .mf { color: #fd7e14 !important; } /* Numbers - orange */
-    
-    body:not(.dark) .chroma .ln,
-    body:not(.dark) .chroma .lnt { color: #adb5bd !important; } /* Line numbers - gray */
-    
-    body:not(.dark) .chroma .p { color: #495057 !important; } /* Punctuation - dark gray */
-    
-    /* Fix specific problematic elements */
-    body:not(.dark) .chroma .nc,
-    body:not(.dark) .chroma .no { color: #d63384 !important; font-weight: 600 !important; } /* Types like "Package" - magenta */
-    
-    body:not(.dark) .chroma .nt { color: #003d99 !important; font-weight: 600 !important; } /* Type hints like "String" - much darker blue */
-    
-    body:not(.dark) .chroma .na,
-    body:not(.dark) .chroma .nx { color: #1a1a1a !important; } /* Attributes and names - black */
-    
-    /* Target self/&self parameters and other variable references */
-    body:not(.dark) .chroma .nv,
-    body:not(.dark) .chroma .vc,
-    body:not(.dark) .chroma .vg,
-    body:not(.dark) .chroma .vi,
-    body:not(.dark) .chroma .vm { color: #003d99 !important; font-weight: 500 !important; } /* Variables like self/&self - dark blue */
-    
-    /* AGGRESSIVE OVERRIDE - catch any remaining light blue elements */
-    body:not(.dark) .chroma .nb,
-    body:not(.dark) .chroma .bp,
-    body:not(.dark) .chroma .nd,
-    body:not(.dark) .chroma .nn { color: #003d99 !important; font-weight: 500 !important; } /* Built-ins, decorators, namespaces - dark blue */
-    
-    /* Final catchall for any elements that might still be light blue */
-    body:not(.dark) .chroma [style*="color:#8aadf4"],
-    body:not(.dark) .chroma [style*="color:#91d7e3"] { color: #003d99 !important; }
 
+    /* Inline code */
+    .post-content code:not(pre code),p code,li code,td code,h1 code,h2 code,h3 code,h4 code {
+        background-color:var(--code-bg) !important;
+        color:var(--primary) !important;
+        border-radius:4px;
+        padding:0.1em 0.35em;
+    }
+
+    /* Highlighted line + line numbers */
+    .chroma .hl,.highlight .hl { background-color:var(--hl-bg) !important; display:block; width:100%; }
+    .chroma .ln,.chroma .lnt,.lnt,.ln { color:var(--syn-linenum) !important; }
+
+    /* Syntax tokens */
+    .chroma .k,.chroma .kc,.chroma .kd,.chroma .kn,.chroma .kp,.chroma .kr,.chroma .kt { color:var(--syn-keyword) !important; font-weight:600; }
+    .chroma .s,.chroma .s1,.chroma .s2,.chroma .sa,.chroma .sb,.chroma .sc,.chroma .dl,.chroma .sd,.chroma .se,.chroma .sh,.chroma .si,.chroma .sx,.chroma .sr,.chroma .ss { color:var(--syn-string) !important; }
+    .chroma .nf,.chroma .fm { color:var(--syn-func) !important; font-weight:500; }
+    .chroma .c,.chroma .ch,.chroma .c1,.chroma .cm,.chroma .cs,.chroma .cp,.chroma .cpf { color:var(--syn-comment) !important; font-style:italic; }
+    .chroma .m,.chroma .mb,.chroma .mf,.chroma .mh,.chroma .mi,.chroma .il,.chroma .mo { color:var(--syn-number) !important; }
+    .chroma .nc,.chroma .no,.chroma .nn,.chroma .nt { color:var(--syn-type) !important; font-weight:600; }
+    .chroma .nb,.chroma .bp,.chroma .nd { color:var(--syn-builtin) !important; }
+    .chroma .nv,.chroma .vc,.chroma .vg,.chroma .vi,.chroma .vm { color:var(--syn-builtin) !important; }
+    .chroma .na,.chroma .nx,.chroma .nl,.chroma .py,.chroma .ni { color:var(--syn-name) !important; }
+    .chroma .p,.chroma .o,.chroma .ow { color:var(--syn-punct) !important; }
+    .chroma .gp,.chroma .gu,.chroma .gh { color:var(--syn-comment) !important; }
+    .chroma .gi { color:var(--syn-string) !important; }
+    .chroma .gd { color:var(--syn-keyword) !important; }
     /* Simple dotted underline for all links */
     a {
         text-decoration: underline;
@@ -782,7 +485,8 @@
     }
 
     /* Dark mode dropdown support */
-    body.dark .tag-dropdown {
+    :root[data-theme="dark"] .tag-dropdown,
+    :root[data-theme="red"] .tag-dropdown {
         background-color: var(--entry);
         color: var(--primary);
     }
@@ -885,7 +589,8 @@
     }
 
     /* Dark mode for tags page */
-    body.dark .tag-card:hover {
+    :root[data-theme="dark"] .tag-card:hover,
+    :root[data-theme="red"] .tag-card:hover {
         box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
     }
 
@@ -967,17 +672,20 @@
     }
 
     /* Dark mode TIL styling */
-    body.dark .til-post {
+    :root[data-theme="dark"] .til-post,
+    :root[data-theme="red"] .til-post {
         background: linear-gradient(135deg, #0c1929 0%, #1e293b 100%);
         border-left-color: #38bdf8;
     }
 
-    body.dark .til-post::before {
+    :root[data-theme="dark"] .til-post::before,
+    :root[data-theme="red"] .til-post::before {
         background: #38bdf8;
         color: #0f172a;
     }
 
-    body.dark .til-post:hover {
+    :root[data-theme="dark"] .til-post:hover,
+    :root[data-theme="red"] .til-post:hover {
         background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
         box-shadow: 0 4px 6px -1px rgba(56, 189, 248, 0.2), 0 2px 4px -1px rgba(56, 189, 248, 0.1);
     }
@@ -1028,51 +736,8 @@
         outline: none !important;
     }
     
-    /* FIX BLACK CORNERS ON CODE BLOCK CONTAINER - COMPREHENSIVE */
-    .highlight,
-    .chroma,
-    div.highlight,
-    .lntable,
-    .highlight .lntable,
-    .chroma .lntable,
-    .highlight > div,
-    .chroma > div,
-    body:not(.dark) .highlight,
-    body:not(.dark) .chroma,
-    body:not(.dark) div.highlight,
-    body:not(.dark) .lntable,
-    body:not(.dark) .highlight .lntable,
-    body:not(.dark) .chroma .lntable,
-    body:not(.dark) .highlight > div,
-    body:not(.dark) .chroma > div {
-        background-color: #f8f9fa !important;
-        background: #f8f9fa !important;
-    }
-
-    /* LINE HIGHLIGHTING - Light mode */
-    body:not(.dark) .chroma .hl,
-    body:not(.dark) .highlight .hl {
-        background-color: #fff3cd !important;
-        display: block;
-        width: 100%;
-    }
-
-    /* LINE HIGHLIGHTING - Dark mode */
-    body.dark .chroma .hl,
-    body.dark .highlight .hl {
-        background-color: #3d3d00 !important;
-        display: block;
-        width: 100%;
-    }
-
-    /* Media query fallback for line highlighting */
-    @media (prefers-color-scheme: dark) {
-        body:not(.light) .chroma .hl,
-        body:not(.light) .highlight .hl {
-            background-color: #3d3d00 !important;
-        }
-    }
-
+    /* Code block container: keep rounded corners clean */
+    .highlight,.chroma,div.highlight,.lntable { overflow:hidden; }
     /* Hire Banner */
     .hire-banner {
         background: linear-gradient(135deg, #10b981, #059669);
@@ -1097,7 +762,8 @@
         opacity: 0.85;
     }
 
-    body.dark .hire-banner {
+    :root[data-theme="dark"] .hire-banner,
+    :root[data-theme="red"] .hire-banner {
         background: linear-gradient(135deg, #059669, #047857);
     }
 
@@ -1205,17 +871,21 @@
     }
 
     /* Dark mode newsletter styling */
-    body.dark .newsletter-container {
+    :root[data-theme="dark"] .newsletter-container,
+    :root[data-theme="red"] .newsletter-container {
         background-color: var(--entry);
     }
 
-    body.dark .picoletter-form-embed input[type="text"],
-    body.dark .picoletter-form-embed input[type="email"] {
+    :root[data-theme="dark"] .picoletter-form-embed input[type="text"],
+    :root[data-theme="dark"] .picoletter-form-embed input[type="email"],
+    :root[data-theme="red"] .picoletter-form-embed input[type="text"],
+    :root[data-theme="red"] .picoletter-form-embed input[type="email"] {
         background-color: var(--theme);
         border-color: var(--border);
     }
 
-    body.dark .picoletter-form-embed input[type="submit"] {
+    :root[data-theme="dark"] .picoletter-form-embed input[type="submit"],
+    :root[data-theme="red"] .picoletter-form-embed input[type="submit"] {
         background-color: var(--primary);
         color: var(--theme);
     }
@@ -1236,34 +906,6 @@
         }
     }
 
-    /* Final PaperMod dark-mode code override.
-       PaperMod toggles dark mode with body.dark, not data-theme="dark". */
-    body.dark code,
-    body.dark pre,
-    body.dark .highlight,
-    body.dark .chroma,
-    body.dark .lntable,
-    body.dark .lntd,
-    body.dark .highlight pre,
-    body.dark .highlight code,
-    body.dark .highlight .chroma,
-    body.dark .highlight .lntable,
-    body.dark .highlight .lntd,
-    body.dark .chroma .lntable,
-    body.dark .chroma .lntd {
-        background-color: #24273a !important;
-        background: #24273a !important;
-        color: #cad3f5 !important;
-    }
-
-    body.dark .post-content code:not(pre code),
-    body.dark p code,
-    body.dark li code,
-    body.dark td code {
-        background-color: var(--code-bg) !important;
-        background: var(--code-bg) !important;
-        color: var(--primary) !important;
-    }
 </style>
 
 {{- partial "extend_head.html" . -}}
