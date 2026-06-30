@@ -1,7 +1,7 @@
 ---
 date: "2026-06-29T16:42:01+05:30"
 draft: false
-title: "Why Tailscale SSH Works When OpenSSH Doesn't"
+title: "Who Logs You In When You Use Tailscale SSH?"
 description: "Why Tailscale SSH can log you in when OpenSSH would reject you: tailscaled, ACLs, root privileges, and Unix users."
 tags:
   - "tailscale"
