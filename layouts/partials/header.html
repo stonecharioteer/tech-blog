@@ -35,12 +35,12 @@
             <div class="logo-switches">
                 {{- if (not site.Params.disableThemeToggle) }}
                 <div class="theme-switches" role="group" aria-label="Appearance">
-                    <select id="theme-select" aria-label="Color theme" title="Color theme">
-                        <option value="light">Light</option>
-                        <option value="dark">Dark</option>
-                        <option value="sepia">Sepia</option>
-                        <option value="red">Red</option>
-                    </select>
+                    <div class="theme-switcher" role="group" aria-label="Color theme">
+                        <button type="button" class="theme-dot" data-theme-value="light" aria-pressed="false" aria-label="Light theme" title="Light"></button>
+                        <button type="button" class="theme-dot" data-theme-value="dark" aria-pressed="false" aria-label="Dark theme" title="Dark"></button>
+                        <button type="button" class="theme-dot" data-theme-value="sepia" aria-pressed="false" aria-label="Sepia theme" title="Sepia"></button>
+                        <button type="button" class="theme-dot" data-theme-value="red" aria-pressed="false" aria-label="Red theme" title="Red"></button>
+                    </div>
                     <button id="font-toggle" type="button" aria-label="Toggle serif and sans font" title="Toggle serif / sans">Aa</button>
                 </div>
                 {{- end }}

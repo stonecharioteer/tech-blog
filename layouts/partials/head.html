@@ -199,15 +199,22 @@
         --syn-number:#8a541a; --syn-name:#3a2f24; --syn-type:#8a4a2a; --syn-builtin:#2f5a7a;
         --syn-punct:#6b5d49; --syn-linenum:#8a7b54;
     }
+    /* gerane "Red" theme (deep maroon, like the VS Code theme) */
     :root[data-theme="red"] {
-        --theme:#1a1416; --entry:#241a1c; --primary:#f0e3e3; --secondary:#b7a0a0; --tertiary:#3a2a2d;
-        --content:#e6d8d8; --primary-rgb:240,227,227; --border:#3d2c30;
-        --code-block-bg:#241a1c; --code-fg:#f0dada; --code-bg:#33252a; --hl-bg:#3a1f22;
-        --link:#ff6b6b;
-        --syn-keyword:#ff7b72; --syn-string:#e8b88a; --syn-func:#ff9e9e; --syn-comment:#a78487;
-        --syn-number:#ffb86c; --syn-name:#f0e3e3; --syn-type:#ffd9a0; --syn-builtin:#ff8fb0;
-        --syn-punct:#c9aaaa; --syn-linenum:#7a6063;
+        --theme:#390000; --entry:#490000; --primary:#f8f8f8; --secondary:#d9a9a9; --tertiary:#5a1414;
+        --content:#f3e3e3; --primary-rgb:248,248,248; --border:#6e1414;
+        --code-block-bg:#2c0000; --code-fg:#f8f8f8; --code-bg:#560a0a; --hl-bg:#6e0808;
+        --link:#ff9e9e;
+        --syn-keyword:#ff5e5e; --syn-string:#daa0a0; --syn-func:#fec758; --syn-comment:#e7c0c0;
+        --syn-number:#f0a07a; --syn-name:#f3e3e3; --syn-type:#ff8a6a; --syn-builtin:#9df39f;
+        --syn-punct:#caa0a0; --syn-linenum:#b06a6a;
     }
+
+    /* ===== "Open to opportunities" banner, aligned per theme ===== */
+    :root, :root[data-theme="light"] { --banner-a:#10b981; --banner-b:#059669; --banner-fg:#ffffff; }
+    :root[data-theme="dark"]  { --banner-a:#0e9b6c; --banner-b:#076c50; --banner-fg:#ffffff; }
+    :root[data-theme="sepia"] { --banner-a:#7a8a3a; --banner-b:#5c6a28; --banner-fg:#fbf3df; }
+    :root[data-theme="red"]   { --banner-a:#c0282f; --banner-b:#7a0000; --banner-fg:#ffe8e8; }
 
     /* ===== Fonts: sans (Inter) / serif (Source Serif 4) via data-font ===== */
     :root{
@@ -223,22 +230,33 @@
     a:not(.logo):not(.btn){ color:var(--link); }
 
     /* ===== Theme + font picker ===== */
-    .theme-switches{ display:inline-flex; align-items:center; gap:0.4rem; vertical-align:middle; }
-    #theme-select{
-        font:inherit; font-size:0.85rem; padding:0.15rem 1.4rem 0.15rem 0.5rem; line-height:1.2;
-        color:var(--primary); background-color:var(--entry); border:1px solid var(--border);
-        border-radius:6px; cursor:pointer; appearance:none; -webkit-appearance:none;
-        background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23888' stroke-width='1.5'%3E%3Cpath d='M3 4.5 6 7.5 9 4.5'/%3E%3C/svg%3E");
-        background-repeat:no-repeat; background-position:right 0.4rem center; background-size:12px;
+    .theme-switches{ display:inline-flex; align-items:center; gap:0.5rem; vertical-align:middle; }
+    .theme-switcher{
+        display:inline-flex; align-items:center; gap:0.45rem;
+        padding:0.3rem 0.5rem; background-color:var(--entry);
+        border:1px solid var(--border); border-radius:999px;
     }
-    #theme-select:hover, #font-toggle:hover{ border-color:var(--primary); }
-    #theme-select:focus-visible, #font-toggle:focus-visible{ outline:2px solid var(--link); outline-offset:1px; }
-    #theme-select option{ color:#1f2328; background:#fff; }
+    .theme-dot{
+        width:17px; height:17px; padding:0; border-radius:50%; cursor:pointer;
+        border:1px solid rgba(128,128,128,0.45);
+        transition:transform 0.12s ease, box-shadow 0.12s ease;
+    }
+    .theme-dot[data-theme-value="light"]{ background:linear-gradient(135deg,#ffffff 50%,#0b62d6 50%); }
+    .theme-dot[data-theme-value="dark"] { background:linear-gradient(135deg,#26272b 50%,#8aadf4 50%); }
+    .theme-dot[data-theme-value="sepia"]{ background:linear-gradient(135deg,#f4ecd8 50%,#985b22 50%); }
+    .theme-dot[data-theme-value="red"]  { background:linear-gradient(135deg,#390000 50%,#f12727 50%); }
+    .theme-dot:hover{ transform:scale(1.18); }
+    .theme-dot[aria-pressed="true"]{
+        box-shadow:0 0 0 2px var(--entry), 0 0 0 4px var(--primary);
+        transform:scale(1.1);
+    }
+    .theme-dot:focus-visible, #font-toggle:focus-visible{ outline:2px solid var(--link); outline-offset:2px; }
     #font-toggle{
-        font:inherit; font-weight:600; font-size:0.85rem; line-height:1; padding:0.2rem 0.45rem;
+        font:inherit; font-weight:600; font-size:0.8rem; line-height:1; padding:0.25rem 0.45rem;
         color:var(--primary); background-color:var(--entry); border:1px solid var(--border);
-        border-radius:6px; cursor:pointer; min-width:2rem;
+        border-radius:8px; cursor:pointer; min-width:2rem;
     }
+    #font-toggle:hover{ border-color:var(--primary); }
     :root[data-font="serif"] #font-toggle{ font-family:var(--font-serif); }
     :root[data-font="sans"] #font-toggle{ font-family:var(--font-sans); }
 
@@ -738,10 +756,10 @@
     
     /* Code block container: keep rounded corners clean */
     .highlight,.chroma,div.highlight,.lntable { overflow:hidden; }
-    /* Hire Banner */
+    /* Hire Banner — colors come from per-theme --banner-* tokens */
     .hire-banner {
-        background: linear-gradient(135deg, #10b981, #059669);
-        color: #fff;
+        background: linear-gradient(135deg, var(--banner-a), var(--banner-b));
+        color: var(--banner-fg);
         text-align: center;
         padding: 0.6rem 1rem;
         font-size: 0.95rem;
@@ -750,8 +768,8 @@
         z-index: 100;
     }
 
-    .hire-banner a {
-        color: #fff;
+    .hire-banner a:not(.logo):not(.btn) {
+        color: var(--banner-fg);
         font-weight: 700;
         text-decoration: underline;
         text-decoration-style: solid;
@@ -760,11 +778,6 @@
 
     .hire-banner a:hover {
         opacity: 0.85;
-    }
-
-    :root[data-theme="dark"] .hire-banner,
-    :root[data-theme="red"] .hire-banner {
-        background: linear-gradient(135deg, #059669, #047857);
     }
 
     @media (max-width: 768px) {

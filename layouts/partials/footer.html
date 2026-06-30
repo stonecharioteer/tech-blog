@@ -83,14 +83,21 @@
 <script>
     (function () {
         var el = document.documentElement;
-        var sel = document.getElementById("theme-select");
-        if (sel) {
-            sel.value = el.dataset.theme || "light";
-            sel.addEventListener("change", function () {
-                el.dataset.theme = sel.value;
-                localStorage.setItem("pref-theme", sel.value);
+        var dots = document.querySelectorAll(".theme-dot");
+        function sync(theme) {
+            dots.forEach(function (d) {
+                d.setAttribute("aria-pressed", d.dataset.themeValue === theme ? "true" : "false");
             });
         }
+        sync(el.dataset.theme || "light");
+        dots.forEach(function (d) {
+            d.addEventListener("click", function () {
+                var v = d.dataset.themeValue;
+                el.dataset.theme = v;
+                localStorage.setItem("pref-theme", v);
+                sync(v);
+            });
+        });
         var fb = document.getElementById("font-toggle");
         if (fb) {
             fb.addEventListener("click", function () {
