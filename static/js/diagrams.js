@@ -1,0 +1,15 @@
+(function(){
+  "use strict";
+  var accents={red:"var(--red)",green:"var(--green)",blue:"var(--blue)",slate:"var(--slate)",orange:"var(--orange)"};
+  function el(t,c){var n=document.createElement(t); if(c)n.className=c; return n;}
+  function text(n,v){n.textContent=v==null?"":String(v); return n;}
+  function data(c){var s=c.querySelector("script.ts-diagram-data"); if(!s)return null; try{return JSON.parse(s.textContent)}catch(e){console.error("diagram json",e);return null}}
+  function toggle(n){n.classList.add("ts-click");n.setAttribute("role","button");n.tabIndex=0;n.setAttribute("aria-expanded","false");function f(){var open=n.classList.toggle("is-open");n.setAttribute("aria-expanded",open?"true":"false")}n.addEventListener("click",f);n.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();f()}})}
+  function detail(n,d){if(!d)return; var x=el("div","ts-detail"); text(x,d); n.appendChild(x); toggle(n)}
+  function badgeWrap(items){if(!items||!items.length)return null; var w=el("div","ts-badges"); items.forEach(function(b){text(w.appendChild(el("span","ts-badge")),b)}); return w}
+  function connector(label){var c=el("div","ts-connector"); c.appendChild(el("div","ts-connector__line")); if(label)text(c.appendChild(el("div","ts-connector__label")),label); return c}
+  function flow(c,d){var nodes=Array.isArray(d)?d:d.nodes||[]; var o=c.dataset.orientation||"vertical"; var f=el("div","ts-flow ts-flow--"+o); nodes.forEach(function(x,i){if(i)f.appendChild(connector(x.via)); var n=el("div","ts-node"); if(x.accent&&accents[x.accent])n.style.borderLeftColor=accents[x.accent]; text(n.appendChild(el("div","ts-node__label")),x.label); if(x.sub)text(n.appendChild(el("div","ts-node__sub")),x.sub); var bw=badgeWrap(x.badges); if(bw)n.appendChild(bw); detail(n,x.detail); f.appendChild(n)}); c.appendChild(f)}
+  function compare(c,d){var w=el("div","ts-compare"); (d.columns||[]).forEach(function(col){var cc=el("div","ts-column"); text(cc.appendChild(el("div","ts-column__title")),col.title); var steps=cc.appendChild(el("div","ts-column__steps")); (col.steps||[]).forEach(function(s){var n=el("div","ts-step"); if(col.accent&&accents[col.accent])n.style.borderLeftColor=accents[col.accent]; text(n.appendChild(el("div","ts-step__label")),s.label); detail(n,s.detail); steps.appendChild(n)}); w.appendChild(cc)}); c.appendChild(w)}
+  function layers(c,d){var title=c.dataset.title; if(title)text(c.appendChild(el("div","ts-diagram__title")),title); (d.layers||[]).forEach(function(x){var n=el("div","ts-layer"); if(x.accent&&accents[x.accent])n.style.borderLeftColor=accents[x.accent]; text(n.appendChild(el("div","ts-layer__q")),x.q); text(n.appendChild(el("div","ts-layer__a")),x.a); detail(n,x.detail); c.appendChild(n)})}
+  document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".ts-diagram").forEach(function(c){var d=data(c); if(!d)return; var s=c.querySelector("script"); if(s)s.remove(); if(c.dataset.animate!=="false")c.classList.add("ts-animate"); if(c.dataset.type==="compare")compare(c,d); else if(c.dataset.type==="layers")layers(c,d); else flow(c,d)})});
+})();
