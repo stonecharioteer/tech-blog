@@ -412,29 +412,41 @@
         flex-wrap: wrap;
     }
 
-    .page-numbers a,
+    .page-numbers a:not(.btn),
     .page-numbers span.current {
         display: inline-block;
-        padding: 0.5rem 0.75rem;
+        padding: 0.45rem 0.7rem;
+        min-width: 2.4rem;
+        text-align: center;
         text-decoration: none;
         border: 1px solid var(--border);
-        border-radius: 4px;
-        min-width: 2.5rem;
-        text-align: center;
-        transition: all 0.2s ease;
+        border-radius: 6px;
+        line-height: 1.2;
+        transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
     }
 
-    .page-numbers a:hover {
-        background-color: var(--theme);
-        color: var(--main);
-        border-color: var(--theme);
+    .page-numbers a:not(.btn) {
+        background-color: var(--entry);
+        color: var(--primary);
+    }
+
+    .page-numbers a:not(.btn):hover {
+        background-color: color-mix(in srgb, var(--primary) 12%, var(--entry));
+        border-color: var(--primary);
+        color: var(--primary);
     }
 
     .page-numbers span.current {
-        background-color: var(--theme);
-        color: var(--main);
-        border-color: var(--theme);
-        font-weight: bold;
+        background-color: var(--primary);
+        color: var(--theme);
+        border-color: var(--primary);
+        font-weight: 700;
+    }
+
+    /* Keep PaperMod's prev/next pills readable (global link color must not win here) */
+    .pagination a.prev,
+    .pagination a.next {
+        color: var(--theme);
     }
 
     .page-numbers span.dots {
