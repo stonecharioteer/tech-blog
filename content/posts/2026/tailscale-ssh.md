@@ -110,6 +110,10 @@ The protocol is not the problem. The annoying part is access distribution:
 This is not an argument against OpenSSH. I use it everywhere. The point is that
 key distribution and access policy become _your_ distributed system.
 
+OpenSSH certificates solve a related key-distribution problem, but they still
+use `sshd` as the login broker. Tailscale SSH moves the authorization decision
+into tailnet policy.
+
 ## What Tailscale changes
 
 Tailscale already gives every device in your tailnet a cryptographic identity and
@@ -345,8 +349,14 @@ want, but it is not nothing.
 There is another way to think about this from the OpenSSH side: I could run more
 than one `sshd`.
 
-`sshd` is just a daemon listening on a socket. A server can run multiple OpenSSH
-instances as long as they do not bind the same IP/port pair. For example:
+This was a small duh moment for me. I have run multiple instances of services on
+a dev box before. Postgres on different ports, for example. But I had never
+really thought of SSH that way. I mostly treated `sshd` as "the SSH service on
+the machine", singular.
+
+But `sshd` is just a daemon listening on a socket. A server can run multiple
+OpenSSH instances as long as they do not bind the same IP/port pair. For
+example:
 
 ```text
 0.0.0.0:22       → normal sshd
@@ -396,72 +406,6 @@ client → tailscaled → Tailscale SSH ACLs → Unix session
 ```
 
 That distinction matters for automation.
-
-## Ansible, GitHub Actions, and why I still used OpenSSH
-
-Tailscale SSH is pleasant when I am the one typing the command. Deployment
-tooling is a different story. A lot of it assumes normal OpenSSH semantics.
-
-Ansible is where I ran into this. Its default shape is:
-
-```text
-ansible controller → ssh binary → remote sshd → run Python/modules remotely
-```
-
-It knows how to pass SSH arguments, use an inventory hostname, select a private
-key, set a port, become another user, copy files, and reuse connections. That
-all fits OpenSSH very naturally.
-
-In one deployment, I had trouble making Ansible use Tailscale SSH cleanly from a
-GitHub workflow. The target machine was on my tailnet, but the deployment path
-was automation, not me typing `tailscale ssh`. I did not want the workflow to
-need an exit node just to reach SSH, and I did not want to expose SSH publicly.
-
-The compromise was simple: run OpenSSH on the tailnet, on a different port, and
-point the workflow at that.
-
-```text
-GitHub workflow runner
-  → joins tailnet / can reach tailnet
-  → ssh deploy@100.x.y.z -p 2222
-  → tailnet-only sshd
-  → Ansible runs normally
-```
-
-Then the Ansible inventory stays ordinary:
-
-```ini
-[servers]
-my-server ansible_host=100.x.y.z ansible_port=2222 ansible_user=deploy
-```
-
-or in YAML:
-
-```yaml
-all:
-  hosts:
-    my-server:
-      ansible_host: 100.x.y.z
-      ansible_port: 2222
-      ansible_user: deploy
-```
-
-This is less elegant than using Tailscale SSH policy everywhere, but it fits the
-tooling. Tailscale provides the private network path. OpenSSH provides the
-login surface Ansible already understands. Ansible does not need to know anything
-special.
-
-The trade-off is that I now have two SSH-like paths to reason about:
-
-- `tailscale ssh vinay@my-server` for human access controlled by Tailscale SSH
-  ACLs;
-- `ssh -p 2222 deploy@100.x.y.z` for automation controlled by OpenSSH keys and
-  the tailnet-only `sshd_config`.
-
-I am fine with that as long as I keep the boundary clear. Tailscale SSH and
-OpenSSH-over-Tailscale are not the same thing. One uses `tailscaled` to authorize
-and create the login. The other uses `sshd`; Tailscale only supplies the private
-route.
 
 ## What happened to `authorized_keys`?
 
@@ -636,6 +580,72 @@ And remember the three separate gates:
 1. Does the requested local Unix user exist and have the expected permissions?
 
 Most of my confusion came from mixing these layers together.
+
+## Ansible, GitHub Actions, and why I still used OpenSSH
+
+Tailscale SSH is pleasant when I am the one typing the command. Deployment
+tooling is a different story. A lot of it assumes normal OpenSSH semantics.
+
+Ansible is where I ran into this. Its default shape is:
+
+```text
+ansible controller → ssh binary → remote sshd → run Python/modules remotely
+```
+
+It knows how to pass SSH arguments, use an inventory hostname, select a private
+key, set a port, become another user, copy files, and reuse connections. That
+all fits OpenSSH very naturally.
+
+In one deployment, I had trouble making Ansible use Tailscale SSH cleanly from a
+GitHub workflow. The target machine was on my tailnet, but the deployment path
+was automation, not me typing `tailscale ssh`. I did not want the workflow to
+need an exit node just to reach SSH, and I did not want to expose SSH publicly.
+
+The compromise was simple: run OpenSSH on the tailnet, on a different port, and
+point the workflow at that.
+
+```text
+GitHub workflow runner
+  → joins tailnet / can reach tailnet
+  → ssh deploy@100.x.y.z -p 2222
+  → tailnet-only sshd
+  → Ansible runs normally
+```
+
+Then the Ansible inventory stays ordinary:
+
+```ini
+[servers]
+my-server ansible_host=100.x.y.z ansible_port=2222 ansible_user=deploy
+```
+
+or in YAML:
+
+```yaml
+all:
+  hosts:
+    my-server:
+      ansible_host: 100.x.y.z
+      ansible_port: 2222
+      ansible_user: deploy
+```
+
+This is less elegant than using Tailscale SSH policy everywhere, but it fits the
+tooling. Tailscale provides the private network path. OpenSSH provides the
+login surface Ansible already understands. Ansible does not need to know anything
+special.
+
+The trade-off is that I now have two SSH-like paths to reason about:
+
+- `tailscale ssh vinay@my-server` for human access controlled by Tailscale SSH
+  ACLs;
+- `ssh -p 2222 deploy@100.x.y.z` for automation controlled by OpenSSH keys and
+  the tailnet-only `sshd_config`.
+
+I am fine with that as long as I keep the boundary clear. Tailscale SSH and
+OpenSSH-over-Tailscale are not the same thing. One uses `tailscaled` to authorize
+and create the login. The other uses `sshd`; Tailscale only supplies the private
+route.
 
 ## Why this feels nicer than needing an exit node for SSH
 
