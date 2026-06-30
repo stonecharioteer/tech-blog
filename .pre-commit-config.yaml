@@ -25,6 +25,22 @@ repos:
         files: ^content/.*\.md$
         pass_filenames: false
 
+      - id: reject-claude-coauthor
+        name: Reject Claude co-author trailers
+        entry: >-
+          bash -lc 'msg_file="$1";
+          if grep -Eiq "^[[:space:]]*Co-authored-by:[[:space:]]*.*(claude|anthropic)" "$msg_file"; then
+            echo "Commit message must not include Claude/Anthropic Co-authored-by trailers.";
+            exit 1;
+          fi;
+          if grep -Eiq "^[[:space:]]*Generated with[[:space:]]+.*claude" "$msg_file"; then
+            echo "Commit message must not include Claude generation footers.";
+            exit 1;
+          fi;
+          exit 0' --
+        language: system
+        stages: [commit-msg]
+
       - id: conventional-commit
         name: Check conventional commit message
         entry: >-
