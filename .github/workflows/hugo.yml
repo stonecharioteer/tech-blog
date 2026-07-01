@@ -31,8 +31,29 @@ defaults:
     shell: bash
 
 jobs:
+  mermaid:
+    name: Check Mermaid diagrams
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Check Mermaid diagrams
+        uses: stonecharioteer/check-mmdjs-action@v3.1
+        with:
+          files: |
+            content/**/*.md
+            diagrams/**/*.mmd
+            diagrams/**/*.mermaid
+            README.md
+          ignore: |
+            themes/**
+            public/**
+            node_modules/**
+          mermaid-version: 11.4.1
+
   # Build job
   build:
+    needs: mermaid
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: 0.146.7
