@@ -49,6 +49,19 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Check Mermaid diagrams
+        uses: stonecharioteer/check-mmdjs-action@v3.1
+        with:
+          files: |
+            content/**/*.md
+            diagrams/**/*.mmd
+            diagrams/**/*.mermaid
+            README.md
+          ignore: |
+            themes/**
+            public/**
+            node_modules/**
+          mermaid-version: 11.4.1
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
