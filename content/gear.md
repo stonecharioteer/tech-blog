@@ -1,14 +1,11 @@
-______________________________________________________________________
-
+---
 date: "2025-04-13T10:54:37+05:30"
 lastmod: "2026-07-03T00:00:00+05:30"
 draft: false
 title: "🖥️ My Gear"
 aliases:
-
-- "/uses"
-
-______________________________________________________________________
+  - "/uses"
+---
 
 I get asked what devices I use (since I have a LOT of them). I wanted to
 document these at one place so that I answer this question a little
