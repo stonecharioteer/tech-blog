@@ -1,6 +1,7 @@
-______________________________________________________________________
-
-## date: "2025-04-15T16:12:53+05:30" title: "🧡 Favourites"
+---
+date: "2025-04-15T16:12:53+05:30"
+title: "🧡 Favourites"
+---
 
 These are a list of my favourites in tech, whether they're podcasts, blogs,
 youtube videos, or books.
