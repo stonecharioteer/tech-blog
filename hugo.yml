@@ -68,17 +68,28 @@ params:
   openToHire: true
   homeInfoParams:
     Title: Hello world!
-    Content: I'm *Vinay Keerthi*, `stonecharioteer` around the webs.
-
-      **Quick Links:** [🖥️ My Gear](/gear) • [🧡 Favourites](/favourites) • [🫀
-      Values](/values) • [📚 Learning Resources](/distributed) • [🔨
-      Contributions](https://git.stonecharioteer.com)
+    Content: |-
+      I'm *Vinay Keerthi*, `stonecharioteer` around the webs.
 
       ![The Stone Chariot of Hampi](/logo/stonecharioteer.png)
 
-      I'm a developer who's worked with Python, Rust and Ruby, and here I'm
-      collecting my thoughts on software development, technology and having a
-      career I am passionate about.
+      I'm a developer who's worked with Python, Rust and Ruby, and here I'm collecting my thoughts on software development, technology and having a career I am passionate about.
+    QuickLinks:
+      - name: "My Gear"
+        icon: "🖥️"
+        url: "/gear"
+      - name: "Favourites"
+        icon: "🧡"
+        url: "/favourites"
+      - name: "Values"
+        icon: "🫀"
+        url: "/values"
+      - name: "Learning Resources"
+        icon: "📚"
+        url: "/distributed"
+      - name: "Contributions"
+        icon: "🔨"
+        url: "https://git.stonecharioteer.com"
 
   socialIcons: # optional
     - name: "github"

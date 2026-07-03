@@ -1,0 +1,26 @@
+{{- with site.Params.homeInfoParams }}
+<article class="first-entry home-info">
+    <header class="entry-header">
+        <h1>{{ .Title | markdownify }}</h1>
+    </header>
+    <div class="entry-content">
+        {{ .Content | markdownify }}
+        {{- with .QuickLinks }}
+        <nav class="home-quick-links" aria-label="Quick links">
+            <span class="home-quick-links__label">Quick Links</span>
+            <div class="home-quick-links__items">
+                {{- range . }}
+                <a class="home-quick-links__item" href="{{ .url | safeURL }}">
+                    {{- with .icon }}<span class="home-quick-links__icon" aria-hidden="true">{{ . }}</span>{{ end -}}
+                    <span>{{ .name }}</span>
+                </a>
+                {{- end }}
+            </div>
+        </nav>
+        {{- end }}
+    </div>
+    <footer class="entry-footer">
+        {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}
+    </footer>
+</article>
+{{- end -}}
