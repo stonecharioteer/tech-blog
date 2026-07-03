@@ -1,7 +1,6 @@
----
-date: "2025-04-15T16:12:53+05:30"
-title: "🧡 Favourites"
----
+______________________________________________________________________
+
+## date: "2025-04-15T16:12:53+05:30" title: "🧡 Favourites"
 
 These are a list of my favourites in tech, whether they're podcasts, blogs,
 youtube videos, or books.
@@ -10,20 +9,20 @@ youtube videos, or books.
 
 1. [Designing Data Intensive Applications - Martin Kleppmann](https://dataintensive.net/)
    [Youtube Playlist of Lectures](https://www.youtube.com/playlist?list=PLeKd45zvjcDFUEv_ohr_HdUFe97RItdiB)
-2. [Database Internals - Alex Petrov](https://www.databass.dev/) (Also watch his
+1. [Database Internals - Alex Petrov](https://www.databass.dev/) (Also watch his
    talk - [Link](https://www.youtube.com/watch?v=V667vJzDvt4))
-3. [The Rust Programming Language - Carol Nichols and Steve Klabnik](https://doc.rust-lang.org/book/title-page.html)
-4. [Learn Python the Hard Way - Zed A. Shaw](https://learnpythonthehardway.org/)
+1. [The Rust Programming Language - Carol Nichols and Steve Klabnik](https://doc.rust-lang.org/book/title-page.html)
+1. [Learn Python the Hard Way - Zed A. Shaw](https://learnpythonthehardway.org/)
    (This book taught me how to code in 2014)
-5. [Fluent Python - Luciano Ramalho](https://www.oreilly.com/library/view/fluent-python-2nd/9781492056348/)
-6. [Python 101 - Mike Driscoll](https://python101.pythonlibrary.org/)
-7. [Python 201 - Mike Driscoll](https://driscollis.gumroad.com/l/py201)
-8. [CPython Internals - Anthony Shaw](https://realpython.com/products/cpython-internals-book/)
-9. [Build a Large Language Model from Scratch - Sebastian Raschka](https://www.manning.com/books/build-a-large-language-model-from-scratch)
-10. [Rust for Rustaceans - Jon Gjengset](https://rust-for-rustaceans.com/)
-11. [Beej's Guide to Network Concepts](https://beej.us/guide/bgnet0/)
-12. [Beej's Guide to Git](https://beej.us/guide/bggit/)
-13. [Beej's Guide to Network Programming](https://beej.us/guide/bgnet/)
+1. [Fluent Python - Luciano Ramalho](https://www.oreilly.com/library/view/fluent-python-2nd/9781492056348/)
+1. [Python 101 - Mike Driscoll](https://python101.pythonlibrary.org/)
+1. [Python 201 - Mike Driscoll](https://driscollis.gumroad.com/l/py201)
+1. [CPython Internals - Anthony Shaw](https://realpython.com/products/cpython-internals-book/)
+1. [Build a Large Language Model from Scratch - Sebastian Raschka](https://www.manning.com/books/build-a-large-language-model-from-scratch)
+1. [Rust for Rustaceans - Jon Gjengset](https://rust-for-rustaceans.com/)
+1. [Beej's Guide to Network Concepts](https://beej.us/guide/bgnet0/)
+1. [Beej's Guide to Git](https://beej.us/guide/bggit/)
+1. [Beej's Guide to Network Programming](https://beej.us/guide/bgnet/)
 
 ## Articles & Blogs
 
@@ -45,6 +44,12 @@ They're ongoing as of this post, but I hope he gets around to finishing them.
 ### 4. [Reality Has a Surprising Amount of Detail](http://johnsalvatier.org/blog/2017/reality-has-a-surprising-amount-of-detail)
 
 This article is part philosphy and part advice on a life in programming.
+
+### 5. [Hello Interview](https://www.hellointerview.com/)
+
+This is the best resource I've found for learning system design. You don't even
+need to be interviewing; it's worth going through just to become a better
+programmer.
 
 ## Podcasts and Videos
 
