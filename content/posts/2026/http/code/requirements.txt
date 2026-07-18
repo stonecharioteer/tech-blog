@@ -1,0 +1,8 @@
+fastapi
+hypercorn
+httpx[http2]
+requests
+uvicorn
+websockets
+grpcio
+grpcio-tools

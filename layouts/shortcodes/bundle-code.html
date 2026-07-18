@@ -1,0 +1,10 @@
+{{ $source := .Get "source" }}
+{{ $language := .Get "language" }}
+{{ $options := .Get "options" }}
+{{ $resource := .Page.Resources.Get $source }}
+{{ with $resource }}
+  {{ $content := .Content }}
+  {{ highlight (trim $content "\n\r") $language $options }}
+{{ else }}
+  <p style="color: red; font-weight: bold;">Resource not found: {{ $source }}</p>
+{{ end }}
