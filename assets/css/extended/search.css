@@ -1,0 +1,26 @@
+/* PaperMod's overlay uses height:100% on an auto-height card, so the
+   empty <a> collapses to 0px and clicks miss. Stretch it like .entry-link. */
+#searchResults a {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    text-decoration: none;
+}
+
+#searchResults li {
+    cursor: pointer;
+}
+
+#searchResults li:hover {
+    border-color: var(--primary);
+}
+
+#searchResults .entry-header {
+    color: var(--link);
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 3px;
+}

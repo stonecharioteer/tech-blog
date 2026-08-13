@@ -90,7 +90,16 @@ build *ARGS:
 serve *ARGS:
     #!/usr/bin/env bash
     set -euo pipefail
-    lan_ip="${HUGO_LAN_IP:-$(hostname -I 2>/dev/null | awk '{print $1}')}"
+    lan_ip="${HUGO_LAN_IP:-}"
+    if [[ -z "${lan_ip}" ]]; then
+        lan_ip="$(ipconfig getifaddr en0 2>/dev/null || true)"
+    fi
+    if [[ -z "${lan_ip}" ]]; then
+        lan_ip="$(ipconfig getifaddr en1 2>/dev/null || true)"
+    fi
+    if [[ -z "${lan_ip}" ]]; then
+        lan_ip="$(hostname -I 2>/dev/null | awk '{print $1}' || true)"
+    fi
     base_url="${HUGO_BASE_URL:-http://${lan_ip:-localhost}:1313}"
     echo "🚀 Starting Hugo development server..."
     echo "🌐 Bind: 0.0.0.0"
