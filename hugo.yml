@@ -65,7 +65,7 @@ params:
   ShowToc: true
   TocOpen: false
   # logo: "/logo/stonecharioteer-banner.png"
-  openToHire: true
+  openToHire: false
   homeInfoParams:
     Title: Hello world!
     Content: |-
