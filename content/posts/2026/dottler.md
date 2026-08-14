@@ -1,14 +1,14 @@
 ---
 date: "2026-08-14T13:17:39+05:30"
-draft: true
+draft: false
 title: "Dottler - Manage .env Files Across Git Worktrees"
 description:
-  "Dottler is a local CLI for managing project environment variables and
-  sharing them across Git worktrees without a server."
+  "Manage .env files across Git worktrees with Dottler, a local Rust CLI that
+  imports, stores, and dumps project environment variables without a server."
 tags:
   - "rust"
   - "cli"
-  - "dotfiles"
+  - "environment-variables"
   - "git"
   - "development-tools"
   - "open-source"
