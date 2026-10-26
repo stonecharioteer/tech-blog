@@ -1,6 +1,6 @@
 ---
 date: "2025-04-13T10:54:37+05:30"
-lastmod: "2026-10-26T20:55:50+05:30"
+lastmod: "2026-10-26T21:33:03+05:30"
 draft: false
 title: "Hardware I use"
 description: "My computers, keyboards, trackball, and other devices."
@@ -37,20 +37,22 @@ The [software I use]({{< ref "/uses/software" >}}) has its own page.
 ### Laptop - Apple MacBook Pro (M5)
 
 This is my primary device now, but mostly as a very nice terminal and browser.
-For real development work, I predominantly SSH into either the ASUS ROG Flow X13
-or the Beelink EQR5. Docker on macOS is a hack, and I cannot be convinced
-otherwise.
+Docker on macOS is a hack, and I cannot be convinced otherwise.
+
+I've set up a Docker context on the Macbook that connects to my ThinkPad P1
+Gen 2 over Tailscale. I can type `docker run` on the Macbook, but the containers
+run on the P1. The images and volumes stay there too, rather than taking up
+space on the Macbook's 512 GB SSD. I'll write a separate post about this setup
+later.
 
 ### Mini PC - [Beelink EQR5](https://www.bee-link.com/products/beelink-eqr5)
 
-This was my daily driver as of Sept. 2025, and it's still one of the machines I
-SSH into for most of my work. It's headless now, like the rest of my Linux boxes.
+This was my daily driver as of Sept. 2025, but I don't use it directly anymore.
+It's now a headless GitHub Actions runner for [Merrilin.ai](https://merrilin.ai/),
+alongside the ThinkPad P14s Gen 1 and T14 Gen 2.
+
 I didn't think I'd enjoy using a Mini PC more than a laptop, but honestly, this
 has been a great purchase. I got the AMD Ryzen 5 PRO 5650U model with 32GB RAM.
-
-It also runs GitHub Actions runners for [Merrilin.ai](https://merrilin.ai/),
-which makes it a nice local build and automation box without needing to keep
-another machine awake.
 
 ### Mini PC - [Beelink EQI12](https://www.bee-link.com/products/beelink-eqi12-intel%C2%AE-core-1220p-12450h-12650h)
 
@@ -77,8 +79,9 @@ own projects. I have one of each:
 - ThinkPad P14s Gen 1
 - ThinkPad T14 Gen 2 Intel i5
 
-They're headless Linux machines I SSH into, rather than daily-driver laptops.
-I also use the P14s as a remote Docker host from my Macbook.
+They're headless Linux machines, rather than daily-driver laptops. The P14s
+and T14 run GitHub Actions jobs for Merrilin alongside the Beelink EQR5. The P1
+is the remote Docker host I use from my Macbook over Tailscale.
 
 ### Desktop - AMD Ryzen 9 7950X + AMD Radeon RX 7900 XTX (24GB)
 
