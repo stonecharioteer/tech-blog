@@ -75,9 +75,9 @@ params:
 
       I'm a developer who's worked with Python, Rust and Ruby, and here I'm collecting my thoughts on software development, technology and having a career I am passionate about.
     QuickLinks:
-      - name: "My Gear"
+      - name: "What I Use"
         icon: "🖥️"
-        url: "/gear"
+        url: "/uses/"
       - name: "Favourites"
         icon: "🧡"
         url: "/favourites"

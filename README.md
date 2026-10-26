@@ -78,7 +78,9 @@ url: "custom-url-path" # Optional
 **Regular Posts**: `content/posts/YYYY/title.md` **Unlisted Content**:
 `content/unlisted/` (published but not featured) **Static Pages**:
 
-- `gear.md` - Personal tech setup
+- `uses/_index.md` - Setup overview at `/uses/`
+- `uses/hardware.md` - Hardware, with `/gear/` redirecting here
+- `uses/software.md` - Mac apps, terminal tools, and home services
 - `favourites.md` - Curated resources
 - `values.md` - Personal philosophy
 

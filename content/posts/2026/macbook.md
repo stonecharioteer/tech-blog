@@ -61,7 +61,10 @@ this was possible, but never got the chance to try it out. Damn. {{</note>}}
 The list of things I'm having to install to make this machine's GUI usable is
 insane.
 
-I've installed the following:
+I keep an up-to-date [list of the Mac apps I use](/uses/software/#mac-apps).
+I've since replaced Vanilla with Barly.
+
+When I wrote this, I'd installed the following:
 
 - [Aerospace Tiling Window Manager](https://github.com/nikitabobko/AeroSpace) -
   Apple is _pathetic_ at window management. How?!
