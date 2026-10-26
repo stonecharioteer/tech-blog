@@ -1,19 +1,16 @@
-______________________________________________________________________
-
+---
 date: "2026-10-14T20:53:08+05:30"
 draft: true
 title: "Using Docker on my Macbook without storing everything on it"
 description:
-"My M5 Macbook Pro has a 512 GB SSD. I use Docker contexts over Tailscale to
-run containers on a used ThinkPad instead."
+  "My M5 Macbook Pro has a 512 GB SSD. I use Docker contexts over Tailscale to
+  run containers on a used ThinkPad instead."
 tags:
-
-- "docker"
-- "macbook"
-- "homelab"
-- "tailscale"
-
-______________________________________________________________________
+  - "docker"
+  - "macbook"
+  - "homelab"
+  - "tailscale"
+---
 
 <!-- Working outline. The opening is draft prose; the section notes are not
 finished article text. Confirm the target ThinkPad before publishing. The
@@ -22,7 +19,7 @@ Redact usernames, IP addresses, and actual hostnames in commands and output. -->
 
 I bought an M5 Macbook Pro with a 512 GB SSD. I wanted the 1 TB model, but I
 couldn't afford it back then. I've written about
-\[why I bought the Macbook\]({{< ref "posts/2026/macbook.md" >}}), and I still
+[why I bought the Macbook]({{< ref "posts/2026/macbook.md" >}}), and I still
 like using it. I just don't want Docker images and build caches taking up the
 storage I have.
 
@@ -198,7 +195,7 @@ Macbook at a cafe -> SSH over Tailscale -> ThinkPad at home -> Docker engine
   The ThinkPad must stay awake, online, and accessible under tailnet policy.
 - Keep SSH over Tailscale distinct from the Tailscale SSH feature. The
   `ssh://` endpoint alone does not establish which SSH server handles login.
-  Link to \[my Tailscale SSH post\]({{< ref "posts/2026/tailscale-ssh.md" >}}).
+  Link to [my Tailscale SSH post]({{< ref "posts/2026/tailscale-ssh.md" >}}).
 - For published services, use the ThinkPad's Tailscale address instead of its
   LAN address. Service bindings, the host firewall, and tailnet policy must
   allow the connection. Docker context does not forward application ports.
