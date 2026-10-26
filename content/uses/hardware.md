@@ -1,6 +1,6 @@
 ---
 date: "2025-04-13T10:54:37+05:30"
-lastmod: "2026-10-26T21:33:03+05:30"
+lastmod: "2026-10-26T21:36:47+05:30"
 draft: false
 title: "Hardware I use"
 description: "My computers, keyboards, trackball, and other devices."
@@ -20,7 +20,7 @@ The [software I use]({{< ref "/uses/software" >}}) has its own page.
 ## TLDR
 
 - Apple MacBook Pro (M5) laptop
-- ASUS ROG Flow X13 (2022) laptop
+- ASUS ROG Flow X13 (2022) laptop, retired
 - Lenovo ThinkPad P1 Gen 2 laptop
 - Lenovo ThinkPad P14s Gen 1 laptop
 - Lenovo ThinkPad T14 Gen 2 Intel i5 laptop
@@ -99,6 +99,8 @@ turning it on to archive something.
 
 ### Laptop - ASUS ROG Flow X13 (2022)
 
+I've retired this machine. I'm keeping its details here for reference.
+
 ![ASUS ROG Flow X13](/images/laptop_x13_flow_product_image.png)
 
 I got this just at the start of 2023, and it's a pretty sweet laptop. I wanted a
@@ -111,15 +113,16 @@ I've never been happy with bluetooth on Linux, so let's not get into that.
 I used to predominantly use this on my desk, docked to my monitors, and carried
 it with me whenever I was in the mood to work or study from a cafe. I also used
 this as my work laptop at ChainSafe where we were asked to Bring Your Own Device
-(BYOD). I don't use the stylus much, or the touch screen to be honest. But in
-its tented mode, it's a sweet way to game.
+(BYOD). I didn't use the stylus much, or the touch screen to be honest. But in
+its tented mode, it was a sweet way to game.
 
-These days, I've turned the ASUS ROG Flow X13 into a headless server. It took a bunch of
-hacks to get it working properly, and that probably deserves its own blog post
-one day. If you're interested in the RCA and the fixes, they're documented in
+Before retiring it, I'd turned the ASUS ROG Flow X13 into a headless server.
+It took a bunch of hacks to get it working properly, and that probably deserves
+its own blog post one day. If you're interested in the RCA and the fixes,
+they're documented in
 [this dotfiles PR](https://github.com/stonecharioteer/dotfiles-qtile/pull/37).
 
-I'd earlier run Fedora and Linux Mint on this as a desktop, but it is headless now.
+Before that, I'd run Fedora and Linux Mint on it as a desktop.
 
 Here are the specs for this machine:
 ![ASUS ROG Flow X13 neofetch](/images/neofetch_x13_flow.png)
@@ -129,9 +132,9 @@ Here are the specs for this machine:
 1. RAM: 32 GiB
 1. Storage: SSD - 1 TB SSD
 
-I also run Windows 11 on this just to play games every now and then. The
-Graphics Card on this is poorly cooled, so for any games, I need to ensure that
-the temperatures are lower than 80 degrees Celsius.
+I also used to run Windows 11 on it to play games every now and then. The
+graphics card was poorly cooled, so I had to keep the temperatures below
+80 degrees Celsius.
 
 ## Gaming Machines
 
@@ -245,9 +248,9 @@ especially with Koreader. For PDFs I still default to ReadERA.
 ### Tablet - Apple iPad (A16)
 
 I got an Apple iPad (A16) for testing Merrilin. I don't use it much, but I picked
-up a third-party keyboard case for it and I do like using it to SSH into my ASUS
-ROG Flow X13 when I want to do real work from a tablet. That said, I haven't been using
-it that much lately. I'm happier on Android.
+up a third-party keyboard case for it. I used it to SSH into the ASUS ROG Flow
+X13 before retiring that laptop. I haven't been using the iPad much lately.
+I'm happier on Android.
 
 ### Tablet - Samsung Galaxy Tab S9 Ultra
 
