@@ -1,43 +1,36 @@
 ---
 date: "2025-04-13T10:54:37+05:30"
-lastmod: "2026-07-03T00:00:00+05:30"
+lastmod: "2026-10-26T20:55:50+05:30"
 draft: false
-title: "🖥️ My Gear"
+title: "Hardware I use"
+description: "My computers, keyboards, trackball, and other devices."
+weight: 10
 aliases:
-  - "/uses"
+  - "/gear"
 ---
 
 I get asked what devices I use (since I have a LOT of them). I wanted to
 document these at one place so that I answer this question a little
 deliberately.
 
-## TLDR
+I use Ansible with my distributed dotfiles to set up all my hardware.
 
-### Devices
+The [software I use]({{< ref "/uses/software" >}}) has its own page.
+
+## TLDR
 
 - Apple MacBook Pro (M5) laptop
 - ASUS ROG Flow X13 (2022) laptop
-- 2x Lenovo ThinkPad T14 Gen 2 Intel i5 laptops
+- Lenovo ThinkPad P1 Gen 2 laptop
+- Lenovo ThinkPad P14s Gen 1 laptop
+- Lenovo ThinkPad T14 Gen 2 Intel i5 laptop
 - Beelink EQR5 Mini PC
 - Beelink EQI12 Mini PC
 - Apple iPad (A16) tablet
 - White MoErgo Glove80 keyboard
 - Logitech MX Ergo trackball
-
-### Software
-
-- macOS as my terminal and browser environment.
-- [`pi.dev`](https://pi.dev/), tmux, and Neovim are the software I use the most.
-- I practically live inside tmux; I can't leave it for anything.
-- I still prefer Linux Mint for the desktop Linux experience, but lately I've
-  given up on the desktop Linux dream.
-- Headless Linux boxes that I SSH into for real work, including the ASUS ROG Flow
-  X13 and ThinkPads.
-- Proxmox on the Beelink EQI12, with OpenWrt as my router and dual WAN failover.
-- Unbound for DNS and AdGuard Home for ad blocking.
-- GitHub Actions runners for Merrilin.ai on the Beelink EQR5.
-- Possibly Kubernetes on the ThinkPads for local services and Merrilin dev boxes.
-- `.home.arpa` local DNS and a Tailscale exit node for remote access.
+- Elgato Stream Deck Neo for personal use
+- Elgato Stream Deck + for work
 
 ## Computers
 
@@ -75,16 +68,17 @@ My particular model has a 12th Gen Intel(R) Core(TM) i5-1235U CPU with 16GB DDR5
 RAM. Most of these come with LPDDR5 RAM, but I wanted something I could upgrade
 to 64 GB later.
 
-### Laptops - 2x Lenovo ThinkPad T14 Gen 2 Intel i5
+### Laptops - Lenovo ThinkPads
 
-I also picked up two used Lenovo ThinkPad T14 Gen 2 Intel i5 models to use as headless
-machines. I still need to set them up with Ubuntu 26.04 LTS, which is the latest
-Ubuntu LTS as of this update. They're not daily-driver laptops for me; they're
-part of the pool of Linux boxes I can SSH into when I need extra machines
-around.
+I picked up used ThinkPads, mostly to set up as GitHub Actions runners for my
+own projects. I have one of each:
 
-I'm thinking of putting Kubernetes on them so I can spin up services when I want
-them. They might also become local Merrilin development boxes.
+- ThinkPad P1 Gen 2
+- ThinkPad P14s Gen 1
+- ThinkPad T14 Gen 2 Intel i5
+
+They're headless Linux machines I SSH into, rather than daily-driver laptops.
+I also use the P14s as a remote Docker host from my Macbook.
 
 ### Desktop - AMD Ryzen 9 7950X + AMD Radeon RX 7900 XTX (24GB)
 
@@ -175,6 +169,12 @@ reach for most often.
 I even use this to play games now (mostly RTS like Age of Mythology Retold).
 I've tried other trackballs like the Kensington Expert Wireless, but I think I
 prefer the form factor of a thumb trackball better.
+
+## Stream Decks
+
+I use two Elgato Stream Decks. The Stream Deck Neo is for personal use, and
+I use the Stream Deck + for work. My configuration is in my
+`elgato-stream-deck` repo, but it's private for now.
 
 ## Keyboards
 
